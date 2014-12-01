@@ -43,6 +43,12 @@ public class WrappedLokum extends Lokum implements ComboDestroyable,
 		return new WrappedLokum(getRowIndex(), getColumnIndex(), getLokumColor());
 	}
 
+	@Override
+	public String getType() {
+		// TODO Auto-generated method stub
+		return "WrappedLokum";
+	}
+
 //	@Override
 //	public void comboDestroy() {
 //		// TODO Auto-generated method stub

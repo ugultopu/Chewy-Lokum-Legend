@@ -42,6 +42,12 @@ public class VerticalStripedLokum extends StripedLokum {
 		// TODO Auto-generated method stub
 		return new VerticalStripedLokum(getRowIndex(), getColumnIndex(), getLokumColor());
 	}
+
+	@Override
+	public String getType() {
+		// TODO Auto-generated method stub
+		return "VerticalStripedLokum";
+	}
 	
 //	@Override
 //	public void comboDestroy() {

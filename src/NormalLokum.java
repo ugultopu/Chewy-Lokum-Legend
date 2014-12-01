@@ -25,6 +25,12 @@ public class NormalLokum extends Lokum implements ComboDestroyable{
 		// TODO Auto-generated method stub
 		return new NormalLokum(getRowIndex(), getColumnIndex(), getLokumColor());
 	}
+
+	@Override
+	public String getType() {
+		// TODO Auto-generated method stub
+		return "NormalLokum";
+	}
 	
 //	/**
 //	 * @requires

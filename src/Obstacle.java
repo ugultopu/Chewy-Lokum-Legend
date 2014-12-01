@@ -23,4 +23,10 @@ public class Obstacle extends LogicField{
 		this.obstacleColor = obstacleColor;
 	}
 
+	@Override
+	public String getType() {
+		// TODO Auto-generated method stub
+		return "Obstacle";
+	}
+
 }

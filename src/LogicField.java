@@ -33,4 +33,6 @@ public abstract class LogicField {
 		this.columnIndex = columnIndex;
 	}
 	
+	public abstract String getType();
+	
 }
