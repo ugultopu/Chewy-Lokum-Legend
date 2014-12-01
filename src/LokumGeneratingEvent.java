@@ -6,7 +6,7 @@ public class LokumGeneratingEvent extends GameEvent{
 	ArrayList<EmptyLogicField> destroyedLokums;
 	ArrayList<Lokum> generatedLokums;
 	
-	public LokumGeneratingEvent(ArrayList<EmptyLogic> destroyedLokums, ArrayList<Lokum> generatedLokums){
+	public LokumGeneratingEvent(ArrayList<EmptyLogicField> destroyedLokums, ArrayList<Lokum> generatedLokums){
 		this.destroyedLokums = destroyedLokums;
 		this.generatedLokums = generatedLokums;
 	}
