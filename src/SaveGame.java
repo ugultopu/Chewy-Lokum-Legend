@@ -53,7 +53,7 @@ public class SaveGame {
 					wr.write("<color>"+((Obstacle)obstacle).getObstacleColor()+"</color>");
 					wr.write("<position>");
 					wr.write("<xcoord>"+((Obstacle)obstacle).getColumnIndex()+"</xcoord>");
-					wr.write("<ycoord>"+obstacle.getY()+"</ycoord>");
+					wr.write("<ycoord>"+((Obstacle)obstacle).getRowIndex()+"</ycoord>");
 					wr.write("</position>");
 					wr.write("</obstacle>");
 				}
@@ -67,8 +67,11 @@ public class SaveGame {
 		wr.write("<level>"+level+"</level>");
 		wr.write("</game>");
 		wr.close();
-		
-		
+			
+	}
+	public static void main(String[] args){
+		NormalLokum lokum = new NormalLokum(0,0,"red");
+		System.out.println(lokum.toString());
 	}
 
 }
