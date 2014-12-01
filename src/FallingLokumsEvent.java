@@ -1,11 +1,11 @@
 import java.util.HashMap;
 
 
-public class FallingLokumEvent extends GameEvent {
+public class FallingLokumsEvent extends GameEvent {
 	
 	HashMap<Lokum,Integer> fallingLokums;
 	
-	public FallingLokumEvent(HashMap<Lokum,Integer> fallingLokums){
+	public FallingLokumsEvent(HashMap<Lokum,Integer> fallingLokums){
 		
 		this.fallingLokums = fallingLokums;
 		
@@ -13,13 +13,13 @@ public class FallingLokumEvent extends GameEvent {
 	
 	@Override
 	public void executeEvent() {
-		while(fallingLokums.getKeySet().size()>0){
-			for(Lokum lokum: fallingLokums.getKeySet()){
+		while(fallingLokums.keySet().size()>0){
+			for(Lokum lokum: fallingLokums.keySet()){
 				int lokumShift = fallingLokums.get(lokum);
 				if(lokumShift>0){
-					lokum.setY(lokum.getY()+1);
-					fallingLokums.set(lokum, lokumShift-1);
-					if(lokum.getLocation().getY()>=0){
+					lokum.setRowIndex(lokum.getRowIndex()-1);
+					fallingLokums.put(lokum, (Integer)lokumShift-1);
+					if(lokum.getColumnIndex()>=0){
 						GameBoardPanel.changeLokum(lokum);
 					}
 				}else
