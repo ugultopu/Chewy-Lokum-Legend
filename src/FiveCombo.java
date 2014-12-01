@@ -13,7 +13,11 @@ public class FiveCombo {
 	}
 	
 	public void generateLokum(){
-		this.generatedLokum = new BombLokum(.....);
+		Lokum midLokum = lokums.get(2);
+		int x = midLokum.getRowIndex();
+		int y = midLokum.getColumnIndex();
+		String color = midLokum.getLokumColor();
+		this.generatedLokum = new BombLokum(x, y, color);
 	}
 	
 	public Lokum getGeneratedLokum(){

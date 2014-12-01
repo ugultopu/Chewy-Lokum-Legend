@@ -11,18 +11,19 @@ public class StripedWrappedMerge extends Merge {
 	}
 	
 	public void destroyMerge(){
-		int xl1 = l1.getX();
-		int yl1 = l1.getY();
+		int xl1 = l1.getRowIndex();
+		int yl1 = l1.getColumnIndex();
+		String color = l1.getLokumColor();
 		//IMPORTANT: CHECK THE BOUNDS OF BOARD.
 		for(int i = -1; i < 2; i++){
 			int y = yl1 + i;
-			VerticalStripedLokum lokumDestroyer = new VerticalStripedLokum();	
+			VerticalStripedLokum lokumDestroyer = new VerticalStripedLokum(xl1, y, color);	
 			lokumDestroyer.comboDestroy();
 		}
 		
 		for(int i = -1; i < 2; i++){
 			int x = xl1 + i;
-			HorizontalStripedLokum lokumDestroyer = new HorizontalStripedLokum();
+			HorizontalStripedLokum lokumDestroyer = new HorizontalStripedLokum(x, yl1, color);
 			lokumDestroyer.comboDestroy();
 		}
 	}

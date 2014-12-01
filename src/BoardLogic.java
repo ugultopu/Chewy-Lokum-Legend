@@ -29,6 +29,10 @@ public class BoardLogic {
 	public int getColumnSize() {
 		return columnSize;
 	}
+	
+	public LogicField[][] getBoard(){
+		return logicFields;
+	}
 
 	/**
 	 * Clears the given location. That is: Sets it to a new EmptyLogicField instance. 
