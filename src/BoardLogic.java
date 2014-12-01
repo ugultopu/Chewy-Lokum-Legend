@@ -53,25 +53,17 @@ public class BoardLogic {
 	}
 	
 	private BoardLogic(){
-		if(this.instance != null)
-			return;
-			// if here, then instance is null.
 		initializeBoard();	// initializes the board to all EmptyLogicField objects.
 		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
 		this.rowSize = Constants.BOARD_WIDTH;
 		this.columnSize= Constants.BOARD_HEIGHT;
-		this.instance = this;
 	}
 	
 	private BoardLogic(int rowSize, int columnSize){
-		if(this.instance != null)
-			return;
-			// if here, then instance is null.
 		initializeBoard();	// initializes the board to all EmptyLogicField objects.
 		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
 		this.rowSize = rowSize;
 		this.columnSize= columnSize;
-		this.instance = this;
 	}
 	
 	private void initializeBoard(){
