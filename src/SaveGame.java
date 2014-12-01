@@ -9,7 +9,7 @@ public class SaveGame {
 		
 		int player_id = 1;
 		String player_name = "default";
-		BoardLogic lokumBoard = BoardLogic.getInstance().getLokums();
+		LogicField[][] lokumBoard = BoardLogic.getInstance().getBoard();
 		int goal_score = BoardLogic.getInstance().getGoalScore();
 		int current_score = BoardLogic.getInstance().getCurrentScore();
 		int moves_left = BoardLogic.getInstance().getMovesLeft();
@@ -27,15 +27,14 @@ public class SaveGame {
 		wr.write("<board>");
 		wr.write("<lokums>");
 		for(int i=0; i<lokumBoard.length; i++){
-			for(int j=0; j<lokumBoard.length[i].length; i++){
+			for(int j=0; j<lokumBoard[i].length; i++){
 				LogicField lokum = lokumBoard[i][j];
 				if(lokum instanceof Lokum){
-					lokum = (Lokum) lokum;
 					wr.write("<lokum>");
-					wr.write("<color>"+lokum.getColor()+"</color>");
+					wr.write("<color>"+((Lokum)lokum).getLokumColor()+"</color>");
 					wr.write("<position>");
-					wr.write("<xcoord>"+lokum.getX()+"</xcoord>");
-					wr.write("<ycoord>"+lokum.getY()+"</ycoord>");
+					wr.write("<xcoord>"+((Lokum)lokum).getColumnIndex()+"</xcoord>");
+					wr.write("<ycoord>"+((Lokum)lokum).getRowIndex()+"</ycoord>");
 					wr.write("</position>");
 					wr.write("<type>"+lokum.getType()+"</type>");
 					wr.write("</lokum>");
@@ -46,14 +45,14 @@ public class SaveGame {
 		
 		wr.write("<obstacles>");
 		for(int i=0; i<lokumBoard.length; i++){
-			for(int j=0; j<lokumBoard.length[i].length; i++){
+			for(int j=0; j<lokumBoard[i].length; i++){
 				LogicField obstacle = lokumBoard[i][j];
 				if(obstacle instanceof Obstacle){
 					obstacle = (Obstacle) obstacle;
 					wr.write("<obstacle>");
-					wr.write("<color>"+obstacle.getColor()+"</color>");
+					wr.write("<color>"+((Obstacle)obstacle).getObstacleColor()+"</color>");
 					wr.write("<position>");
-					wr.write("<xcoord>"+obstacle.getX()+"</xcoord>");
+					wr.write("<xcoord>"+((Obstacle)obstacle).getColumnIndex()+"</xcoord>");
 					wr.write("<ycoord>"+obstacle.getY()+"</ycoord>");
 					wr.write("</position>");
 					wr.write("</obstacle>");
