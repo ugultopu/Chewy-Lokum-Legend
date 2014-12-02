@@ -17,13 +17,13 @@ public class StripedWrappedMerge extends Merge {
 		//IMPORTANT: CHECK THE BOUNDS OF BOARD.
 		for(int i = -1; i < 2; i++){
 			int y = yl1 + i;
-			VerticalStripedLokum lokumDestroyer = new VerticalStripedLokum(xl1, y, color);	
+			VerticalStripedLokum lokumDestroyer = (VerticalStripedLokum) Factory.createLokum(color, xl1, y, "VerticalStripedLokum");	
 			lokumDestroyer.comboDestroy();
 		}
 		
 		for(int i = -1; i < 2; i++){
 			int x = xl1 + i;
-			HorizontalStripedLokum lokumDestroyer = new HorizontalStripedLokum(x, yl1, color);
+			HorizontalStripedLokum lokumDestroyer = (HorizontalStripedLokum) Factory.createLokum(color, x, yl1, "HorizontalStripedLokum");
 			lokumDestroyer.comboDestroy();
 		}
 	}

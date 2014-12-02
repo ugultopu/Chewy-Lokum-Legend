@@ -1,21 +1,28 @@
+import java.util.Random;
+
 
 public class Factory {
-	public static Lokum createLokum(String color, int x, int y, String type){
-		if(type == "NormalLokum"){
-			return new NormalLokum(x, y, color);
-		}else if(type == "VerticalStripedLokum"){
-			return new VerticalStripedLokum(x, y, color);
-		}else if(type == "HorizontalStripedLokum"){
-			return new HorizontalStripedLokum(x, y, color);
-		}else if(type == "WrappedLokum"){
-			return new WrappedLokum(x, y, color);
-		}else if(type == "BombLokum"){
-			return new BombLokum(x, y, null);
-		}else{
-			System.out.println("Foctory error: No such lokum.");
-			return null;
+	
+	public static Lokum createRandomLokum(int x, int y){
+		int randomNumber = generateRandomNumber();
+		switch (randomNumber){
+			case 0:
+				return new NormalLokum(x, y, Constants.LOKUM_COLOR_BROWN);
+			case 1:
+				return new NormalLokum(x, y, Constants.LOKUM_COLOR_GREEN);
+			case 2:
+				return new NormalLokum(x, y, Constants.LOKUM_COLOR_RED);
+			case 3:
+				return new NormalLokum(x, y, Constants.LOKUM_COLOR_WHITE);
+			default:
+					return null;
 		}
-		
+	}
+	
+	public static int generateRandomNumber(){
+		Random randomGenerator = new Random();
+		int randomNumber = randomGenerator.nextInt(4);
+		return randomNumber;
 	}
 	
 	public static Merge createMerge(Lokum l1, Lokum l2){
