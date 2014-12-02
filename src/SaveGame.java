@@ -69,9 +69,5 @@ public class SaveGame {
 		wr.close();
 			
 	}
-	public static void main(String[] args){
-		NormalLokum lokum = new NormalLokum(0,0,"red");
-		System.out.println(lokum.toString());
-	}
 
 }
