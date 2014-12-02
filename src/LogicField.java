@@ -12,7 +12,6 @@ public abstract class LogicField {
 		super();
 		this.rowIndex = rowIndex;
 		this.columnIndex = columnIndex;
-		BoardLogic.getInstance().introduceLogicField(this);
 	}
 	
 	public abstract LogicField copyLogicField(); 
