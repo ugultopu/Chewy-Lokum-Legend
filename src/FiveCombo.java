@@ -12,7 +12,7 @@ public class FiveCombo {
 		
 	}
 	
-	public void generateLokum(){
+	private void generateLokum(){
 		Lokum midLokum = lokums.get(2);
 		int x = midLokum.getRowIndex();
 		int y = midLokum.getColumnIndex();
