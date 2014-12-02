@@ -92,7 +92,7 @@ public class BoardLogic {
 	private void populateColumn(int columnIndex){
 		for(int i=0;i<rowSize;i++){
 			if( logicFields[i][columnIndex] instanceof EmptyLogicField )
-			logicFields[i][columnIndex] = Factory.........
+			logicFields[i][columnIndex] = Factory.createRandomLokum(i, columnIndex);
 		}
 	}	
 	
@@ -198,7 +198,7 @@ public class BoardLogic {
 		}
 		for(int i=0;i<emptyLocationCounter;i++){
 			logicFields[rowSize - emptyLocationCounter + i][columnIndex]
-					 = LokumFactory.create(rowSize - emptyLocationCounter + i, columnIndex);
+					 = Factory.createRandomLokum(rowSize - emptyLocationCounter + i, columnIndex);
 			/*
 			 * In the two lines above, the current empty place in the column is populated. We need to send this information to graphics. So in the 3 lines below, we get a
 			 * copy of the recently populated LogicField. Then we set its rowIndex to its actual row index (that it out of the bounds of the board right now). We do not need
@@ -280,7 +280,7 @@ public class BoardLogic {
 	 * R.0 Either of the arguments is instanceof MergeDestroyable.
 	 */
 	public void mergeDestroy( MergeDestroyable f0, MergeDestroyable f1 ){
-		Merge merge = MergeFactory.create( f0, f1);
+		Merge merge = Factory.createMerge( f0, f1);
 		merge.destroyMerge();
 	}
 	/**
@@ -322,10 +322,14 @@ public class BoardLogic {
 	}
 	
 	public boolean isMoveAvailable(){
-		
+		return true;
 	}
 	
 	private void scoreUpdate(Combo combo){
+		
+	}
+	
+	private Combo getCombos(){
 		
 	}
 	

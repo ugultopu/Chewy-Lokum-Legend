@@ -17,7 +17,11 @@ public class TCombo {
 	}
 	
 	public void generateLokum(){
-		this.generatedLokum = new WrappedLokum(.....);
+		Lokum midLokum = lokums.get(2);
+		int midx = midLokum.getRowIndex();
+		int midy = midLokum.getColumnIndex();
+		String midColor = midLokum.getLokumColor();
+		this.generatedLokum = new WrappedLokum(midx, midy, midColor);
 	}
 	
 	public ArrayList<Lokum> getComboLokums(){

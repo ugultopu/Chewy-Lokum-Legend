@@ -18,7 +18,7 @@ public class FourCombo {
 		return lokums;
 	}
 	
-	public void generateLokum(){
+	private void generateLokum(){
 		Lokum midLokum = lokums.get(1);
 		int x = midLokum.getRowIndex();
 		int y = midLokum.getColumnIndex();
