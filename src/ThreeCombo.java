@@ -3,6 +3,7 @@ import java.util.*;
 public class ThreeCombo extends Combo {
 	private ThreeComboTest test;
 	private ArrayList<Lokum> lokums;
+
 	public ThreeCombo(ArrayList<Lokum> lokums){
 		test = new ThreeComboTest(lokums);
 		this.lokums = lokums;
@@ -24,5 +25,11 @@ public class ThreeCombo extends Combo {
 				}
 			}
 		}
+	}
+
+	@Override
+	public Lokum getGeneratedLokum() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
