@@ -3,18 +3,18 @@ import java.util.HashMap;
 
 public class FallingLokumsEvent extends GameEvent {
 	
-	HashMap<Lokum,Integer> fallingLokums;
+	HashMap<LogicField,Integer> fallingLokums;
 	
-	public FallingLokumsEvent(HashMap<Lokum,Integer> fallingLokums){
+	public FallingLokumsEvent(HashMap<LogicField, Integer> fallingLogicFields){
 		
-		this.fallingLokums = fallingLokums;
+		this.fallingLokums = fallingLogicFields;
 		
 	}
 	
 	@Override
 	public void executeEvent() {
 		while(fallingLokums.keySet().size()>0){
-			for(Lokum lokum: fallingLokums.keySet()){
+			for(LogicField lokum: fallingLokums.keySet()){
 				int lokumShift = fallingLokums.get(lokum);
 				if(lokumShift>0){
 					lokum.setRowIndex(lokum.getRowIndex()-1);

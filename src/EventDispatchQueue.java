@@ -8,9 +8,7 @@ public class EventDispatchQueue {
 	private static EventDispatchQueue instance = new EventDispatchQueue();
 	
 	private EventDispatchQueue(){
-		
 		eventQueue = new LinkedList<GameEvent>();
-		
 	}
 	
 	public synchronized void addEvent(GameEvent newEvent){
@@ -25,11 +23,11 @@ public class EventDispatchQueue {
 		return eventQueue.isEmpty();
 	}
 	
-	public EventDispatchQueue getInstance(){
+	public static EventDispatchQueue getInstance(){
 		return instance;
 	}
 	
-	public void resetInstance(){
+	public static void resetInstance(){
 		instance = new EventDispatchQueue();
 	}
 	
