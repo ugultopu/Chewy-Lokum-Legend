@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 
 public class BoardLogic {
@@ -310,8 +311,8 @@ public class BoardLogic {
 		return true;
 	}
 	
-	private boolean typesSuitableForSwap(LogicField f1, LogicField f1){
-		if ( !f0.isSwappable() || !f1.isSwappable() )
+	private boolean typesSuitableForSwap(LogicField f0, LogicField f1){
+		if ( !LogicField.isSwapable(f0) || !LogicField.isSwapable(f1) )
 			return false;
 		return true;
 	}
@@ -349,7 +350,16 @@ public class BoardLogic {
 	 * -Yet as another alternative, you can pick the lokums to be swapped not in a random fashion, but it a "pseudo - random" fashion.
 	 */
 	private void shuffleBoard(){
-		
+		Random rnd = new Random();
+	    for (int i = logicFields.length - 1; i > 0; i--){
+	    	int rowIndex = rnd.nextInt(i + 1);
+	    	for(int j = logicFields[i].length - 1; j > 0; j--){
+	    		int columnIndex = rnd.nextInt(j + 1);
+	    		LogicField temp = logicFields[i][j];
+	    		logicFields[i][j] = logicFields[rowIndex][columnIndex];
+	    		logicFields[rowIndex][columnIndex] = temp;
+	    	}
+	    }
 	}
 
 	public void swap(int selectedColumn, int selectedRow, int otherColumn, int otherRow) {

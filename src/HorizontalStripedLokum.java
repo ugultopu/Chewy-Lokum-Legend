@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 
-public class HorizontalStripedLokum extends StripedLokum {
+public class HorizontalStripedLokum extends StripedLokum implements MergeDestroyable, ComboDestroyable {
 
 	public HorizontalStripedLokum(int rowIndex, int columnIndex,
 			String lokumColor) {
