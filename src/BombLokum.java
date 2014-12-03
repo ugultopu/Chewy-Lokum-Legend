@@ -14,13 +14,13 @@ public class BombLokum extends Lokum implements ComboDestroyable,
 	}
 
 	@Override
-	public void comboDestroy(ArrayList<ComboDestroyable> comboDestroyedFields) {
+	public void comboDestroy() {
 		// TODO Auto-generated method stub
 		EmptyLogicField destroyed = new EmptyLogicField(getRowIndex(), getColumnIndex());
 		BoardLogic.getInstance().introduceLogicField(destroyed);
 		
 		EventDispatchQueue.getInstance().addEvent(new DestroyLokumEvent(destroyed.copyLogicField()));
-		comboDestroyedFields.add(this);
+		
 	}
 
 	@Override

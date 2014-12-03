@@ -9,16 +9,16 @@ public class NormalLokum extends Lokum implements ComboDestroyable{
 	}
 
 	@Override
-	public void comboDestroy(ArrayList<ComboDestroyable> comboDestroyedFields) {
+	public void comboDestroy() {
 		/*
 		 * To Do:
 		 * -Check privacy scope.
 		 */
 		// TODO Auto-generated method stub
-		EmptyLogicField destroyed = new EmptyLogicField(getRowIndex(), getColumnIndex())
+		EmptyLogicField destroyed = new EmptyLogicField(getRowIndex(), getColumnIndex());
 		BoardLogic.getInstance().introduceLogicField(destroyed);
 		EventDispatchQueue.getInstance().addEvent(new DestroyLokumEvent(destroyed.copyLogicField()));
-		comboDestroyedFields.add(this);
+	
 	}
 
 	@Override

@@ -10,7 +10,7 @@ public class WrappedLokum extends Lokum implements ComboDestroyable,
 	}
 	
 	@Override
-	public void comboDestroy(ArrayList<ComboDestroyable> comboDestroyedFields) {
+	public void comboDestroy() {
 		// TODO Auto-generated method stub
 		BoardLogic boardLogic = BoardLogic.getInstance();
 		
@@ -18,12 +18,12 @@ public class WrappedLokum extends Lokum implements ComboDestroyable,
 		 * Set the wrapped lokum's position to empty.
 		 */
 		boardLogic.introduceLogicField(new EmptyLogicField(getRowIndex(), getColumnIndex()));
-		comboDestroyedFields.add(this);
+		
 		for(int i=1;i>-2;i--){
 			for(int j=-1;j<2;j++){
 				LogicField currentLogicField = boardLogic.getLogicFieldAt( getRowIndex() + i , getColumnIndex() + j ); 
 				if( currentLogicField instanceof ComboDestroyable )
-					((ComboDestroyable) currentLogicField).comboDestroy(comboDestroyedFields);
+					((ComboDestroyable) currentLogicField).comboDestroy();
 				// if here, then currentLogicField is not combo destroyable. So simply clear it's position.
 				else{
 					EmptyLogicField destroyed = new EmptyLogicField( getRowIndex() + i, getColumnIndex() + j );
@@ -33,7 +33,7 @@ public class WrappedLokum extends Lokum implements ComboDestroyable,
 					 * CHECK THE LINE BELOW!!!
 					 */
 					EventDispatchQueue.getInstance().addEvent(new DestroyLokumEvent(destroyed.copyLogicField()));
-					comboDestroyedFields.add((ComboDestroyable) boardLogic.getLogicFieldAt(getRowIndex() + i, getColumnIndex() + j));
+					
 				}
 			}
 		}

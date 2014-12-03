@@ -9,7 +9,7 @@ public class VerticalStripedLokum extends StripedLokum {
 	}
 
 	@Override
-	public void comboDestroy(ArrayList<ComboDestroyable> comboDestroyedFields) {
+	public void comboDestroy() {
 		// TODO Auto-generated method stub
 		BoardLogic boardLogic = BoardLogic.getInstance();
 
@@ -17,14 +17,14 @@ public class VerticalStripedLokum extends StripedLokum {
 		 * Set the striped lokum's position to empty.
 		 */
 		boardLogic.introduceLogicField(new EmptyLogicField(getRowIndex(), getColumnIndex()));
-		comboDestroyedFields.add(this);
+		
 
 		int currentRowIndex;
 
 		for( currentRowIndex = 0; currentRowIndex<boardLogic.getRowSize(); currentRowIndex++ ){
 			LogicField currentLogicField = boardLogic.getLogicFieldAt( currentRowIndex , getColumnIndex() ); 
 			if( currentLogicField instanceof ComboDestroyable ){
-				((ComboDestroyable) currentLogicField).comboDestroy(comboDestroyedFields);
+				((ComboDestroyable) currentLogicField).comboDestroy();
 				
 			}
 			// if here, then currentLogicField is not combo destroyable. So simply clear it's position.
@@ -35,7 +35,7 @@ public class VerticalStripedLokum extends StripedLokum {
 				 * CHECK THE LINE BELOW!!!
 				 */
 				EventDispatchQueue.getInstance().addEvent(new DestroyLokumEvent(destroyed.copyLogicField()));
-				comboDestroyedFields.add((ComboDestroyable) boardLogic.getLogicFieldAt( currentRowIndex, getColumnIndex() ));
+				
 			}
 		}
 	}
