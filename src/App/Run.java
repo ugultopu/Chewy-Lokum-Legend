@@ -32,6 +32,7 @@ public class Run {
 		//MergeTest.mergeTest(Factory.createMerge(testWrapped, testWrapped)); --> Works Good But Merge is wrong
 		//MergeTest.mergeTest(Factory.createMerge(testBomb, testBomb)); --> Works
 		//MergeTest.mergeTest(Factory.createMerge(testHStriped, testBomb));//--> Works
+		//Combo test classes are in the Combo classes. It will only useful when tested in swap.
 		
 	}
 

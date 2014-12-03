@@ -38,4 +38,10 @@ public class LCombo extends Combo{
 			}
 		}
 	}
+
+	@Override
+	public ArrayList<Lokum> getComboLokums() {
+		// TODO Auto-generated method stub
+		return lokums;
+	}
 }

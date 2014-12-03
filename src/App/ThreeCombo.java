@@ -30,4 +30,10 @@ public class ThreeCombo extends Combo {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public ArrayList<Lokum> getComboLokums() {
+		// TODO Auto-generated method stub
+		return lokums;
+	}
 }
