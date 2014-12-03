@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class FiveCombo {
+public class FiveCombo extends Combo{
 	private FiveComboTest test;
 	private ArrayList<Lokum> lokums;
 	private Lokum generatedLokum;

@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class LCombo {
+public class LCombo extends Combo{
 	private LComboTest test;
 	private ArrayList<Lokum> lokums;
 	private Lokum generatedLokum;

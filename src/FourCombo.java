@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 
-public class FourCombo {
+public class FourCombo extends Combo{
 	private FourComboTest test;
 	private ArrayList<Lokum> lokums;
 	private String fourComboType; //Horizontal, vertical

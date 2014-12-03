@@ -858,6 +858,694 @@ public abstract class Lokum extends LogicField{
 	}
 	
 	/**
+	 * This method takes in adjacent lokums and returns a number according to the adjacency combination.
+	 * @param leftLokum
+	 * @param rightLokum
+	 * @param aboveLokum
+	 * @param belowLokum
+	 * @return
+	 */
+	private int getAdjacentLokumCombinationNumber(Lokum leftLokum, Lokum rightLokum, Lokum aboveLokum, Lokum belowLokum){
+		int combinationValue = 0; // initially, set combinationValue to 0.
+		
+		if(leftLokum != null)
+			combinationValue += Math.pow(2, 3);
+		if(rightLokum != null)
+			combinationValue += Math.pow(2, 2);
+		if(aboveLokum != null)
+			combinationValue += Math.pow(2, 1);
+		if(belowLokum != null)
+			combinationValue += Math.pow(2, 0);
+		return combinationValue;
+	}
+	
+	public void fifthFindCombos(){
+		/*
+		 * First, the method checks if this Lokum is an instance of BombLokum. If so, it returns immediately from the method. If not, it keeps on finding the combos which
+		 * this Lokum participates in.
+		 */
+		if(this instanceof BombLokum)
+			return;
+		/*
+		 * If here, then "this" is not an instance of BombLokum. So get the Lokums that are adjacent to it.
+		 */
+		
+		Lokum leftLokum = (Lokum) getLeftLogicField();
+		Lokum rightLokum = (Lokum) getRightLogicField();
+		Lokum aboveLokum = (Lokum) getAboveLogicField();
+		Lokum belowLokum = (Lokum) getBelowLogicField();
+		
+		
+		int alc = getAdjacentLokumCombinationNumber(leftLokum, rightLokum, aboveLokum, belowLokum);
+		
+		switch(alc){
+		case 0x0:
+			/* Combination: 0000
+			 * Form:
+			 * 
+			 * 		X
+			 * 		|
+			 * 	 X--T--X
+			 * 		|
+			 * 		X
+			 * Possible Combinations:
+			 * -No combinations are possible in such a case. So simply return.
+			 */
+			break;
+		case 0x1:
+			/* Combination: 0001
+			 * Form:
+			 * 
+			 * 		X
+			 * 		|
+			 * 	 X--T--X
+			 * 		|
+			 * 		L
+			 * Possible Combinations:
+			 * -No combinations are possible in such a case. So simply return.
+			 */
+			break;
+		case 0x2:
+			/* Combination: 0010
+			 * Form:
+			 * 
+			 * 		L
+			 * 		|
+			 * 	 X--T--X
+			 * 		|
+			 * 		X
+			 * Possible Combinations:
+			 * -No combinations are possible in such a case. So simply return.
+			 */
+			break;
+		case 0x3:
+			/* Combination: 0011
+			 * Form:
+			 * 
+			 * 		L
+			 * 		|
+			 * 	 X--T--X
+			 * 		|
+			 * 		L
+			 * Highest Definite Combination:
+			 * -3V2
+			 * Possible Higher Combinations:
+			 * -4V1
+			 * -4V2
+			 * -5V1
+			 */
+			break;
+		case 0x4:
+			/* Combination: 0100
+			 * Form:
+			 * 
+			 * 		X
+			 * 		|
+			 * 	 X--T--L
+			 * 		|
+			 * 		X
+			 * Possible Combinations:
+			 * -No combinations are possible in such a case. So simply return.
+			 */
+			break;
+		case 0x5:
+			/* Combination: 0101
+			 * Form:
+			 * 
+			 * 		X
+			 * 		|
+			 * 	 X--T--L
+			 * 		|
+			 * 		L
+			 * Possible Combinations:
+			 * -L1
+			 */
+			break;
+		case 0x6:
+			/* Combination: 0110
+			 * Form:
+			 * 
+			 * 		L
+			 * 		|
+			 * 	 X--T--L
+			 * 		|
+			 * 		X
+			 * Possible Combinations:
+			 * -L4
+			 */
+			break;
+		case 0x7:
+			/* Combination: 0111
+			 * Form:
+			 * 
+			 * 		L
+			 * 		|
+			 * 	 X--T--L
+			 * 		|
+			 * 		L
+			 * Highest Definite Combination:
+			 * -3V2
+			 * Possible Higher Combinations:
+			 * -Some T shape.
+			 * -4V1
+			 * -4V2
+			 * -5V1
+			 */
+			break;
+		case 0x8:
+			/* Combination: 1000
+			 * Form:
+			 * 
+			 * 		X
+			 * 		|
+			 * 	 L--T--X
+			 * 		|
+			 * 		X
+			 * Possible Combinations:
+			 * -No combinations are possible in such a case. So simply return.
+			 */
+			break;
+		case 0x9:
+			/* Combination: 1001
+			 * Form:
+			 * 
+			 * 		X
+			 * 		|
+			 * 	 L--T--X
+			 * 		|
+			 * 		L
+			 * Possible Combinations:
+			 * -L2
+			 */
+			break;
+		case 0xA:
+			/* Combination: 1010
+			 * Form:
+			 * 
+			 * 		L
+			 * 		|
+			 * 	 L--T--X
+			 * 		|
+			 * 		X
+			 * Possible Combinations:
+			 * -L3
+			 */
+			break;
+		case 0xB:
+			/* Combination: 1011
+			 * Form:
+			 * 
+			 * 		L
+			 * 		|
+			 * 	 L--T--X
+			 * 		|
+			 * 		L
+			 * Highest Definite Combination:
+			 * -3V2
+			 * Possible Higher Combinations:
+			 * -Some T shape.
+			 * -4V1
+			 * -4V2
+			 * -5V1
+			 */
+			break;
+		case 0xC:
+			/* Combination: 1100
+			 * Form:
+			 * 
+			 * 		X
+			 * 		|
+			 * 	 L--T--L
+			 * 		|
+			 * 		X
+			 * Highest Definite Combination:
+			 * -3H2
+			 * Possible Higher Combinations:
+			 * -4H1
+			 * -4H2
+			 * -5H1
+			 */
+			break;
+		case 0xD:
+			/* Combination: 1101
+			 * Form:
+			 * 
+			 * 		X
+			 * 		|
+			 * 	 L--T--L
+			 * 		|
+			 * 		L
+			 * Highest Definite Combination:
+			 * -3H2
+			 * Possible Higher Combinations:
+			 * -Some T shape.
+			 * -4H1
+			 * -4H2
+			 * -5H1
+			 */
+			break;
+		case 0xE:
+			/* Combination: 1110
+			 * Form:
+			 * 
+			 * 		L
+			 * 		|
+			 * 	 L--T--L
+			 * 		|
+			 * 		X
+			 * Highest Definite Combination:
+			 * -3H2
+			 * Possible Higher Combinations:
+			 * -Some T shape.
+			 * -4H1
+			 * -4H2
+			 * -5H1
+			 */
+			break;
+		case 0xF:
+			/* Combination: 1111
+			 * Form:
+			 * 
+			 * 		L
+			 * 		|
+			 * 	 L--T--L
+			 * 		|
+			 * 		L
+			 * Highest Definite Combination:
+			 * -T2
+			 * Possible Higher Combinations:
+			 * -5H1
+			 * -5V1
+			 */
+			break;
+		}
+	}
+	
+	public void sixthFindCombos(){
+		/*
+		 * First, the method checks if this Lokum is an instance of BombLokum. If so, it returns immediately from the method. If not, it keeps on finding the combos which
+		 * this Lokum participates in.
+		 */
+		if(this instanceof BombLokum)
+			return;
+		/*
+		 * If here, then "this" is not an instance of BombLokum. So get the Lokums that are adjacent to it.
+		 */
+		
+		Lokum leftLokum = (Lokum) getLeftLogicField();
+		Lokum rightLokum = (Lokum) getRightLogicField();
+		Lokum aboveLokum = (Lokum) getAboveLogicField();
+		Lokum belowLokum = (Lokum) getBelowLogicField();
+		
+		ArrayList<Lokum> comboLokums = new ArrayList<Lokum>();
+		
+		int alc = getAdjacentLokumCombinationNumber(leftLokum, rightLokum, aboveLokum, belowLokum);
+		
+		/*
+		 * Some lokum reference name declarations that may be used in the switch case below.
+		 */
+		Lokum leftLeftLokum;
+		Lokum rightRightLokum;
+		Lokum aboveAboveLokum;
+		Lokum belowBelowLokum;
+		
+		switch(alc){
+		case 0x0:
+			/* Combination: 0000
+			 * Form:
+			 * 
+			 * 		X
+			 * 		|
+			 * 	 X--T--X
+			 * 		|
+			 * 		X
+			 * Possible Combinations:
+			 * -No combinations are possible in such a case. So simply return.
+			 */
+			break;
+		case 0x1:
+			/* Combination: 0001
+			 * Form:
+			 * 
+			 * 		X
+			 * 		|
+			 * 	 X--T--X
+			 * 		|
+			 * 		L
+			 * Possible Combinations:
+			 * -No combinations are possible in such a case. So simply return.
+			 */
+			break;
+		case 0x2:
+			/* Combination: 0010
+			 * Form:
+			 * 
+			 * 		L
+			 * 		|
+			 * 	 X--T--X
+			 * 		|
+			 * 		X
+			 * Possible Combinations:
+			 * -No combinations are possible in such a case. So simply return.
+			 */
+			break;
+		case 0x3:
+			/* Combination: 0011
+			 * Form:
+			 * 
+			 * 		L
+			 * 		|
+			 * 	 X--T--X
+			 * 		|
+			 * 		L
+			 * Highest Definite Combination:
+			 * -3V2
+			 * Possible Higher Combinations:
+			 * -4V1
+			 * -4V2
+			 * -5V1
+			 */
+			
+			/*
+			 * First, put the lokums of the Highest Definite Combination to the comboLokums.
+			 */
+			comboLokums.add(belowLokum);
+			comboLokums.add(this);
+			comboLokums.add(aboveLokum);
+			/*
+			 * Then, set the references of the aboveAboveLokum and belowBelowLokum to use them in determining if the combo is one of the higher combinations. 
+			 */
+			aboveAboveLokum = (Lokum)aboveLokum.getAboveLogicField();
+			belowBelowLokum = (Lokum)belowLokum.getBelowLogicField();
+			/*
+			 * Check if the combo is 5V1. 
+			 */
+			if( (aboveAboveLokum != null) && (belowBelowLokum != null) ){
+				/*
+				 * If here, then we have a 5V1. So form it and return.
+				 */
+				comboLokums.add(0, belowBelowLokum); // insert belowBelowLokum to the beginning of this list.
+				comboLokums.add(aboveAboveLokum);	 // insert belowBelowLokum to the end of this list.
+				comboThisLokumIn = new FiveCombo(comboLokums);
+			}
+			/*
+			 * Check if the combo is 4V1. 
+			 */
+			else if(belowBelowLokum != null){
+				comboLokums.add(0, belowBelowLokum);
+				comboThisLokumIn = new FourCombo(comboLokums); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
+			}
+			/*
+			 * Check if the combo is 4V2. 
+			 */
+			else if(aboveAboveLokum != null){
+				comboLokums.add(aboveAboveLokum);
+				comboThisLokumIn = new FourCombo(comboLokums); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
+			}
+			else{
+				/*
+				 * If here, then no higher combos are available. So simply form the 3 combo and return.
+				 */
+				comboThisLokumIn = new ThreeCombo(comboLokums);
+			}
+			break;
+		case 0x4:
+			/* Combination: 0100
+			 * Form:
+			 * 
+			 * 		X
+			 * 		|
+			 * 	 X--T--L
+			 * 		|
+			 * 		X
+			 * Possible Combinations:
+			 * -No combinations are possible in such a case. So simply return.
+			 */
+			break;
+		case 0x5:
+			/* Combination: 0101
+			 * Form:
+			 * 
+			 * 		X
+			 * 		|
+			 * 	 X--T--L
+			 * 		|
+			 * 		L
+			 * Possible Combinations:
+			 * -L1
+			 */
+			
+			/*
+			 * Set references of belowBelowLokum and rightRightLokum to use them in determining if the lokum is in a L1 combo.
+			 */
+			belowBelowLokum = (Lokum)belowLokum.getBelowLogicField();
+			rightRightLokum = (Lokum)rightLokum.getRightLogicField();
+			/*
+			 * Check if the combo is L1. 
+			 */
+			if( (belowBelowLokum != null) && (rightRightLokum != null) ){
+				/*
+				 * If here, then we have an L1. So form it and return.
+				 */
+				comboLokums.add(belowBelowLokum);
+				comboLokums.add(belowLokum);
+				comboLokums.add(this);
+				comboLokums.add(rightLokum);
+				comboLokums.add(rightRightLokum);
+				comboThisLokumIn = new LCombo(comboLokums);	// CHECK THE CONSTRUCTOR OF THE LCombo!
+			}
+			break;
+		case 0x6:
+			/* Combination: 0110
+			 * Form:
+			 * 
+			 * 		L
+			 * 		|
+			 * 	 X--T--L
+			 * 		|
+			 * 		X
+			 * Possible Combinations:
+			 * -L4
+			 */
+			
+			/*
+			 * Set references of aboveAboveLokum and rightRightLokum to use them in determining if the lokum is in a L4 combo.
+			 */
+			aboveAboveLokum = (Lokum)aboveLokum.getAboveLogicField();
+			rightRightLokum = (Lokum)rightLokum.getRightLogicField();
+			/*
+			 * Check if the combo is L4. 
+			 */
+			if( (aboveAboveLokum != null) && (rightRightLokum != null) ){
+				/*
+				 * If here, then we have an L4. So form it and return.
+				 */
+				comboLokums.add(aboveAboveLokum);
+				comboLokums.add(aboveLokum);
+				comboLokums.add(this);
+				comboLokums.add(rightLokum);
+				comboLokums.add(rightRightLokum);
+				comboThisLokumIn = new LCombo(comboLokums);	// CHECK THE CONSTRUCTOR OF THE LCombo!
+			}
+			break;
+		case 0x7:
+			/* Combination: 0111
+			 * Form:
+			 * 
+			 * 		L
+			 * 		|
+			 * 	 X--T--L
+			 * 		|
+			 * 		L
+			 * Highest Definite Combination:
+			 * -3V2
+			 * Possible Higher Combinations:
+			 * -Some T shape.
+			 * -4V1
+			 * -4V2
+			 * -5V1
+			 */
+			
+			/*
+			 * First, put the lokums of the Highest Definite Combination to the comboLokums.
+			 */
+			comboLokums.add(belowLokum);
+			comboLokums.add(this);
+			comboLokums.add(aboveLokum);
+			/*
+			 * Then, set the references of the aboveAboveLokum, belowBelowLokum and rightRightLokum to use them in determining if the combo is one of the higher combinations. 
+			 */
+			aboveAboveLokum = (Lokum)aboveLokum.getAboveLogicField();
+			belowBelowLokum = (Lokum)belowLokum.getBelowLogicField();
+			rightRightLokum = (Lokum)rightLokum.getRightLogicField();
+			/*
+			 * Check if the combo is 5V1. 
+			 */
+			if( (aboveAboveLokum != null) && (belowBelowLokum != null) ){
+				/*
+				 * If here, then we have a 5V1. So form it and return.
+				 */
+				comboLokums.add(0, belowBelowLokum); // insert belowBelowLokum to the beginning of this list.
+				comboLokums.add(aboveAboveLokum);	 // insert belowBelowLokum to the end of this list.
+				comboThisLokumIn = new FiveCombo(comboLokums);
+			}
+			/*
+			 * Check if the combo is some T shape. 
+			 */
+			else if(rightRightLokum != null){
+				// TO DO!
+			}
+			/*
+			 * Check if the combo is 4V1. 
+			 */
+			else if(belowBelowLokum != null){
+				comboLokums.add(0, belowBelowLokum);
+				comboThisLokumIn = new FourCombo(comboLokums); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
+			}
+			/*
+			 * Check if the combo is 4V2. 
+			 */
+			else if(aboveAboveLokum != null){
+				comboLokums.add(aboveAboveLokum);
+				comboThisLokumIn = new FourCombo(comboLokums); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
+			}
+			else{
+				/*
+				 * If here, then no higher combos are available. So simply form the 3 combo and return.
+				 */
+				comboThisLokumIn = new ThreeCombo(comboLokums);
+			}
+			break;
+		case 0x8:
+			/* Combination: 1000
+			 * Form:
+			 * 
+			 * 		X
+			 * 		|
+			 * 	 L--T--X
+			 * 		|
+			 * 		X
+			 * Possible Combinations:
+			 * -No combinations are possible in such a case. So simply return.
+			 */
+			break;
+		case 0x9:
+			/* Combination: 1001
+			 * Form:
+			 * 
+			 * 		X
+			 * 		|
+			 * 	 L--T--X
+			 * 		|
+			 * 		L
+			 * Possible Combinations:
+			 * -L2
+			 */
+			break;
+		case 0xA:
+			/* Combination: 1010
+			 * Form:
+			 * 
+			 * 		L
+			 * 		|
+			 * 	 L--T--X
+			 * 		|
+			 * 		X
+			 * Possible Combinations:
+			 * -L3
+			 */
+			break;
+		case 0xB:
+			/* Combination: 1011
+			 * Form:
+			 * 
+			 * 		L
+			 * 		|
+			 * 	 L--T--X
+			 * 		|
+			 * 		L
+			 * Highest Definite Combination:
+			 * -3V2
+			 * Possible Higher Combinations:
+			 * -Some T shape.
+			 * -4V1
+			 * -4V2
+			 * -5V1
+			 */
+			break;
+		case 0xC:
+			/* Combination: 1100
+			 * Form:
+			 * 
+			 * 		X
+			 * 		|
+			 * 	 L--T--L
+			 * 		|
+			 * 		X
+			 * Highest Definite Combination:
+			 * -3H2
+			 * Possible Higher Combinations:
+			 * -4H1
+			 * -4H2
+			 * -5H1
+			 */
+			break;
+		case 0xD:
+			/* Combination: 1101
+			 * Form:
+			 * 
+			 * 		X
+			 * 		|
+			 * 	 L--T--L
+			 * 		|
+			 * 		L
+			 * Highest Definite Combination:
+			 * -3H2
+			 * Possible Higher Combinations:
+			 * -Some T shape.
+			 * -4H1
+			 * -4H2
+			 * -5H1
+			 */
+			break;
+		case 0xE:
+			/* Combination: 1110
+			 * Form:
+			 * 
+			 * 		L
+			 * 		|
+			 * 	 L--T--L
+			 * 		|
+			 * 		X
+			 * Highest Definite Combination:
+			 * -3H2
+			 * Possible Higher Combinations:
+			 * -Some T shape.
+			 * -4H1
+			 * -4H2
+			 * -5H1
+			 */
+			break;
+		case 0xF:
+			/* Combination: 1111
+			 * Form:
+			 * 
+			 * 		L
+			 * 		|
+			 * 	 L--T--L
+			 * 		|
+			 * 		L
+			 * Highest Definite Combination:
+			 * -T2
+			 * Possible Higher Combinations:
+			 * -5H1
+			 * -5V1
+			 */
+			break;
+		}
+	}
+	
+	/**
 	 * Remaining possible combo scenario:
 	 * 3H1)
 	 * 		T-L-L
@@ -1318,7 +2006,7 @@ public abstract class Lokum extends LogicField{
 		/*
 		 * Checks O.1. If true, returns false. 
 		 */
-		if(aboveLokumsRowIndex >= BoardLogic.getInstance().rowSize)
+		if(aboveLokumsRowIndex >= BoardLogic.getInstance().getRowSize())
 			return false;
 		/*
 		 * If here, then O.1 is not the case. So check O.2.

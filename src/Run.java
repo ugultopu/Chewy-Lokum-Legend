@@ -16,15 +16,11 @@ public class Run {
 		VerticalStripedLokum testVStriped = new VerticalStripedLokum(2, 3, "white");
 		HorizontalStripedLokum testHStriped = new HorizontalStripedLokum(1, 3, "white");
 		
-		Merge testMergeNormalBomb = Factory.createMerge(testNormal, testBomb);
-		Merge testMergeWrappedBomb = Factory.createMerge(testWrapped, testBomb);
-		Merge testMergeVStripedBomb = Factory.createMerge(testVStriped, testBomb);
-		Merge testMergeHStripedBomb = Factory.createMerge(testHStriped, testBomb);
-		Merge testMergeWrappedStriped = Factory.createMerge(testVStriped, testWrapped);
+		
 		
 		System.out.println(Factory.createRandomLokum(3, 4).toString());
-		System.out.println(BoardLogic.getInstance().getBoard());
 		System.out.println(BoardLogic.getInstance().toString());
+		
 	}
 
 }
