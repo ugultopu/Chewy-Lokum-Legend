@@ -1,5 +1,6 @@
+package Tests;
 
-public class Lokum {
+public class LokumTest {
 	
 	
 	/**
