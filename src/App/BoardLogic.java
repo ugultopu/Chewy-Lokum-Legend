@@ -12,7 +12,7 @@ public class BoardLogic {
 	private int rowSize;
 	private int columnSize;
 	private static BoardLogic instance;
-	private HashSet<Combo> boardCombos;
+	private ArrayList<Combo> boardCombos;
 	
 	/*
 	 * CHECK!
@@ -64,17 +64,22 @@ public class BoardLogic {
 	}
 	
 	private void findBoardCombos(){
+		HashSet<Combo> combosAsSet = new HashSet<Combo>();
 		for(int currentRowIndex=0;currentRowIndex<rowSize;currentRowIndex++){
 			for(int currentColumnIndex=0;currentColumnIndex<columnSize;currentColumnIndex++){
 				LogicField currentLogicField = logicFields[currentRowIndex][currentColumnIndex];
 				if(currentLogicField instanceof Lokum){
 					Lokum currentLokum = (Lokum) currentLogicField;
-					ArrayList<Combo> currentCombos = currentLokum.getCombosThisLokumIn();
-					for(int currentComboIndex=0;currentComboIndex<currentCombos.size();currentComboIndex++){
-						boardCombos.add(currentCombos.get(currentComboIndex));
+					ArrayList<Combo> currentLokumCombos = currentLokum.getCombosThisLokumIn();
+					for(int currentComboIndex=0;currentComboIndex<currentLokumCombos.size();currentComboIndex++){
+						combosAsSet.add(currentLokumCombos.get(currentComboIndex));
 					}
 				}
 			}
+		}
+		Object[] combosAsObjectArray = combosAsSet.toArray();
+		for(int i=0;i<combosAsObjectArray.length;i++){
+			boardCombos.add((Combo) combosAsObjectArray[i]);
 		}
 	}
 	
@@ -82,7 +87,7 @@ public class BoardLogic {
 		this.rowSize = Constants.BOARD_WIDTH;
 		this.columnSize= Constants.BOARD_HEIGHT;
 		logicFields = new LogicField[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
-		this.boardCombos = new HashSet<Combo>();
+		this.boardCombos = new ArrayList<Combo>();
 		initializeBoard();	// initializes the board to all EmptyLogicField objects.
 		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
 	}
@@ -91,7 +96,7 @@ public class BoardLogic {
 		this.rowSize = rowSize;
 		this.columnSize= columnSize;
 		logicFields = new LogicField[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
-		this.boardCombos = new HashSet<Combo>();
+		this.boardCombos = new ArrayList<Combo>();
 		initializeBoard();	// initializes the board to all EmptyLogicField objects.
 		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
 		
@@ -124,7 +129,6 @@ public class BoardLogic {
 		for(int i=0;i<rowSize;i++){
 			if( logicFields[i][columnIndex] instanceof EmptyLogicField )
 				logicFields[i][columnIndex] = (LogicField) Factory.createRandomLokum(i, columnIndex);
-
 		}
 	}	
 	
@@ -294,13 +298,13 @@ public class BoardLogic {
 		}
 		// if here, then not merge swap. So combo swap.
 		else{
-			ArrayList<Combo> combos = getCombos();
-			for(int i=0;i<combos.size();i++){
-				Combo currentCombo = combos.get(i);
-				ArrayList<Lokum> currentCombosComboDestroyables = currentCombo.getComboLokums();
-				for(int j=0;j<currentCombosComboDestroyables.size();j++){
-					ComboDestroyable comboDestroyer = (ComboDestroyable)currentCombosComboDestroyables.get(i);
-					comboDestroyer.comboDestroy();
+			findBoardCombos();
+			for(int i=0;i<boardCombos.size();i++){
+				Combo currentCombo = boardCombos.get(i);
+				ArrayList<Lokum> currentCombosLokums = currentCombo.getComboLokums();
+				for(int j=0;j<currentCombosLokums.size();j++){
+					Lokum currentLokum = currentCombosLokums.get(i);
+					((ComboDestroyable) currentLokum).comboDestroy();
 				}
 			}
 			// send comboDestroyedFields to Kugi.
@@ -359,7 +363,16 @@ public class BoardLogic {
 	}
 	
 	public boolean isMoveAvailable(){
-		
+		int currentRowIndex;
+		int currentColumnIndex;
+		LogicField currentLogicField0;
+		LogicField currentLogicField1;
+		for(currentRowIndex=0;currentRowIndex<rowSize;currentRowIndex++){
+			for(currentColumnIndex=0;currentColumnIndex<columnSize;currentColumnIndex++){
+				
+				if(swap())
+			}
+		}
 	}
 	
 	private void scoreUpdate(Combo combo){
