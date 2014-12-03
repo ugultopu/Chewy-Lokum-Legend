@@ -7,7 +7,6 @@ public class WrappedLokum extends Lokum implements ComboDestroyable,
 	public WrappedLokum(int rowIndex, int columnIndex, String lokumColor) {
 		super(rowIndex, columnIndex, lokumColor);
 		// TODO Auto-generated constructor stub
-		BoardLogic.getInstance().introduceLogicField(this);
 	}
 	
 	@Override

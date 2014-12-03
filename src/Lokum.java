@@ -16,7 +16,6 @@ public abstract class Lokum extends LogicField{
 		super(rowIndex, columnIndex);
 		this.lokumColor = lokumColor;
 		this.combosThisLokumIn = new ArrayList<Combo>();
-		BoardLogic.getInstance().introduceLogicField(this);
 	}
 
 	public String getLokumColor() {

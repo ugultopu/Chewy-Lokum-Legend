@@ -6,7 +6,6 @@ public class Obstacle extends LogicField{
 	public Obstacle(int rowIndex, int columnIndex, String obstacleColor) {
 		super(rowIndex, columnIndex);
 		this.obstacleColor = obstacleColor;
-		BoardLogic.getInstance().introduceLogicField(this);
 	}
 
 	@Override
