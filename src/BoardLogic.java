@@ -329,8 +329,8 @@ public class BoardLogic {
 		
 	}
 	
-	private Combo getCombos(){
-		
+	private ArrayList<Combo> getCombos(){
+		return null;
 	}
 	
 	/**
