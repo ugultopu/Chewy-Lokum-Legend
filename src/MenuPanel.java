@@ -9,9 +9,9 @@ public class MenuPanel extends JPanel {
 	
 	private JButton start,loadGame,exit;
 	private JLabel label;
-	private MenuPanel instance;
+	private static MenuPanel instance;
 	
-	private MenuPanel() {
+	public MenuPanel() {
 		label = new JLabel("Testis Crush",JLabel.CENTER);
 		start = new JButton("Start");
 		loadGame = new JButton("Load Game");
@@ -43,21 +43,21 @@ public class MenuPanel extends JPanel {
 		c.gridy= 3;
 		add(exit,c);
 		
-//		start.addActionListener(new ActionListener(){
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				
+		start.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			
+				ApplicationWindow.instance = GamePanel.getInstance();
+
 //				ownerFrame.game = new GamePanel(ownerFrame);
-//				
-//				
 //				ownerFrame.remove(ownerFrame.menu);
 //				ownerFrame.add(ownerFrame.game);
 //				ownerFrame.game.requestFocusInWindow();
 //				ownerFrame.game.startGame();
 //				ownerFrame.game.repaint();
-//			}
-//		});
+			}
+		});
 		
 				
 		exit.addActionListener(new ActionListener(){
@@ -70,7 +70,7 @@ public class MenuPanel extends JPanel {
 		});	
 	}
 	
-	public MenuPanel getInstance(){
+	public static MenuPanel getInstance(){
 		if(instance==null){
 			instance = new MenuPanel();
 		}

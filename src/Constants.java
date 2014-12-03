@@ -2,7 +2,7 @@ import java.awt.Color;
 
 public class Constants {
 	/* Animation Window Dimentions */
-	public static final int ANIMATION_WINDOW_WIDTH = 360;
+	public static final int ANIMATION_WINDOW_WIDTH = 720;
 	public static final int ANIMATION_WINDOW_HEIGHT = 540;
 	
 	public static final String LOKUM_COLOR_RED = "red";
