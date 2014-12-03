@@ -1,4 +1,5 @@
 
+
 public class EmptyLogicField extends LogicField {
 
 	public EmptyLogicField(int rowIndex, int columnIndex) {

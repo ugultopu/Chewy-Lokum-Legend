@@ -1,4 +1,5 @@
 
+
 public class StripedWrappedMerge extends Merge {
 	private Lokum l1;
 	private Lokum l2;

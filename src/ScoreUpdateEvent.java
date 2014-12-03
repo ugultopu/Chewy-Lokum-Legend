@@ -1,4 +1,5 @@
 
+
 public class ScoreUpdateEvent extends GameEvent {
 
 	int scoreIncrement;

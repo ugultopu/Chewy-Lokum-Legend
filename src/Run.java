@@ -1,4 +1,5 @@
 
+
 public class Run {
 
 	public static void main(String[] args) {
@@ -15,7 +16,8 @@ public class Run {
 		
 		System.out.println(Factory.createRandomLokum(3, 4).toString());
 		System.out.println(BoardLogic.getInstance().toString());
-		
+		testVStriped.comboDestroy();
+		System.out.println(BoardLogic.getInstance().toString());
 	}
 
 }

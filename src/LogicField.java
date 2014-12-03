@@ -1,4 +1,5 @@
 
+
 public abstract class LogicField {
 	private int rowIndex;
 	private int columnIndex;

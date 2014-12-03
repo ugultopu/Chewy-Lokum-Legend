@@ -1,4 +1,5 @@
 
+
 public class StripedStripedMerge extends Merge {
 	private Lokum l1;
 	private Lokum l2;

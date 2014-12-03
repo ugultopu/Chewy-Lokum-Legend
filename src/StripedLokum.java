@@ -1,4 +1,5 @@
 
+
 public abstract class StripedLokum extends Lokum implements MergeDestroyable, ComboDestroyable, Swapable{
 
 	public StripedLokum(int rowIndex, int columnIndex, String lokumColor) {

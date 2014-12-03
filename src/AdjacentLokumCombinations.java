@@ -1,4 +1,5 @@
 
+
 public enum AdjacentLokumCombinations {
 	C0000,
 	C0001,

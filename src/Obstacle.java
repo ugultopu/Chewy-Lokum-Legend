@@ -1,4 +1,5 @@
 
+
 public class Obstacle extends LogicField{
 	
 	private String obstacleColor;
