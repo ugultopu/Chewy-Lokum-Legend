@@ -272,6 +272,10 @@ public class BoardLogic {
 				}
 			}
 			// send comboDestroyedFields to Kugi.
+			// How does kugi get new generated lokums in this implementation?
+			// We are changing this sending all destroyed lokums approach to sending one destroyed lokum at a time approach.
+			// Hence, the line below is deprecated now, the above implementation also has to change
+			EventDispatchQueue.getInstance().addEvent(new NonLokumGeneratingEvent(convertLogicFieldListToEmptyLogicFieldList(comboDestroyedFields)));
 		}
 	}
 	
@@ -350,6 +354,24 @@ public class BoardLogic {
 
 	public void swap(int selectedColumn, int selectedRow, int otherColumn, int otherRow) {
 		swap(logicFields[selectedRow][selectedColumn], logicFields[selectedRow][selectedColumn]);
+	}
+	
+	private ArrayList<LogicField> copyLogicFieldList(ArrayList<LogicField> logicFields){
+		ArrayList<LogicField> copyLogicFields = new ArrayList<LogicField>();
+		for(LogicField logicField: logicFields)
+			copyLogicFields.add(logicField.copyLogicField());
+		
+		return logicFields;
+	}
+	
+	private ArrayList<EmptyLogicField> convertLogicFieldListToEmptyLogicFieldList(ArrayList<LogicField> logicFields){
+		ArrayList<EmptyLogicField> emptyLogicFields = new ArrayList<EmptyLogicField>();
+		for(LogicField logicField: logicFields){
+			logicField = new EmptyLogicField(logicField.getRowIndex(), logicField.getColumnIndex());
+			emptyLogicFields.add((EmptyLogicField)logicField);
+		}
+		return  emptyLogicFields;
+		
 	}
 
 //	/**
