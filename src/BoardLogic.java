@@ -5,10 +5,10 @@ import java.util.Random;
 
 public class BoardLogic {
 	
-	LogicField[][] logicFields;
-	int rowSize;
-	int columnSize;
-	static BoardLogic instance;
+	private LogicField[][] logicFields;
+	private int rowSize;
+	private int columnSize;
+	private static BoardLogic instance;
 	
 	/*
 	 * CHECK!
@@ -31,8 +31,14 @@ public class BoardLogic {
 		return columnSize;
 	}
 	
-	public LogicField[][] getBoard(){
-		return logicFields;
+	public Lokum[][] getBoard(){
+		Lokum[][] lokumArray = new Lokum[rowSize][columnSize];
+		for(int i = 0; i < rowSize; i++){
+			for(int j = 0; j < columnSize; j++){
+				lokumArray[i][j] = (Lokum)logicFields[i][j];			
+			}
+		}
+		return lokumArray;
 	}
 
 	/**
@@ -54,17 +60,20 @@ public class BoardLogic {
 	}
 	
 	private BoardLogic(){
-		initializeBoard();	// initializes the board to all EmptyLogicField objects.
-		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
 		this.rowSize = Constants.BOARD_WIDTH;
 		this.columnSize= Constants.BOARD_HEIGHT;
+		logicFields = new LogicField[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
+		initializeBoard();	// initializes the board to all EmptyLogicField objects.
+		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
 	}
 	
 	private BoardLogic(int rowSize, int columnSize){
-		initializeBoard();	// initializes the board to all EmptyLogicField objects.
-		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
 		this.rowSize = rowSize;
 		this.columnSize= columnSize;
+		logicFields = new LogicField[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
+		initializeBoard();	// initializes the board to all EmptyLogicField objects.
+		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
+		
 	}
 	
 	private void initializeBoard(){
@@ -93,7 +102,8 @@ public class BoardLogic {
 	private void populateColumn(int columnIndex){
 		for(int i=0;i<rowSize;i++){
 			if( logicFields[i][columnIndex] instanceof EmptyLogicField )
-			logicFields[i][columnIndex] = Factory.createRandomLokum(i, columnIndex);
+				logicFields[i][columnIndex] = (LogicField) Factory.createRandomLokum(i, columnIndex);
+
 		}
 	}	
 	
@@ -263,17 +273,21 @@ public class BoardLogic {
 		}
 		// if here, then not merge swap. So combo swap.
 		else{
-			ArrayList<ComboDestroyable> comboDestroyedFields = new ArrayList<ComboDestroyable>();	
 			ArrayList<Combo> combos = getCombos();
 			for(int i=0;i<combos.size();i++){
 				Combo currentCombo = combos.get(i);
 				ArrayList<ComboDestroyable> currentCombosComboDestroyables = currentCombo.getComboLokums();
 				for(int j=0;j<currentCombosComboDestroyables.size();j++){
-					currentCombosComboDestroyables.get(j).comboDestroy(comboDestroyedFields);
+					currentCombosComboDestroyables.get(j).comboDestroy();
 				}
 			}
 			// send comboDestroyedFields to Kugi.
+			// How does kugi get new generated lokums in this implementation?
+			// We are changing this sending all destroyed lokums approach to sending one destroyed lokum at a time approach.
+			// Hence, the line below is deprecated now, I commented out it just as a remainder
+			// EventDispatchQueue.getInstance().addEvent(new NonLokumGeneratingEvent(convertLogicFieldListToEmptyLogicFieldList(comboDestroyedFields)));
 		}
+		return true;
 	}
 	
 	/**
@@ -360,6 +374,23 @@ public class BoardLogic {
 
 	public void swap(int selectedColumn, int selectedRow, int otherColumn, int otherRow) {
 		swap(logicFields[selectedRow][selectedColumn], logicFields[selectedRow][selectedColumn]);
+	}
+	
+	private ArrayList<LogicField> copyLogicFieldList(ArrayList<LogicField> logicFields){
+		ArrayList<LogicField> copyLogicFields = new ArrayList<LogicField>();
+		for(LogicField logicField: logicFields)
+			copyLogicFields.add(logicField.copyLogicField());
+		
+		return logicFields;
+	}
+	
+	private ArrayList<EmptyLogicField> convertLogicFieldListToEmptyLogicFieldList(ArrayList<LogicField> logicFields){
+		ArrayList<EmptyLogicField> emptyLogicFields = new ArrayList<EmptyLogicField>();
+		for(LogicField logicField: logicFields){
+			logicField = new EmptyLogicField(logicField.getRowIndex(), logicField.getColumnIndex());
+			emptyLogicFields.add((EmptyLogicField)logicField);
+		}
+		return  emptyLogicFields;
 	}
 
 //	/**
@@ -461,5 +492,25 @@ public class BoardLogic {
 //		}
 //		printBoard();
 //	}
+	
+	public String toString(){
+		String boardString = "";
+		Lokum[][] loks = getBoard();
+
+		for(int i = 0; i < rowSize; i++){
+			for(int j = 0; j < columnSize; j++){
+				if(!(logicFields[i][j] instanceof EmptyLogicField)){
+					Lokum lok = loks[i][j];
+					String color = lok.getLokumColor();
+					String type = lok.getType();
+					boardString += type + "|" + color + " ";
+				}else{
+					boardString += "empty ";
+				}
+			}
+			boardString += "\n";
+		}
+		return boardString;
+	}
 
 }

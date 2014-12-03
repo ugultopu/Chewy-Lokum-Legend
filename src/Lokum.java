@@ -15,7 +15,7 @@ public abstract class Lokum extends LogicField{
 	public Lokum(int rowIndex, int columnIndex, String lokumColor){
 		super(rowIndex, columnIndex);
 		this.lokumColor = lokumColor;
-		this.comboThisLokumIn = null;
+		this.combosThisLokumIn = new ArrayList<Combo>();
 	}
 
 	public String getLokumColor() {
@@ -2006,7 +2006,7 @@ public abstract class Lokum extends LogicField{
 		/*
 		 * Checks O.1. If true, returns false. 
 		 */
-		if(aboveLokumsRowIndex >= BoardLogic.getInstance().rowSize)
+		if(aboveLokumsRowIndex >= BoardLogic.getInstance().getRowSize())
 			return false;
 		/*
 		 * If here, then O.1 is not the case. So check O.2.

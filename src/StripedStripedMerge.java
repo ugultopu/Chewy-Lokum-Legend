@@ -11,7 +11,7 @@ public class StripedStripedMerge extends Merge {
 	}
 	
 	public void destroyMerge(){
-		l1.destroyCombo();
-		l1.destroyCombo();
+		((StripedLokum)l1).comboDestroy();
+		((StripedLokum)l2).comboDestroy();
 	}
 }
