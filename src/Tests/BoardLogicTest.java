@@ -34,4 +34,13 @@ public class BoardLogicTest{
 		System.out.println(toString(BL));
 		
 	}
+	
+	public static void fallLokumsTest(){
+		BoardLogic BL = BoardLogic.getInstance();
+		System.out.println("Before fall: ");
+		System.out.println(toString(BL));
+		System.out.println("After fall: ");
+		BL.readjustBoardAfterDestroy();
+		System.out.println(toString(BL));
+	}
 }

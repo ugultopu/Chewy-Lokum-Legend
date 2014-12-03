@@ -16,9 +16,7 @@ public class FourCombo extends Combo{
 		test = new FourComboTest();
 	}
 	
-	public ArrayList<Lokum> getComboLokums(){
-		return lokums;
-	}
+	
 	
 	private void generateLokum(){
 		Lokum midLokum = lokums.get(1);
