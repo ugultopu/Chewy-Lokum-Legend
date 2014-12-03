@@ -263,20 +263,19 @@ public class BoardLogic {
 		}
 		// if here, then not merge swap. So combo swap.
 		else{
-			ArrayList<ComboDestroyable> comboDestroyedFields = new ArrayList<ComboDestroyable>();	
 			ArrayList<Combo> combos = getCombos();
 			for(int i=0;i<combos.size();i++){
 				Combo currentCombo = combos.get(i);
 				ArrayList<ComboDestroyable> currentCombosComboDestroyables = currentCombo.getComboLokums();
 				for(int j=0;j<currentCombosComboDestroyables.size();j++){
-					currentCombosComboDestroyables.get(j).comboDestroy(comboDestroyedFields);
+					currentCombosComboDestroyables.get(j).comboDestroy();
 				}
 			}
 			// send comboDestroyedFields to Kugi.
 			// How does kugi get new generated lokums in this implementation?
 			// We are changing this sending all destroyed lokums approach to sending one destroyed lokum at a time approach.
-			// Hence, the line below is deprecated now, the above implementation also has to change
-			EventDispatchQueue.getInstance().addEvent(new NonLokumGeneratingEvent(convertLogicFieldListToEmptyLogicFieldList(comboDestroyedFields)));
+			// Hence, the line below is deprecated now, I commented out it just as a remainder
+			// EventDispatchQueue.getInstance().addEvent(new NonLokumGeneratingEvent(convertLogicFieldListToEmptyLogicFieldList(comboDestroyedFields)));
 		}
 	}
 	
