@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 
-public class FourCombo {
+public class FourCombo extends Combo{
 	private FourComboTest test;
 	private ArrayList<Lokum> lokums;
 	private String fourComboType; //Horizontal, vertical
@@ -18,7 +18,7 @@ public class FourCombo {
 		return lokums;
 	}
 	
-	public void generateLokum(){
+	private void generateLokum(){
 		Lokum midLokum = lokums.get(1);
 		int x = midLokum.getRowIndex();
 		int y = midLokum.getColumnIndex();

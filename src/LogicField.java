@@ -12,7 +12,6 @@ public abstract class LogicField {
 		super();
 		this.rowIndex = rowIndex;
 		this.columnIndex = columnIndex;
-		BoardLogic.getInstance().introduceLogicField(this);
 	}
 	
 	public abstract LogicField copyLogicField(); 
@@ -34,5 +33,12 @@ public abstract class LogicField {
 	}
 	
 	public abstract String getType();
+
+	public static boolean isSwapable(LogicField l1) {
+		if(l1 instanceof Swapable){
+			return true;
+		}
+		return false;
+	}
 	
 }

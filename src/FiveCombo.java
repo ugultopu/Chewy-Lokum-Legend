@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class FiveCombo {
+public class FiveCombo extends Combo{
 	private FiveComboTest test;
 	private ArrayList<Lokum> lokums;
 	private Lokum generatedLokum;
@@ -12,7 +12,7 @@ public class FiveCombo {
 		
 	}
 	
-	public void generateLokum(){
+	private void generateLokum(){
 		Lokum midLokum = lokums.get(2);
 		int x = midLokum.getRowIndex();
 		int y = midLokum.getColumnIndex();

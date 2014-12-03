@@ -7,9 +7,9 @@ public class BombMerge extends Merge {
 	private BoardLogic board;
 	private Lokum[][] lokumBoard;
 
-	public BombMerge(Lokum l1, Lokum l2){
-		this.l1 = l1;
-		this.l2 = l2;
+	public BombMerge(MergeDestroyable l1, MergeDestroyable l2){
+		this.l1 = (Lokum) l1;
+		this.l2 = (Lokum) l2;
 		board = BoardLogic.getInstance();
 		lokumBoard = (Lokum[][]) board.getBoard();
 	}
@@ -87,7 +87,7 @@ public class BombMerge extends Merge {
 			for(int i = 0; i < lokumBoard.length; i++){
 				for(int j = 0; j < lokumBoard[i].length; j++){
 					Lokum lokum = lokumBoard[i][j];
-					if(lokum.getColor().equals(colorl1)){
+					if(lokum.getLokumColor().equals(colorl1)){
 						WrappedLokum newLokum = new WrappedLokum(i, j, colorl1);
 						newLokum.comboDestroy();
 					}

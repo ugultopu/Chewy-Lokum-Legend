@@ -11,7 +11,6 @@ public class BombLokum extends Lokum implements ComboDestroyable,
 		 */
 		super(rowIndex, columnIndex, lokumColor);
 		// TODO Auto-generated constructor stub
-		BoardLogic.getInstance().introduceLogicField(this);
 	}
 
 	@Override

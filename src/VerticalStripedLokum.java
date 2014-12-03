@@ -6,7 +6,6 @@ public class VerticalStripedLokum extends StripedLokum {
 	public VerticalStripedLokum(int rowIndex, int columnIndex, String lokumColor) {
 		super(rowIndex, columnIndex, lokumColor);
 		// TODO Auto-generated constructor stub
-		BoardLogic.getInstance().introduceLogicField(this);
 	}
 
 	@Override

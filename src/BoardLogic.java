@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 
 public class BoardLogic {
@@ -92,7 +93,7 @@ public class BoardLogic {
 	private void populateColumn(int columnIndex){
 		for(int i=0;i<rowSize;i++){
 			if( logicFields[i][columnIndex] instanceof EmptyLogicField )
-			logicFields[i][columnIndex] = Factory.........
+			logicFields[i][columnIndex] = Factory.createRandomLokum(i, columnIndex);
 		}
 	}	
 	
@@ -198,7 +199,7 @@ public class BoardLogic {
 		}
 		for(int i=0;i<emptyLocationCounter;i++){
 			logicFields[rowSize - emptyLocationCounter + i][columnIndex]
-					 = LokumFactory.create(rowSize - emptyLocationCounter + i, columnIndex);
+					 = Factory.createRandomLokum(rowSize - emptyLocationCounter + i, columnIndex);
 			/*
 			 * In the two lines above, the current empty place in the column is populated. We need to send this information to graphics. So in the 3 lines below, we get a
 			 * copy of the recently populated LogicField. Then we set its rowIndex to its actual row index (that it out of the bounds of the board right now). We do not need
@@ -280,7 +281,7 @@ public class BoardLogic {
 	 * R.0 Either of the arguments is instanceof MergeDestroyable.
 	 */
 	public void mergeDestroy( MergeDestroyable f0, MergeDestroyable f1 ){
-		Merge merge = MergeFactory.create( f0, f1);
+		Merge merge = Factory.createMerge( f0, f1);
 		merge.destroyMerge();
 	}
 	/**
@@ -306,8 +307,8 @@ public class BoardLogic {
 		return true;
 	}
 	
-	private boolean typesSuitableForSwap(LogicField f1, LogicField f1){
-		if ( !f0.isSwappable() || !f1.isSwappable() )
+	private boolean typesSuitableForSwap(LogicField f0, LogicField f1){
+		if ( !LogicField.isSwapable(f0) || !LogicField.isSwapable(f1) )
 			return false;
 		return true;
 	}
@@ -322,11 +323,15 @@ public class BoardLogic {
 	}
 	
 	public boolean isMoveAvailable(){
-		
+		return true;
 	}
 	
 	private void scoreUpdate(Combo combo){
 		
+	}
+	
+	private ArrayList<Combo> getCombos(){
+		return null;
 	}
 	
 	/**
@@ -341,7 +346,20 @@ public class BoardLogic {
 	 * -Yet as another alternative, you can pick the lokums to be swapped not in a random fashion, but it a "pseudo - random" fashion.
 	 */
 	private void shuffleBoard(){
-		
+		Random rnd = new Random();
+	    for (int i = logicFields.length - 1; i > 0; i--){
+	    	int rowIndex = rnd.nextInt(i + 1);
+	    	for(int j = logicFields[i].length - 1; j > 0; j--){
+	    		int columnIndex = rnd.nextInt(j + 1);
+	    		LogicField temp = logicFields[i][j];
+	    		logicFields[i][j] = logicFields[rowIndex][columnIndex];
+	    		logicFields[rowIndex][columnIndex] = temp;
+	    	}
+	    }
+	}
+
+	public void swap(int selectedColumn, int selectedRow, int otherColumn, int otherRow) {
+		swap(logicFields[selectedRow][selectedColumn], logicFields[selectedRow][selectedColumn]);
 	}
 
 //	/**

@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class LCombo {
+public class LCombo extends Combo{
 	private LComboTest test;
 	private ArrayList<Lokum> lokums;
 	private Lokum generatedLokum;
@@ -15,10 +15,10 @@ public class LCombo {
 		return generatedLokum;
 	}
 	
-	public void generateLokum(){
+	private void generateLokum(){
 		Lokum midLokum = lokums.get(2);
 		int x = midLokum.getRowIndex();
-		int y = midLokum.getRowIndex();
+		int y = midLokum.getColumnIndex();
 		String color = midLokum.getLokumColor();
 		this.generatedLokum = new WrappedLokum(x, y, color);
 	}

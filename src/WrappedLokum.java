@@ -2,12 +2,11 @@ import java.util.ArrayList;
 
 
 public class WrappedLokum extends Lokum implements ComboDestroyable,
-		MergeDestroyable {
+		MergeDestroyable, Swapable {
 
 	public WrappedLokum(int rowIndex, int columnIndex, String lokumColor) {
 		super(rowIndex, columnIndex, lokumColor);
 		// TODO Auto-generated constructor stub
-		BoardLogic.getInstance().introduceLogicField(this);
 	}
 	
 	@Override
