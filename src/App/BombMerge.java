@@ -47,6 +47,7 @@ public class BombMerge extends Merge {
 				for(int j = 0; j < lokumBoard[i].length; j++){
 					Lokum lokum = lokumBoard[i][j];
 					if(lokum.getLokumColor().equals(colorl1)){
+						
 						int randomStriped = randomGenerator.nextInt(2);
 						if(randomStriped == 0){
 							VerticalStripedLokum newLokum = new VerticalStripedLokum(i, j, colorl1);

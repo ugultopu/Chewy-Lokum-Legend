@@ -25,10 +25,6 @@ public class LCombo extends Combo{
 		this.generatedLokum = new WrappedLokum(x, y, color);
 	}
 	
-	public ArrayList<Lokum> getComboLokums(){
-		return lokums;
-	}
-	
 	public class LComboTest{
 		public LComboTest(){
 			if(lokums == null){

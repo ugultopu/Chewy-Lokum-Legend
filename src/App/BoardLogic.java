@@ -278,9 +278,10 @@ public class BoardLogic {
 			ArrayList<Combo> combos = getCombos();
 			for(int i=0;i<combos.size();i++){
 				Combo currentCombo = combos.get(i);
-				ArrayList<ComboDestroyable> currentCombosComboDestroyables = currentCombo.getComboLokums();
+				ArrayList<Lokum> currentCombosComboDestroyables = currentCombo.getComboLokums();
 				for(int j=0;j<currentCombosComboDestroyables.size();j++){
-					currentCombosComboDestroyables.get(j).comboDestroy();
+					ComboDestroyable comboDestroyer = (ComboDestroyable)currentCombosComboDestroyables.get(i);
+					comboDestroyer.comboDestroy();
 				}
 			}
 			// send comboDestroyedFields to Kugi.

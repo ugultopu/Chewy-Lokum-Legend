@@ -17,7 +17,7 @@ public class Run {
 		
 		NormalLokum nl = new NormalLokum(0,0,"red");
 		
-		System.out.println(nl.toString());
+		System.out.println(LokumTest.toString(nl));
 		NormalLokum testNormal = new NormalLokum(1, 2, "red");
 		BombLokum testBomb = new BombLokum(10, 15, null);
 		WrappedLokum testWrapped = new WrappedLokum(10, 5, "brown");
@@ -31,7 +31,8 @@ public class Run {
 		//MergeTest.mergeTest(Factory.createMerge(testBomb, testWrapped)); --> !!Problem!!
 		//MergeTest.mergeTest(Factory.createMerge(testWrapped, testWrapped)); --> Works Good But Merge is wrong
 		//MergeTest.mergeTest(Factory.createMerge(testBomb, testBomb)); --> Works
-		MergeTest.mergeTest(Factory.createMerge(testHStriped, testBomb));
+		//MergeTest.mergeTest(Factory.createMerge(testHStriped, testBomb));//--> Works
+		
 	}
 
 }

@@ -11,10 +11,6 @@ public class ThreeCombo extends Combo {
 		this.lokums = lokums;
 	}
 	
-	public ArrayList<Lokum> getComboLokums() {
-		return lokums;
-	}
-	
 //Test for the method:
 	public class ThreeComboTest{
 		public ThreeComboTest(){
