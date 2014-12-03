@@ -108,6 +108,12 @@ public class BombMerge extends Merge {
 			}
 			destroyMostOccuredColor();
 		}else if(l1 instanceof BombLokum || l2 instanceof BombLokum){
+			for(int i = 0; i < lokumBoard.length; i++){
+				for(int j = 0; j < lokumBoard[i].length; j++){
+					NormalLokum newLokum = new NormalLokum(i, j, "white");
+					newLokum.comboDestroy();
+				}
+			}
 			System.out.println("Anasını siktin.");
 		}else{
 			System.out.println("FATAL ERROR!: BOMBMERGE");

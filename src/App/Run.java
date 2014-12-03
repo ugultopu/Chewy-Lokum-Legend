@@ -1,5 +1,11 @@
 package App;
 
+import Tests.BoardLogicTest;
+import Tests.LokumTest;
+import Tests.MergeTest;
+import Tests.NormalLokumTest;
+import Tests.StripedLokumTest;
+
 
 public class Run {
 
@@ -13,17 +19,19 @@ public class Run {
 		
 		System.out.println(nl.toString());
 		NormalLokum testNormal = new NormalLokum(1, 2, "red");
-		BombLokum testBomb = new BombLokum(2, 5, null);
-		WrappedLokum testWrapped = new WrappedLokum(4, 5, "brown");
-		VerticalStripedLokum testVStriped = new VerticalStripedLokum(2, 3, "white");
-		HorizontalStripedLokum testHStriped = new HorizontalStripedLokum(1, 3, "white");
+		BombLokum testBomb = new BombLokum(10, 15, null);
+		WrappedLokum testWrapped = new WrappedLokum(10, 5, "brown");
+		VerticalStripedLokum testVStriped = new VerticalStripedLokum(1, 3, "white");
+		HorizontalStripedLokum testHStriped = new HorizontalStripedLokum(1, 1, "white");
 		
 		
-		
-		System.out.println(Factory.createRandomLokum(3, 4).toString());
-		System.out.println(BoardLogic.getInstance().toString());
-		testVStriped.comboDestroy();
-		System.out.println(BoardLogic.getInstance().toString());
+		//MergeTest.mergeTest(Factory.createMerge(testBomb, testNormal)); --> Works
+		//BoardLogicTest.shuffleBoardTest(); --> Works
+		//MergeTest.mergeTest(Factory.createMerge(testWrapped, testVStriped)); --> Works
+		//MergeTest.mergeTest(Factory.createMerge(testBomb, testWrapped)); --> !!Problem!!
+		//MergeTest.mergeTest(Factory.createMerge(testWrapped, testWrapped)); --> Works Good But Merge is wrong
+		//MergeTest.mergeTest(Factory.createMerge(testBomb, testBomb)); --> Works
+		MergeTest.mergeTest(Factory.createMerge(testHStriped, testBomb));
 	}
 
 }

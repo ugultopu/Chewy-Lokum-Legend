@@ -12,6 +12,7 @@ public class WrappedLokum extends Lokum implements ComboDestroyable,
 	}
 	
 	@Override
+	
 	public void comboDestroy() {
 		// TODO Auto-generated method stub
 		BoardLogic boardLogic = BoardLogic.getInstance();

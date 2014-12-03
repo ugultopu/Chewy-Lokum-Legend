@@ -163,7 +163,7 @@ public class BoardLogic {
 	 * @param columnIndex
 	 * @return
 	 */
-	private boolean dropColumn(HashMap<LogicField, Integer> fallingLogicFields, int rowIndex, int columnIndex){
+	public boolean dropColumn(HashMap<LogicField, Integer> fallingLogicFields, int rowIndex, int columnIndex){
 		int dropCounter = 0;
 		int currentRowIndex = rowIndex;
 		while(logicFields[currentRowIndex][columnIndex] instanceof EmptyLogicField){
@@ -361,7 +361,7 @@ public class BoardLogic {
 	 * 
 	 * -Yet as another alternative, you can pick the lokums to be swapped not in a random fashion, but it a "pseudo - random" fashion.
 	 */
-	private void shuffleBoard(){
+	public void shuffleBoard(){
 		Random rnd = new Random();
 	    for (int i = logicFields.length - 1; i > 0; i--){
 	    	int rowIndex = rnd.nextInt(i + 1);
@@ -495,24 +495,5 @@ public class BoardLogic {
 //		printBoard();
 //	}
 	
-	public String toString(){
-		String boardString = "";
-		Lokum[][] loks = getBoard();
-
-		for(int i = 0; i < rowSize; i++){
-			for(int j = 0; j < columnSize; j++){
-				if(!(logicFields[i][j] instanceof EmptyLogicField)){
-					Lokum lok = loks[i][j];
-					String color = lok.getLokumColor();
-					String type = lok.getType();
-					boardString += type + "|" + color + " ";
-				}else{
-					boardString += "empty ";
-				}
-			}
-			boardString += "\n";
-		}
-		return boardString;
-	}
 
 }
