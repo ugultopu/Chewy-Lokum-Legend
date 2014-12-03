@@ -33,5 +33,12 @@ public abstract class LogicField {
 	}
 	
 	public abstract String getType();
+
+	public static boolean isSwapable(LogicField l1) {
+		if(l1 instanceof Swapable){
+			return true;
+		}
+		return false;
+	}
 	
 }

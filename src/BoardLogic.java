@@ -306,8 +306,8 @@ public class BoardLogic {
 		return true;
 	}
 	
-	private boolean typesSuitableForSwap(LogicField f1, LogicField f1){
-		if ( !f0.isSwappable() || !f1.isSwappable() )
+	private boolean typesSuitableForSwap(LogicField f0, LogicField f1){
+		if ( !LogicField.isSwapable(f0) || !LogicField.isSwapable(f1) )
 			return false;
 		return true;
 	}
