@@ -120,7 +120,7 @@ public class BombMerge extends Merge {
 			for(int j = 0; j < lokumBoard[i].length; j++){
 				Lokum lokum = lokumBoard[i][j];
 				if(lokum.getLokumColor().equals(color)){
-					lokum.comboDestroy();
+					((ComboDestroyable) lokum).comboDestroy();
 				}
 			}
 		}
