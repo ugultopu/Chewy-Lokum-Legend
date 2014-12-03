@@ -139,7 +139,7 @@ public class BoardLogic {
 	 * R.0) Should be called in the method:swap(LogicField, LogicField), after performing the required lokum destroys.
 	 * @return
 	 */
-	private void readjustBoardAfterDestroy(){
+	public void readjustBoardAfterDestroy(){
 		HashMap<LogicField, Integer> fallingLogicFields = new HashMap<LogicField, Integer>();
 		levelBoard(fallingLogicFields);
 		populateAfterDestroy(fallingLogicFields);

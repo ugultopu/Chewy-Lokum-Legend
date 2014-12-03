@@ -6,29 +6,28 @@ import java.util.ArrayList;
 public class FourCombo extends Combo{
 	private FourComboTest test;
 	private ArrayList<Lokum> lokums;
-	private String fourComboType; //Horizontal, vertical
 	private Lokum generatedLokum;
 	
-	public FourCombo(ArrayList<Lokum> lokums, String fourComboType){
+	public FourCombo(ArrayList<Lokum> lokums){
 		this.lokums = lokums;
-		this.fourComboType = fourComboType;
 		generateLokum();
 		test = new FourComboTest();
 	}
 	
-	public ArrayList<Lokum> getComboLokums(){
-		return lokums;
-	}
+	
 	
 	private void generateLokum(){
 		Lokum midLokum = lokums.get(1);
-		int x = midLokum.getRowIndex();
-		int y = midLokum.getColumnIndex();
+		Lokum nextLokum = lokums.get(2);
+		int xMid = midLokum.getRowIndex();
+		int yMid = midLokum.getColumnIndex();
+		int xNext = nextLokum.getRowIndex();
+		
 		String color = midLokum.getLokumColor();
-		if(fourComboType.equals("horizontal")){
-			this.generatedLokum = new HorizontalStripedLokum(x, y, color);
+		if((xMid + 1) == xNext){
+			this.generatedLokum = new HorizontalStripedLokum(xMid, yMid, color);
 		}else{
-			this.generatedLokum = new VerticalStripedLokum(x, y, color);
+			this.generatedLokum = new VerticalStripedLokum(xMid, yMid, color);
 		}
 	}
 	
@@ -48,5 +47,11 @@ public class FourCombo extends Combo{
 				}
 			}
 		}
+	}
+
+	@Override
+	public ArrayList<Lokum> getComboLokums() {
+		// TODO Auto-generated method stub
+		return lokums;
 	}
 }
