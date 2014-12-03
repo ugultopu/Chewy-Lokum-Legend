@@ -25,7 +25,7 @@ public class Factory {
 		return randomNumber;
 	}
 	
-	public static Merge createMerge(Lokum l1, Lokum l2){
+	public static Merge createMerge(MergeDestroyable l1, MergeDestroyable l2){
 		if(l1 instanceof HorizontalStripedLokum || l1 instanceof VerticalStripedLokum && l2 instanceof VerticalStripedLokum || l2 instanceof HorizontalStripedLokum){
 			System.out.println("Striped + Striped Merge");
 			return new StripedStripedMerge(l1, l2);
