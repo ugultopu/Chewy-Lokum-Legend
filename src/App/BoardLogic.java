@@ -2,6 +2,7 @@ package App;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Random;
 
 
@@ -11,6 +12,7 @@ public class BoardLogic {
 	private int rowSize;
 	private int columnSize;
 	private static BoardLogic instance;
+	private HashSet<Combo> boardCombos;
 	
 	/*
 	 * CHECK!
@@ -61,10 +63,26 @@ public class BoardLogic {
 		logicFields[lf.getRowIndex()][lf.getColumnIndex()] = lf;
 	}
 	
+	private void findBoardCombos(){
+		for(int currentRowIndex=0;currentRowIndex<rowSize;currentRowIndex++){
+			for(int currentColumnIndex=0;currentColumnIndex<columnSize;currentColumnIndex++){
+				LogicField currentLogicField = logicFields[currentRowIndex][currentColumnIndex];
+				if(currentLogicField instanceof Lokum){
+					Lokum currentLokum = (Lokum) currentLogicField;
+					ArrayList<Combo> currentCombos = currentLokum.getCombosThisLokumIn();
+					for(int currentComboIndex=0;currentComboIndex<currentCombos.size();currentComboIndex++){
+						boardCombos.add(currentCombos.get(currentComboIndex));
+					}
+				}
+			}
+		}
+	}
+	
 	private BoardLogic(){
 		this.rowSize = Constants.BOARD_WIDTH;
 		this.columnSize= Constants.BOARD_HEIGHT;
 		logicFields = new LogicField[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
+		this.boardCombos = new HashSet<Combo>();
 		initializeBoard();	// initializes the board to all EmptyLogicField objects.
 		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
 	}
@@ -73,6 +91,7 @@ public class BoardLogic {
 		this.rowSize = rowSize;
 		this.columnSize= columnSize;
 		logicFields = new LogicField[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
+		this.boardCombos = new HashSet<Combo>();
 		initializeBoard();	// initializes the board to all EmptyLogicField objects.
 		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
 		
@@ -335,20 +354,16 @@ public class BoardLogic {
 	}
 	
 	public boolean isBoardStabilized(){
-		ArrayList<Combo> combos = getCombos();
-		return ( combos.size() == 0 ) ;
+		findBoardCombos();
+		return ( this.boardCombos.size() == 0 ) ;
 	}
 	
 	public boolean isMoveAvailable(){
-		return true;
+		
 	}
 	
 	private void scoreUpdate(Combo combo){
 		
-	}
-	
-	private ArrayList<Combo> getCombos(){
-		return null;
 	}
 	
 	/**

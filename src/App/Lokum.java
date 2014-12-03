@@ -28,6 +28,10 @@ public abstract class Lokum extends LogicField{
 		this.lokumColor = lokumColor;
 	}
 	
+	public ArrayList<Combo> getCombosThisLokumIn() {
+		return combosThisLokumIn;
+	}
+
 	public void firstFindCombos(){
 		/*
 		 * First, the method checks if this Lokum is an instance of BombLokum. If so, it returns immediately from the method. If not, it keeps on finding the combos which
@@ -1374,7 +1378,9 @@ public abstract class Lokum extends LogicField{
 			 * Check if the combo is some T shape. 
 			 */
 			else if(rightRightLokum != null){
-				// TO DO!
+				comboLokums.add(rightLokum);
+				comboLokums.add(rightRightLokum);
+				combosThisLokumIn.add(new TCombo(comboLokums));
 			}
 			/*
 			 * Check if the combo is 4V1. 
@@ -1739,11 +1745,11 @@ public abstract class Lokum extends LogicField{
 			}
 			comboLokums.clear();
 			if( (aboveAboveLokum != null) && (belowBelowLokum != null) ){
-				comboLokums.add(belowBelowLokum);
-				comboLokums.add(belowLokum);
-				comboLokums.add(this);
-				comboLokums.add(aboveLokum);
 				comboLokums.add(aboveAboveLokum);
+				comboLokums.add(aboveLokum);
+				comboLokums.add(this);
+				comboLokums.add(belowLokum);
+				comboLokums.add(belowBelowLokum);
 				combosThisLokumIn.add(new FiveCombo(comboLokums));
 			}
 			else{
