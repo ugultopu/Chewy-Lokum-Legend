@@ -4,7 +4,7 @@ public abstract class StripedLokum extends Lokum implements MergeDestroyable, Co
 	public StripedLokum(int rowIndex, int columnIndex, String lokumColor) {
 		super(rowIndex, columnIndex, lokumColor);
 		// TODO Auto-generated constructor stub
-		BoardLogic.getInstance().introduceLogicField(this);
+		//BoardLogic.getInstance().introduceLogicField(this);
 	}
 	
 }

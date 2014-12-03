@@ -15,7 +15,7 @@ public class Factory {
 			case 3:
 				return new NormalLokum(x, y, Constants.LOKUM_COLOR_WHITE);
 			default:
-					return null;
+				return null;
 		}
 	}
 	
@@ -26,10 +26,10 @@ public class Factory {
 	}
 	
 	public static Merge createMerge(MergeDestroyable l1, MergeDestroyable l2){
-		if(l1 instanceof HorizontalStripedLokum || l1 instanceof VerticalStripedLokum && l2 instanceof VerticalStripedLokum || l2 instanceof HorizontalStripedLokum){
+		if((l1 instanceof HorizontalStripedLokum || l1 instanceof VerticalStripedLokum) && (l2 instanceof VerticalStripedLokum || l2 instanceof HorizontalStripedLokum)){
 			System.out.println("Striped + Striped Merge");
 			return new StripedStripedMerge(l1, l2);
-		}else if(l1 instanceof StripedLokum || l1 instanceof WrappedLokum && l2 instanceof WrappedLokum || l2 instanceof StripedLokum){
+		}else if((l1 instanceof StripedLokum || l1 instanceof WrappedLokum) && (l2 instanceof WrappedLokum || l2 instanceof StripedLokum)){
 			System.out.println("Striped + Wrapped Merge");
 			return new StripedWrappedMerge(l1, l2);
 		}else if(l1 instanceof BombLokum || l2 instanceof BombLokum){

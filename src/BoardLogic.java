@@ -93,7 +93,7 @@ public class BoardLogic {
 	private void populateColumn(int columnIndex){
 		for(int i=0;i<rowSize;i++){
 			if( logicFields[i][columnIndex] instanceof EmptyLogicField )
-			logicFields[i][columnIndex] = Factory.createRandomLokum(i, columnIndex);
+				logicFields[i][columnIndex] = Factory.createRandomLokum(i, columnIndex);
 		}
 	}	
 	
@@ -482,5 +482,23 @@ public class BoardLogic {
 //		}
 //		printBoard();
 //	}
+	
+	public String toString(){
+		String boardString = "";
+		for(int i = 0; i < rowSize; i++){
+			for(int j = 0; j < columnSize; i++){
+				if(!(logicFields[i][j] instanceof EmptyLogicField)){
+					Lokum lok = (Lokum) logicFields[i][j];
+					String color = lok.getLokumColor();
+					String type = lok.getType();
+					boardString += type + "|" + color + " ";
+				}else{
+					boardString += "empty ";
+				}
+			}
+			boardString += "\n";
+		}
+		return boardString;
+	}
 
 }

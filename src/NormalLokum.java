@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 
-public class NormalLokum extends Lokum implements ComboDestroyable{
+public class NormalLokum extends Lokum implements ComboDestroyable, MergeDestroyable{
 	
 	public NormalLokum(int rowIndex, int columnIndex, String lokumColor) {
 		super(rowIndex, columnIndex, lokumColor);
@@ -31,6 +31,10 @@ public class NormalLokum extends Lokum implements ComboDestroyable{
 	public String getType() {
 		// TODO Auto-generated method stub
 		return "NormalLokum";
+	}
+	
+	public String toString(){
+		return "Normal Lokum at (" + getRowIndex() + ", " + getColumnIndex() + ") with color: " + getLokumColor();
 	}
 	
 //	/**
