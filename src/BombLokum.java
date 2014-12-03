@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 
 public class BombLokum extends Lokum implements ComboDestroyable,
-		MergeDestroyable {
+		MergeDestroyable, Swapable {
 
 	public BombLokum(int rowIndex, int columnIndex, String lokumColor) {
 		/*
@@ -16,7 +16,10 @@ public class BombLokum extends Lokum implements ComboDestroyable,
 	@Override
 	public void comboDestroy(ArrayList<ComboDestroyable> comboDestroyedFields) {
 		// TODO Auto-generated method stub
-		BoardLogic.getInstance().introduceLogicField(new EmptyLogicField(getRowIndex(), getColumnIndex()));
+		EmptyLogicField destroyed = new EmptyLogicField(getRowIndex(), getColumnIndex());
+		BoardLogic.getInstance().introduceLogicField(destroyed);
+		
+		EventDispatchQueue.getInstance().addEvent(new DestroyLokumEvent(destroyed.copyLogicField()));
 		comboDestroyedFields.add(this);
 	}
 

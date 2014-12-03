@@ -28,10 +28,12 @@ public class HorizontalStripedLokum extends StripedLokum implements MergeDestroy
 				((ComboDestroyable) currentLogicField).comboDestroy(comboDestroyedFields);
 			// if here, then currentLogicField is not combo destroyable. So simply clear it's position.
 			else{
-				boardLogic.introduceLogicField(new EmptyLogicField( getRowIndex() , currentColumnIndex ));
+				EmptyLogicField destroyed = new EmptyLogicField( getRowIndex() , currentColumnIndex )
+				boardLogic.introduceLogicField(destroyed);
 				/*
 				 * CHECK THE LINE BELOW!!!
 				 */
+				EventDispatchQueue.getInstance().addEvent(new DestroyLokumEvent(destroyed.copyLogicField()));
 				comboDestroyedFields.add((ComboDestroyable) boardLogic.getLogicFieldAt( getRowIndex(), currentColumnIndex ));
 			}
 		}

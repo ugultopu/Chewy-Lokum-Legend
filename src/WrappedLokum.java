@@ -26,10 +26,13 @@ public class WrappedLokum extends Lokum implements ComboDestroyable,
 					((ComboDestroyable) currentLogicField).comboDestroy(comboDestroyedFields);
 				// if here, then currentLogicField is not combo destroyable. So simply clear it's position.
 				else{
-					boardLogic.introduceLogicField(new EmptyLogicField( getRowIndex() + i, getColumnIndex() + j ));
+					EmptyLogicField destroyed = new EmptyLogicField( getRowIndex() + i, getColumnIndex() + j );
+					boardLogic.introduceLogicField(destroyed);
+					
 					/*
 					 * CHECK THE LINE BELOW!!!
 					 */
+					EventDispatchQueue.getInstance().addEvent(new DestroyLokumEvent(destroyed.copyLogicField()));
 					comboDestroyedFields.add((ComboDestroyable) boardLogic.getLogicFieldAt(getRowIndex() + i, getColumnIndex() + j));
 				}
 			}
