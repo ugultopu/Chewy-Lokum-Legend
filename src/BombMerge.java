@@ -4,14 +4,13 @@ import java.util.Random;
 public class BombMerge extends Merge {
 	private Lokum l1;
 	private Lokum l2;
-	private BoardLogic board;
-	private Lokum[][] lokumBoard;
+	private BoardLogic board = BoardLogic.getInstance();
+	private Lokum[][] lokumBoard = (Lokum[][]) board.getBoard();
 
 	public BombMerge(MergeDestroyable l1, MergeDestroyable l2){
 		this.l1 = (Lokum) l1;
 		this.l2 = (Lokum) l2;
-		board = BoardLogic.getInstance();
-		lokumBoard = (Lokum[][]) board.getBoard();
+	
 	}
 
 	public void destroyMerge(){
@@ -120,7 +119,7 @@ public class BombMerge extends Merge {
 			for(int j = 0; j < lokumBoard[i].length; j++){
 				Lokum lokum = lokumBoard[i][j];
 				if(lokum.getLokumColor().equals(color)){
-					lokum.comboDestroy();
+					((ComboDestroyable) lokum).comboDestroy();
 				}
 			}
 		}

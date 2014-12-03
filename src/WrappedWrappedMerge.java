@@ -15,9 +15,9 @@ public class WrappedWrappedMerge extends Merge {
 	
 	public void destroyMerge(){
 		ArrayList<Lokum> destroyedLokums = new ArrayList<Lokum>();
-		l1.destroy();
+		((WrappedLokum)l1).comboDestroy();
 		destroyedLokums.add(l1);
-		l2.destroy();
+		((WrappedLokum) l2).comboDestroy();
 		destroyedLokums.add(l2);
 		
 	}

@@ -7,7 +7,7 @@ public class EmptyLogicField extends LogicField {
 	}
 
 	@Override
-	public LogicField copyLogicField() {
+	public EmptyLogicField copyLogicField() {
 		// TODO Auto-generated method stub
 		return new EmptyLogicField(getRowIndex(), getColumnIndex());
 	}
