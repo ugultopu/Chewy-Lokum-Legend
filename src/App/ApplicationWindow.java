@@ -5,10 +5,11 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class ApplicationWindow extends JFrame {
-	protected MenuPanel menu;
-	protected GamePanel game;
+	
+	protected static GamePanel game;
 	protected static ApplicationWindow instance;
 
 	public ApplicationWindow() {
@@ -16,9 +17,6 @@ public class ApplicationWindow extends JFrame {
 		
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				if(game!=null){
-					game.running=false;
-				}
 				System.exit(0);
 			}
 		});
@@ -27,9 +25,9 @@ public class ApplicationWindow extends JFrame {
 		setVisible(true);
 		setResizable(false);
 		
-		menu = MenuPanel.getInstance();
+		game = GamePanel.getInstance();
 		
-		add(menu);
+		add(game);
 	}
 	
 	public static ApplicationWindow getInstance(){
@@ -42,4 +40,13 @@ public class ApplicationWindow extends JFrame {
 	public void resetInstance(){
 		instance = null;
 	}
+	
+	public static void addPanel(JPanel panel){
+		instance.add(panel);
+	}
+	
+	public static void removePanel(JPanel panel){
+		instance.remove(panel);
+	}
+	
 }

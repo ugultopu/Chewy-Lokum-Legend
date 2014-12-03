@@ -12,11 +12,11 @@ import java.util.LinkedList;
 import java.util.Iterator;
 
 public class GamePanel extends JPanel {
-	private static int LabelXPadding = Constants.SCREEN_WIDTH*11/16;  
-	private static int LabelYPadding = Constants.SCREEN_HEIGHT*6/16;
+	private static int LabelXPadding = 750;  
+	private static int LabelYPadding = 160;
 	
-	protected BlockBoard blockboard;
-	private GameInformationPanel informationPanel;
+	protected GameBoard gameBoard;
+	private InformationBoard informationBoard;
 //	protected GameOverPanel gameOverPanel;
 	protected boolean running=true;
 //	private ScoreCalculator scoreCalculator;
@@ -26,31 +26,22 @@ public class GamePanel extends JPanel {
 		super();
 		
 //		scoreCalculator = new ScoreCalculator();
-		
-		informationPanel = new GameInformationPanel(scoreCalculator);
-		
-		add(informationPanel);
-		informationPanel.setBounds(LabelXPadding, LabelYPadding, 
-				Constants.INFORMATIONPANEL_SIZE,Constants.INFORMATIONPANEL_SIZE);
-		
-
-		blockboard = new BlockBoard(ownerFrame, scoreCalculator);
-				
-		nextPiecePanel = new NextPiecePanel(ownerFrame);
-		
+		informationBoard = new InformationBoard();
+//		gameBoard = new GameBoard(ownerFrame, scoreCalculator);
+						
 		requestFocusInWindow();
 		
-		new Thread(new Runnable(){
-
-			public void run() {
-
-				while(running){
-					gameUpdate();
-					scoreUpdate();
-				}				
-			}
-			
-		}).start();
+//		new Thread(new Runnable(){
+//
+//			public void run() {
+//
+//				while(running){
+//					gameUpdate();
+//					scoreUpdate();
+//				}				
+//			}
+//			
+//		}).start();
 		
 		
 		
@@ -58,21 +49,18 @@ public class GamePanel extends JPanel {
 		setBackground(Constants.GAME_BACKGROUND_COLOR);
 		setSize(Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
 		
-		add(informationPanel);
-		informationPanel.setBounds(LabelXPadding, LabelYPadding, 
-				Constants.INFORMATIONPANEL_SIZE,Constants.INFORMATIONPANEL_SIZE);
+		add(informationBoard);
+		informationBoard.setBounds(LabelXPadding,LabelYPadding, 
+				Constants.INFORMATION_BOARD_WIDTH,Constants.INFORMATION_BOARD_HEIGHT);
 		
-		add(blockboard);
-		blockboard.setBounds(40, 60, 600, 540);
-		
-		
-		
+//		add(gameBoard);
+//		gameBoard.setBounds(40, 60, 600, 540);
 				
-		
 	}
-	public void startGame(){
-		running=true;
-	}
+
+//	public void startGame(){
+//		running=true;
+//	}
 	
 //	public void endGame(){
 //		running = false;
@@ -99,22 +87,22 @@ public class GamePanel extends JPanel {
 		return instance;
 	}
 	
-	public void resetInstance(){
+	public static void resetInstance(){
 		instance = null;
 	}	
 
 
 	public void paint(Graphics g){
-		/* For some reason background color won't change so a fillRect is put in to background */
+
 		g.setColor(Constants.GAME_BACKGROUND_COLOR);
 		g.fillRect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 		g.setColor(new Color(0,0,0));
-		g.fillRect(440, 60,220,150);
-		g.setColor(new Color(0,0,0));
-    	g.fillRect(30,50, 380, 560);
+		g.fillRect(30,50, Constants.ANIMATION_WINDOW_WIDTH, Constants.ANIMATION_WINDOW_HEIGHT);
+		g.fillRect(750, 160, Constants.INFORMATION_BOARD_WIDTH, Constants.INFORMATION_BOARD_HEIGHT);
     	
-    	informationPanel.repaint();
-		blockboard.repaint();
+    	
+    	informationBoard.repaint();
+//		gameBoard.repaint();
 	}
 
 }
