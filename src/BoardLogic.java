@@ -5,10 +5,10 @@ import java.util.Random;
 
 public class BoardLogic {
 	
-	LogicField[][] logicFields;
-	int rowSize;
-	int columnSize;
-	static BoardLogic instance;
+	private LogicField[][] logicFields;
+	private int rowSize;
+	private int columnSize;
+	private static BoardLogic instance;
 	
 	/*
 	 * CHECK!
@@ -54,6 +54,7 @@ public class BoardLogic {
 	}
 	
 	private BoardLogic(){
+		logicFields = new LogicField[Constants.BOARD_HEIGHT][Constants.BOARD_WIDTH];
 		initializeBoard();	// initializes the board to all EmptyLogicField objects.
 		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
 		this.rowSize = Constants.BOARD_WIDTH;
