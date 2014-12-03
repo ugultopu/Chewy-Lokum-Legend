@@ -5,7 +5,7 @@ public class BombMerge extends Merge {
 	private Lokum l1;
 	private Lokum l2;
 	private BoardLogic board = BoardLogic.getInstance();
-	private Lokum[][] lokumBoard = (Lokum[][]) board.getBoard();
+	private Lokum[][] lokumBoard =  board.getBoard();
 
 	public BombMerge(MergeDestroyable l1, MergeDestroyable l2){
 		this.l1 = (Lokum) l1;

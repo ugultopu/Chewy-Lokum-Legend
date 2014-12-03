@@ -31,8 +31,14 @@ public class BoardLogic {
 		return columnSize;
 	}
 	
-	public LogicField[][] getBoard(){
-		return logicFields;
+	public Lokum[][] getBoard(){
+		Lokum[][] lokumArray = new Lokum[rowSize][columnSize];
+		for(int i = 0; i < rowSize; i++){
+			for(int j = 0; j < columnSize; j++){
+				lokumArray[i][j] = (Lokum)logicFields[i][j];			
+			}
+		}
+		return lokumArray;
 	}
 
 	/**
@@ -54,18 +60,20 @@ public class BoardLogic {
 	}
 	
 	private BoardLogic(){
-		logicFields = new LogicField[Constants.BOARD_HEIGHT][Constants.BOARD_WIDTH];
-		initializeBoard();	// initializes the board to all EmptyLogicField objects.
-		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
 		this.rowSize = Constants.BOARD_WIDTH;
 		this.columnSize= Constants.BOARD_HEIGHT;
+		logicFields = new LogicField[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
+		initializeBoard();	// initializes the board to all EmptyLogicField objects.
+		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
 	}
 	
 	private BoardLogic(int rowSize, int columnSize){
-		initializeBoard();	// initializes the board to all EmptyLogicField objects.
-		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
 		this.rowSize = rowSize;
 		this.columnSize= columnSize;
+		logicFields = new LogicField[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
+		initializeBoard();	// initializes the board to all EmptyLogicField objects.
+		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
+		
 	}
 	
 	private void initializeBoard(){
@@ -94,7 +102,7 @@ public class BoardLogic {
 	private void populateColumn(int columnIndex){
 		for(int i=0;i<rowSize;i++){
 			if( logicFields[i][columnIndex] instanceof EmptyLogicField )
-				logicFields[i][columnIndex] = Factory.createRandomLokum(i, columnIndex);
+				logicFields[i][columnIndex] = (LogicField) Factory.createRandomLokum(i, columnIndex);
 		}
 	}	
 	
@@ -487,10 +495,12 @@ public class BoardLogic {
 	
 	public String toString(){
 		String boardString = "";
+		Lokum[][] loks = getBoard();
+
 		for(int i = 0; i < rowSize; i++){
-			for(int j = 0; j < columnSize; i++){
+			for(int j = 0; j < columnSize; j++){
 				if(!(logicFields[i][j] instanceof EmptyLogicField)){
-					Lokum lok = (Lokum) logicFields[i][j];
+					Lokum lok = loks[i][j];
 					String color = lok.getLokumColor();
 					String type = lok.getType();
 					boardString += type + "|" + color + " ";
