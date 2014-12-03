@@ -277,6 +277,7 @@ public class BoardLogic {
 			// Hence, the line below is deprecated now, I commented out it just as a remainder
 			// EventDispatchQueue.getInstance().addEvent(new NonLokumGeneratingEvent(convertLogicFieldListToEmptyLogicFieldList(comboDestroyedFields)));
 		}
+		return true;
 	}
 	
 	/**

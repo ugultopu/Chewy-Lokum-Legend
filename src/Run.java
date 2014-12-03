@@ -16,6 +16,7 @@ public class Run {
 		Merge testMergeVStripedBomb = Factory.createMerge(testVStriped, testBomb);
 		Merge testMergeHStripedBomb = Factory.createMerge(testHStriped, testBomb);
 		Merge testMergeWrappedStriped = Factory.createMerge(testVStriped, testWrapped);
+		Merge testMergeStripedStriped = Factory.createMerge(testVStriped, testHStriped);
 		
 		System.out.println(Factory.createRandomLokum(3, 4).toString());
 		System.out.println(BoardLogic.getInstance().getBoard());
