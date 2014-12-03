@@ -31,7 +31,7 @@ public class Factory {
 		if((l1 instanceof HorizontalStripedLokum || l1 instanceof VerticalStripedLokum) && (l2 instanceof VerticalStripedLokum || l2 instanceof HorizontalStripedLokum)){
 			System.out.println("Striped + Striped Merge");
 			return new StripedStripedMerge(l1, l2);
-		}else if((l1 instanceof StripedLokum || l1 instanceof WrappedLokum) && (l2 instanceof WrappedLokum || l2 instanceof StripedLokum)){
+		}else if((l1 instanceof StripedLokum && l2 instanceof WrappedLokum) || (l2 instanceof StripedLokum && l1 instanceof WrappedLokum)){
 			System.out.println("Striped + Wrapped Merge");
 			return new StripedWrappedMerge(l1, l2);
 		}else if(l1 instanceof BombLokum || l2 instanceof BombLokum){

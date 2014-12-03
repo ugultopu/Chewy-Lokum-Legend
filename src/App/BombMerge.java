@@ -47,6 +47,7 @@ public class BombMerge extends Merge {
 				for(int j = 0; j < lokumBoard[i].length; j++){
 					Lokum lokum = lokumBoard[i][j];
 					if(lokum.getLokumColor().equals(colorl1)){
+						
 						int randomStriped = randomGenerator.nextInt(2);
 						if(randomStriped == 0){
 							VerticalStripedLokum newLokum = new VerticalStripedLokum(i, j, colorl1);
@@ -108,6 +109,12 @@ public class BombMerge extends Merge {
 			}
 			destroyMostOccuredColor();
 		}else if(l1 instanceof BombLokum || l2 instanceof BombLokum){
+			for(int i = 0; i < lokumBoard.length; i++){
+				for(int j = 0; j < lokumBoard[i].length; j++){
+					NormalLokum newLokum = new NormalLokum(i, j, "white");
+					newLokum.comboDestroy();
+				}
+			}
 			System.out.println("Anasını siktin.");
 		}else{
 			System.out.println("FATAL ERROR!: BOMBMERGE");

@@ -26,10 +26,6 @@ public class FiveCombo extends Combo{
 		return generatedLokum;
 	}
 	
-	public ArrayList<Lokum> getComboLokums(){
-		return lokums;
-	}
-	
 	public class FiveComboTest{
 		public FiveComboTest(){
 			if(lokums == null){
@@ -42,5 +38,11 @@ public class FiveCombo extends Combo{
 				}
 			}
 		}
+	}
+
+	@Override
+	public ArrayList<Lokum> getComboLokums() {
+		// TODO Auto-generated method stub
+		return lokums;
 	}
 }

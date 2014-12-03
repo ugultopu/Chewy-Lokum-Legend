@@ -4,8 +4,10 @@ import java.awt.Color;
 
 public class Constants {
 	/* Animation Window Dimentions */
-	public static final int ANIMATION_WINDOW_WIDTH = 720;
-	public static final int ANIMATION_WINDOW_HEIGHT = 540;
+	public static final int ANIMATION_WINDOW_WIDTH = 690;
+	public static final int ANIMATION_WINDOW_HEIGHT = 560;
+	public static final int INFORMATION_BOARD_WIDTH = 220;
+	public static final int INFORMATION_BOARD_HEIGHT = 300;
 	
 	public static final String LOKUM_COLOR_RED = "red";
 	public static final String LOKUM_COLOR_GREEN = "green";
@@ -13,9 +15,8 @@ public class Constants {
 	public static final String LOKUM_COLOR_WHITE = "white";
 	
 	/* Screen Dimensions */
-	public static final int SCREEN_WIDTH=700;
+	public static final int SCREEN_WIDTH=1000;
 	public static final int SCREEN_HEIGHT=700;
-	public static final int INFORMATIONPANEL_SIZE=200;
 	
 	/* Board Size Options */
 

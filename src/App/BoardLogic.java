@@ -182,7 +182,7 @@ public class BoardLogic {
 	 * @param columnIndex
 	 * @return
 	 */
-	private boolean dropColumn(HashMap<LogicField, Integer> fallingLogicFields, int rowIndex, int columnIndex){
+	public boolean dropColumn(HashMap<LogicField, Integer> fallingLogicFields, int rowIndex, int columnIndex){
 		int dropCounter = 0;
 		int currentRowIndex = rowIndex;
 		while(logicFields[currentRowIndex][columnIndex] instanceof EmptyLogicField){
@@ -297,9 +297,10 @@ public class BoardLogic {
 			ArrayList<Combo> combos = getCombos();
 			for(int i=0;i<combos.size();i++){
 				Combo currentCombo = combos.get(i);
-				ArrayList<ComboDestroyable> currentCombosComboDestroyables = currentCombo.getComboLokums();
+				ArrayList<Lokum> currentCombosComboDestroyables = currentCombo.getComboLokums();
 				for(int j=0;j<currentCombosComboDestroyables.size();j++){
-					currentCombosComboDestroyables.get(j).comboDestroy();
+					ComboDestroyable comboDestroyer = (ComboDestroyable)currentCombosComboDestroyables.get(i);
+					comboDestroyer.comboDestroy();
 				}
 			}
 			// send comboDestroyedFields to Kugi.
@@ -376,7 +377,7 @@ public class BoardLogic {
 	 * 
 	 * -Yet as another alternative, you can pick the lokums to be swapped not in a random fashion, but it a "pseudo - random" fashion.
 	 */
-	private void shuffleBoard(){
+	public void shuffleBoard(){
 		Random rnd = new Random();
 	    for (int i = logicFields.length - 1; i > 0; i--){
 	    	int rowIndex = rnd.nextInt(i + 1);
@@ -408,126 +409,6 @@ public class BoardLogic {
 			emptyLogicFields.add((EmptyLogicField)logicField);
 		}
 		return  emptyLogicFields;
-	}
-
-//	/**
-//	 * 	@requires:
-//	 * 	
-//	 * 	<nothing>
-//	 * 
-//	 * 	@ensures:
-//	 * 
-//	 * 	E.1) BoardLogic instance != null.
-//	 * 	E.2) LogicField[][] lokums != null.
-//	 * 	E.3) Any element of lokums is not null.
-//	 * 	E.4) EventDispatchQuenue eventDispatchQuenue != null.
-//	 * 	
-//	 * 	E.5) lokums.repOK() == true.
-//	 * 	E.6) lokum.repOK() == true for every lokum in lokums matrix.
-//	 * 	E.7) eventDispatchQuenue.repOK() == true.
-//	 * 
-//	 * 	@modifies:
-//	 * 
-//	 *	<nothing> 
-//	 */	
-//	private boolean repOK(){
-//
-//		if(instance == null)
-//			return false;
-//		if(lokums == null)
-//			return false;
-//		if(!lokums.repOK())
-//			return false;
-//		for(int i=0;i<lokums.length;i++){
-//			if(lokums[i] == null)
-//				return false;
-//			if(!lokums[i].repOK)
-//				return false;
-//		}
-//		if(eventDispatchQueue == null)
-//			return false;
-//		if(!eventDispatchQuenue.repOK())
-//			return false;
-//		return true;
-//	}
-//	
-//	/**
-//	 * Using the scoreAward:int field of the Combo, a ScoreUpdateEvent is generated and the resulting
-//	 * ScoreUpdateEvent has been enqueued to eventDispatchQueue:EventDispatchQueue of the BoardLogic
-//	 * instance.
-//	 * 
-//	 * @requires: 
-//	 * 
-//	 * R.1) (implicit) combo.repOK == true.
-//	 * R.2) (implicit) eventDispatchQueue.repOK == true.
-//	 * 
-//	 * @ensures
-//	 * 
-//	 * E.1) A new ScoreUpdateEvent is created with regard to the scoreAward:int field of the given
-//	 * combo.
-//	 * E.2) This newly created ScoreUpdateEvent is enqueued to eventDispatchQueue. 
-//	 * 
-//	 * @modifies
-//	 * 
-//	 * M.1) eventDispatchQueue:EventDispatchQueue.
-//	 * 
-//	 */
-//
-//	public static void testSwap(){
-//		setupTestEnvironment();
-//		if(!l0.repOK() || !l1.repOK()){
-//			System.out.println("At least 1 lokum's representation is not OK at the beginning of swap(Lokum, Lokum).");
-//			return;
-//		}
-//			// if here, then both lokums' representations are OK.
-//		Location l0priorLocation = l0.getLocation;
-//		Location l1priorLocation = l1.getLocation;
-//		
-//		if(
-//				Math.abs(l0priorLocation.getX() - l1priorLocation.getX()) != 1
-//				&&
-//				Math.abs(l0priorLocation.getY() - l1priorLocation.getY()) != 1)
-//		{
-//			System.out.println("Lokums are not next to each other.");
-//			return;
-//		}
-//		printBoard();
-//		swap(l0, l1);
-//		if(!l0.repOK() || !l1.repOK()){
-//			System.out.println("At least 1 lokum's representation is not OK at the end of swap(Lokum, Lokum).");
-//			return;
-//		}
-//			
-//			// if here, then both lokums' representations are OK.
-//		if(!l0.getLocation.equals(l1priorLocation)){
-//			System.out.println("l0's new location is not equal to l1's prior location.");
-//			return;
-//		}
-//		if(!l1.getLocation.equals(l0priorLocation)){
-//			System.out.println("l1's new location is not equal to l0's prior location.");
-//			return;
-//		}
-//		printBoard();
-//	}
-	
-	public String toString(){
-		String boardString = "";
-		Lokum[][] loks = getBoard();
-
-		for(int i = 0; i < rowSize; i++){
-			for(int j = 0; j < columnSize; j++){
-				if(!(logicFields[i][j] instanceof EmptyLogicField)){
-					Lokum lok = loks[i][j];
-					String color = lok.getLokumColor();
-					String type = lok.getType();
-					boardString += type + "|" + color + " ";
-				}else{
-					boardString += "empty ";
-				}
-			}
-			boardString += "\n";
-		}
-		return boardString;
 	}
 
 }

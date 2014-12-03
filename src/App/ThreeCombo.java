@@ -11,10 +11,6 @@ public class ThreeCombo extends Combo {
 		this.lokums = lokums;
 	}
 	
-	public ArrayList<Lokum> getComboLokums() {
-		return lokums;
-	}
-	
 //Test for the method:
 	public class ThreeComboTest{
 		public ThreeComboTest(){
@@ -33,5 +29,11 @@ public class ThreeCombo extends Combo {
 	public Lokum getGeneratedLokum() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public ArrayList<Lokum> getComboLokums() {
+		// TODO Auto-generated method stub
+		return lokums;
 	}
 }

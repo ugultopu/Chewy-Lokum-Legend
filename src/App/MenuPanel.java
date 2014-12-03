@@ -49,15 +49,12 @@ public class MenuPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			
-				ApplicationWindow.instance = GamePanel.getInstance();
 
-//				ownerFrame.game = new GamePanel(ownerFrame);
-//				ownerFrame.remove(ownerFrame.menu);
-//				ownerFrame.add(ownerFrame.game);
-//				ownerFrame.game.requestFocusInWindow();
-//				ownerFrame.game.startGame();
-//				ownerFrame.game.repaint();
+//				ApplicationWindow.removePanel(ApplicationWindow.menu);
+//				ApplicationWindow.addPanel(ApplicationWindow.game);
+//				ApplicationWindow.game.requestFocusInWindow();
+//				ApplicationWindow.game.startGame();
+//				ApplicationWindow.game.repaint();
 			}
 		});
 		
