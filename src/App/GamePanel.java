@@ -27,7 +27,7 @@ public class GamePanel extends JPanel {
 		
 //		scoreCalculator = new ScoreCalculator();
 		informationBoard = new InformationBoard();
-//		gameBoard = new GameBoard(ownerFrame, scoreCalculator);
+//		gameBoard = new GameBoard();
 						
 		requestFocusInWindow();
 		
