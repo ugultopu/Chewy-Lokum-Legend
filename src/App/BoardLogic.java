@@ -122,7 +122,6 @@ public class BoardLogic {
 		boardCombos = new ArrayList<Combo>();
 		initializeBoard();	// initializes the board to all EmptyLogicField objects.
 		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
-		this.boardCombos = new ArrayList<Combo>();
 	}
 
 	private BoardLogic(int rowSize, int columnSize){
@@ -131,7 +130,7 @@ public class BoardLogic {
 		logicFields = new LogicField[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
 		initializeBoard();	// initializes the board to all EmptyLogicField objects.
 		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
-		this.boardCombos = new ArrayList<Combo>();
+
 	}
 
 	private void initializeBoard(){
@@ -508,10 +507,6 @@ public class BoardLogic {
 			}
 		}
 		return false;
-	}
-
-	private void scoreUpdate(Combo combo){
-
 	}
 
 	/**
