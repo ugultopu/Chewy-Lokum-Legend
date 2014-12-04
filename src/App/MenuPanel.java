@@ -50,11 +50,11 @@ public class MenuPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-//				ApplicationWindow.removePanel(ApplicationWindow.menu);
-//				ApplicationWindow.addPanel(ApplicationWindow.game);
-//				ApplicationWindow.game.requestFocusInWindow();
-//				ApplicationWindow.game.startGame();
-//				ApplicationWindow.game.repaint();
+				ApplicationWindow.removePanel(instance);
+				ApplicationWindow.addPanel(GamePanel.getInstance());
+				GameBoard.getInstance().requestFocusInWindow();
+				GamePanel.getInstance().startGame();
+				GamePanel.getInstance().repaint();
 			}
 		});
 		

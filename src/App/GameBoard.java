@@ -12,7 +12,7 @@ public class GameBoard extends JPanel {
 	private static GameBoard instance;
 	
 	private GameBoard(){
-		
+		boardArray = new LokumBox[height][width];
 		for(int i = 0; i < height; i++){
 			for(int j = 0; j < width; j++){
 				boardArray[i][j] = new LokumBox(new EmptyLogicField(i,j));
