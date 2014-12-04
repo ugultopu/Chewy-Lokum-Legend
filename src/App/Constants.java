@@ -24,6 +24,11 @@ public class Constants {
 	public static final int SCREEN_WIDTH=1000;
 	public static final int SCREEN_HEIGHT=700;
 	
+	/* Numbers in Level Board */
+	
+	public static final int NUMBER_OF_COLUMNS = 5;
+	public static final int NUMBER_OF_LEVELS = 25;
+	
 	/* Board Size Options */
 
 	public static final int BOARD_HEIGHT = 9;
