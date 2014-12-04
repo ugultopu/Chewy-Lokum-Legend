@@ -20,7 +20,7 @@ public class HorizontalStripedLokum extends StripedLokum implements MergeDestroy
 		 * Set the striped lokum's position to empty.
 		 */
 		boardLogic.introduceLogicField(new EmptyLogicField(getRowIndex(), getColumnIndex()));
-		
+		int destroyedLokums = 0;
 
 		int currentColumnIndex;
 
@@ -32,6 +32,7 @@ public class HorizontalStripedLokum extends StripedLokum implements MergeDestroy
 			else{
 				EmptyLogicField destroyed = new EmptyLogicField( getRowIndex() , currentColumnIndex );
 				boardLogic.introduceLogicField(destroyed);
+				destroyedLokums++;
 				/*
 				 * CHECK THE LINE BELOW!!!
 				 */
@@ -39,6 +40,7 @@ public class HorizontalStripedLokum extends StripedLokum implements MergeDestroy
 				
 			}
 		}
+		Score.getInstance().scoreUpdateStripedUse(destroyedLokums);
 	}
 
 	@Override
