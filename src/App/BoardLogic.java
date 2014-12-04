@@ -72,8 +72,10 @@ public class BoardLogic {
 		logicFields[lf.getRowIndex()][lf.getColumnIndex()] = lf;
 	}
 
-	
+
+
 	public ArrayList<Combo> findBoardCombos(){
+
 		/*
 		 * Clear current board combos before beginning a new search.
 		 */
@@ -117,6 +119,7 @@ public class BoardLogic {
 		this.rowSize = Constants.BOARD_WIDTH;
 		this.columnSize= Constants.BOARD_HEIGHT;
 		logicFields = new LogicField[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
+		boardCombos = new ArrayList<Combo>();
 		initializeBoard();	// initializes the board to all EmptyLogicField objects.
 		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
 		this.boardCombos = new ArrayList<Combo>();
@@ -382,7 +385,7 @@ public class BoardLogic {
 		introduceLogicField(f0);
 		introduceLogicField(f1);
 	}
-	
+
 	/**
 	 * @requires:
 	 * R.0 Either of the arguments is instanceof MergeDestroyable.
@@ -410,7 +413,7 @@ public class BoardLogic {
 			return false;
 		return true;
 	}
-	
+
 	private boolean locationsSuitableForSwap(LogicField f0, LogicField f1){
 		/*
 		 * NOTE: This checker allows swapping of the same lokums (That is: Arguments pointing to the exact same object.). Check if that would cause a problem. 
@@ -436,13 +439,13 @@ public class BoardLogic {
 		else
 			return null;
 	}
-	
+
 	private boolean isRowIndexInBoundaries(int rowIndex){
 		if( (rowIndex >= 0) && (rowIndex < this.rowSize) )
 			return true;
 		return false;
 	}
-	
+
 	private boolean isColumnIndexInBoundaries(int columnIndex){
 		if( (columnIndex >= 0) && (columnIndex < this.columnSize) )
 			return true;
@@ -461,7 +464,7 @@ public class BoardLogic {
 		LogicField currentNorthLogicField;
 		LogicField currentNorthEastLogicField;
 		LogicField currentEastLogicField;
-		
+
 		for(currentRowIndex=0;currentRowIndex<rowSize;currentRowIndex++){
 			for(currentColumnIndex=0;currentColumnIndex<columnSize;currentColumnIndex++){
 
@@ -470,7 +473,7 @@ public class BoardLogic {
 				currentNorthLogicField = getLogicFieldAt(currentRowIndex + 1, currentColumnIndex);
 				currentNorthEastLogicField = getLogicFieldAt(currentRowIndex + 1, currentColumnIndex + 1);
 				currentEastLogicField = getLogicFieldAt(currentRowIndex, currentColumnIndex + 1);
-				
+
 				if(isSwapPossible(currentLogicField, currentNorthWestLogicField)){
 					locationSwap(currentLogicField, currentNorthWestLogicField);
 					findBoardCombos();
@@ -478,7 +481,7 @@ public class BoardLogic {
 					if(boardCombos.size() != 0)
 						return true;
 				}
-				
+
 				if(isSwapPossible(currentLogicField, currentNorthLogicField)){
 					locationSwap(currentLogicField, currentNorthLogicField);
 					findBoardCombos();
@@ -486,7 +489,7 @@ public class BoardLogic {
 					if(boardCombos.size() != 0)
 						return true;
 				}
-				
+
 				if(isSwapPossible(currentLogicField, currentNorthEastLogicField)){
 					locationSwap(currentLogicField, currentNorthEastLogicField);
 					findBoardCombos();
@@ -494,7 +497,7 @@ public class BoardLogic {
 					if(boardCombos.size() != 0)
 						return true;
 				}
-				
+
 				if(isSwapPossible(currentLogicField, currentEastLogicField)){
 					locationSwap(currentLogicField, currentEastLogicField);
 					findBoardCombos();
