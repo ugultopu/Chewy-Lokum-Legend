@@ -73,7 +73,7 @@ public class BoardLogic {
 	}
 
 	
-	private void findBoardCombos(){
+	private ArrayList<Combo> findBoardCombos(){
 		/*
 		 * Clear current board combos before beginning a new search.
 		 */
@@ -110,6 +110,7 @@ public class BoardLogic {
 		for(int i=0;i<combosAsObjectArray.length;i++){
 			boardCombos.add((Combo) combosAsObjectArray[i]);
 		}
+		return this.boardCombos;
 	}
 
 	private BoardLogic(){
