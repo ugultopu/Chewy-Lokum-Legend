@@ -1318,7 +1318,7 @@ public abstract class Lokum extends LogicField{
 		/*
 		 * Checks O.1. If true, returns false. 
 		 */
-		if(aboveLokumsRowIndex >= BoardLogic.getInstance().rowSize)
+		if(aboveLokumsRowIndex >= BoardLogic.getInstance().getRowSize())
 			return false;
 		/*
 		 * If here, then O.1 is not the case. So check O.2.
