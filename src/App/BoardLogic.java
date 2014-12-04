@@ -21,11 +21,8 @@ public class BoardLogic {
 	 * CHECK!
 	 */
 	public static BoardLogic getInstance(){
-		if(instance == null){
+		if(instance == null)
 			instance = new BoardLogic();
-
-
-		}
 		return instance;
 	}
 
@@ -48,9 +45,6 @@ public class BoardLogic {
 				lokumArray[i][j] = (Lokum)logicFields[i][j];			
 			}
 		}
-		LogicField[][] copyLogicFields = logicFields;
-		NewBoardEvent newBoardEvent = new NewBoardEvent(copyLogicFields);
-		EventDispatchQueue.getInstance().addEvent(newBoardEvent);
 		return lokumArray;
 	}
 
@@ -122,20 +116,36 @@ public class BoardLogic {
 		boardCombos = new ArrayList<Combo>();
 		initializeBoard();	// initializes the board to all EmptyLogicField objects.
 		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
-	}
-
-	private BoardLogic(int rowSize, int columnSize){
-		this.rowSize = rowSize;
-		this.columnSize= columnSize;
-		logicFields = new LogicField[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
-		initializeBoard();	// initializes the board to all EmptyLogicField objects.
-		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
+		NewBoardEvent newBoardEvent = new NewBoardEvent(copyLogicFieldArray());
+		EventDispatchQueue.getInstance().addEvent(newBoardEvent);
+		this.boardCombos = new ArrayList<Combo>();
 
 	}
-
+	
+	
+	/**
+	 * This method firstly populates the board with random lokums. Then, it checks the board
+	 * to observe if there are any combos in it. If there are, it destroys them and refills
+	 * the board. If there are still combos, this operation is iterated until there are no
+	 * combos left.
+	 */
 	private void initializeBoard(){
 		for(int i=0;i<columnSize;i++)
 			initializeColumn(i);
+		destroyCombos();
+		readjustBoardAfterDestroy();
+	}
+	
+	private void destroyCombos(){
+		findBoardCombos();
+		for(int currentComboIndex=0;currentComboIndex<boardCombos.size();currentComboIndex++){
+			Combo currentCombo = boardCombos.get(currentComboIndex);
+			ArrayList<Lokum> currentComboLokums = currentCombo.getComboLokums();
+			for(int currentComboLokumIndex=0;currentComboLokumIndex<currentComboLokums.size();currentComboLokumIndex++){
+				Lokum currentCombosCurrentLokum = currentComboLokums.get(currentComboLokumIndex);
+				currentCombosCurrentLokum.comboDestroy();
+			}
+		}
 	}
 
 	private void initializeColumn(int columnIndex){
@@ -179,8 +189,11 @@ public class BoardLogic {
 		/*
 		 * If board is not yet stabilized, call the method again.
 		 */
-		if ( !isBoardStabilized() )
+		if ( !isBoardStabilized() ){
+			destroyCombos();
 			readjustBoardAfterDestroy();
+		}
+			
 	}
 
 	/**
@@ -452,6 +465,7 @@ public class BoardLogic {
 	}
 
 	public boolean isBoardStabilized(){
+		findBoardCombos();
 		return ( boardCombos.size() == 0 ) ;
 	}
 
@@ -537,12 +551,13 @@ public class BoardLogic {
 		swap(logicFields[selectedRow][selectedColumn], logicFields[selectedRow][selectedColumn]);
 	}
 
-	private ArrayList<LogicField> copyLogicFieldList(ArrayList<LogicField> logicFields){
-		ArrayList<LogicField> copyLogicFields = new ArrayList<LogicField>();
-		for(LogicField logicField: logicFields)
-			copyLogicFields.add(logicField.copyLogicField());
+	private LogicField[][] copyLogicFieldArray(){
+		LogicField[][] copyLogicFields = new LogicField[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
+		for(int i=0; i<logicFields.length; i++)
+			for(int j=0; j<logicFields[i].length;j++)
+				copyLogicFields[i][j] = logicFields[i][j].copyLogicField();
 
-		return logicFields;
+		return copyLogicFields;
 	}
 
 	private ArrayList<EmptyLogicField> convertLogicFieldListToEmptyLogicFieldList(ArrayList<LogicField> logicFields){

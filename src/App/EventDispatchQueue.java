@@ -14,6 +14,7 @@ public class EventDispatchQueue {
 	}
 	
 	public synchronized void addEvent(GameEvent newEvent){
+		System.out.println("New event!");
 		eventQueue.add(newEvent);
 	}
 	
