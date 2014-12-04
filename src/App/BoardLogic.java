@@ -73,7 +73,7 @@ public class BoardLogic {
 	}
 
 	
-	private void findBoardCombos(){
+	public void findBoardCombos(){
 		/*
 		 * Clear current board combos before beginning a new search.
 		 */
