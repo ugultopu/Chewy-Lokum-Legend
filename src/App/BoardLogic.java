@@ -12,7 +12,7 @@ public class BoardLogic {
 	private int rowSize;
 	private int columnSize;
 	private static BoardLogic instance;
-	private ArrayList<Combo> boardCombos;
+	
 	
 	/*
 	 * CHECK!
@@ -63,7 +63,8 @@ public class BoardLogic {
 		logicFields[lf.getRowIndex()][lf.getColumnIndex()] = lf;
 	}
 	
-	private void findBoardCombos(){
+	public ArrayList<Combo> findBoardCombos(){
+		ArrayList<Combo> boardCombos = new ArrayList<Combo>();
 		HashSet<Combo> combosAsSet = new HashSet<Combo>();
 		for(int currentRowIndex=0;currentRowIndex<rowSize;currentRowIndex++){
 			for(int currentColumnIndex=0;currentColumnIndex<columnSize;currentColumnIndex++){
@@ -81,13 +82,13 @@ public class BoardLogic {
 		for(int i=0;i<combosAsObjectArray.length;i++){
 			boardCombos.add((Combo) combosAsObjectArray[i]);
 		}
+		return boardCombos;
 	}
 	
 	private BoardLogic(){
 		this.rowSize = Constants.BOARD_WIDTH;
 		this.columnSize= Constants.BOARD_HEIGHT;
 		logicFields = new LogicField[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
-		this.boardCombos = new ArrayList<Combo>();
 		initializeBoard();	// initializes the board to all EmptyLogicField objects.
 		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
 	}
@@ -96,7 +97,6 @@ public class BoardLogic {
 		this.rowSize = rowSize;
 		this.columnSize= columnSize;
 		logicFields = new LogicField[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
-		this.boardCombos = new ArrayList<Combo>();
 		initializeBoard();	// initializes the board to all EmptyLogicField objects.
 		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
 		
@@ -303,9 +303,10 @@ public class BoardLogic {
 		}
 		// if here, then not merge swap. So combo swap.
 		else{
-			findBoardCombos();
-			for(int i=0;i<boardCombos.size();i++){
-				Combo currentCombo = boardCombos.get(i);
+			System.out.println("Normal swap");
+			ArrayList<Combo> foundCombos = findBoardCombos();
+			for(int i=0;i<foundCombos.size();i++){
+				Combo currentCombo = foundCombos.get(i);
 				ArrayList<Lokum> currentCombosLokums = currentCombo.getComboLokums();
 				for(int j=0;j<currentCombosLokums.size();j++){
 					Lokum currentLokum = currentCombosLokums.get(i);
@@ -363,8 +364,8 @@ public class BoardLogic {
 	}
 	
 	public boolean isBoardStabilized(){
-		findBoardCombos();
-		return ( this.boardCombos.size() == 0 ) ;
+		ArrayList<Combo> foundCombos = findBoardCombos();
+		return ( foundCombos.size() == 0 ) ;
 	}
 	
 	public boolean isMoveAvailable(){

@@ -61,4 +61,15 @@ public class BoardLogicTest{
 		BL.swap(lokum1, lokum2);
 		System.out.println(toString(BL));
 	}
+	
+	public static void findBoardCombosTest(){
+		ArrayList<Combo> boardCombos = BoardLogic.getInstance().findBoardCombos();
+		if(boardCombos.size() == 0){
+			System.out.println("No combos.");
+		}else{
+			for(int i = 0; i < boardCombos.size(); i++){
+				System.out.println(boardCombos.get(i).toString());
+			}
+		}
+	}
 }
