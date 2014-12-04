@@ -16,7 +16,6 @@ public class NewBoardEvent extends GameEvent {
 			}
 		}
 		GameBoard.getInstance().repaint();
-
 	}
 
 }

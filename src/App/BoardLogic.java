@@ -23,8 +23,6 @@ public class BoardLogic {
 	public static BoardLogic getInstance(){
 		if(instance == null){
 			instance = new BoardLogic();
-
-
 		}
 		return instance;
 	}
@@ -48,9 +46,6 @@ public class BoardLogic {
 				lokumArray[i][j] = (Lokum)logicFields[i][j];			
 			}
 		}
-		LogicField[][] copyLogicFields = logicFields;
-		NewBoardEvent newBoardEvent = new NewBoardEvent(copyLogicFields);
-		EventDispatchQueue.getInstance().addEvent(newBoardEvent);
 		return lokumArray;
 	}
 
@@ -118,6 +113,8 @@ public class BoardLogic {
 		logicFields = new LogicField[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
 		initializeBoard();	// initializes the board to all EmptyLogicField objects.
 		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
+		NewBoardEvent newBoardEvent = new NewBoardEvent(copyLogicFieldArray());
+		EventDispatchQueue.getInstance().addEvent(newBoardEvent);
 	}
 
 	private BoardLogic(int rowSize, int columnSize){
@@ -126,7 +123,6 @@ public class BoardLogic {
 		logicFields = new LogicField[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
 		initializeBoard();	// initializes the board to all EmptyLogicField objects.
 		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
-
 	}
 
 	private void initializeBoard(){
@@ -537,12 +533,13 @@ public class BoardLogic {
 		swap(logicFields[selectedRow][selectedColumn], logicFields[selectedRow][selectedColumn]);
 	}
 
-	private ArrayList<LogicField> copyLogicFieldList(ArrayList<LogicField> logicFields){
-		ArrayList<LogicField> copyLogicFields = new ArrayList<LogicField>();
-		for(LogicField logicField: logicFields)
-			copyLogicFields.add(logicField.copyLogicField());
+	private LogicField[][] copyLogicFieldArray(){
+		LogicField[][] copyLogicFields = new LogicField[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
+		for(int i=0; i<logicFields.length; i++)
+			for(int j=0; j<logicFields[i].length;j++)
+				copyLogicFields[i][j] = logicFields[i][j].copyLogicField();
 
-		return logicFields;
+		return copyLogicFields;
 	}
 
 	private ArrayList<EmptyLogicField> convertLogicFieldListToEmptyLogicFieldList(ArrayList<LogicField> logicFields){
