@@ -13,16 +13,16 @@ public class Run {
 
 	public static void main(String[] args) throws IOException {
 		
-		ApplicationWindow frame = ApplicationWindow.getInstance();
-		frame.pack();
-		frame.setSize(Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
+		//ApplicationWindow frame = ApplicationWindow.getInstance();
+		//frame.pack();
+		//frame.setSize(Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
 		
 		NormalLokum nl = new NormalLokum(0,0,"red");
 		
 		NormalLokum testNormal = new NormalLokum(0, 0, "red");
 		NormalLokum testNormal1 = new NormalLokum(0, 1, "red");
-		NormalLokum testNormal2 = new NormalLokum(0, 3, "brown");
-		NormalLokum testNormal3 = new NormalLokum(0, 2, "red");
+		NormalLokum testNormal2 = new NormalLokum(0, 2, "red");
+		NormalLokum testNormal3 = new NormalLokum(0, 3, "red");
 		BombLokum testBomb = new BombLokum(1, 1);
 		WrappedLokum testWrapped = new WrappedLokum(10, 5, "brown");
 		VerticalStripedLokum testVStriped = new VerticalStripedLokum(1, 3, "white");
@@ -52,7 +52,7 @@ public class Run {
 		//System.out.println(BoardLogicTest.toString(BoardLogic.getInstance()));
 		//BoardLogicTest.testForStability();
 		//BoardLogicTest.swapTest(testNormal2, testNormal3);
-		//BoardLogicTest.findBoardCombosTest(); !!Doesn't work!!
+		//BoardLogicTest.findBoardCombosTest(); //!!Doesn't work!!
 		//SaveGame.saveBoardToXML(); --> Works
 	}
 

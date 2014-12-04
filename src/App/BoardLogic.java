@@ -7,25 +7,25 @@ import java.util.Random;
 
 
 public class BoardLogic {
-	
+
 	private LogicField[][] logicFields;
 	private int rowSize;
 	private int columnSize;
 	private static BoardLogic instance;
-	
-	
+
+
 	/*
 	 * CHECK!
 	 */
 	public static BoardLogic getInstance(){
 		if(instance == null){
 			instance = new BoardLogic();
-			
-			
+
+
 		}
 		return instance;
 	}
-	
+
 	public LogicField[][] getLogicFields() {
 		return logicFields;
 	}
@@ -37,7 +37,7 @@ public class BoardLogic {
 	public int getColumnSize() {
 		return columnSize;
 	}
-	
+
 	public Lokum[][] getBoard(){
 		Lokum[][] lokumArray = new Lokum[rowSize][columnSize];
 		for(int i = 0; i < rowSize; i++){
@@ -59,7 +59,7 @@ public class BoardLogic {
 	public void clearLocation(int x, int y){
 		logicFields[x][y] = new EmptyLogicField(x, y);
 	}
-	
+
 	/**
 	 * Introduces the given LogicField object to logicFields field of this BoardLogic instance. The given LogicField object holds its location information in itself. This
 	 * suggests that the logicFields just obtains the location information from the argument and assigns the argument to the given location.
@@ -68,7 +68,7 @@ public class BoardLogic {
 	public void introduceLogicField(LogicField lf){
 		logicFields[lf.getRowIndex()][lf.getColumnIndex()] = lf;
 	}
-	
+
 	public ArrayList<Combo> findBoardCombos(){
 		ArrayList<Combo> boardCombos = new ArrayList<Combo>();
 		HashSet<Combo> combosAsSet = new HashSet<Combo>();
@@ -90,7 +90,7 @@ public class BoardLogic {
 		}
 		return boardCombos;
 	}
-	
+
 	private BoardLogic(){
 		this.rowSize = Constants.BOARD_WIDTH;
 		this.columnSize= Constants.BOARD_HEIGHT;
@@ -98,26 +98,26 @@ public class BoardLogic {
 		initializeBoard();	// initializes the board to all EmptyLogicField objects.
 		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
 	}
-	
+
 	private BoardLogic(int rowSize, int columnSize){
 		this.rowSize = rowSize;
 		this.columnSize= columnSize;
 		logicFields = new LogicField[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
 		initializeBoard();	// initializes the board to all EmptyLogicField objects.
 		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
-		
+
 	}
-	
+
 	private void initializeBoard(){
 		for(int i=0;i<columnSize;i++)
 			initializeColumn(i);
 	}
-	
+
 	private void initializeColumn(int columnIndex){
 		for(int i=0;i<rowSize;i++)
 			logicFields[i][columnIndex] = new EmptyLogicField(i, columnIndex);
 	}
-	
+
 	/*
 	 * The two populate methods below are for initial population of the board. But maybe these methods may be integrated into populateAfterDestroy and populateEmptiedColumn
 	 * as well. 
@@ -126,7 +126,7 @@ public class BoardLogic {
 		for(int i=0;i<columnSize;i++)
 			populateColumn(i);
 	}
-	
+
 	/**
 	 * Checks all elements in a given column and if the element is an instance of EmptyLogicField, populates it with a random lokum. 
 	 * @param columnIndex
@@ -137,7 +137,7 @@ public class BoardLogic {
 				logicFields[i][columnIndex] = (LogicField) Factory.createRandomLokum(i, columnIndex);
 		}
 	}	
-	
+
 	/**
 	 * After destroys, levels the LogicFields that have emptyLogicFields underneath. After that, populates the emptied locations with new LogicFields falling from above the
 	 * board.
@@ -157,7 +157,7 @@ public class BoardLogic {
 		if ( !isBoardStabilized() )
 			readjustBoardAfterDestroy();
 	}
-	
+
 	/**
 	 * This method levels the board after destroying various combos around the board.
 	 */
@@ -165,7 +165,7 @@ public class BoardLogic {
 		for(int i=0;i<columnSize;i++)
 			levelColumn(fallingLogicFields, i);
 	}	
-	
+
 	private void levelColumn(HashMap<LogicField, Integer> fallingLogicFields, int columnIndex){
 		int currentRowIndex=0;
 		while(currentRowIndex < rowSize){
@@ -181,7 +181,7 @@ public class BoardLogic {
 			currentRowIndex++;
 		}
 	}
-	
+
 	/**
 	 * Position of an empty logicFields element is given to this method. Receiving that, the method
 	 * calculates if there are more continuously empty fields that are above the given position and
@@ -216,13 +216,13 @@ public class BoardLogic {
 		}
 		return currentRowIndex == (rowSize-1);
 	}
-	
+
 	private void populateAfterDestroy(HashMap<LogicField, Integer> fallingLogicFields){
 		for(int i=0;i<columnSize;i++){
 			populateEmptiedColumn(fallingLogicFields, i);
 		}
 	}	
-	
+
 	/**
 	 * @requires:
 	 * R.0 After lokum destroys, board is stabilized. Hence, a column is like partitioned into two pieces
@@ -240,7 +240,7 @@ public class BoardLogic {
 		}
 		for(int i=0;i<emptyLocationCounter;i++){
 			logicFields[rowSize - emptyLocationCounter + i][columnIndex]
-					 = Factory.createRandomLokum(rowSize - emptyLocationCounter + i, columnIndex);
+					= Factory.createRandomLokum(rowSize - emptyLocationCounter + i, columnIndex);
 			/*
 			 * In the two lines above, the current empty place in the column is populated. We need to send this information to graphics. So in the 3 lines below, we get a
 			 * copy of the recently populated LogicField. Then we set its rowIndex to its actual row index (that it out of the bounds of the board right now). We do not need
@@ -251,7 +251,7 @@ public class BoardLogic {
 			fallingLogicFields.put(currentLogicFieldToSendGraphics, emptyLocationCounter);
 		}
 	}
-	
+
 	/**
 	 * @requires:
 	 * 
@@ -279,7 +279,7 @@ public class BoardLogic {
 	 *	DEFINITION
 	 *	This method takes two positions and does the appropriate swapping operation between them.
 	 */
-	public boolean swap(LogicField f0, LogicField f1){
+	private boolean swap(LogicField f0, LogicField f1){
 		/*
 		 * NOTE: This method allows swapping of the same lokums (That is: Arguments pointing to the exact same object.). Check if that would cause a problem. 
 		 */
@@ -287,35 +287,50 @@ public class BoardLogic {
 		/*
 		 * If locations are not suitable for swap, simply return w/o doing anything.
 		 */
-		if( !locationsSuitableForSwap(f0, f1) ){
-			System.out.println("Swap locations are not suitable.");
+		if( !locationsSuitableForSwap(f0, f1) )
 			return false;
-		}
 		// if here, then locations are suitable for swap.
 		/*
 		 * If types are not suitable for swap, simply return w/o doing anything.
 		 */
-		if( !typesSuitableForSwap(f0, f1) ){
-			System.out.println("Lokum types are not suitable for swap.");
+		if( !typesSuitableForSwap(f0, f1) )
 			return false;
-		}
 		// if here, then types are suitable for swap as well.
 		/*
 		 * ADD LOKUM RETURNING LIST FOR MERGE DESTROY AS WELL.
 		 */
 		if( isMergeSwap( f0, f1 ) ){
-			System.out.println("This is a merge swap");
-			mergeDestroy(f0, f1 );
+			mergeDestroy( f0,  f1 );
 		}
 		// if here, then not merge swap. So combo swap.
 		else{
-			System.out.println("Normal swap");
+			/*
+			 * If here, then this means that this swap is a swap that requires the swapping of LogicFields on logicFields array. So perform it.
+			 */
+			locationSwap(f0, f1);
+			/*
+			 * Then, check for combos.
+			 */
 			ArrayList<Combo> foundCombos = findBoardCombos();
-			for(int i=0;i<foundCombos.size();i++){
-				Combo currentCombo = foundCombos.get(i);
+			/*
+			 * After checking for combos, check if there are any combos actually. If not, revert the swap and return from the method.
+			 */
+			if(foundCombos.size() == 0){
+				/*
+				 * If here, then swap did not yield any combos. So revert the swap and return from the method.
+				 */
+				locationSwap(f0, f1);
+				return false;
+			}
+			/*
+			 * If here, then there were indeed combos present. So find them and execute them. 
+			 */
+
+			for(int currentComboIndex=0;currentComboIndex<foundCombos.size();currentComboIndex++){
+				Combo currentCombo = foundCombos.get(currentComboIndex);
 				ArrayList<Lokum> currentCombosLokums = currentCombo.getComboLokums();
-				for(int j=0;j<currentCombosLokums.size();j++){
-					Lokum currentLokum = currentCombosLokums.get(i);
+				for(int currentCombosLokumIndex=0;currentCombosLokumIndex<currentCombosLokums.size();currentCombosLokumIndex++){
+					Lokum currentLokum = currentCombosLokums.get(currentCombosLokumIndex);
 					((ComboDestroyable) currentLokum).comboDestroy();
 				}
 			}
@@ -327,7 +342,18 @@ public class BoardLogic {
 		}
 		return true;
 	}
-	
+
+	private void locationSwap(LogicField f0, LogicField f1){
+		int f0sInitialRowIndex = f0.getRowIndex();
+		int f0sInitialColumnIndex = f0.getColumnIndex();
+		f0.setRowIndex(f1.getRowIndex());
+		f0.setColumnIndex(f1.getColumnIndex());
+		f1.setRowIndex(f0sInitialRowIndex);
+		f1.setColumnIndex(f0sInitialColumnIndex);
+		introduceLogicField(f0);
+		introduceLogicField(f1);
+	}
+
 	/**
 	 * @requires:
 	 * R.0 Either of the arguments is instanceof MergeDestroyable.
@@ -345,35 +371,35 @@ public class BoardLogic {
 			return true;
 		return false;
 	}
-	
+
 	private boolean locationsSuitableForSwap(LogicField f0, LogicField f1){
 		/*
 		 * NOTE: This checker allows swapping of the same lokums (That is: Arguments pointing to the exact same object.). Check if that would cause a problem. 
 		 */
-		
+
 		int xDifference = Math.abs(f0.getRowIndex() - f1.getRowIndex());
 		int yDifference = Math.abs(f0.getColumnIndex() - f1.getColumnIndex());
-		
+
 		if((xDifference + yDifference) > 2)
 			return false;
 		return true;
 	}
-	
+
 	private boolean typesSuitableForSwap(LogicField f0, LogicField f1){
 		if ( !LogicField.isSwapable(f0) || !LogicField.isSwapable(f1) )
 			return false;
 		return true;
 	}
-	
+
 	public LogicField getLogicFieldAt(int x, int y){
 		return logicFields[x][y];
 	}
-	
+
 	public boolean isBoardStabilized(){
 		ArrayList<Combo> foundCombos = findBoardCombos();
 		return ( foundCombos.size() == 0 ) ;
 	}
-	
+
 	public boolean isMoveAvailable(){
 		int currentRowIndex;
 		int currentColumnIndex;
@@ -381,16 +407,16 @@ public class BoardLogic {
 		LogicField currentLogicField1;
 		for(currentRowIndex=0;currentRowIndex<rowSize;currentRowIndex++){
 			for(currentColumnIndex=0;currentColumnIndex<columnSize;currentColumnIndex++){
-				
+
 				if(swap())
 			}
 		}
 	}
-	
+
 	private void scoreUpdate(Combo combo){
-		
+
 	}
-	
+
 	/**
 	 * -Shuffles the board. That is: Forms a new board using the existing LogicFields in the board. To do so, we will have a method named "unconditionalSwap" that will swap
 	 * the given LogicField with a random LogicField from the board. This operation will be done for all LogicFields in the board. Then the method will return.
@@ -404,29 +430,29 @@ public class BoardLogic {
 	 */
 	public void shuffleBoard(){
 		Random rnd = new Random();
-	    for (int i = logicFields.length - 1; i > 0; i--){
-	    	int rowIndex = rnd.nextInt(i + 1);
-	    	for(int j = logicFields[i].length - 1; j > 0; j--){
-	    		int columnIndex = rnd.nextInt(j + 1);
-	    		LogicField temp = logicFields[i][j];
-	    		logicFields[i][j] = logicFields[rowIndex][columnIndex];
-	    		logicFields[rowIndex][columnIndex] = temp;
-	    	}
-	    }
+		for (int i = logicFields.length - 1; i > 0; i--){
+			int rowIndex = rnd.nextInt(i + 1);
+			for(int j = logicFields[i].length - 1; j > 0; j--){
+				int columnIndex = rnd.nextInt(j + 1);
+				LogicField temp = logicFields[i][j];
+				logicFields[i][j] = logicFields[rowIndex][columnIndex];
+				logicFields[rowIndex][columnIndex] = temp;
+			}
+		}
 	}
 
 	public void swap(int selectedColumn, int selectedRow, int otherColumn, int otherRow) {
 		swap(logicFields[selectedRow][selectedColumn], logicFields[selectedRow][selectedColumn]);
 	}
-	
+
 	private ArrayList<LogicField> copyLogicFieldList(ArrayList<LogicField> logicFields){
 		ArrayList<LogicField> copyLogicFields = new ArrayList<LogicField>();
 		for(LogicField logicField: logicFields)
 			copyLogicFields.add(logicField.copyLogicField());
-		
+
 		return logicFields;
 	}
-	
+
 	private ArrayList<EmptyLogicField> convertLogicFieldListToEmptyLogicFieldList(ArrayList<LogicField> logicFields){
 		ArrayList<EmptyLogicField> emptyLogicFields = new ArrayList<EmptyLogicField>();
 		for(LogicField logicField: logicFields){
