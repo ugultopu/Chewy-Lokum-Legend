@@ -22,13 +22,18 @@ public class FallingLokumsEvent extends GameEvent {
 					lokum.setRowIndex(lokum.getRowIndex()-1);
 					fallingLokums.put(lokum, (Integer)lokumShift-1);
 					if(lokum.getColumnIndex()>=0){
-						GameBoardPanel.changeLokum(lokum);
+						GameBoard.getInstance().changeLokum(lokum);
 					}
 				}else
 					fallingLokums.remove(lokum);
 			}
-			GameBoardPanel.getInstance().repaint();
-			Thread.sleep(1000);
+			GameBoard.getInstance().repaint();
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				System.out.println("Exception on event waiting.");
+			}
 		}
 	}
 }

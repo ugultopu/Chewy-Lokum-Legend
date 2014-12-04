@@ -12,18 +12,11 @@ public class LokumBox {
 
 	private LogicField logicField;
 	private Image image;
-	private int side=Constants.ANIMATION_WINDOW_WIDTH/9;
-	private double x;
-	private double y;
+	private int side=Constants.ANIMATION_WINDOW_WIDTH/Constants.SCREEN_WIDTH;
 	
 
 	public LokumBox(LogicField logicField){
 		this.logicField = logicField;
-	}
-	
-	public LokumBox(double x, double y) {
-		this.x=x;
-		this.y=y;
 	}
 
 	public void paintComponent(Graphics g){
@@ -112,5 +105,9 @@ public class LokumBox {
 			} else {
 				g.fillRect(logicField.getColumnIndex(),  Constants.BOARD_HEIGHT - logicField.getRowIndex(), side, side);
 			}
+	}
+
+	public void changeLogicField(LogicField logicField) {
+		this.logicField=logicField;
 	}
 }

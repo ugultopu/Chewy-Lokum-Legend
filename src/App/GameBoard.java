@@ -9,7 +9,6 @@ public class GameBoard extends JPanel {
 	private LokumBox[][] boardArray;
 	private int width = Constants.ANIMATION_WINDOW_WIDTH;
 	private int height = Constants.ANIMATION_WINDOW_HEIGHT;
-	private int blockSize = Constants.ANIMATION_WINDOW_WIDTH/9;
 	private static GameBoard instance;
 	
 	private GameBoard(LogicField[][] logicFieldArray){
@@ -19,6 +18,8 @@ public class GameBoard extends JPanel {
 				boardArray[i][j] = new LokumBox(logicFieldArray[i][j]);
 			}
 		}
+		requestFocusInWindow();
+		addMouseListener(ClickListener.getInstance());
 	}
 	
 	public static GameBoard getInstance(){
@@ -30,6 +31,7 @@ public class GameBoard extends JPanel {
 	}
 	
 	public void changeLokum(LogicField logicField){
+		boardArray[logicField.getRowIndex()][logicField.getColumnIndex()].changeLogicField(logicField);
 	}
 	
 }

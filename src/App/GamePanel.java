@@ -15,33 +15,25 @@ public class GamePanel extends JPanel {
 	private static int LabelXPadding = 750;  
 	private static int LabelYPadding = 160;
 	
-	protected GameBoard gameBoard;
-	private InformationBoard informationBoard;
 //	protected GameOverPanel gameOverPanel;
 	protected boolean running=true;
-//	private ScoreCalculator scoreCalculator;
 	private static GamePanel instance;
 	
-	public GamePanel() {
+	private GamePanel() {
 		super();
 		
-//		scoreCalculator = new ScoreCalculator();
-		informationBoard = new InformationBoard();
-//		gameBoard = new GameBoard();
-						
-		requestFocusInWindow();
+		EventDispatchQueue.resetInstance();
 		
-//		new Thread(new Runnable(){
-//
-//			public void run() {
-//
-//				while(running){
-//					gameUpdate();
-//					scoreUpdate();
-//				}				
-//			}
-//			
-//		}).start();
+		new Thread(new Runnable(){
+
+			public void run() {
+
+				while(running){
+					gameUpdate();
+				}				
+			}
+			
+		}).start();
 		
 		
 		
@@ -49,28 +41,28 @@ public class GamePanel extends JPanel {
 		setBackground(Constants.GAME_BACKGROUND_COLOR);
 		setSize(Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
 		
-		add(informationBoard);
-		informationBoard.setBounds(LabelXPadding,LabelYPadding, 
+		add(InformationBoard.getInstance());
+		InformationBoard.getInstance().setBounds(LabelXPadding,LabelYPadding, 
 				Constants.INFORMATION_BOARD_WIDTH,Constants.INFORMATION_BOARD_HEIGHT);
 		
-//		add(gameBoard);
+		add(GameBoard.getInstance());
 //		gameBoard.setBounds(40, 60, 600, 540);
 				
 	}
 
-//	public void startGame(){
-//		running=true;
-//	}
+	public void startGame(){
+		running=true;
+	}
 	
-//	public void endGame(){
-//		running = false;
+	public void endGame(){
+		running = false;
 //		gameOverPanel = new GameOverPanel(ownerFrame, scoreCalculator.getScore());
 //		remove(blockboard);
 //		
 //		gameOverPanel.setBounds(40, 60, 360, 540);
 //		add(gameOverPanel);
 //		gameOverPanel.repaint();
-//	}
+	}
 		
 //	private void scoreUpdate(){
 //		if(scoreCalculator.updated){
@@ -80,6 +72,12 @@ public class GamePanel extends JPanel {
 //		
 //	}
 	
+	private void gameUpdate(){
+		if(!EventDispatchQueue.getInstance().isEmpty()){
+			EventDispatchQueue.getInstance().getEvent().executeEvent();
+		}
+	}
+	
 	public static GamePanel getInstance(){
 		if(instance==null){
 			instance = new GamePanel();
@@ -88,7 +86,7 @@ public class GamePanel extends JPanel {
 	}
 	
 	public static void resetInstance(){
-		instance = null;
+		instance = new GamePanel();
 	}	
 
 
@@ -101,8 +99,8 @@ public class GamePanel extends JPanel {
 		g.fillRect(750, 160, Constants.INFORMATION_BOARD_WIDTH, Constants.INFORMATION_BOARD_HEIGHT);
     	
     	
-    	informationBoard.repaint();
-//		gameBoard.repaint();
+    	InformationBoard.getInstance().repaint();
+		GameBoard.getInstance().repaint();
 	}
 
 }

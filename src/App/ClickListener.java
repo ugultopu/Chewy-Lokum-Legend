@@ -1,5 +1,6 @@
 package App;
 
+import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -10,6 +11,7 @@ public class ClickListener implements MouseListener {
 	Integer selectedRow = null;
 	Integer selectedColumn = null; 
 	boolean active = true;
+	private static ClickListener instance;
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -67,6 +69,12 @@ public class ClickListener implements MouseListener {
 	
 	private int convertToColumnIndex(Integer xLocation){
 		return selectedColumn = xLocation/(Constants.ANIMATION_WINDOW_WIDTH/Constants.SCREEN_WIDTH);
+	}
+
+	public static ClickListener getInstance() {
+		if (instance == null)
+			instance = new ClickListener();
+		return null;
 	}
 
 }
