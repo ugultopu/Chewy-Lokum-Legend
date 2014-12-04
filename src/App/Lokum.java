@@ -109,10 +109,35 @@ public abstract class Lokum extends LogicField{
 		/*
 		 * Some lokum references that may be used in the switch case below.
 		 */
-		Lokum leftLeftLokum = (Lokum) leftLokum.getLeftLogicField();
-		Lokum rightRightLokum = (Lokum) rightLokum.getRightLogicField();
-		Lokum aboveAboveLokum = (Lokum) aboveLokum.getAboveLogicField();
-		Lokum belowBelowLokum = (Lokum) belowLokum.getBelowLogicField();
+		Lokum leftLeftLokum;
+		Lokum rightRightLokum;
+		Lokum aboveAboveLokum;
+		Lokum belowBelowLokum;
+
+		if(leftLokum != null){
+			leftLeftLokum = (Lokum) leftLokum.getLeftLogicField();
+		}
+		else{
+			leftLeftLokum = null;
+		}
+		if(rightLokum != null){
+			rightRightLokum = (Lokum) rightLokum.getRightLogicField();
+		}
+		else{
+			rightRightLokum = null;
+		}
+		if(aboveLokum != null){
+			aboveAboveLokum = (Lokum) aboveLokum.getAboveLogicField();
+		}
+		else{
+			aboveAboveLokum = null;
+		}
+		if(belowLokum != null){
+			belowBelowLokum = (Lokum) belowLokum.getBelowLogicField();
+		}
+		else{
+			belowBelowLokum = null;
+		}
 		
 		Combo comboToAdd;
 		
