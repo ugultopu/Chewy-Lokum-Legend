@@ -236,6 +236,8 @@ public class BoardLogic {
 		while(logicFields[currentRowIndex][columnIndex] instanceof EmptyLogicField){
 			dropCounter++;
 			currentRowIndex++;
+			if(currentRowIndex == rowSize)
+				break;
 		}
 		for(int i=rowIndex;i<rowSize-dropCounter;i++){
 			/*
@@ -275,6 +277,8 @@ public class BoardLogic {
 		while(logicFields[currentRowIndex][columnIndex] instanceof EmptyLogicField){
 			emptyLocationCounter++;
 			currentRowIndex--;
+			if(currentRowIndex == 0)
+				break;
 		}
 		for(int i=0;i<emptyLocationCounter;i++){
 			logicFields[rowSize - emptyLocationCounter + i][columnIndex]
