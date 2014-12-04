@@ -21,11 +21,8 @@ public class BoardLogic {
 	 * CHECK!
 	 */
 	public static BoardLogic getInstance(){
-		if(instance == null){
+		if(instance == null)
 			instance = new BoardLogic();
-
-
-		}
 		return instance;
 	}
 
