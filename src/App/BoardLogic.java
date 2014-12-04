@@ -119,7 +119,6 @@ public class BoardLogic {
 		NewBoardEvent newBoardEvent = new NewBoardEvent(copyLogicFieldArray());
 		EventDispatchQueue.getInstance().addEvent(newBoardEvent);
 		this.boardCombos = new ArrayList<Combo>();
-
 	}
 	
 	
@@ -132,6 +131,9 @@ public class BoardLogic {
 	private void initializeBoard(){
 		for(int i=0;i<columnSize;i++)
 			initializeColumn(i);
+	}
+	
+	void readjustAfterInitialize(){
 		destroyCombos();
 		readjustBoardAfterDestroy();
 	}
