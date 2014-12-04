@@ -133,10 +133,30 @@ public class BoardLogic {
 		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
 		this.boardCombos = new ArrayList<Combo>();
 	}
-
+	
+	/**
+	 * This method firstly populates the board with random lokums. Then, it checks the board
+	 * to observe if there are any combos in it. If there are, it destroys them and refills
+	 * the board. If there are still combos, this operation is iterated until there are no
+	 * combos left.
+	 */
 	private void initializeBoard(){
 		for(int i=0;i<columnSize;i++)
 			initializeColumn(i);
+		destroyCombos();
+		readjustBoardAfterDestroy();
+	}
+	
+	private void destroyCombos(){
+		findBoardCombos();
+		for(int currentComboIndex=0;currentComboIndex<boardCombos.size();currentComboIndex++){
+			Combo currentCombo = boardCombos.get(currentComboIndex);
+			ArrayList<Lokum> currentComboLokums = currentCombo.getComboLokums();
+			for(int currentComboLokumIndex=0;currentComboLokumIndex<currentComboLokums.size();currentComboLokumIndex++){
+				Lokum currentCombosCurrentLokum = currentComboLokums.get(currentComboLokumIndex);
+				currentCombosCurrentLokum.comboDestroy();
+			}
+		}
 	}
 
 	private void initializeColumn(int columnIndex){
@@ -180,8 +200,11 @@ public class BoardLogic {
 		/*
 		 * If board is not yet stabilized, call the method again.
 		 */
-		if ( !isBoardStabilized() )
+		if ( !isBoardStabilized() ){
+			destroyCombos();
 			readjustBoardAfterDestroy();
+		}
+			
 	}
 
 	/**
@@ -453,6 +476,7 @@ public class BoardLogic {
 	}
 
 	public boolean isBoardStabilized(){
+		findBoardCombos();
 		return ( boardCombos.size() == 0 ) ;
 	}
 

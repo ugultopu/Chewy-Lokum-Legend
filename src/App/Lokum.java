@@ -3,7 +3,7 @@ package App;
 import java.util.ArrayList;
 
 
-public abstract class Lokum extends LogicField{
+public abstract class Lokum extends LogicField implements ComboDestroyable{
 
 	private String lokumColor;
 	private ArrayList<Combo> combosThisLokumIn;
