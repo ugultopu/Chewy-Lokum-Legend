@@ -86,30 +86,30 @@ public class BombMerge extends Merge {
 			}
 		}else if(l1 instanceof WrappedLokum){
 			String colorl1 = l1.getLokumColor();
+			String randomColor = generateRandomColor();
 			System.out.println("l1: Wrapped Lokum, color: " + colorl1 + ", l2: Bomb Lokum, merge.");
 			for(int i = 0; i < lokumBoard.length; i++){
 				for(int j = 0; j < lokumBoard[i].length; j++){
 					Lokum lokum = lokumBoard[i][j];
-					if(lokum.getLokumColor().equals(colorl1)){
-						WrappedLokum newLokum = new WrappedLokum(i, j, colorl1);
+					if(lokum.getLokumColor().equals(colorl1) || lokum.getLokumColor().equals(randomColor)){
+						NormalLokum newLokum = new NormalLokum(i, j, colorl1);
 						newLokum.comboDestroy();
 					}
 				}
 			}
-			destroyMostOccuredColor();
 		}else if(l2 instanceof WrappedLokum){
 			String colorl2 = l2.getLokumColor();
+			String randomColor = generateRandomColor();
 			System.out.println("l2: Wrapped Lokum, color: " + colorl2 + ", l1: Bomb Lokum, merge.");
 			for(int i = 0; i < lokumBoard.length; i++){
 				for(int j = 0; j < lokumBoard[i].length; j++){
 					Lokum lokum = lokumBoard[i][j];
-					if(lokum.getLokumColor().equals(colorl2)){
-						WrappedLokum newLokum = new WrappedLokum(i, j, colorl2);
+					if(lokum.getLokumColor().equals(colorl2) || lokum.getLokumColor().equals(randomColor)){
+						NormalLokum newLokum = new NormalLokum(i, j, colorl2);
 						newLokum.comboDestroy();
 					}
 				}
 			}
-			destroyMostOccuredColor();
 		}else if(l1 instanceof BombLokum || l2 instanceof BombLokum){
 			for(int i = 0; i < lokumBoard.length; i++){
 				for(int j = 0; j < lokumBoard[i].length; j++){
@@ -174,6 +174,22 @@ public class BombMerge extends Merge {
 			return whiteColor;
 		}else{
 			return null;
+		}
+	}
+	
+	private String generateRandomColor(){
+		int randomNumber = Factory.generateRandomNumber();
+		switch (randomNumber){
+			case 0:
+				return Constants.LOKUM_COLOR_BROWN;
+			case 1:
+				return Constants.LOKUM_COLOR_GREEN;
+			case 2:
+				return  Constants.LOKUM_COLOR_RED;
+			case 3:
+				return Constants.LOKUM_COLOR_WHITE;
+			default:
+				return null;
 		}
 	}
 }

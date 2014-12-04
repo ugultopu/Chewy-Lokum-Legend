@@ -15,12 +15,10 @@ public class WrappedWrappedMerge extends Merge {
 	}
 	
 	public void destroyMerge(){
-		ArrayList<Lokum> destroyedLokums = new ArrayList<Lokum>();
-		((WrappedLokum)l1).comboDestroy();
-		destroyedLokums.add(l1);
-		((WrappedLokum) l2).comboDestroy();
-		destroyedLokums.add(l2);
-		
+		NormalLokum destroyer1 = new NormalLokum(l1.getRowIndex(), l1.getColumnIndex(), l1.getLokumColor());
+		NormalLokum destroyer2 = new NormalLokum(l2.getRowIndex(), l2.getColumnIndex(), l2.getLokumColor());
+		destroyer1.comboDestroy();
+		destroyer2.comboDestroy();
 	}
 
 }
