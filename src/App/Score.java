@@ -18,12 +18,7 @@ public class Score {
 		return currentScore;
 	}
 	
-	public void scoreUpdateThreeCombo(Object type){
-		if(type instanceof FourCombo){
-			
-		}else if(type instanceof FiveCombo){
-			
-		}
+	public void scoreUpdateThreeCombo(){
 		
 	}
 	

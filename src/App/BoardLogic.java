@@ -18,8 +18,11 @@ public class BoardLogic {
 	 * CHECK!
 	 */
 	public static BoardLogic getInstance(){
-		if(instance == null)
+		if(instance == null){
 			instance = new BoardLogic();
+			
+			
+		}
 		return instance;
 	}
 	
@@ -42,6 +45,9 @@ public class BoardLogic {
 				lokumArray[i][j] = (Lokum)logicFields[i][j];			
 			}
 		}
+		LogicField[][] copyLogicFields = logicFields;
+		NewBoardEvent newBoardEvent = new NewBoardEvent(copyLogicFields);
+		EventDispatchQueue.getInstance().addEvent(newBoardEvent);
 		return lokumArray;
 	}
 
