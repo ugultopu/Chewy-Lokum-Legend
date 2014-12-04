@@ -73,7 +73,7 @@ public class BoardLogic {
 	}
 
 	
-	private ArrayList<Combo> findBoardCombos(){
+	public ArrayList<Combo> findBoardCombos(){
 		/*
 		 * Clear current board combos before beginning a new search.
 		 */
