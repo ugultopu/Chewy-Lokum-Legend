@@ -11,11 +11,11 @@ public class GameBoard extends JPanel {
 	private int height = Constants.ANIMATION_WINDOW_HEIGHT;
 	private static GameBoard instance;
 	
-	private GameBoard(LogicField[][] logicFieldArray){
+	private GameBoard(){
 		
 		for(int i = 0; i < height; i++){
 			for(int j = 0; j < width; j++){
-				boardArray[i][j] = new LokumBox(logicFieldArray[i][j]);
+				boardArray[i][j] = new LokumBox(new EmptyLogicField(i,j));
 			}
 		}
 		requestFocusInWindow();
@@ -23,11 +23,14 @@ public class GameBoard extends JPanel {
 	}
 	
 	public static GameBoard getInstance(){
+		if(instance == null){
+			instance = new GameBoard();
+		}
 		return instance;
 	}
 	
 	public static void resetInstance(LogicField[][] logicFieldArray){
-		instance = new GameBoard(logicFieldArray);
+		instance = new GameBoard();
 	}
 	
 	public void changeLokum(LogicField logicField){
