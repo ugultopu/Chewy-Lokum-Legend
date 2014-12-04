@@ -13,9 +13,9 @@ public class SwapEvent extends GameEvent {
 	
 	@Override
 	public void executeEvent() {
-		GameBoardPanel.changeLokum(swapLokum1);
-		GameBoardPanel.changeLokum(swapLokum2);
-		GameBoardPanel.getInstance().repaint();
+		GameBoard.getInstance().changeLokum(swapLokum1);
+		GameBoard.getInstance().changeLokum(swapLokum2);
+		GameBoard.getInstance().repaint();
 	}
 
 }

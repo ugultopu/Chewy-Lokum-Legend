@@ -7,6 +7,7 @@ public class WrappedWrappedMerge extends Merge {
 	private Lokum l1;
 	private Lokum l2;
 	private BoardLogic board;
+	private Score score = Score.getInstance();
 	
 	public WrappedWrappedMerge(MergeDestroyable l1, MergeDestroyable l2){
 		this.l1 = (Lokum)l1;
@@ -15,12 +16,11 @@ public class WrappedWrappedMerge extends Merge {
 	}
 	
 	public void destroyMerge(){
-		ArrayList<Lokum> destroyedLokums = new ArrayList<Lokum>();
-		((WrappedLokum)l1).comboDestroy();
-		destroyedLokums.add(l1);
-		((WrappedLokum) l2).comboDestroy();
-		destroyedLokums.add(l2);
-		
+		NormalLokum destroyer1 = new NormalLokum(l1.getRowIndex(), l1.getColumnIndex(), l1.getLokumColor());
+		NormalLokum destroyer2 = new NormalLokum(l2.getRowIndex(), l2.getColumnIndex(), l2.getLokumColor());
+		destroyer1.comboDestroy();
+		destroyer2.comboDestroy();
+		score.scoreUpdateWrappedWrappedMerge();
 	}
 
 }

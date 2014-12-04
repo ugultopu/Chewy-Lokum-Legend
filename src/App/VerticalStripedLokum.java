@@ -14,13 +14,13 @@ public class VerticalStripedLokum extends StripedLokum {
 	public void comboDestroy() {
 		// TODO Auto-generated method stub
 		BoardLogic boardLogic = BoardLogic.getInstance();
-
+		
 		/*
 		 * Set the striped lokum's position to empty.
 		 */
 		boardLogic.introduceLogicField(new EmptyLogicField(getRowIndex(), getColumnIndex()));
 		
-
+		int lokumsDestroyed = 0;
 		int currentRowIndex;
 
 		for( currentRowIndex = 0; currentRowIndex<boardLogic.getRowSize(); currentRowIndex++ ){
@@ -33,6 +33,7 @@ public class VerticalStripedLokum extends StripedLokum {
 			else{
 				EmptyLogicField destroyed = new EmptyLogicField( currentRowIndex, getColumnIndex());
 				boardLogic.introduceLogicField(destroyed);
+				lokumsDestroyed++;
 				/*
 				 * CHECK THE LINE BELOW!!!
 				 */
@@ -40,6 +41,7 @@ public class VerticalStripedLokum extends StripedLokum {
 				
 			}
 		}
+		Score.getInstance().scoreUpdateStripedUse(lokumsDestroyed);
 	}
 
 	@Override

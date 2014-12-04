@@ -43,4 +43,33 @@ public class BoardLogicTest{
 		BL.readjustBoardAfterDestroy();
 		System.out.println(toString(BL));
 	}
+	
+	public static void testForStability(){
+		BoardLogic BL = BoardLogic.getInstance();
+		if(BL.isBoardStabilized()){
+			System.out.println("Board is stable");
+		}else{
+			System.out.println("Board is not stable");
+		}
+	}
+	
+	public static void swapTest(LogicField lokum1, LogicField lokum2){
+		BoardLogic BL = BoardLogic.getInstance();
+		System.out.println("Before swap: ");
+		System.out.println(toString(BL));
+		System.out.println("After swap: ");
+		BL.swap(lokum1, lokum2);
+		System.out.println(toString(BL));
+	}
+	
+	public static void findBoardCombosTest(){
+		ArrayList<Combo> boardCombos = BoardLogic.getInstance().findBoardCombos();
+		if(boardCombos.size() == 0){
+			System.out.println("No combos.");
+		}else{
+			for(int i = 0; i < boardCombos.size(); i++){
+				System.out.println(boardCombos.get(i).toString());
+			}
+		}
+	}
 }

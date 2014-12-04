@@ -18,8 +18,7 @@ public class FiveCombo extends Combo{
 		Lokum midLokum = lokums.get(2);
 		int x = midLokum.getRowIndex();
 		int y = midLokum.getColumnIndex();
-		String color = midLokum.getLokumColor();
-		this.generatedLokum = new BombLokum(x, y, color);
+		this.generatedLokum = new BombLokum(x, y);
 	}
 	
 	public Lokum getGeneratedLokum(){

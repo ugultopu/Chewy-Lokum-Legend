@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 
 public class ApplicationWindow extends JFrame {
 	
-	protected static GamePanel game;
 	protected static ApplicationWindow instance;
 
 	public ApplicationWindow() {
@@ -25,9 +24,9 @@ public class ApplicationWindow extends JFrame {
 		setVisible(true);
 		setResizable(false);
 		
-		game = GamePanel.getInstance();
 		
-		add(game);
+		
+		add(ChooseLevelPanel.getInstance());
 	}
 	
 	public static ApplicationWindow getInstance(){
@@ -43,6 +42,9 @@ public class ApplicationWindow extends JFrame {
 	
 	public static void addPanel(JPanel panel){
 		instance.add(panel);
+		instance.pack();
+		instance.setSize(Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
+
 	}
 	
 	public static void removePanel(JPanel panel){

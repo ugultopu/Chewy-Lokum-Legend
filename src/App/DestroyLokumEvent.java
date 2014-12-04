@@ -14,7 +14,13 @@ public class DestroyLokumEvent extends GameEvent {
 	
 	@Override
 	public void executeEvent() {
-		GameBoardPanel.changeLokum(destroyedLokum);
-		GameBoardPanel.getInstance().repaint();
+		GameBoard.getInstance().changeLokum(destroyedLokum);
+		GameBoard.getInstance().repaint();
+		try {
+			Thread.sleep(20);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Exception on event waiting.");
+		}
 	}
 }

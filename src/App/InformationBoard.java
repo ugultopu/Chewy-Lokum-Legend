@@ -3,11 +3,13 @@ package App;
 import java.awt.Font;
 import java.awt.Graphics;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class InformationBoard extends JPanel {
 	private JLabel level,target,score,movesLeft,levelInput,targetInput,scoreInput,movesLeftInput;
+	private JButton saveButton;
 	private int currentScore;
 	private int goalScore;
 	private int currentLevel;
@@ -23,6 +25,7 @@ public class InformationBoard extends JPanel {
 		targetInput = new JLabel("0");
 		scoreInput = new JLabel("0");
 		movesLeftInput = new JLabel("0");
+		saveButton = new JButton("Save Game");
 		
 		setLayout(null);
 		setBackground(Constants.GAME_BACKGROUND_COLOR);
@@ -43,7 +46,6 @@ public class InformationBoard extends JPanel {
 		movesLeft.setBounds(0, 180, 80, 30);
 		movesLeft.setFont(new Font("Tahoma", Font.BOLD, 20));
 		
-		
 		add(levelInput);
 		levelInput.setBounds(100, 0,80,30);
 		levelInput.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -59,6 +61,11 @@ public class InformationBoard extends JPanel {
 		add(movesLeftInput);
 		movesLeftInput.setBounds(100, 180, 80, 30);
 		movesLeftInput.setFont(new Font("Tahoma", Font.BOLD, 20));
+		
+		add(saveButton);
+		saveButton.setBounds(0, 240, 150, 50);
+		saveButton.setBorderPainted(false);
+		saveButton.setFocusPainted(false);
 		
 		level.setOpaque(true);
 		level.setBackground(Constants.GAME_BACKGROUND_COLOR);
@@ -110,6 +117,8 @@ public class InformationBoard extends JPanel {
     	targetInput.repaint();
     	scoreInput.repaint();
     	movesLeftInput.repaint();
+    	
+    	saveButton.repaint();
 	}
 	
 	public static InformationBoard getInstance(){
@@ -122,5 +131,4 @@ public class InformationBoard extends JPanel {
 	public static void resetInstance(){
 		instance = null;
 	}
-	
 }

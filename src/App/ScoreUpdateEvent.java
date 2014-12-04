@@ -11,8 +11,8 @@ public class ScoreUpdateEvent extends GameEvent {
 	
 	@Override
 	public void executeEvent() {
-		InformationPanel.increaseScore(scoreIncrement);
-		InformationPanel.getInstance().repaint();
+		InformationBoard.getInstance().increaseScore(scoreIncrement);
+		InformationBoard.getInstance().repaint();
 	}
 
 }

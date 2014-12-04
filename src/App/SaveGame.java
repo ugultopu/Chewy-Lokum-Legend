@@ -3,7 +3,7 @@ package App;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.io.File;
 
 public class SaveGame {
 	
@@ -12,10 +12,18 @@ public class SaveGame {
 		int player_id = 1;
 		String player_name = "default";
 		LogicField[][] lokumBoard = BoardLogic.getInstance().getBoard();
+
+		int goal_score = 20;
+		int current_score = 0;
+		int moves_left = 32;
+		int level = 2;
+		/*
 		int goal_score = BoardLogic.getInstance().getGoalScore();
 		int current_score = BoardLogic.getInstance().getCurrentScore();
 		int moves_left = BoardLogic.getInstance().getMovesLeft();
 		int level = BoardLogic.getInstance().getLevel();
+		*/
+
 		
 		BufferedWriter wr = new BufferedWriter(new FileWriter("save.xml"));
 		wr.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
@@ -29,7 +37,7 @@ public class SaveGame {
 		wr.write("<board>");
 		wr.write("<lokums>");
 		for(int i=0; i<lokumBoard.length; i++){
-			for(int j=0; j<lokumBoard[i].length; i++){
+			for(int j=0; j<lokumBoard[i].length; j++){
 				LogicField lokum = lokumBoard[i][j];
 				if(lokum instanceof Lokum){
 					wr.write("<lokum>");
@@ -47,7 +55,7 @@ public class SaveGame {
 		
 		wr.write("<obstacles>");
 		for(int i=0; i<lokumBoard.length; i++){
-			for(int j=0; j<lokumBoard[i].length; i++){
+			for(int j=0; j<lokumBoard[i].length; j++){
 				LogicField obstacle = lokumBoard[i][j];
 				if(obstacle instanceof Obstacle){
 					obstacle = (Obstacle) obstacle;
@@ -70,6 +78,17 @@ public class SaveGame {
 		wr.write("</game>");
 		wr.close();
 			
+	}
+	
+	public static void main(String[] args){
+		
+		try {
+			saveBoardToXML();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }
