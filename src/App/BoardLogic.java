@@ -273,7 +273,7 @@ public class BoardLogic {
 	 *	DEFINITION
 	 *	This method takes two positions and does the appropriate swapping operation between them.
 	 */
-	private boolean swap(LogicField f0, LogicField f1){
+	public boolean swap(LogicField f0, LogicField f1){
 		/*
 		 * NOTE: This method allows swapping of the same lokums (That is: Arguments pointing to the exact same object.). Check if that would cause a problem. 
 		 */
@@ -281,20 +281,25 @@ public class BoardLogic {
 		/*
 		 * If locations are not suitable for swap, simply return w/o doing anything.
 		 */
-		if( !locationsSuitableForSwap(f0, f1) )
+		if( !locationsSuitableForSwap(f0, f1) ){
+			System.out.println("Swap locations are not suitable.");
 			return false;
+		}
 		// if here, then locations are suitable for swap.
 		/*
 		 * If types are not suitable for swap, simply return w/o doing anything.
 		 */
-		if( !typesSuitableForSwap(f0, f1) )
+		if( !typesSuitableForSwap(f0, f1) ){
+			System.out.println("Lokum types are not suitable for swap.");
 			return false;
+		}
 		// if here, then types are suitable for swap as well.
 		/*
 		 * ADD LOKUM RETURNING LIST FOR MERGE DESTROY AS WELL.
 		 */
 		if( isMergeSwap( f0, f1 ) ){
-			mergeDestroy( (MergeDestroyable) f0, (MergeDestroyable) f1 );
+			System.out.println("This is a merge swap");
+			mergeDestroy(f0, f1 );
 		}
 		// if here, then not merge swap. So combo swap.
 		else{
@@ -320,8 +325,8 @@ public class BoardLogic {
 	 * @requires:
 	 * R.0 Either of the arguments is instanceof MergeDestroyable.
 	 */
-	public void mergeDestroy( MergeDestroyable f0, MergeDestroyable f1 ){
-		Merge merge = Factory.createMerge( f0, f1);
+	public void mergeDestroy( LogicField f0, LogicField f1 ){
+		Merge merge = Factory.createMerge( (Lokum) f0, (Lokum) f1);
 		merge.destroyMerge();
 	}
 	/**

@@ -27,19 +27,19 @@ public class Factory {
 		return randomNumber;
 	}
 	
-	public static Merge createMerge(MergeDestroyable l1, MergeDestroyable l2){
+	public static Merge createMerge(LogicField l1, LogicField l2){
 		if((l1 instanceof HorizontalStripedLokum || l1 instanceof VerticalStripedLokum) && (l2 instanceof VerticalStripedLokum || l2 instanceof HorizontalStripedLokum)){
 			System.out.println("Striped + Striped Merge");
-			return new StripedStripedMerge(l1, l2);
+			return new StripedStripedMerge((MergeDestroyable) l1, (MergeDestroyable) l2);
 		}else if((l1 instanceof StripedLokum && l2 instanceof WrappedLokum) || (l2 instanceof StripedLokum && l1 instanceof WrappedLokum)){
 			System.out.println("Striped + Wrapped Merge");
-			return new StripedWrappedMerge(l1, l2);
+			return new StripedWrappedMerge((MergeDestroyable) l1, (MergeDestroyable) l2);
 		}else if(l1 instanceof BombLokum || l2 instanceof BombLokum){
 			System.out.println("Bomb Merge");
-			return new BombMerge(l1, l2);
+			return new BombMerge( l1,  l2);
 		}else if(l1 instanceof WrappedLokum && l2 instanceof WrappedLokum){
 			System.out.println("Wrapped + Wrapped Merge");
-			return new WrappedWrappedMerge(l1, l2);
+			return new WrappedWrappedMerge((MergeDestroyable) l1, (MergeDestroyable) l2);
 		}else{
 			System.out.println("NOT A MERGE");
 			return null;

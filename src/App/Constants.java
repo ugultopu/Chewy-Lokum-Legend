@@ -13,6 +13,7 @@ public class Constants {
 	public static final String LOKUM_COLOR_GREEN = "green";
 	public static final String LOKUM_COLOR_BROWN = "brown";
 	public static final String LOKUM_COLOR_WHITE = "white";
+	public static final String BOMB_LOKUM_COLOR = "bomb";
 	
 	/* Screen Dimensions */
 	public static final int SCREEN_WIDTH=1000;

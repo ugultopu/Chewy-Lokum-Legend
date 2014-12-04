@@ -6,12 +6,12 @@ import java.util.ArrayList;
 public class BombLokum extends Lokum implements ComboDestroyable,
 		MergeDestroyable, Swapable {
 
-	public BombLokum(int rowIndex, int columnIndex, String lokumColor) {
+	public BombLokum(int rowIndex, int columnIndex) {
 		/*
 		 * Actually, BombLokum should not have a color. So just enter a dummy value as the color, since
 		 * this field will not have any significance for the BombLokum.
 		 */
-		super(rowIndex, columnIndex, lokumColor);
+		super(rowIndex, columnIndex, Constants.BOMB_LOKUM_COLOR);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -28,7 +28,7 @@ public class BombLokum extends Lokum implements ComboDestroyable,
 	@Override
 	public LogicField copyLogicField() {
 		// TODO Auto-generated method stub
-		return new BombLokum(getRowIndex(), getColumnIndex(), getLokumColor());
+		return new BombLokum(getRowIndex(), getColumnIndex());
 	}
 
 	@Override

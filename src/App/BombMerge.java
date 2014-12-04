@@ -2,6 +2,8 @@ package App;
 
 import java.util.Random;
 
+import Tests.LokumTest;
+
 
 public class BombMerge extends Merge {
 	private Lokum l1;
@@ -9,7 +11,7 @@ public class BombMerge extends Merge {
 	private BoardLogic board = BoardLogic.getInstance();
 	private Lokum[][] lokumBoard =  board.getBoard();
 
-	public BombMerge(MergeDestroyable l1, MergeDestroyable l2){
+	public BombMerge(LogicField l1, LogicField l2){
 		this.l1 = (Lokum) l1;
 		this.l2 = (Lokum) l2;
 	}

@@ -3,7 +3,7 @@ package App;
 import java.util.ArrayList;
 
 
-public class NormalLokum extends Lokum implements ComboDestroyable, MergeDestroyable{
+public class NormalLokum extends Lokum implements ComboDestroyable, Swapable{
 	
 	public NormalLokum(int rowIndex, int columnIndex, String lokumColor) {
 		super(rowIndex, columnIndex, lokumColor);

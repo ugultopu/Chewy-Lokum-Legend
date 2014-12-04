@@ -17,15 +17,16 @@ public class Run {
 		
 		NormalLokum nl = new NormalLokum(0,0,"red");
 		
-		System.out.println(LokumTest.toString(nl));
+		//System.out.println(LokumTest.toString(nl));
 		NormalLokum testNormal = new NormalLokum(1, 2, "red");
-		BombLokum testBomb = new BombLokum(10, 15, null);
+		BombLokum testBomb = new BombLokum(1, 1);
 		WrappedLokum testWrapped = new WrappedLokum(10, 5, "brown");
 		VerticalStripedLokum testVStriped = new VerticalStripedLokum(1, 3, "white");
 		HorizontalStripedLokum testHStriped = new HorizontalStripedLokum(1, 1, "white");
 		
-		
-		//MergeTest.mergeTest(Factory.createMerge(testBomb, testNormal)); --> Works
+		BoardLogic.getInstance().introduceLogicField(testBomb);
+		BoardLogic.getInstance().introduceLogicField(testNormal);
+		//MergeTest.mergeTest(Factory.createMerge(testBomb, testNormal)); //--> Works
 		//BoardLogicTest.shuffleBoardTest(); --> Works
 		//MergeTest.mergeTest(Factory.createMerge(testWrapped, testVStriped)); --> Works
 		//MergeTest.mergeTest(Factory.createMerge(testBomb, testWrapped)); --> !!Problem!!
@@ -34,6 +35,9 @@ public class Run {
 		//MergeTest.mergeTest(Factory.createMerge(testHStriped, testBomb));//--> Works
 		//Combo test classes are in the Combo classes. It will only useful when tested in swap.
 		//BoardLogicTest.fallLokumsTest(); --> Array Index Out of Bounds!!!!
+		//BoardLogicTest.testForStability();// --> Works but needs more testing.
+		BoardLogicTest.swapTest(testNormal, testBomb);
+		BoardLogicTest.testForStability();
 		
 	}
 
