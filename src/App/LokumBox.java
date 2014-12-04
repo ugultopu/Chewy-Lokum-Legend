@@ -13,7 +13,7 @@ public class LokumBox {
 	private LogicField logicField;
 	private Image image;
 	private int side=Constants.ANIMATION_WINDOW_WIDTH/Constants.SCREEN_WIDTH;
-	
+
 
 	public LokumBox(LogicField logicField){
 		this.logicField = logicField;
@@ -46,11 +46,11 @@ public class LokumBox {
 				case Constants.LOKUM_COLOR_BROWN:
 					ImageIcon brownNormalLokumImage = new ImageIcon("images/normalbrownlokum.png");
 					image = brownNormalLokumImage.getImage();
-					g.drawImage(image, logicField.getColumnIndex(), Constants.BOARD_HEIGHT - logicField.getRowIndex(), side, side, null); break;	
+					g.drawImage(image, logicField.getColumnIndex(), Constants.BOARD_HEIGHT - logicField.getRowIndex(), side, side, null); break;
 				case Constants.LOKUM_COLOR_WHITE:
 					ImageIcon whiteNormalLokumImage = new ImageIcon("images/normalwhitelokum.png");
 					image = whiteNormalLokumImage.getImage();
-					g.drawImage(image, logicField.getColumnIndex(), Constants.BOARD_HEIGHT - logicField.getRowIndex(), side, side, null); break;						
+					g.drawImage(image, logicField.getColumnIndex(), Constants.BOARD_HEIGHT - logicField.getRowIndex(), side, side, null); break;
 				default: g.fillRect(logicField.getColumnIndex(), Constants.BOARD_HEIGHT - logicField.getRowIndex(), side, side);
 			}
 		}

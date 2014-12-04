@@ -46,7 +46,6 @@ public class InformationBoard extends JPanel {
 		movesLeft.setBounds(0, 180, 80, 30);
 		movesLeft.setFont(new Font("Tahoma", Font.BOLD, 20));
 		
-		
 		add(levelInput);
 		levelInput.setBounds(100, 0,80,30);
 		levelInput.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -132,5 +131,4 @@ public class InformationBoard extends JPanel {
 	public static void resetInstance(){
 		instance = null;
 	}
-	
 }

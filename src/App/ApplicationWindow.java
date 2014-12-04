@@ -26,7 +26,7 @@ public class ApplicationWindow extends JFrame {
 		
 		
 		
-		add(MenuPanel.getInstance());
+		add(ChooseLevelPanel.getInstance());
 	}
 	
 	public static ApplicationWindow getInstance(){
