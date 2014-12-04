@@ -33,7 +33,7 @@ public class Run {
 		BoardLogic.getInstance().introduceLogicField(testNormal1);
 		BoardLogic.getInstance().introduceLogicField(testNormal2);
 		BoardLogic.getInstance().introduceLogicField(testNormal3);
-		MergeTest.mergeTest(Factory.createMerge(testBomb, testNormal)); //--> Works
+		//MergeTest.mergeTest(Factory.createMerge(testBomb, testNormal)); //--> Works
 		//BoardLogicTest.shuffleBoardTest(); --> Works
 		//MergeTest.mergeTest(Factory.createMerge(testWrapped, testVStriped)); --> Works
 		//MergeTest.mergeTest(Factory.createMerge(testBomb, testWrapped)); //--> Works
