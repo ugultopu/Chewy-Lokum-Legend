@@ -55,22 +55,44 @@ public class LokumBox {
 			}
 		}
 		
-		if(logicField instanceof StripedLokum){
+		if(logicField instanceof VerticalStripedLokum){
 			switch(((Lokum)logicField).getLokumColor()){
 				case Constants.LOKUM_COLOR_RED:
-					ImageIcon redStrippedLokumImage = new ImageIcon("images/strippedredlokum.png");
+					ImageIcon redStrippedLokumImage = new ImageIcon("images/vertical_stripped_red_lokum.png");
 					image = redStrippedLokumImage.getImage();
 					g.drawImage(image, logicField.getColumnIndex(), Constants.BOARD_HEIGHT - logicField.getRowIndex(), side, side, null); break;
 				case Constants.LOKUM_COLOR_GREEN:
-					ImageIcon yellowStrippedLokumImage = new ImageIcon("images/strippedgreenlokum.png");
+					ImageIcon yellowStrippedLokumImage = new ImageIcon("images/vertical_stripped_green_lokum.png");
 					image = yellowStrippedLokumImage.getImage();
 					g.drawImage(image, logicField.getColumnIndex(), Constants.BOARD_HEIGHT - logicField.getRowIndex(), side, side, null); break;	
 				case Constants.LOKUM_COLOR_BROWN:
-					ImageIcon brownStrippedLokumImage = new ImageIcon("images/strippedbrownlokum.png");
+					ImageIcon brownStrippedLokumImage = new ImageIcon("images/vertical_stripped_brown_lokum.png");
 					image = brownStrippedLokumImage.getImage();
 					g.drawImage(image, logicField.getColumnIndex(), Constants.BOARD_HEIGHT - logicField.getRowIndex(), side, side, null); break;	
 				case Constants.LOKUM_COLOR_WHITE:
-					ImageIcon whiteStrippedLokumImage = new ImageIcon("images/strippedwhitelokum.png");
+					ImageIcon whiteStrippedLokumImage = new ImageIcon("images/vertical_stripped_white_lokum.png");
+					image = whiteStrippedLokumImage.getImage();
+					g.drawImage(image, logicField.getColumnIndex(), Constants.BOARD_HEIGHT - logicField.getRowIndex(), side, side, null); break;						
+				default: g.fillRect(logicField.getColumnIndex(), Constants.BOARD_HEIGHT - logicField.getRowIndex(), side, side);
+			}
+		}
+		
+		if(logicField instanceof HorizontalStripedLokum){
+			switch(((Lokum)logicField).getLokumColor()){
+				case Constants.LOKUM_COLOR_RED:
+					ImageIcon redStrippedLokumImage = new ImageIcon("images/horizontal_stripped_red_lokum.png");
+					image = redStrippedLokumImage.getImage();
+					g.drawImage(image, logicField.getColumnIndex(), Constants.BOARD_HEIGHT - logicField.getRowIndex(), side, side, null); break;
+				case Constants.LOKUM_COLOR_GREEN:
+					ImageIcon yellowStrippedLokumImage = new ImageIcon("images/horizontal_stripped_green_lokum.png");
+					image = yellowStrippedLokumImage.getImage();
+					g.drawImage(image, logicField.getColumnIndex(), Constants.BOARD_HEIGHT - logicField.getRowIndex(), side, side, null); break;	
+				case Constants.LOKUM_COLOR_BROWN:
+					ImageIcon brownStrippedLokumImage = new ImageIcon("images/horizontal_stripped_brown_lokum.png");
+					image = brownStrippedLokumImage.getImage();
+					g.drawImage(image, logicField.getColumnIndex(), Constants.BOARD_HEIGHT - logicField.getRowIndex(), side, side, null); break;	
+				case Constants.LOKUM_COLOR_WHITE:
+					ImageIcon whiteStrippedLokumImage = new ImageIcon("images/horizontal_stripped_white_lokum.png");
 					image = whiteStrippedLokumImage.getImage();
 					g.drawImage(image, logicField.getColumnIndex(), Constants.BOARD_HEIGHT - logicField.getRowIndex(), side, side, null); break;						
 				default: g.fillRect(logicField.getColumnIndex(), Constants.BOARD_HEIGHT - logicField.getRowIndex(), side, side);
