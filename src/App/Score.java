@@ -68,4 +68,8 @@ public class Score {
 		updated = true;
 	}
 	
+	public void scoreUpdateThreeCombo(){
+		currentScore += 60;
+	}
+	
 }
