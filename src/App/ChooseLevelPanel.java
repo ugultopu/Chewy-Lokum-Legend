@@ -18,7 +18,7 @@ public class ChooseLevelPanel extends JPanel {
 		label = new JLabel("Choose Level",JLabel.CENTER);
 		label.setFont(new Font("Tahoma", Font.BOLD, 30));
 		label.setForeground(Constants.TITLE_COLOR);
-		numberOfLevels = 15;		
+		numberOfLevels = 20;		
 
 		setLayout(new GridBagLayout());
 		setBackground(Constants.GAME_BACKGROUND_COLOR);
