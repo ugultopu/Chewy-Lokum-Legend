@@ -52,7 +52,7 @@ public class GamePanel extends JPanel {
 
 	public void startGame(){
 		System.out.println("Game Started!");
-		BoardLogic logic = BoardLogic.getInstance();
+		BoardLogic.getInstance().readjustAfterInitialize();
 		running=true;
 	}
 	
