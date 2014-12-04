@@ -1,5 +1,7 @@
 package App;
 
+import java.io.IOException;
+
 import Tests.BoardLogicTest;
 import Tests.LokumTest;
 import Tests.MergeTest;
@@ -9,7 +11,7 @@ import Tests.StripedLokumTest;
 
 public class Run {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
 		ApplicationWindow frame = ApplicationWindow.getInstance();
 		frame.pack();
@@ -34,8 +36,8 @@ public class Run {
 		//MergeTest.mergeTest(Factory.createMerge(testBomb, testNormal)); //--> Works
 		//BoardLogicTest.shuffleBoardTest(); --> Works
 		//MergeTest.mergeTest(Factory.createMerge(testWrapped, testVStriped)); --> Works
-		//MergeTest.mergeTest(Factory.createMerge(testBomb, testWrapped)); //--> !!Problem!!
-		//MergeTest.mergeTest(Factory.createMerge(testWrapped, testWrapped)); --> Works Good But Merge is wrong
+		//MergeTest.mergeTest(Factory.createMerge(testBomb, testWrapped)); //--> Works
+		//MergeTest.mergeTest(Factory.createMerge(testWrapped, testWrapped)); //--> Works
 		//MergeTest.mergeTest(Factory.createMerge(testBomb, testBomb)); --> Works
 		//MergeTest.mergeTest(Factory.createMerge(testHStriped, testBomb));//--> Works
 		//Combo test classes are in the Combo classes. It will only useful when tested in swap.
@@ -51,7 +53,7 @@ public class Run {
 		//BoardLogicTest.testForStability();
 		//BoardLogicTest.swapTest(testNormal2, testNormal3);
 		//BoardLogicTest.findBoardCombosTest(); !!Doesn't work!!
-		
+		//SaveGame.saveBoardToXML(); --> Works
 	}
 
 }
