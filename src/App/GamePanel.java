@@ -22,7 +22,7 @@ public class GamePanel extends JPanel {
 	private GamePanel() {
 		super();
 		
-		EventDispatchQueue.resetInstance();
+//		EventDispatchQueue.resetInstance();
 		
 		new Thread(new Runnable(){
 
@@ -46,7 +46,7 @@ public class GamePanel extends JPanel {
 				Constants.INFORMATION_BOARD_WIDTH,Constants.INFORMATION_BOARD_HEIGHT);
 		
 		add(GameBoard.getInstance());
-//		gameBoard.setBounds(40, 60, 600, 540);
+		GameBoard.getInstance().setBounds(40, 60, 600, 540);
 				
 	}
 
@@ -98,9 +98,9 @@ public class GamePanel extends JPanel {
 		g.fillRect(30,50, Constants.ANIMATION_WINDOW_WIDTH, Constants.ANIMATION_WINDOW_HEIGHT);
 		g.fillRect(750, 160, Constants.INFORMATION_BOARD_WIDTH, Constants.INFORMATION_BOARD_HEIGHT);
     	
-    	
+		GameBoard.getInstance().repaint();    	
     	InformationBoard.getInstance().repaint();
-		GameBoard.getInstance().repaint();
+
 	}
 
 }

@@ -1,5 +1,6 @@
 package App;
 
+import java.awt.Graphics;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -7,14 +8,12 @@ import javax.swing.JPanel;
 public class GameBoard extends JPanel {
 
 	private LokumBox[][] boardArray;
-	private int width = Constants.ANIMATION_WINDOW_WIDTH;
-	private int height = Constants.ANIMATION_WINDOW_HEIGHT;
 	private static GameBoard instance;
 	
 	private GameBoard(){
-		boardArray = new LokumBox[height][width];
-		for(int i = 0; i < height; i++){
-			for(int j = 0; j < width; j++){
+		boardArray = new LokumBox[Constants.NUMBER_OF_LOKUMS][Constants.NUMBER_OF_LOKUMS];
+		for(int i = 0; i < Constants.NUMBER_OF_LOKUMS; i++){
+			for(int j = 0; j < Constants.NUMBER_OF_LOKUMS; j++){
 				boardArray[i][j] = new LokumBox(new EmptyLogicField(i,j));
 			}
 		}
@@ -37,4 +36,12 @@ public class GameBoard extends JPanel {
 		boardArray[logicField.getRowIndex()][logicField.getColumnIndex()].changeLogicField(logicField);
 	}
 	
+	public void paintComponent(Graphics g){
+		for(int i = 0; i < 9; i++){
+			for(int j = 0; j < 9; j++){
+				boardArray[i][j].paintComponent(g);
+				
+			}
+		}
+	}
 }

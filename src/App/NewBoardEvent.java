@@ -15,6 +15,7 @@ public class NewBoardEvent extends GameEvent {
 				GameBoard.getInstance().changeLokum(newBoard[i][j]);
 			}
 		}
+		GameBoard.getInstance().repaint();
 
 	}
 
