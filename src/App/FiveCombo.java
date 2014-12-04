@@ -11,7 +11,7 @@ public class FiveCombo extends Combo{
 		this.lokums = lokums;
 		generateLokum();
 		test = new FiveComboTest();
-		
+		this.comboPriority = 4;
 	}
 	
 	private void generateLokum(){

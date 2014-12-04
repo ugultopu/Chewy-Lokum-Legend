@@ -11,6 +11,7 @@ public class LCombo extends Combo{
 		this.lokums = lokums;
 		generateLokum();
 		test = new LComboTest();
+		this.comboPriority = 3;
 	}
 	
 	public Lokum getGeneratedLokum(){

@@ -12,6 +12,7 @@ public class FourCombo extends Combo{
 		this.lokums = lokums;
 		generateLokum();
 		test = new FourComboTest();
+		this.comboPriority = 2;
 	}
 	
 	

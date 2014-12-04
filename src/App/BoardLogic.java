@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
 
+import com.sun.org.apache.bcel.internal.generic.DALOAD;
+
 
 public class BoardLogic {
 	
@@ -64,20 +66,39 @@ public class BoardLogic {
 	}
 	
 	private void findBoardCombos(){
+		/*
+		 * Clear current board combos before beginning a new search.
+		 */
+		boardCombos.clear();
+		/*
+		 * Then, create a temporary set, where each found combo will first be put in this set. This is done for automatically eliminating any duplicate combos.
+		 */
 		HashSet<Combo> combosAsSet = new HashSet<Combo>();
+		/*
+		 * Then, start searching for combos.
+		 */
 		for(int currentRowIndex=0;currentRowIndex<rowSize;currentRowIndex++){
 			for(int currentColumnIndex=0;currentColumnIndex<columnSize;currentColumnIndex++){
 				LogicField currentLogicField = logicFields[currentRowIndex][currentColumnIndex];
-				if(currentLogicField instanceof Lokum){
+				/*
+				 * In order to be subject to the combo search, currentLogicField must be an instance of Lokum AND it MUST NOT be an instance of BombLokum.
+				 */
+				if( (currentLogicField instanceof Lokum) && !(currentLogicField instanceof BombLokum) ){
 					Lokum currentLokum = (Lokum) currentLogicField;
 					ArrayList<Combo> currentLokumCombos = currentLokum.getCombosThisLokumIn();
-					for(int currentComboIndex=0;currentComboIndex<currentLokumCombos.size();currentComboIndex++){
-						combosAsSet.add(currentLokumCombos.get(currentComboIndex));
+					for(int currentLokumComboIndex=0;currentLokumComboIndex<currentLokumCombos.size();currentLokumComboIndex++){
+						combosAsSet.add(currentLokumCombos.get(currentLokumComboIndex));
 					}
 				}
 			}
 		}
+		/*
+		 * After the search for combos is finished, convert the Set into an Object array, by using the built in method: toArray().
+		 */
 		Object[] combosAsObjectArray = combosAsSet.toArray();
+		/*
+		 * After that, finally put every element in this array to the boardCombos field of the BoardLogic.
+		 */
 		for(int i=0;i<combosAsObjectArray.length;i++){
 			boardCombos.add((Combo) combosAsObjectArray[i]);
 		}
@@ -298,12 +319,32 @@ public class BoardLogic {
 		}
 		// if here, then not merge swap. So combo swap.
 		else{
+			/*
+			 * If here, then this means that this swap is a swap that requires the swapping of LogicFields on logicFields array. So perform it.
+			 */
+			locationSwap(f0, f1);
+			/*
+			 * Then, check for combos.
+			 */
 			findBoardCombos();
-			for(int i=0;i<boardCombos.size();i++){
-				Combo currentCombo = boardCombos.get(i);
+			/*
+			 * After checking for combos, check if there are any combos actually. If not, revert the swap and return from the method.
+			 */
+			if(boardCombos.size() == 0){
+				/*
+				 * If here, then swap did not yield any combos. So revert the swap and return from the method.
+				 */
+				locationSwap(f0, f1);
+				return false;
+			}
+			/*
+			 * If here, then there were indeed combos present. So find them and execute them. 
+			 */
+			for(int currentComboIndex=0;currentComboIndex<boardCombos.size();currentComboIndex++){
+				Combo currentCombo = boardCombos.get(currentComboIndex);
 				ArrayList<Lokum> currentCombosLokums = currentCombo.getComboLokums();
-				for(int j=0;j<currentCombosLokums.size();j++){
-					Lokum currentLokum = currentCombosLokums.get(i);
+				for(int currentCombosLokumIndex=0;currentCombosLokumIndex<currentCombosLokums.size();currentCombosLokumIndex++){
+					Lokum currentLokum = currentCombosLokums.get(currentCombosLokumIndex);
 					((ComboDestroyable) currentLokum).comboDestroy();
 				}
 			}
@@ -314,6 +355,22 @@ public class BoardLogic {
 			// EventDispatchQueue.getInstance().addEvent(new NonLokumGeneratingEvent(convertLogicFieldListToEmptyLogicFieldList(comboDestroyedFields)));
 		}
 		return true;
+	}
+	
+	/**
+	 * This method performs the immediate swapping of the given two LogicFields. 
+	 * @param f0
+	 * @param f1
+	 */
+	private void locationSwap(LogicField f0, LogicField f1){
+		int f0sInitialRowIndex = f0.getRowIndex();
+		int f0sInitialColumnIndex = f0.getColumnIndex();
+		f0.setRowIndex(f1.getRowIndex());
+		f0.setColumnIndex(f1.getColumnIndex());
+		f1.setRowIndex(f0sInitialRowIndex);
+		f1.setColumnIndex(f0sInitialColumnIndex);
+		introduceLogicField(f0);
+		introduceLogicField(f1);
 	}
 	
 	/**
@@ -332,6 +389,16 @@ public class BoardLogic {
 		if ( ( f0 instanceof MergeDestroyable ) || ( f1 instanceof MergeDestroyable ) )
 			return true;
 		return false;
+	}
+	
+	private boolean isSwapPossible(LogicField f0, LogicField f1){
+		if( (f0 == null) || (f1 == null) )
+			return false;
+		if(!locationsSuitableForSwap(f0, f1))
+			return false;
+		if(!typesSuitableForSwap(f0, f1))
+			return false;
+		return true;
 	}
 	
 	private boolean locationsSuitableForSwap(LogicField f0, LogicField f1){
@@ -353,8 +420,23 @@ public class BoardLogic {
 		return true;
 	}
 	
-	public LogicField getLogicFieldAt(int x, int y){
-		return logicFields[x][y];
+	public LogicField getLogicFieldAt(int rowIndex, int columnIndex){
+		if( isRowIndexInBoundaries(rowIndex) && isColumnIndexInBoundaries(columnIndex) )
+			return logicFields[rowIndex][columnIndex];
+		else
+			return null;
+	}
+	
+	private boolean isRowIndexInBoundaries(int rowIndex){
+		if( (rowIndex >= 0) && (rowIndex < this.rowSize) )
+			return true;
+		return false;
+	}
+	
+	private boolean isColumnIndexInBoundaries(int columnIndex){
+		if( (columnIndex >= 0) && (columnIndex < this.columnSize) )
+			return true;
+		return false;
 	}
 	
 	public boolean isBoardStabilized(){
@@ -365,14 +447,55 @@ public class BoardLogic {
 	public boolean isMoveAvailable(){
 		int currentRowIndex;
 		int currentColumnIndex;
-		LogicField currentLogicField0;
-		LogicField currentLogicField1;
+		LogicField currentLogicField;
+		LogicField currentNorthWestLogicField;
+		LogicField currentNorthLogicField;
+		LogicField currentNorthEastLogicField;
+		LogicField currentEastLogicField;
+		
 		for(currentRowIndex=0;currentRowIndex<rowSize;currentRowIndex++){
 			for(currentColumnIndex=0;currentColumnIndex<columnSize;currentColumnIndex++){
 				
-				if(swap())
+				currentLogicField = getLogicFieldAt(currentRowIndex, currentColumnIndex);
+				currentNorthWestLogicField = getLogicFieldAt(currentRowIndex + 1, currentColumnIndex - 1);
+				currentNorthLogicField = getLogicFieldAt(currentRowIndex + 1, currentColumnIndex);
+				currentNorthEastLogicField = getLogicFieldAt(currentRowIndex + 1, currentColumnIndex + 1);
+				currentEastLogicField = getLogicFieldAt(currentRowIndex, currentColumnIndex + 1);
+				
+				if(isSwapPossible(currentLogicField, currentNorthWestLogicField)){
+					locationSwap(currentLogicField, currentNorthWestLogicField);
+					findBoardCombos();
+					locationSwap(currentLogicField, currentNorthWestLogicField);
+					if(boardCombos.size() != 0)
+						return true;
+				}
+				
+				if(isSwapPossible(currentLogicField, currentNorthLogicField)){
+					locationSwap(currentLogicField, currentNorthLogicField);
+					findBoardCombos();
+					locationSwap(currentLogicField, currentNorthLogicField);
+					if(boardCombos.size() != 0)
+						return true;
+				}
+				
+				if(isSwapPossible(currentLogicField, currentNorthEastLogicField)){
+					locationSwap(currentLogicField, currentNorthEastLogicField);
+					findBoardCombos();
+					locationSwap(currentLogicField, currentNorthEastLogicField);
+					if(boardCombos.size() != 0)
+						return true;
+				}
+				
+				if(isSwapPossible(currentLogicField, currentEastLogicField)){
+					locationSwap(currentLogicField, currentEastLogicField);
+					findBoardCombos();
+					locationSwap(currentLogicField, currentEastLogicField);
+					if(boardCombos.size() != 0)
+						return true;
+				}
 			}
 		}
+		return false;
 	}
 	
 	private void scoreUpdate(Combo combo){

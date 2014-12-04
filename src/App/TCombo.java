@@ -11,7 +11,7 @@ public class TCombo extends Combo{
 		this.lokums = lokums;
 		generateLokum();
 		test = new TComboTest();
-	
+		this.comboPriority = 3;
 	}
 	
 	public Lokum getGeneratedLokum(){

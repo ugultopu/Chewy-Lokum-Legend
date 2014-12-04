@@ -9,6 +9,7 @@ public class ThreeCombo extends Combo {
 	public ThreeCombo(ArrayList<Lokum> lokums){
 		test = new ThreeComboTest();
 		this.lokums = lokums;
+		this.comboPriority = 1;
 	}
 	
 //Test for the method:
