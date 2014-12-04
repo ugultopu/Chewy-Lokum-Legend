@@ -13,6 +13,8 @@ public class FourCombo extends Combo{
 		generateLokum();
 		//test = new FourComboTest();
 		this.comboPriority = 2;
+		Score.getInstance().scoreUpdateStripedForm();
+		Score.getInstance().setUpdated(true);
 	}
 	
 	

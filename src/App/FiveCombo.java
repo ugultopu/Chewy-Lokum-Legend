@@ -12,6 +12,8 @@ public class FiveCombo extends Combo{
 		generateLokum();
 		//test = new FiveComboTest();
 		this.comboPriority = 4;
+		Score.getInstance().scoreUpdateBombForm();
+		Score.getInstance().setUpdated(true);
 	}
 	
 	private void generateLokum(){
