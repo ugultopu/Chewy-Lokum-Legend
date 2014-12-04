@@ -50,7 +50,7 @@ public class Run {
 		//testVStriped.comboDestroy(); --> Works
 		//testHStriped.comboDestroy(); --> Works
 		//BoardLogicTest.swapTest(testNormal2, testNormal3);
-		//BoardLogicTest.findBoardCombosTest(); //!!Doesn't work!!
+		BoardLogicTest.findBoardCombosTest(); //!!Doesn't work!!
 		//SaveGame.saveBoardToXML(); --> Works
 		//Score updates works.
 	}

@@ -10,7 +10,7 @@ public class LCombo extends Combo{
 	public LCombo(ArrayList<Lokum> lokums){
 		this.lokums = lokums;
 		generateLokum();
-		test = new LComboTest();
+		//test = new LComboTest();
 		this.comboPriority = 3;
 	}
 	

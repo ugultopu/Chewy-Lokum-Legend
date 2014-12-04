@@ -7,7 +7,7 @@ public class ThreeCombo extends Combo {
 	private ArrayList<Lokum> lokums;
 
 	public ThreeCombo(ArrayList<Lokum> lokums){
-		test = new ThreeComboTest();
+		//test = new ThreeComboTest();
 		this.lokums = lokums;
 		this.comboPriority = 1;
 	}

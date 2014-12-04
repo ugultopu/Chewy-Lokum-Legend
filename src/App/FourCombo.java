@@ -11,7 +11,7 @@ public class FourCombo extends Combo{
 	public FourCombo(ArrayList<Lokum> lokums){
 		this.lokums = lokums;
 		generateLokum();
-		test = new FourComboTest();
+		//test = new FourComboTest();
 		this.comboPriority = 2;
 	}
 	

@@ -10,7 +10,7 @@ public class FiveCombo extends Combo{
 	public FiveCombo(ArrayList<Lokum> lokums){
 		this.lokums = lokums;
 		generateLokum();
-		test = new FiveComboTest();
+		//test = new FiveComboTest();
 		this.comboPriority = 4;
 	}
 	
