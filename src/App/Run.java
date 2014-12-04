@@ -1,0 +1,57 @@
+package App;
+
+import Tests.BoardLogicTest;
+import Tests.LokumTest;
+import Tests.MergeTest;
+import Tests.NormalLokumTest;
+import Tests.StripedLokumTest;
+
+
+public class Run {
+
+	public static void main(String[] args) {
+		
+		ApplicationWindow frame = ApplicationWindow.getInstance();
+		frame.pack();
+		frame.setSize(Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
+		
+		NormalLokum nl = new NormalLokum(0,0,"red");
+		
+		NormalLokum testNormal = new NormalLokum(0, 0, "red");
+		NormalLokum testNormal1 = new NormalLokum(0, 1, "red");
+		NormalLokum testNormal2 = new NormalLokum(0, 3, "brown");
+		NormalLokum testNormal3 = new NormalLokum(0, 2, "red");
+		BombLokum testBomb = new BombLokum(1, 1);
+		WrappedLokum testWrapped = new WrappedLokum(10, 5, "brown");
+		VerticalStripedLokum testVStriped = new VerticalStripedLokum(1, 3, "white");
+		HorizontalStripedLokum testHStriped = new HorizontalStripedLokum(1, 1, "white");
+		
+		BoardLogic.getInstance().introduceLogicField(testBomb);
+		BoardLogic.getInstance().introduceLogicField(testNormal);
+		BoardLogic.getInstance().introduceLogicField(testNormal1);
+		BoardLogic.getInstance().introduceLogicField(testNormal2);
+		BoardLogic.getInstance().introduceLogicField(testNormal3);
+		//MergeTest.mergeTest(Factory.createMerge(testBomb, testNormal)); //--> Works
+		//BoardLogicTest.shuffleBoardTest(); --> Works
+		//MergeTest.mergeTest(Factory.createMerge(testWrapped, testVStriped)); --> Works
+		//MergeTest.mergeTest(Factory.createMerge(testBomb, testWrapped)); //--> !!Problem!!
+		//MergeTest.mergeTest(Factory.createMerge(testWrapped, testWrapped)); --> Works Good But Merge is wrong
+		//MergeTest.mergeTest(Factory.createMerge(testBomb, testBomb)); --> Works
+		//MergeTest.mergeTest(Factory.createMerge(testHStriped, testBomb));//--> Works
+		//Combo test classes are in the Combo classes. It will only useful when tested in swap.
+		//BoardLogicTest.fallLokumsTest(); --> Array Index Out of Bounds!!!!
+		//BoardLogicTest.testForStability();// --> Works but needs more testing.
+		//BoardLogicTest.swapTest(testNormal, testBomb);
+		//------>Swap locations suitable works.
+		//------>Merge swap works.
+		//testWrapped.comboDestroy(); --> Works
+		//testVStriped.comboDestroy(); --> Works
+		//testHStriped.comboDestroy(); --> Works
+		//System.out.println(BoardLogicTest.toString(BoardLogic.getInstance()));
+		//BoardLogicTest.testForStability();
+		//BoardLogicTest.swapTest(testNormal2, testNormal3);
+		//BoardLogicTest.findBoardCombosTest(); !!Doesn't work!!
+		
+	}
+
+}
