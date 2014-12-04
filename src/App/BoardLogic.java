@@ -279,7 +279,7 @@ public class BoardLogic {
 	 *	DEFINITION
 	 *	This method takes two positions and does the appropriate swapping operation between them.
 	 */
-	private boolean swap(LogicField f0, LogicField f1){
+	public boolean swap(LogicField f0, LogicField f1){
 		/*
 		 * NOTE: This method allows swapping of the same lokums (That is: Arguments pointing to the exact same object.). Check if that would cause a problem. 
 		 */
