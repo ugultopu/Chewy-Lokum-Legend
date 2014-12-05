@@ -19,14 +19,18 @@ public class StripedWrappedMerge extends Merge {
 		//IMPORTANT: CHECK THE BOUNDS OF BOARD.
 		for(int i = -1; i < 2; i++){
 			int y = yl1 + i;
-			VerticalStripedLokum lokumDestroyer = new VerticalStripedLokum(xl1, y, color);	
-			lokumDestroyer.comboDestroy();
+			if(LogicField.isIndicesInBounds(xl1, y)){
+				VerticalStripedLokum lokumDestroyer = new VerticalStripedLokum(xl1, y, color);	
+				lokumDestroyer.comboDestroy();
+			}
 		}
-		
+
 		for(int i = -1; i < 2; i++){
 			int x = xl1 + i;
-			HorizontalStripedLokum lokumDestroyer = new HorizontalStripedLokum(x, yl1, color);
-			lokumDestroyer.comboDestroy();
+			if(LogicField.isIndicesInBounds(x, yl1)){
+				HorizontalStripedLokum lokumDestroyer = new HorizontalStripedLokum(x, yl1, color);
+				lokumDestroyer.comboDestroy();
+			}
 		}
 	}
 }

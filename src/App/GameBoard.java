@@ -21,7 +21,6 @@ public class GameBoard extends JPanel {
 		}
 		requestFocusInWindow();
 		addMouseListener(ClickListener.getInstance());
-		
 	}
 	
 	public static GameBoard getInstance(){
@@ -31,7 +30,8 @@ public class GameBoard extends JPanel {
 		return instance;
 	}
 	
-	public static void resetInstance(LogicField[][] logicFieldArray){
+
+	public static void resetInstance(){
 		instance = null;
 	}
 	

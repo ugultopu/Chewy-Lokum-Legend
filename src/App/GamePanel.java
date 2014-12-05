@@ -17,7 +17,7 @@ public class GamePanel extends JPanel {
 	private static int LabelYPadding = 160;
 	
 //	protected GameOverPanel gameOverPanel;
-	protected boolean running=true;
+	private boolean running=true;
 	private static GamePanel instance;
 	
 	private GamePanel() {
@@ -93,7 +93,7 @@ public class GamePanel extends JPanel {
 	}
 	
 	public static void resetInstance(){
-		instance = new GamePanel();
+		instance = null;
 	}	
 
 	public void paint(Graphics g){

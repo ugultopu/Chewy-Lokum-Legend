@@ -42,5 +42,11 @@ public abstract class LogicField {
 		}
 		return false;
 	}
-	
+	public static boolean isIndicesInBounds(int argRowIndex, int argColumnIndex){
+		if( (argRowIndex < 0) || (argRowIndex >= BoardLogic.getInstance().getRowSize()) )
+			return false;
+		if( (argColumnIndex < 0) || (argColumnIndex >= BoardLogic.getInstance().getColumnSize()) )
+			return false;
+		return true;
+	}
 }
