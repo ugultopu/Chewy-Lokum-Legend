@@ -190,6 +190,8 @@ public class BoardLogic {
 		populateAfterDestroy(fallingLogicFields);
 		GameEvent fallingLokumsEvent = new FallingLokumsEvent(fallingLogicFields);
 		EventDispatchQueue.getInstance().addEvent(fallingLokumsEvent);
+		NewBoardEvent newBoardEvent = new NewBoardEvent(copyLogicFieldArray());
+		EventDispatchQueue.getInstance().addEvent(newBoardEvent);
 		// send fallingLogicFields to Kugi.
 		/*
 		 * If board is not yet stabilized, call the method again.
