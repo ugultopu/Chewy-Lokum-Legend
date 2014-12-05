@@ -28,18 +28,19 @@ public class WrappedLokum extends Lokum implements ComboDestroyable,
 		for(int i=1;i>-2;i--){
 			for(int j=-1;j<2;j++){
 				LogicField currentLogicField = boardLogic.getLogicFieldAt( getRowIndex() + i , getColumnIndex() + j ); 
-				if( currentLogicField instanceof ComboDestroyable )
-					((ComboDestroyable) currentLogicField).comboDestroy();
-				// if here, then currentLogicField is not combo destroyable. So simply clear it's position.
-				else{
-					EmptyLogicField destroyed = new EmptyLogicField( getRowIndex() + i, getColumnIndex() + j );
-					boardLogic.introduceLogicField(destroyed);
-					
-					/*
-					 * CHECK THE LINE BELOW!!!
-					 */
-					EventDispatchQueue.getInstance().addEvent(new DestroyLokumEvent(destroyed.copyLogicField()));
-					
+				if(currentLogicField != null){
+					if( currentLogicField instanceof ComboDestroyable )
+						((ComboDestroyable) currentLogicField).comboDestroy();
+					// if here, then currentLogicField is not combo destroyable. So simply clear it's position.
+					else{
+						EmptyLogicField destroyed = new EmptyLogicField( getRowIndex() + i, getColumnIndex() + j );
+						boardLogic.introduceLogicField(destroyed);
+						
+						/*
+						 * CHECK THE LINE BELOW!!!
+						 */
+						EventDispatchQueue.getInstance().addEvent(new DestroyLokumEvent(destroyed.copyLogicField()));
+					}
 				}
 			}
 		}
