@@ -11,8 +11,10 @@ public class FourCombo extends Combo{
 	public FourCombo(ArrayList<Lokum> lokums){
 		this.lokums = lokums;
 		generateLokum();
-		test = new FourComboTest();
+		//test = new FourComboTest();
 		this.comboPriority = 2;
+		Score.getInstance().scoreUpdateStripedForm();
+		Score.getInstance().setUpdated(true);
 	}
 	
 	

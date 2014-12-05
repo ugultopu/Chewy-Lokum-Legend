@@ -13,11 +13,11 @@ public class BoardLogicTest{
 			for(int j = 0; j < BL.getColumnSize(); j++){
 				if(!(logicFields[i][j] instanceof EmptyLogicField)){
 					Lokum lok = (Lokum)logicFields[i][j];
-					String color = lok.getLokumColor();
-					String type = lok.getType();
+					String color = Character.toString(lok.getLokumColor().charAt(0));
+					String type = Character.toString(lok.getType().charAt(0));
 					boardString += type + "|" + color + " ";
 				}else{
-					boardString += "empty ";
+					boardString += "E|E ";
 				}
 			}
 			boardString += "\n";
@@ -63,13 +63,25 @@ public class BoardLogicTest{
 	}
 	
 	public static void findBoardCombosTest(){
+		BoardLogic BL = BoardLogic.getInstance();
+		System.out.println("Before Combo:");
+		System.out.println(toString(BL));
 		ArrayList<Combo> boardCombos = BoardLogic.getInstance().findBoardCombos();
 		if(boardCombos.size() == 0){
 			System.out.println("No combos.");
-		}else{
-			for(int i = 0; i < boardCombos.size(); i++){
-				System.out.println(boardCombos.get(i).toString());
+		}
+		else{
+			for(int currentComboIndex=0;currentComboIndex<boardCombos.size();currentComboIndex++){
+				// System.out.println(boardCombos.get(i).toString());
+				Combo currentCombo = boardCombos.get(currentComboIndex);
+				ArrayList<Lokum> currentCombosLokums = currentCombo.getComboLokums();
+				for(int currentCombosLokumIndex=0;currentCombosLokumIndex<currentCombosLokums.size();currentCombosLokumIndex++){
+					Lokum currentLokum = currentCombosLokums.get(currentCombosLokumIndex);
+					((ComboDestroyable) currentLokum).comboDestroy();
+				}
 			}
 		}
+		System.out.println("After Combo:");
+		System.out.println(toString(BL));
 	}
 }

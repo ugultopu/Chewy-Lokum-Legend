@@ -3,7 +3,7 @@ package App;
 import java.util.ArrayList;
 
 
-public abstract class Lokum extends LogicField{
+public abstract class Lokum extends LogicField implements ComboDestroyable{
 
 	private String lokumColor;
 	private ArrayList<Combo> combosThisLokumIn;
@@ -67,7 +67,7 @@ public abstract class Lokum extends LogicField{
 	 * combosThisLokumIn.
 	 * @param comboToAdd
 	 */
-	private void addComboToComboList(Combo comboToAdd){
+	public void addComboToComboList(Combo comboToAdd){
 		if(combosThisLokumIn.isEmpty())
 			combosThisLokumIn.add(comboToAdd);
 		else{
@@ -109,10 +109,37 @@ public abstract class Lokum extends LogicField{
 		/*
 		 * Some lokum references that may be used in the switch case below.
 		 */
-		Lokum leftLeftLokum = (Lokum) leftLokum.getLeftLogicField();
-		Lokum rightRightLokum = (Lokum) rightLokum.getRightLogicField();
-		Lokum aboveAboveLokum = (Lokum) aboveLokum.getAboveLogicField();
-		Lokum belowBelowLokum = (Lokum) belowLokum.getBelowLogicField();
+		Lokum leftLeftLokum;
+		Lokum rightRightLokum;
+		Lokum aboveAboveLokum;
+		Lokum belowBelowLokum;
+
+		if(leftLokum != null){
+			leftLeftLokum = (Lokum) leftLokum.getLeftLogicField();
+		}
+		else{
+			leftLeftLokum = null;
+		}
+		if(rightLokum != null){
+			rightRightLokum = (Lokum) rightLokum.getRightLogicField();
+		}
+		else{
+			rightRightLokum = null;
+		}
+		if(aboveLokum != null){
+			aboveAboveLokum = (Lokum) aboveLokum.getAboveLogicField();
+		}
+		else{
+			aboveAboveLokum = null;
+		}
+		if(belowLokum != null){
+			belowBelowLokum = (Lokum) belowLokum.getBelowLogicField();
+		}
+		else{
+			belowBelowLokum = null;
+		}
+		
+		Combo comboToAdd;
 		
 		switch(alc){
 		case 0x0:
@@ -186,28 +213,29 @@ public abstract class Lokum extends LogicField{
 				 */
 				comboLokums.add(0, belowBelowLokum); // insert belowBelowLokum to the beginning of this list.
 				comboLokums.add(aboveAboveLokum);	 // insert belowBelowLokum to the end of this list.
-				combosThisLokumIn.add(new FiveCombo(comboLokums));
+				comboToAdd = new FiveCombo(comboLokums);
 			}
 			/*
 			 * Check if the combo is 4V1. 
 			 */
 			else if(belowBelowLokum != null){
 				comboLokums.add(0, belowBelowLokum);
-				combosThisLokumIn.add(new FourCombo(comboLokums)); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
+				comboToAdd = new FourCombo(comboLokums); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
 			}
 			/*
 			 * Check if the combo is 4V2. 
 			 */
 			else if(aboveAboveLokum != null){
 				comboLokums.add(aboveAboveLokum);
-				combosThisLokumIn.add(new FourCombo(comboLokums)); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
+				comboToAdd = new FourCombo(comboLokums); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
 			}
 			else{
 				/*
 				 * If here, then no higher combos are available. So simply form the 3 combo and return.
 				 */
-				combosThisLokumIn.add(new ThreeCombo(comboLokums));
+				comboToAdd = new ThreeCombo(comboLokums);
 			}
+			comboToAdd.addComboToLokums();
 			break;
 		case 0x4:
 			/* Combination: 0100
@@ -247,7 +275,8 @@ public abstract class Lokum extends LogicField{
 				comboLokums.add(this);
 				comboLokums.add(rightLokum);
 				comboLokums.add(rightRightLokum);
-				combosThisLokumIn.add(new LCombo(comboLokums));	// CHECK THE CONSTRUCTOR OF THE LCombo!
+				comboToAdd = new LCombo(comboLokums);	// CHECK THE CONSTRUCTOR OF THE LCombo!
+				comboToAdd.addComboToLokums();
 			}
 			break;
 		case 0x6:
@@ -275,7 +304,8 @@ public abstract class Lokum extends LogicField{
 				comboLokums.add(this);
 				comboLokums.add(rightLokum);
 				comboLokums.add(rightRightLokum);
-				combosThisLokumIn.add(new LCombo(comboLokums));	// CHECK THE CONSTRUCTOR OF THE LCombo!
+				comboToAdd = new LCombo(comboLokums);	// CHECK THE CONSTRUCTOR OF THE LCombo!
+				comboToAdd.addComboToLokums();
 			}
 			break;
 		case 0x7:
@@ -311,7 +341,7 @@ public abstract class Lokum extends LogicField{
 				 */
 				comboLokums.add(0, belowBelowLokum); // insert belowBelowLokum to the beginning of this list.
 				comboLokums.add(aboveAboveLokum);	 // insert belowBelowLokum to the end of this list.
-				combosThisLokumIn.add(new FiveCombo(comboLokums));
+				comboToAdd = new FiveCombo(comboLokums);
 			}
 			/*
 			 * Check if the combo is some T shape. 
@@ -319,28 +349,29 @@ public abstract class Lokum extends LogicField{
 			else if(rightRightLokum != null){
 				comboLokums.add(rightLokum);
 				comboLokums.add(rightRightLokum);
-				combosThisLokumIn.add(new TCombo(comboLokums));
+				comboToAdd = new TCombo(comboLokums);	// CHECK CONSTRUCTOR OF TCombo.
 			}
 			/*
 			 * Check if the combo is 4V1. 
 			 */
 			else if(belowBelowLokum != null){
 				comboLokums.add(0, belowBelowLokum);
-				combosThisLokumIn.add(new FourCombo(comboLokums)); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
+				comboToAdd = new FourCombo(comboLokums); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
 			}
 			/*
 			 * Check if the combo is 4V2. 
 			 */
 			else if(aboveAboveLokum != null){
 				comboLokums.add(aboveAboveLokum);
-				combosThisLokumIn.add(new FourCombo(comboLokums)); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
+				comboToAdd = new FourCombo(comboLokums); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
 			}
 			else{
 				/*
 				 * If here, then no higher combos are available. So simply form the 3 combo and return.
 				 */
-				combosThisLokumIn.add(new ThreeCombo(comboLokums));
+				comboToAdd = new ThreeCombo(comboLokums);
 			}
+			comboToAdd.addComboToLokums();
 			break;
 		case 0x8:
 			/* Combination: 1000
@@ -380,7 +411,8 @@ public abstract class Lokum extends LogicField{
 				comboLokums.add(this);
 				comboLokums.add(belowLokum);
 				comboLokums.add(belowBelowLokum);
-				combosThisLokumIn.add(new LCombo(comboLokums));	// CHECK THE CONSTRUCTOR OF THE LCombo!
+				comboToAdd = new LCombo(comboLokums);	// CHECK THE CONSTRUCTOR OF THE LCombo!
+				comboToAdd.addComboToLokums();
 			}
 			break;
 		case 0xA:
@@ -408,7 +440,8 @@ public abstract class Lokum extends LogicField{
 				comboLokums.add(this);
 				comboLokums.add(aboveLokum);
 				comboLokums.add(aboveAboveLokum);
-				combosThisLokumIn.add(new LCombo(comboLokums));	// CHECK THE CONSTRUCTOR OF THE LCombo!
+				comboToAdd = new LCombo(comboLokums);	// CHECK THE CONSTRUCTOR OF THE LCombo!
+				comboToAdd.addComboToLokums();
 			}
 			break;
 		case 0xB:
@@ -444,7 +477,7 @@ public abstract class Lokum extends LogicField{
 				 */
 				comboLokums.add(0, belowBelowLokum); // insert belowBelowLokum to the beginning of this list.
 				comboLokums.add(aboveAboveLokum);	 // insert belowBelowLokum to the end of this list.
-				combosThisLokumIn.add(new FiveCombo(comboLokums));
+				comboToAdd = new FiveCombo(comboLokums);
 			}
 			/*
 			 * Check if the combo is some T shape. 
@@ -452,28 +485,29 @@ public abstract class Lokum extends LogicField{
 			else if(leftLeftLokum != null){
 				comboLokums.add(leftLokum);
 				comboLokums.add(leftLeftLokum);
-				combosThisLokumIn.add(new TCombo(comboLokums)); // CHECK CONSTRUCTOR OF TCombo.
+				comboToAdd = new TCombo(comboLokums); // CHECK CONSTRUCTOR OF TCombo.
 			}
 			/*
 			 * Check if the combo is 4V1. 
 			 */
 			else if(belowBelowLokum != null){
 				comboLokums.add(0, belowBelowLokum);
-				combosThisLokumIn.add(new FourCombo(comboLokums)); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
+				comboToAdd = new FourCombo(comboLokums); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
 			}
 			/*
 			 * Check if the combo is 4V2. 
 			 */
 			else if(aboveAboveLokum != null){
 				comboLokums.add(aboveAboveLokum);
-				combosThisLokumIn.add(new FourCombo(comboLokums)); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
+				comboToAdd = new FourCombo(comboLokums); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
 			}
 			else{
 				/*
 				 * If here, then no higher combos are available. So simply form the 3 combo and return.
 				 */
-				combosThisLokumIn.add(new ThreeCombo(comboLokums));
+				comboToAdd = new ThreeCombo(comboLokums);
 			}
+			comboToAdd.addComboToLokums();
 			break;
 		case 0xC:
 			/* Combination: 1100
@@ -507,28 +541,29 @@ public abstract class Lokum extends LogicField{
 				 */
 				comboLokums.add(0, leftLeftLokum); // insert belowBelowLokum to the beginning of this list.
 				comboLokums.add(rightRightLokum);	 // insert belowBelowLokum to the end of this list.
-				combosThisLokumIn.add(new FiveCombo(comboLokums));
+				comboToAdd = new FiveCombo(comboLokums);
 			}
 			/*
 			 * Check if the combo is 4V1. 
 			 */
 			else if(leftLeftLokum != null){
 				comboLokums.add(0, leftLeftLokum);
-				combosThisLokumIn.add(new FourCombo(comboLokums)); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
+				comboToAdd = new FourCombo(comboLokums); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
 			}
 			/*
 			 * Check if the combo is 4V2. 
 			 */
 			else if(rightRightLokum!= null){
 				comboLokums.add(rightRightLokum);
-				combosThisLokumIn.add(new FourCombo(comboLokums)); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
+				comboToAdd = new FourCombo(comboLokums); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
 			}
 			else{
 				/*
 				 * If here, then no higher combos are available. So simply form the 3 combo and return.
 				 */
-				combosThisLokumIn.add(new ThreeCombo(comboLokums));
+				comboToAdd = new ThreeCombo(comboLokums); 
 			}
+			comboToAdd.addComboToLokums();
 			break;
 		case 0xD:
 			/* Combination: 1101
@@ -563,7 +598,7 @@ public abstract class Lokum extends LogicField{
 				 */
 				comboLokums.add(0, leftLeftLokum); // insert belowBelowLokum to the beginning of this list.
 				comboLokums.add(rightRightLokum);	 // insert belowBelowLokum to the end of this list.
-				combosThisLokumIn.add(new FiveCombo(comboLokums));
+				comboToAdd = new FiveCombo(comboLokums);
 			}
 			/*
 			 * Check if the combo is some T shape. 
@@ -571,28 +606,29 @@ public abstract class Lokum extends LogicField{
 			else if(belowBelowLokum != null){
 				comboLokums.add(belowLokum);
 				comboLokums.add(belowBelowLokum);
-				combosThisLokumIn.add(new TCombo(comboLokums)); //CHECK CONSTRUCTOR OF TCombo.
+				comboToAdd = new TCombo(comboLokums); //CHECK CONSTRUCTOR OF TCombo.
 			}
 			/*
 			 * Check if the combo is 4V1. 
 			 */
 			else if(leftLeftLokum != null){
 				comboLokums.add(0, leftLeftLokum);
-				combosThisLokumIn.add(new FourCombo(comboLokums)); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
+				comboToAdd = new FourCombo(comboLokums); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
 			}
 			/*
 			 * Check if the combo is 4V2. 
 			 */
 			else if(rightRightLokum!= null){
 				comboLokums.add(rightRightLokum);
-				combosThisLokumIn.add(new FourCombo(comboLokums)); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
+				comboToAdd = new FourCombo(comboLokums); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
 			}
 			else{
 				/*
 				 * If here, then no higher combos are available. So simply form the 3 combo and return.
 				 */
-				combosThisLokumIn.add(new ThreeCombo(comboLokums));
+				comboToAdd = new ThreeCombo(comboLokums); 
 			}
+			comboToAdd.addComboToLokums();
 			break;
 		case 0xE:
 			/* Combination: 1110
@@ -627,7 +663,7 @@ public abstract class Lokum extends LogicField{
 				 */
 				comboLokums.add(0, leftLeftLokum); // insert belowBelowLokum to the beginning of this list.
 				comboLokums.add(rightRightLokum);	 // insert belowBelowLokum to the end of this list.
-				combosThisLokumIn.add(new FiveCombo(comboLokums));
+				comboToAdd = new FiveCombo(comboLokums);
 			}
 			/*
 			 * Check if the combo is some T shape. 
@@ -635,28 +671,29 @@ public abstract class Lokum extends LogicField{
 			else if(aboveAboveLokum != null){
 				comboLokums.add(aboveLokum);
 				comboLokums.add(aboveAboveLokum);
-				combosThisLokumIn.add(new TCombo(comboLokums)); //CHECK CONSTRUCTOR OF TCombo.
+				comboToAdd = new TCombo(comboLokums); //CHECK CONSTRUCTOR OF TCombo.
 			}
 			/*
 			 * Check if the combo is 4V1. 
 			 */
 			else if(leftLeftLokum != null){
 				comboLokums.add(0, leftLeftLokum);
-				combosThisLokumIn.add(new FourCombo(comboLokums)); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
+				comboToAdd = new FourCombo(comboLokums); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
 			}
 			/*
 			 * Check if the combo is 4V2. 
 			 */
 			else if(rightRightLokum!= null){
 				comboLokums.add(rightRightLokum);
-				combosThisLokumIn.add(new FourCombo(comboLokums)); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
+				comboToAdd = new FourCombo(comboLokums); // NEED TO INDICATE THE FOUR COMBO TYPE.(horizontal OR vertical)
 			}
 			else{
 				/*
 				 * If here, then no higher combos are available. So simply form the 3 combo and return.
 				 */
-				combosThisLokumIn.add(new ThreeCombo(comboLokums));
+				comboToAdd = new ThreeCombo(comboLokums); 
 			}
+			comboToAdd.addComboToLokums();
 			break;
 		case 0xF:
 			/* Combination: 1111
@@ -680,25 +717,27 @@ public abstract class Lokum extends LogicField{
 				comboLokums.add(this);
 				comboLokums.add(rightLokum);
 				comboLokums.add(rightRightLokum);
-				combosThisLokumIn.add(new FiveCombo(comboLokums));
+				comboToAdd = new FiveCombo(comboLokums);
+				comboToAdd.addComboToLokums();
+				comboLokums.clear();
 			}
-			comboLokums.clear();
 			if( (aboveAboveLokum != null) && (belowBelowLokum != null) ){
 				comboLokums.add(aboveAboveLokum);
 				comboLokums.add(aboveLokum);
 				comboLokums.add(this);
 				comboLokums.add(belowLokum);
 				comboLokums.add(belowBelowLokum);
-				combosThisLokumIn.add(new FiveCombo(comboLokums));
+				comboToAdd = new FiveCombo(comboLokums);
 			}
-			else if( (leftLeftLokum == null) || (rightRightLokum == null) ){
+			else{
 				comboLokums.add(leftLokum);
-				comboLokums.add(aboveLokum);
 				comboLokums.add(this);
-				comboLokums.add(rightLokum);
+				comboLokums.add(aboveLokum);
 				comboLokums.add(belowLokum);
-				combosThisLokumIn.add(new TCombo(comboLokums));	//CHECK THE DEFINITION OF TCombo!
+				comboLokums.add(rightLokum);
+				comboToAdd = new TCombo(comboLokums); //CHECK THE DEFINITION OF TCombo!
 			}
+			comboToAdd.addComboToLokums();
 			break;
 		}
 	}

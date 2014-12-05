@@ -21,6 +21,24 @@ public class Factory {
 		}
 	}
 	
+	public static Lokum createLokum(int x, int y, String type, String color){
+		switch (type){
+			case "NormalLokum":
+				return new NormalLokum(x, y, color);
+			case "VerticalStripedLokum":
+				return new VerticalStripedLokum(x, y, color);
+			case "HorizontalStripedLokum":
+				return new HorizontalStripedLokum(x, y, color);
+			case "WrappedLokum":
+				return new WrappedLokum(x, y, color);
+			case "BombLokum":
+				return new BombLokum(x, y);
+			default:
+				System.out.println("Not a lokum type.");
+				return null;
+		}
+	}
+	
 	public static int generateRandomNumber(){
 		Random randomGenerator = new Random();
 		int randomNumber = randomGenerator.nextInt(4);

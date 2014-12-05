@@ -22,8 +22,6 @@ public class GamePanel extends JPanel {
 	private GamePanel() {
 		super();
 		
-		EventDispatchQueue.resetInstance();
-		
 		new Thread(new Runnable(){
 
 			public void run() {
@@ -46,11 +44,13 @@ public class GamePanel extends JPanel {
 				Constants.INFORMATION_BOARD_WIDTH,Constants.INFORMATION_BOARD_HEIGHT);
 		
 		add(GameBoard.getInstance());
-//		gameBoard.setBounds(40, 60, 600, 540);
+		GameBoard.getInstance().setBounds(40, 60, Constants.ANIMATION_WINDOW_WIDTH, Constants.ANIMATION_WINDOW_HEIGHT);
 				
 	}
 
 	public void startGame(){
+		System.out.println("Game Started!");
+		BoardLogic.getInstance().readjustAfterInitialize();
 		running=true;
 	}
 	
@@ -74,6 +74,7 @@ public class GamePanel extends JPanel {
 	
 	private void gameUpdate(){
 		if(!EventDispatchQueue.getInstance().isEmpty()){
+			System.out.println("Event happened");
 			EventDispatchQueue.getInstance().getEvent().executeEvent();
 		}
 	}
@@ -95,12 +96,9 @@ public class GamePanel extends JPanel {
 		g.setColor(Constants.GAME_BACKGROUND_COLOR);
 		g.fillRect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 		g.setColor(new Color(0,0,0));
-		g.fillRect(30,50, Constants.ANIMATION_WINDOW_WIDTH, Constants.ANIMATION_WINDOW_HEIGHT);
-		g.fillRect(750, 160, Constants.INFORMATION_BOARD_WIDTH, Constants.INFORMATION_BOARD_HEIGHT);
     	
-    	
+		GameBoard.getInstance().repaint();    	
     	InformationBoard.getInstance().repaint();
-		GameBoard.getInstance().repaint();
 	}
 
 }

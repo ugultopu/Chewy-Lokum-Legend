@@ -10,8 +10,10 @@ public class TCombo extends Combo{
 	public TCombo(ArrayList<Lokum> lokums){
 		this.lokums = lokums;
 		generateLokum();
-		test = new TComboTest();
+		//test = new TComboTest();
 		this.comboPriority = 3;
+		Score.getInstance().scoreUpdateWrappedForm();
+		Score.getInstance().setUpdated(true);
 	}
 	
 	public Lokum getGeneratedLokum(){

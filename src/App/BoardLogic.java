@@ -21,11 +21,8 @@ public class BoardLogic {
 	 * CHECK!
 	 */
 	public static BoardLogic getInstance(){
-		if(instance == null){
+		if(instance == null)
 			instance = new BoardLogic();
-
-
-		}
 		return instance;
 	}
 
@@ -48,9 +45,6 @@ public class BoardLogic {
 				lokumArray[i][j] = (Lokum)logicFields[i][j];			
 			}
 		}
-		LogicField[][] copyLogicFields = logicFields;
-		NewBoardEvent newBoardEvent = new NewBoardEvent(copyLogicFields);
-		EventDispatchQueue.getInstance().addEvent(newBoardEvent);
 		return lokumArray;
 	}
 
@@ -72,8 +66,10 @@ public class BoardLogic {
 		logicFields[lf.getRowIndex()][lf.getColumnIndex()] = lf;
 	}
 
-	
-	private void findBoardCombos(){
+
+
+	public ArrayList<Combo> findBoardCombos(){
+
 		/*
 		 * Clear current board combos before beginning a new search.
 		 */
@@ -110,28 +106,48 @@ public class BoardLogic {
 		for(int i=0;i<combosAsObjectArray.length;i++){
 			boardCombos.add((Combo) combosAsObjectArray[i]);
 		}
+		return this.boardCombos;
 	}
 
 	private BoardLogic(){
 		this.rowSize = Constants.BOARD_WIDTH;
 		this.columnSize= Constants.BOARD_HEIGHT;
 		logicFields = new LogicField[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
+		boardCombos = new ArrayList<Combo>();
 		initializeBoard();	// initializes the board to all EmptyLogicField objects.
 		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
+		NewBoardEvent newBoardEvent = new NewBoardEvent(copyLogicFieldArray());
+		EventDispatchQueue.getInstance().addEvent(newBoardEvent);
+		this.boardCombos = new ArrayList<Combo>();
 	}
-
-	private BoardLogic(int rowSize, int columnSize){
-		this.rowSize = rowSize;
-		this.columnSize= columnSize;
-		logicFields = new LogicField[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
-		initializeBoard();	// initializes the board to all EmptyLogicField objects.
-		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
-
-	}
-
+	
+	
+	/**
+	 * This method firstly populates the board with random lokums. Then, it checks the board
+	 * to observe if there are any combos in it. If there are, it destroys them and refills
+	 * the board. If there are still combos, this operation is iterated until there are no
+	 * combos left.
+	 */
 	private void initializeBoard(){
 		for(int i=0;i<columnSize;i++)
 			initializeColumn(i);
+	}
+	
+	void readjustAfterInitialize(){
+		destroyCombos();
+		readjustBoardAfterDestroy();
+	}
+	
+	private void destroyCombos(){
+		findBoardCombos();
+		for(int currentComboIndex=0;currentComboIndex<boardCombos.size();currentComboIndex++){
+			Combo currentCombo = boardCombos.get(currentComboIndex);
+			ArrayList<Lokum> currentComboLokums = currentCombo.getComboLokums();
+			for(int currentComboLokumIndex=0;currentComboLokumIndex<currentComboLokums.size();currentComboLokumIndex++){
+				Lokum currentCombosCurrentLokum = currentComboLokums.get(currentComboLokumIndex);
+				currentCombosCurrentLokum.comboDestroy();
+			}
+		}
 	}
 
 	private void initializeColumn(int columnIndex){
@@ -171,12 +187,15 @@ public class BoardLogic {
 		levelBoard(fallingLogicFields);
 		populateAfterDestroy(fallingLogicFields);
 		GameEvent fallingLokumsEvent = new FallingLokumsEvent(fallingLogicFields);
+		EventDispatchQueue.getInstance().addEvent(fallingLokumsEvent);
 		// send fallingLogicFields to Kugi.
 		/*
 		 * If board is not yet stabilized, call the method again.
 		 */
-		if ( !isBoardStabilized() )
+		if ( !isBoardStabilized() ){
+			destroyCombos();
 			readjustBoardAfterDestroy();
+		}
 	}
 
 	/**
@@ -219,6 +238,8 @@ public class BoardLogic {
 		while(logicFields[currentRowIndex][columnIndex] instanceof EmptyLogicField){
 			dropCounter++;
 			currentRowIndex++;
+			if(currentRowIndex == rowSize)
+				break;
 		}
 		for(int i=rowIndex;i<rowSize-dropCounter;i++){
 			/*
@@ -258,6 +279,8 @@ public class BoardLogic {
 		while(logicFields[currentRowIndex][columnIndex] instanceof EmptyLogicField){
 			emptyLocationCounter++;
 			currentRowIndex--;
+			if(currentRowIndex == 0)
+				break;
 		}
 		for(int i=0;i<emptyLocationCounter;i++){
 			logicFields[rowSize - emptyLocationCounter + i][columnIndex]
@@ -380,7 +403,7 @@ public class BoardLogic {
 		introduceLogicField(f0);
 		introduceLogicField(f1);
 	}
-	
+
 	/**
 	 * @requires:
 	 * R.0 Either of the arguments is instanceof MergeDestroyable.
@@ -408,7 +431,7 @@ public class BoardLogic {
 			return false;
 		return true;
 	}
-	
+
 	private boolean locationsSuitableForSwap(LogicField f0, LogicField f1){
 		/*
 		 * NOTE: This checker allows swapping of the same lokums (That is: Arguments pointing to the exact same object.). Check if that would cause a problem. 
@@ -434,13 +457,13 @@ public class BoardLogic {
 		else
 			return null;
 	}
-	
+
 	private boolean isRowIndexInBoundaries(int rowIndex){
 		if( (rowIndex >= 0) && (rowIndex < this.rowSize) )
 			return true;
 		return false;
 	}
-	
+
 	private boolean isColumnIndexInBoundaries(int columnIndex){
 		if( (columnIndex >= 0) && (columnIndex < this.columnSize) )
 			return true;
@@ -448,6 +471,7 @@ public class BoardLogic {
 	}
 
 	public boolean isBoardStabilized(){
+		findBoardCombos();
 		return ( boardCombos.size() == 0 ) ;
 	}
 
@@ -459,7 +483,7 @@ public class BoardLogic {
 		LogicField currentNorthLogicField;
 		LogicField currentNorthEastLogicField;
 		LogicField currentEastLogicField;
-		
+
 		for(currentRowIndex=0;currentRowIndex<rowSize;currentRowIndex++){
 			for(currentColumnIndex=0;currentColumnIndex<columnSize;currentColumnIndex++){
 
@@ -468,7 +492,7 @@ public class BoardLogic {
 				currentNorthLogicField = getLogicFieldAt(currentRowIndex + 1, currentColumnIndex);
 				currentNorthEastLogicField = getLogicFieldAt(currentRowIndex + 1, currentColumnIndex + 1);
 				currentEastLogicField = getLogicFieldAt(currentRowIndex, currentColumnIndex + 1);
-				
+
 				if(isSwapPossible(currentLogicField, currentNorthWestLogicField)){
 					locationSwap(currentLogicField, currentNorthWestLogicField);
 					findBoardCombos();
@@ -476,7 +500,7 @@ public class BoardLogic {
 					if(boardCombos.size() != 0)
 						return true;
 				}
-				
+
 				if(isSwapPossible(currentLogicField, currentNorthLogicField)){
 					locationSwap(currentLogicField, currentNorthLogicField);
 					findBoardCombos();
@@ -484,7 +508,7 @@ public class BoardLogic {
 					if(boardCombos.size() != 0)
 						return true;
 				}
-				
+
 				if(isSwapPossible(currentLogicField, currentNorthEastLogicField)){
 					locationSwap(currentLogicField, currentNorthEastLogicField);
 					findBoardCombos();
@@ -492,7 +516,7 @@ public class BoardLogic {
 					if(boardCombos.size() != 0)
 						return true;
 				}
-				
+
 				if(isSwapPossible(currentLogicField, currentEastLogicField)){
 					locationSwap(currentLogicField, currentEastLogicField);
 					findBoardCombos();
@@ -503,10 +527,6 @@ public class BoardLogic {
 			}
 		}
 		return false;
-	}
-
-	private void scoreUpdate(Combo combo){
-
 	}
 
 	/**
@@ -537,12 +557,13 @@ public class BoardLogic {
 		swap(logicFields[selectedRow][selectedColumn], logicFields[selectedRow][selectedColumn]);
 	}
 
-	private ArrayList<LogicField> copyLogicFieldList(ArrayList<LogicField> logicFields){
-		ArrayList<LogicField> copyLogicFields = new ArrayList<LogicField>();
-		for(LogicField logicField: logicFields)
-			copyLogicFields.add(logicField.copyLogicField());
+	private LogicField[][] copyLogicFieldArray(){
+		LogicField[][] copyLogicFields = new LogicField[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
+		for(int i=0; i<logicFields.length; i++)
+			for(int j=0; j<logicFields[i].length;j++)
+				copyLogicFields[i][j] = logicFields[i][j].copyLogicField();
 
-		return logicFields;
+		return copyLogicFields;
 	}
 
 	private ArrayList<EmptyLogicField> convertLogicFieldListToEmptyLogicFieldList(ArrayList<LogicField> logicFields){

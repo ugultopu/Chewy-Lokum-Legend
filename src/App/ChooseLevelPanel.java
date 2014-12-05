@@ -9,48 +9,28 @@ import javax.swing.*;
 
 public class ChooseLevelPanel extends JPanel {
 	
-	private JLabel label;
+	private JLabel chooseLevel;
 	private static ChooseLevelPanel instance;
 	private int numberOfLevels;
 	
 	private ChooseLevelPanel() {
 		
-		label = new JLabel("Choose Level",JLabel.CENTER);
-		label.setFont(new Font("Tahoma", Font.BOLD, 30));
-		label.setForeground(Constants.TITLE_COLOR);
-		numberOfLevels = 15;		
+		chooseLevel = new JLabel("Choose Level",JLabel.CENTER);
+		chooseLevel.setFont(new Font("Tahoma", Font.BOLD, 40));
+		chooseLevel.setForeground(Constants.TITLE_COLOR);
+		numberOfLevels = 20;		
 
-		setLayout(new GridBagLayout());
+		setLayout(null);
 		setBackground(Constants.GAME_BACKGROUND_COLOR);
 		setSize(Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
 		
-		GridBagConstraints c = new GridBagConstraints();
-
-		c.gridx= 0;
-		c.gridy= 0;
-		c.insets = new Insets(30,30,30,30);		
-//		add(label, c);
+		add(chooseLevel);
+		chooseLevel.setBounds(0, 50, Constants.SCREEN_WIDTH, 120);
+		chooseLevel.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		int counterX = 0;
-		int counterY = 0;
-		
-		for(int n=0;n<numberOfLevels;n++){
-			
-			if(n%4 == 0){
-				counterX=0;
-				counterY++;
-			}
-			
-			c.gridx= counterX;
-			c.gridy= counterY;
-			
-			JButton newButton = new JButton("Level " + (n + 1));
-			add(newButton,c);
-			
-//			add ActionListeners
-			
-			counterX++;
-		}
+		add(LevelBoard.getInstance());
+		LevelBoard.getInstance().setBounds(0,100, 
+				Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT-120);
 	}
 	
 	public static ChooseLevelPanel getInstance(){
