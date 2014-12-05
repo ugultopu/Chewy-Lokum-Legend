@@ -30,31 +30,21 @@ public class GameOverPanel extends JPanel{
 		setLayout(null);
 		setBackground(Color.RED);
 
-		if (win==true){
 			add(victory);
 			victory.setBounds(80, 100, 200, 60);
 			victory.setForeground(Color.BLACK);
 			victory.setFont(new Font("Tahoma", Font.BOLD, 40));
 			victory.setHorizontalAlignment(SwingConstants.CENTER);
 
-			add(nextLevel);
-			nextLevel.setBounds(20, 250, 150, 50);
-			nextLevel.setBorderPainted(false);
-			nextLevel.setFocusPainted(false);
-		}
-
-		if (win==false){
 			add(gameOver);
 			gameOver.setBounds(80, 100, 200, 60);
 			gameOver.setForeground(Color.BLACK);
 			gameOver.setFont(new Font("Tahoma", Font.BOLD, 30));
 			gameOver.setHorizontalAlignment(SwingConstants.CENTER);
-
+			
+			add(nextLevel);
+			
 			add(replay);
-			replay.setBounds(20, 250, 150, 50);
-			replay.setBorderPainted(false);
-			replay.setFocusPainted(false);
-		}
 
 		add(mainMenu);
 		mainMenu.setBounds(190, 250, 150, 50);
@@ -171,16 +161,23 @@ public class GameOverPanel extends JPanel{
 		g.fillRect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 		g.setColor(new Color(0,0,0));
 		
+		if(win==true){
 		victory.repaint();
 		victory.setOpaque(true);
 		victory.setBackground(Color.RED);
-		
+		nextLevel.setBounds(20, 250, 150, 50);
+		nextLevel.setBorderPainted(false);
+		nextLevel.setFocusPainted(false);
+		nextLevel.repaint();
+		} else {
 		gameOver.repaint();
 		gameOver.setOpaque(true);
 		gameOver.setBackground(Color.RED);
-		
-		nextLevel.repaint();
+		replay.setBounds(20, 250, 150, 50);
+		replay.setBorderPainted(false);
+		replay.setFocusPainted(false);
 		replay.repaint();
+		}
 		mainMenu.repaint();
 	}
 }

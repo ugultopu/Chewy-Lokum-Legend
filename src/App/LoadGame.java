@@ -82,10 +82,7 @@ public class LoadGame {
 			System.out.println("The save.xml format is incorrect!");
 			return false;
 		}
-		
 		return true;
-		
-		
 	}
 	
 	
