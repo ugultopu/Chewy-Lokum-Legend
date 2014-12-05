@@ -77,7 +77,7 @@ public class GamePanel extends JPanel {
 //		
 //		gameOverPanel.setBounds(40, 60, 360, 540);
 //		add(gameOverPanel);
-		gameOverPanel.repaint();
+//		gameOverPanel.repaint();
 	}
 		
 //	private void scoreUpdate(){

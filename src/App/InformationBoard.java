@@ -11,20 +11,21 @@ public class InformationBoard extends JPanel {
 	private JLabel level,target,score,movesLeft,levelInput,targetInput,scoreInput,movesLeftInput;
 	private JButton saveButton;
 	private int currentScore;
-	private int goalScore;
+	private int goalScore = 30000;
 	private int currentLevel;
+	private int moves=20;
 	private static InformationBoard instance;
 
 	public InformationBoard(){
 		
 		level = new JLabel("Level");
-		target = new JLabel("Lines");
+		target = new JLabel("Target");
 		score = new JLabel("Score");
 		movesLeft = new JLabel("Moves");
 		levelInput = new JLabel("");
-		targetInput = new JLabel("0");
-		scoreInput = new JLabel("0");
-		movesLeftInput = new JLabel("0");
+		targetInput = new JLabel(""+goalScore);
+		scoreInput = new JLabel(""+currentScore);
+		movesLeftInput = new JLabel(""+moves);
 		saveButton = new JButton("Save Game");
 		
 		setLayout(null);
@@ -133,6 +134,7 @@ public class InformationBoard extends JPanel {
 	}
 
 	public void updateScore(int currentScore) {
+		this.currentScore = currentScore;
 		scoreInput.setText(""+currentScore);
 	}
 	
@@ -142,5 +144,14 @@ public class InformationBoard extends JPanel {
 	
 	public int getCurrentLevel(){
 		return Integer.parseInt(levelInput.getText());
+	}
+	
+	public void decreaseMoves(){
+		this.moves--;
+		movesLeftInput.setText(""+moves);
+	}
+	
+	public int getCurrentScore(){
+		return this.currentScore;
 	}
 }
