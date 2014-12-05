@@ -1,5 +1,6 @@
 package App;
 
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -29,18 +30,18 @@ public class GameOverPanel extends JPanel{
 		setLayout(null);
 		setBackground(Color.RED);
 
-//		if (win==true){
-//			add(victory);
-//			victory.setBounds(80, 100, 200, 60);
-//			victory.setForeground(Color.BLACK);
-//			victory.setFont(new Font("Tahoma", Font.BOLD, 40));
-//			victory.setHorizontalAlignment(SwingConstants.CENTER);
-//
-//			add(nextLevel);
-//			nextLevel.setBounds(20, 250, 150, 50);
-//			nextLevel.setBorderPainted(false);
-//			nextLevel.setFocusPainted(false);
-//		}
+		if (win==true){
+			add(victory);
+			victory.setBounds(80, 100, 200, 60);
+			victory.setForeground(Color.BLACK);
+			victory.setFont(new Font("Tahoma", Font.BOLD, 40));
+			victory.setHorizontalAlignment(SwingConstants.CENTER);
+
+			add(nextLevel);
+			nextLevel.setBounds(20, 250, 150, 50);
+			nextLevel.setBorderPainted(false);
+			nextLevel.setFocusPainted(false);
+		}
 
 		if (win==false){
 			add(gameOver);
@@ -64,24 +65,30 @@ public class GameOverPanel extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+												
+				int level = InformationBoard.getInstance().getCurrentLevel();
+				ApplicationWindow.removePanel(GamePanel.getInstance());
+				InformationBoard.getInstance().repaint();
 				GamePanel.resetInstance();
 				GameBoard.resetInstance();
-				InformationBoard.resetInstance();
 				BoardLogic.resetInstance();
-				Score.getInstance().setScore(0);
-//				InformationBoard.getInstance().setCurrentLevel(InformationBoard.getInstance().getCurrentLevel());				
-				
+				InformationBoard.resetInstance();
+				InformationBoard.getInstance().repaint();
+				ApplicationWindow.addPanel(GamePanel.getInstance());
 				GamePanel.getInstance().remove(GameOverPanel.getInstance());
 				GamePanel.getInstance().remove(InformationBoard.getInstance());
 				
 				GamePanel.getInstance().add(GameBoard.getInstance());
 				GamePanel.getInstance().add(InformationBoard.getInstance());
 				
-				GamePanel.getInstance().repaint();
+				InformationBoard.getInstance().setCurrentLevel(level);
+
+				Score.getInstance().setScore(0);
+				
 				GamePanel.getInstance().requestFocusInWindow();
 				GamePanel.getInstance().startGame();
-				GamePanel.getInstance().repaint();
-				
+				GameBoard.getInstance().repaint();
+				InformationBoard.getInstance().repaint();
 			}
 
 		});
@@ -90,14 +97,29 @@ public class GameOverPanel extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				InformationBoard.getInstance().setCurrentLevel(InformationBoard.getInstance().getCurrentLevel()+1);
+				int level = InformationBoard.getInstance().getCurrentLevel();
 				ApplicationWindow.removePanel(GamePanel.getInstance());
-				ApplicationWindow.addPanel(GamePanel.getInstance());
+				InformationBoard.getInstance().repaint();
+				GamePanel.resetInstance();
+				GameBoard.resetInstance();
 				BoardLogic.resetInstance();
+				InformationBoard.resetInstance();
+				InformationBoard.getInstance().repaint();
+				ApplicationWindow.addPanel(GamePanel.getInstance());
+				GamePanel.getInstance().remove(GameOverPanel.getInstance());
+				GamePanel.getInstance().remove(InformationBoard.getInstance());
+				
+				GamePanel.getInstance().add(GameBoard.getInstance());
+				GamePanel.getInstance().add(InformationBoard.getInstance());
+				
+				InformationBoard.getInstance().setCurrentLevel(level+1);
+
+				Score.getInstance().setScore(0);
+				
 				GamePanel.getInstance().requestFocusInWindow();
 				GamePanel.getInstance().startGame();
-				GamePanel.getInstance().repaint();
-				
+				GameBoard.getInstance().repaint();
+				InformationBoard.getInstance().repaint();
 			}
 
 		});
