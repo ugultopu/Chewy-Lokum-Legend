@@ -14,6 +14,7 @@ public class GameOverPanel extends JPanel{
 
 	private JLabel gameOver,victory;
 	private JButton replay, nextLevel, mainMenu;
+	private boolean win;
 
 	public GameOverPanel(){
 
@@ -22,8 +23,8 @@ public class GameOverPanel extends JPanel{
 		nextLevel = new JButton("Next Level");
 		replay = new JButton("Replay");
 		mainMenu= new JButton("Main Menu");
-		
-		if (win...){
+
+		if (win==true){
 			add(victory);
 			victory.setBounds(0, 50, 360, 60);
 			victory.setForeground(Color.BLACK);
@@ -35,8 +36,8 @@ public class GameOverPanel extends JPanel{
 			nextLevel.setBorderPainted(false);
 			nextLevel.setFocusPainted(false);
 		}
-		
-		if (lose...){
+
+		if (win==false){
 			add(gameOver);
 			gameOver.setBounds(0, 50, 360, 60);
 			gameOver.setForeground(Color.BLACK);
@@ -48,7 +49,7 @@ public class GameOverPanel extends JPanel{
 			replay.setBorderPainted(false);
 			replay.setFocusPainted(false);
 		}
-		
+
 		add(mainMenu);
 		mainMenu.setBounds(190, 200, 130, 50);
 		mainMenu.setBorderPainted(false);
@@ -67,7 +68,7 @@ public class GameOverPanel extends JPanel{
 			}
 
 		});
-		
+
 		nextLevel.addActionListener(new ActionListener(){
 
 			@Override
@@ -82,7 +83,7 @@ public class GameOverPanel extends JPanel{
 
 		});
 
-		
+
 		mainMenu.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -93,5 +94,12 @@ public class GameOverPanel extends JPanel{
 		});
 
 		repaint();
+	}
+
+	public void setWin(boolean result){
+		if(result==true)
+		this.win=true;
+		else
+		this.win=false;
 	}
 }
