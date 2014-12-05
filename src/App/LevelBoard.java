@@ -10,6 +10,7 @@ import javax.swing.*;
 public class LevelBoard extends JPanel {
 
 	private JLabel label;
+	private JButton[] buttonArray;
 	private static LevelBoard instance;
 	private int numberOfLevels = Constants.NUMBER_OF_LEVELS;
 
@@ -27,7 +28,9 @@ public class LevelBoard extends JPanel {
 
 		int counterX = 0;
 		int counterY = 0;
-
+		
+		buttonArray = new JButton[numberOfLevels];
+		
 		for(int n=0;n<numberOfLevels;n++){
 
 			if(n%Constants.NUMBER_OF_COLUMNS == 0){
@@ -38,15 +41,15 @@ public class LevelBoard extends JPanel {
 			c.gridx= counterX;
 			c.gridy= counterY;
 
-			JButton newButton = new JButton("Level " + (n + 1));
-			add(newButton,c);
+			buttonArray[n] = new JButton("Level " + (n + 1));
+			add(buttonArray[n],c);
 			counterX++;
-			
-			newButton.addActionListener(new ActionListener(){
+			int level = n;
+			buttonArray[n].addActionListener(new ActionListener(){
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-//				ADD LEVEL INFORMATION	
+					InformationBoard.getInstance().setCurrentLevel(level+1);
 					ApplicationWindow.removePanel(ChooseLevelPanel.getInstance());
 					ApplicationWindow.addPanel(GamePanel.getInstance());
 					GameBoard.getInstance().requestFocusInWindow();
