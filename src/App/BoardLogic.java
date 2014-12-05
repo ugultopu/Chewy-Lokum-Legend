@@ -155,7 +155,6 @@ public class BoardLogic {
 		destroyCombos();
 		readjustBoardAfterDestroy();
 		Score.getInstance().setScore(0);
-		InformationBoard.getInstance().setCurrentScore(0);
 	}
 	
 	private void destroyCombos(){

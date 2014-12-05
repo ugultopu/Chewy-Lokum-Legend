@@ -78,5 +78,4 @@ public class Score {
 	public void setScore(int currentScore) {
 		this.currentScore = currentScore;
 	}
-	
 }
