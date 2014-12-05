@@ -455,7 +455,9 @@ public class BoardLogic {
 	 * R.0 ( f0 instanceof SwappableLogicField ) && ( f1 instanceof SwappableLogicField ) 
 	 */
 	private boolean isMergeSwap(LogicField f0, LogicField f1){
-		if ( ( f0 instanceof MergeDestroyable ) || ( f1 instanceof MergeDestroyable ) )
+		if ( ( f0 instanceof MergeDestroyable ) && ( f1 instanceof MergeDestroyable ) )
+			return true;
+		if( ( f0 instanceof BombLokum ) || ( f1 instanceof BombLokum ) )
 			return true;
 		return false;
 	}

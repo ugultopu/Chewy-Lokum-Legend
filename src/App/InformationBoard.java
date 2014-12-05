@@ -136,22 +136,43 @@ public class InformationBoard extends JPanel {
 	public void updateScore(int currentScore) {
 		this.currentScore = currentScore;
 		scoreInput.setText(""+currentScore);
-	}
-	
-	public void setCurrentLevel(int currentLevel){
-		levelInput.setText(""+currentLevel);
-	}	
-	
-	public int getCurrentLevel(){
-		return Integer.parseInt(levelInput.getText());
+		if(this.currentScore==this.goalScore || this.currentScore>this.goalScore){
+			GameOverPanel.getInstance().setWin(true);
+			GamePanel.getInstance().endGame();			
+		}
 	}
 	
 	public void decreaseMoves(){
 		this.moves--;
 		movesLeftInput.setText(""+moves);
+		if(moves==0){
+			GameOverPanel.getInstance().setWin(false);
+			GamePanel.getInstance().endGame();			
+		}
+	}
+	
+	public void setCurrentLevel(int currentLevel){
+		levelInput.setText(""+currentLevel);
+	}
+	
+	public int getCurrentLevel(){
+		return Integer.parseInt(levelInput.getText());
+	}
+	
+	public void setCurrentScore(int currentScore){
+		this.currentScore = currentScore;
 	}
 	
 	public int getCurrentScore(){
 		return this.currentScore;
 	}
+	
+	public void setMovesLeft(int moves){
+		this.moves = moves;
+	}
+	
+	public int getMovesLeft(){
+		return this.moves;
+	}
+	
 }
