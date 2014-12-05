@@ -15,12 +15,12 @@ public class ClickListener implements MouseListener {
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("clicked");
+		//System.out.println("clicked");
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		System.out.println("pressed");
+		//System.out.println("pressed");
 		if(active){
 			if(selectedRow == null && selectedColumn == null){
 				selectedRow = convertToRowIndex(e.getY());

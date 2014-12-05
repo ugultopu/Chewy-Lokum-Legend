@@ -217,6 +217,7 @@ public class BoardLogic {
 		EventDispatchQueue.getInstance().addEvent(fallingLokumsEvent);
 		NewBoardEvent newBoardEvent = new NewBoardEvent(copyLogicFieldArray());
 		EventDispatchQueue.getInstance().addEvent(newBoardEvent);
+		
 		// send fallingLogicFields to Kugi.
 		/*
 		 * If board is not yet stabilized, call the method again.
@@ -225,6 +226,7 @@ public class BoardLogic {
 			destroyCombos();
 			readjustBoardAfterDestroy();
 		}
+		
 		EventDispatchQueue.getInstance().addEvent(new EndGameEvent());
 	}
 
