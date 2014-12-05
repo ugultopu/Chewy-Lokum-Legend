@@ -27,7 +27,7 @@ public class FourCombo extends Combo implements LokumGeneratingCombo{
 		int xNext = nextLokum.getRowIndex();
 		
 		String color = midLokum.getLokumColor();
-		if((xMid + 1) == xNext){
+		if((xMid + 1) != xNext){
 			this.generatedLokum = new HorizontalStripedLokum(xMid, yMid, color);
 		}else{
 			this.generatedLokum = new VerticalStripedLokum(xMid, yMid, color);

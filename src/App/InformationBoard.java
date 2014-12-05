@@ -211,5 +211,4 @@ public class InformationBoard extends JPanel {
 	public int getGoalScore() {
 		return goalScore;
 	}
-	
 }
