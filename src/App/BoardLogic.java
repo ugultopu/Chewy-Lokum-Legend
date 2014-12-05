@@ -355,6 +355,10 @@ public class BoardLogic {
 			 */
 			locationSwap(f0, f1);
 			/*
+			 * Then, send a swap event to Kugi.
+			 */
+			EventDispatchQueue.getInstance().addEvent(new SwapEvent((Lokum)f0.copyLogicField(), (Lokum)f1.copyLogicField()));
+			/*
 			 * Then, check for combos.
 			 */
 
@@ -367,6 +371,10 @@ public class BoardLogic {
 				 * If here, then swap did not yield any combos. So revert the swap and return from the method.
 				 */
 				locationSwap(f0, f1);
+				/*
+				 * Send a swap event to Kugi.
+				 */
+				EventDispatchQueue.getInstance().addEvent(new SwapEvent((Lokum)f0.copyLogicField(), (Lokum)f1.copyLogicField()));
 				return false;
 			}
 			/*
