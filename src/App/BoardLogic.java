@@ -150,6 +150,8 @@ public class BoardLogic {
 				currentCombosCurrentLokum.comboDestroy();
 			}
 			if(currentCombo instanceof LokumGeneratingCombo){
+				introduceLogicField(currentCombo.getGeneratedLokum());
+				currentCombo.
 				
 			}
 		}
