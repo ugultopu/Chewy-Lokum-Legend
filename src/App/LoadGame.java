@@ -61,7 +61,7 @@ public class LoadGame {
 				int x = Integer.parseInt(obstacleFeatures.item(1).getFirstChild().getTextContent());
 				int y = Integer.parseInt(obstacleFeatures.item(1).getLastChild().getTextContent());
 				LogicField obstacle = Factory.createLogicField(y, x, null, color);
-				loadedBoard[x][y] = obstacle;
+				loadedBoard[y][x] = obstacle;
 			}
 			
 			int goalScore = Integer.parseInt(inGameNodes.item(2).getTextContent());
