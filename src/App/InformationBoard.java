@@ -164,19 +164,11 @@ public class InformationBoard extends JPanel {
 	public void updateScore(int currentScore) {
 		this.currentScore = currentScore;
 		scoreInput.setText(""+currentScore);
-		if(this.currentScore==this.goalScore || this.currentScore>this.goalScore){
-			GameOverPanel.getInstance().setWin(true);
-			GamePanel.getInstance().endGame();			
-		}
 	}
 	
 	public void decreaseMoves(){
 		this.moves--;
 		movesLeftInput.setText(""+moves);
-		if(moves==0){
-			GameOverPanel.getInstance().setWin(false);
-			GamePanel.getInstance().endGame();			
-		}
 	}
 	
 	public void setCurrentLevel(int currentLevel){
@@ -209,5 +201,16 @@ public class InformationBoard extends JPanel {
 
 	public int getGoalScore() {
 		return goalScore;
+	}
+	
+	public void finishGame(){
+		if(this.currentScore==this.goalScore || this.currentScore>this.goalScore){
+			GameOverPanel.getInstance().setWin(true);
+			GamePanel.getInstance().endGame();			
+		} else { if(moves==0){
+			GameOverPanel.getInstance().setWin(false);
+			GamePanel.getInstance().endGame();			
+		}
+		}
 	}
 }
