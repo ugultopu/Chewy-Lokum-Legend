@@ -356,7 +356,7 @@ public class BoardLogic {
 		/*
 		 * What's the line below?
 		 */
-		//EventDispatchQueue.getInstance().addEvent(new ClickListenerDeactiveEvent());
+		EventDispatchQueue.getInstance().addEvent(new ClickListenerDeactiveEvent());
 		/*
 		 * If locations are not suitable for swap, simply return w/o doing anything.
 		 */
@@ -365,7 +365,7 @@ public class BoardLogic {
 			System.out.println("Locations are not suitable for swap.");
 			System.out.println("f0's row and column indices: " + f0.getRowIndex() + " " + f0.getColumnIndex());
 			System.out.println("f1's row and column indices: " + f1.getRowIndex() + " " + f1.getColumnIndex());
-			//EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
+			EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
 			return false;
 		}
 		// if here, then locations are suitable for swap.
@@ -374,7 +374,7 @@ public class BoardLogic {
 		 */
 		if( !typesSuitableForSwap(f0, f1) ){
 			System.out.println("Types are not suitable for swap.");
-			//EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
+			EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
 			return false;
 		}
 		// if here, then types are suitable for swap as well.
@@ -413,7 +413,7 @@ public class BoardLogic {
 				 * Send a swap event to Kugi.
 				 */
 				EventDispatchQueue.getInstance().addEvent(new SwapEvent((Lokum)f0.copyLogicField(), (Lokum)f1.copyLogicField()));
-				//EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
+				EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
 				return false;
 			}
 			/*
@@ -428,7 +428,7 @@ public class BoardLogic {
 			// EventDispatchQueue.getInstance().addEvent(new NonLokumGeneratingEvent(convertLogicFieldListToEmptyLogicFieldList(comboDestroyedFields)));
 		}
 		InformationBoard.getInstance().decreaseMoves();
-		//EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
+		EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
 		return true;
 	}
 

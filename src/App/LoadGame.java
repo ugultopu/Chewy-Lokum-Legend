@@ -77,24 +77,15 @@ public class LoadGame {
 			informationBoard.setMovesLeft(movesLeft);
 			BoardLogic.loadBoard(loadedBoard);
 			
-			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println("The save.xml format is incorrect!");
 			return false;
-			
-		} 
+		}
 		
 		return true;
 		
 		
-	}
-	
-	
-	
-	public static void main(String[] args){
-		
-		loadGameFromXML();
 	}
 	
 	

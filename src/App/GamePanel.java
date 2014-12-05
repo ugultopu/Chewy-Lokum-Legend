@@ -92,7 +92,7 @@ public class GamePanel extends JPanel {
 	}
 	
 	public static void resetInstance(){
-		instance = new GamePanel();
+		instance = null;
 	}	
 
 	public void paint(Graphics g){
