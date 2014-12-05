@@ -109,35 +109,19 @@ public abstract class Lokum extends LogicField implements ComboDestroyable{
 		/*
 		 * Some lokum references that may be used in the switch case below.
 		 */
-		Lokum leftLeftLokum;
-		Lokum rightRightLokum;
-		Lokum aboveAboveLokum;
-		Lokum belowBelowLokum;
+		Lokum leftLeftLokum = null;
+		Lokum rightRightLokum = null;
+		Lokum aboveAboveLokum = null;
+		Lokum belowBelowLokum = null;
 
-		if(leftLokum != null){
+		if(leftLokum != null)
 			leftLeftLokum = (Lokum) leftLokum.getLeftLogicField();
-		}
-		else{
-			leftLeftLokum = null;
-		}
-		if(rightLokum != null){
+		if(rightLokum != null)
 			rightRightLokum = (Lokum) rightLokum.getRightLogicField();
-		}
-		else{
-			rightRightLokum = null;
-		}
-		if(aboveLokum != null){
+		if(aboveLokum != null)
 			aboveAboveLokum = (Lokum) aboveLokum.getAboveLogicField();
-		}
-		else{
-			aboveAboveLokum = null;
-		}
-		if(belowLokum != null){
+		if(belowLokum != null)
 			belowBelowLokum = (Lokum) belowLokum.getBelowLogicField();
-		}
-		else{
-			belowBelowLokum = null;
-		}
 		
 		Combo comboToAdd;
 		
@@ -731,8 +715,8 @@ public abstract class Lokum extends LogicField implements ComboDestroyable{
 			}
 			else{
 				comboLokums.add(leftLokum);
-				comboLokums.add(this);
 				comboLokums.add(aboveLokum);
+				comboLokums.add(this);
 				comboLokums.add(belowLokum);
 				comboLokums.add(rightLokum);
 				comboToAdd = new TCombo(comboLokums); //CHECK THE DEFINITION OF TCombo!
@@ -1249,7 +1233,7 @@ public abstract class Lokum extends LogicField implements ComboDestroyable{
 
 	@Override
 	public boolean equals(Object obj){
-		if(!super.equals(obj))
+		if( !super.equals(obj) )
 			return false;
 		if( !(obj instanceof Lokum) )
 			return false;

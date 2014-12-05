@@ -124,6 +124,10 @@ public class BoardLogic {
 		this.rowSize = Constants.BOARD_WIDTH;
 		this.columnSize= Constants.BOARD_HEIGHT;
 		this.logicFields = new LogicField[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
+		/*
+		 * In the line below, we get an unreal score update event inside the constructor of ThreeCombo. Check if that
+		 * would cause a problem.
+		 */
 		this.boardCombos = new PriorityQueue<Combo>(10, new ThreeCombo(null));
 		initializeBoard();	// initializes the board to all EmptyLogicField objects.
 		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
@@ -138,6 +142,10 @@ public class BoardLogic {
 		this.rowSize = Constants.BOARD_WIDTH;
 		this.columnSize = Constants.BOARD_HEIGHT;
 		this.logicFields = logicFields;
+		/*
+		 * In the line below, we get an unreal score update event inside the constructor of ThreeCombo. Check if that
+		 * would cause a problem.
+		 */
 		this.boardCombos = new PriorityQueue<Combo>(10, new ThreeCombo(null));
 		NewBoardEvent newBoardEvent = new NewBoardEvent(copyLogicFieldArray());
 		EventDispatchQueue.getInstance().addEvent(newBoardEvent);
@@ -164,10 +172,10 @@ public class BoardLogic {
 	private void destroyCombos(){
 		findBoardCombos();
 		for(int currentComboIndex=0;currentComboIndex<boardCombos.size();currentComboIndex++){
-			Combo currentCombo = boardCombos.poll();
-			ArrayList<Lokum> currentComboLokums = currentCombo.getComboLokums();
-			for(int currentComboLokumIndex=0;currentComboLokumIndex<currentComboLokums.size();currentComboLokumIndex++){
-				Lokum currentCombosCurrentLokum = currentComboLokums.get(currentComboLokumIndex);
+			Combo currentCombo = boardCombos.remove();
+			ArrayList<Lokum> currentCombosLokums = currentCombo.getComboLokums();
+			for(int currentComboLokumsLokumIndex=0;currentComboLokumsLokumIndex<currentCombosLokums.size();currentComboLokumsLokumIndex++){
+				Lokum currentCombosCurrentLokum = currentCombosLokums.get(currentComboLokumsLokumIndex);
 				currentCombosCurrentLokum.comboDestroy();
 			}
 			if(currentCombo instanceof LokumGeneratingCombo){

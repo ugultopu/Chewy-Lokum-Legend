@@ -45,7 +45,6 @@ public class BombLokum extends Lokum implements ComboDestroyable,
 		if( !(obj instanceof BombLokum) )
 			return false;
 		return true;
-		
 	}
 	
 //	@Override
