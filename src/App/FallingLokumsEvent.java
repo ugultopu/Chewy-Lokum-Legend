@@ -2,6 +2,8 @@ package App;
 
 import java.util.HashMap;
 
+import oracle.jrockit.jfr.Options;
+
 
 public class FallingLokumsEvent extends GameEvent {
 	
@@ -21,7 +23,7 @@ public class FallingLokumsEvent extends GameEvent {
 				if(lokumShift>0){
 					lokum.setRowIndex(lokum.getRowIndex()-1);
 					fallingLokums.put(lokum, (Integer)lokumShift-1);
-					if(lokum.getColumnIndex()>=0){
+					if(lokum.getRowIndex()<Constants.BOARD_HEIGHT){
 						GameBoard.getInstance().changeLokum(lokum);
 					}
 				}else
