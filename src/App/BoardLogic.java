@@ -393,10 +393,7 @@ public class BoardLogic {
 			/*
 			 * Then, check for combos.
 			 */
-
-			//findBoardCombos();
-			destroyCombos();
-			readjustBoardAfterDestroy();
+			findBoardCombos();
 			/*
 			 * After checking for combos, check if there are any combos actually. If not, revert the swap and return from the method.
 			 */
@@ -413,17 +410,10 @@ public class BoardLogic {
 				return false;
 			}
 			/*
-			 * If here, then there were indeed combos present. So find them and execute them. 
+			 * If here, then there are combos.
 			 */
-
-			for(int currentComboIndex=0;currentComboIndex<boardCombos.size();currentComboIndex++){
-				Combo currentCombo = boardCombos.get(currentComboIndex);
-				ArrayList<Lokum> currentCombosLokums = currentCombo.getComboLokums();
-				for(int currentCombosLokumIndex=0;currentCombosLokumIndex<currentCombosLokums.size();currentCombosLokumIndex++){
-					Lokum currentLokum = currentCombosLokums.get(currentCombosLokumIndex);
-					((ComboDestroyable) currentLokum).comboDestroy();
-				}
-			}
+			destroyCombos();
+			readjustBoardAfterDestroy();
 			// send comboDestroyedFields to Kugi.
 			// How does kugi get new generated lokums in this implementation?
 			// We are changing this sending all destroyed lokums approach to sending one destroyed lokum at a time approach.

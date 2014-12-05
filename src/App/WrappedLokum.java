@@ -40,7 +40,6 @@ public class WrappedLokum extends Lokum implements ComboDestroyable,
 						 * CHECK THE LINE BELOW!!!
 						 */
 						EventDispatchQueue.getInstance().addEvent(new DestroyLokumEvent(destroyed.copyLogicField()));
-						
 					}
 				}
 			}
