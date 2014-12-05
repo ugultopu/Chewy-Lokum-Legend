@@ -71,7 +71,7 @@ public class LoadGame {
 			
 			Score.getInstance().setScore(currentScore);
 			InformationBoard informationBoard = InformationBoard.getInstance();
-			informationBoard.setCurrentScore(currentScore);
+			informationBoard.updateScore(currentScore);
 			informationBoard.setGoalScore(goalScore);
 			informationBoard.setCurrentLevel(level);
 			informationBoard.setMovesLeft(movesLeft);

@@ -188,10 +188,6 @@ public class InformationBoard extends JPanel {
 		return Integer.parseInt(levelInput.getText());
 	}
 	
-	public void setCurrentScore(int currentScore){
-		this.currentScore = currentScore;
-		scoreInput.setText(""+currentScore);
-	}
 	
 	public int getCurrentScore(){
 		return this.currentScore;
