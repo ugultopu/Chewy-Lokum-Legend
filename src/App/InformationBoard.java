@@ -180,6 +180,7 @@ public class InformationBoard extends JPanel {
 	}
 	
 	public void setCurrentLevel(int currentLevel){
+		this.currentLevel = currentLevel;
 		levelInput.setText(""+currentLevel);
 	}
 	
@@ -189,6 +190,7 @@ public class InformationBoard extends JPanel {
 	
 	public void setCurrentScore(int currentScore){
 		this.currentScore = currentScore;
+		scoreInput.setText(""+currentScore);
 	}
 	
 	public int getCurrentScore(){
@@ -197,6 +199,7 @@ public class InformationBoard extends JPanel {
 	
 	public void setMovesLeft(int moves){
 		this.moves = moves;
+		movesLeftInput.setText(""+moves);
 	}
 	
 	public int getMovesLeft(){
@@ -205,7 +208,7 @@ public class InformationBoard extends JPanel {
 
 	public void setGoalScore(int goalScore) {
 		this.goalScore = goalScore;
-		
+		targetInput.setText(""+goalScore);
 	}
 
 	public int getGoalScore() {
