@@ -77,17 +77,6 @@ public class GamePanel extends JPanel {
 		GameOverPanel.getInstance().repaint();
 	}
 		
-//	private void scoreUpdate(){
-//		Score score = Score.getInstance();
-//		if(score.isUpdated()){
-//			InformationBoard informationBoard = InformationBoard.getInstance();
-//			informationBoard.updateScore(score.getCurrentScore());
-//			informationBoard.repaint();
-//			score.setUpdated(false);
-//		}
-//		
-//	}
-	
 	private void gameUpdate(){
 		if(!EventDispatchQueue.getInstance().isEmpty()){
 			System.out.println("Event happened");

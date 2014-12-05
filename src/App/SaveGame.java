@@ -12,7 +12,7 @@ public class SaveGame {
 		int player_id = 1;
 		String player_name = "default";
 		LogicField[][] lokumBoard = BoardLogic.getInstance().getBoard();
-
+		
 		int goal_score = 100000;
 		int current_score = 0;
 		int moves_left = 31;
