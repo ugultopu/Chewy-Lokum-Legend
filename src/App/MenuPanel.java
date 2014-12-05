@@ -61,13 +61,16 @@ public class MenuPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				GamePanel.resetInstance();
+				GameBoard.resetInstance();
+				InformationBoard.resetInstance();
 				if(LoadGame.loadGameFromXML()){
 					System.out.println("Loaded");
 					ApplicationWindow.removePanel(instance);
-					GamePanel.resetInstance();
 					ApplicationWindow.addPanel(GamePanel.getInstance());
+					GamePanel.getInstance().repaint();
 					GameBoard.getInstance().requestFocusInWindow();
-					GameBoard.getInstance().repaint();
+					
 				}
 			}
 			

@@ -17,7 +17,7 @@ public class GamePanel extends JPanel {
 	private static int LabelYPadding = 160;
 	
 //	protected GameOverPanel gameOverPanel;
-	protected boolean running=true;
+	private boolean running=true;
 	private static GamePanel instance;
 	
 	private GamePanel() {
