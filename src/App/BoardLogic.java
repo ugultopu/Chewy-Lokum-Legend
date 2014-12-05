@@ -360,10 +360,10 @@ public class BoardLogic {
 		 * If locations are not suitable for swap, simply return w/o doing anything.
 		
 		 */
-		EventDispatchQueue.getInstance().addEvent(new ClickListenerDeactiveEvent());
+		//EventDispatchQueue.getInstance().addEvent(new ClickListenerDeactiveEvent());
 		
 		if( !locationsSuitableForSwap(f0, f1) ){
-			EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
+			//EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
 			return false;
 		}
 		// if here, then locations are suitable for swap.
@@ -371,7 +371,7 @@ public class BoardLogic {
 		 * If types are not suitable for swap, simply return w/o doing anything.
 		 */
 		if( !typesSuitableForSwap(f0, f1) ){
-			EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
+			//EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
 			return false;
 		}
 		// if here, then types are suitable for swap as well.
@@ -411,7 +411,7 @@ public class BoardLogic {
 				 * Send a swap event to Kugi.
 				 */
 				EventDispatchQueue.getInstance().addEvent(new SwapEvent((Lokum)f0.copyLogicField(), (Lokum)f1.copyLogicField()));
-				EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
+				//EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
 				return false;
 			}
 			/*
@@ -435,7 +435,7 @@ public class BoardLogic {
 			// EventDispatchQueue.getInstance().addEvent(new NonLokumGeneratingEvent(convertLogicFieldListToEmptyLogicFieldList(comboDestroyedFields)));
 		}
 		InformationBoard.getInstance().decreaseMoves();
-		EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
+		//EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
 		
 		return true;
 	}
