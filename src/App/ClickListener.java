@@ -22,11 +22,10 @@ public class ClickListener implements MouseListener {
 	public void mousePressed(MouseEvent e) {
 		System.out.println("pressed");
 		if(active){
-			if(selectedRow == null || selectedColumn == null){
+			if(selectedRow == null && selectedColumn == null){
 				selectedRow = convertToRowIndex(e.getY());
 				selectedColumn = convertToColumnIndex(e.getX());
 				System.out.println("First lokum at: "+ selectedColumn+", "+selectedRow);
-				
 			}else{
 				int otherRow = convertToRowIndex(e.getY());
 				int otherColumn = convertToColumnIndex(e.getX());
@@ -44,7 +43,7 @@ public class ClickListener implements MouseListener {
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		/*
+		
 		if(active){
 			if(selectedRow != null && selectedColumn != null){
 				int otherRow = convertToRowIndex(e.getY());
@@ -56,7 +55,7 @@ public class ClickListener implements MouseListener {
 				}
 			}
 		}
-		*/	
+		
 	}
 
 	
@@ -65,7 +64,7 @@ public class ClickListener implements MouseListener {
 	}
 	
 	private int convertToColumnIndex(Integer xLocation){
-		return selectedColumn = (int) xLocation/(Constants.ANIMATION_WINDOW_WIDTH/Constants.BOARD_WIDTH);
+		return (int) xLocation/(Constants.ANIMATION_WINDOW_WIDTH/Constants.BOARD_WIDTH);
 	}
 
 	public static ClickListener getInstance() {
