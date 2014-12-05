@@ -21,6 +21,8 @@ public class LoadGame {
 		
 		
 		try {
+			LogicField[][] loadedBoard = new LogicField[Constants.BOARD_HEIGHT][Constants.BOARD_WIDTH];
+			
 			File saveFile = new File("save.xml");
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -39,15 +41,27 @@ public class LoadGame {
 			/* Lokums */
 			NodeList lokums = board.getChildNodes().item(0).getChildNodes();
 			for(int i=0; i<lokums.getLength();i++){
-				Node lokum = lokums.item(i);
-				NodeList lokumFeatures = lokum.getChildNodes();
-				System.out.println(lokumFeatures.item(0).getTextContent());
-				System.out.println(lokumFeatures.item(1).getFirstChild().getTextContent());
-				System.out.println(lokumFeatures.item(2).getTextContent());
+				Node lokumNode = lokums.item(i);
+				NodeList lokumFeatures = lokumNode.getChildNodes();
+				String color = lokumFeatures.item(0).getTextContent();
+				int x = Integer.parseInt(lokumFeatures.item(1).getFirstChild().getTextContent());
+				int y = Integer.parseInt(lokumFeatures.item(1).getLastChild().getTextContent());
+				String type = lokumFeatures.item(2).getTextContent();
+				LogicField lokum = Factory.createLogicField(x, y, type, color);
+				loadedBoard[y][x] = lokum;
 			}
 			
-			NodeList lokumList = document.getElementsByTagName("lokum");
-			
+			/* Obstacles */
+			NodeList obstacles = board.getChildNodes().item(0).getChildNodes();
+			for(int i=0; i<obstacles.getLength();i++){
+				Node obstacleNode = obstacles.item(i);
+				NodeList obstacleFeatures = obstacleNode.getChildNodes();
+				String color = obstacleFeatures.item(0).getTextContent();
+				int x = Integer.parseInt(obstacleFeatures.item(1).getFirstChild().getTextContent());
+				int y = Integer.parseInt(obstacleFeatures.item(1).getLastChild().getTextContent());
+				LogicField obstacle = Factory.createLogicField(x, y, null, color);
+				loadedBoard[y][x] = obstacle;
+			}
 			
 			
 			
