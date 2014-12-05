@@ -46,4 +46,32 @@ public abstract class Combo implements Comparator<Combo>{
 		else
 			return -1;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		if( !(obj instanceof Combo) )
+			return false;
+		/*
+		 * if here, then obj is an instance of Combo.
+		 */
+		Combo argCombo = (Combo) obj;
+		ArrayList<Lokum> argComboLokums = argCombo.getComboLokums();
+		if( this.lokums.size() != argComboLokums.size() )
+			return false;
+		/*
+		 * if here, then sizes of comboLokums of two combos are the same. So check if
+		 * each element is present in one another.
+		 */
+		for(int i=0;i<lokums.size();i++){
+			Lokum currentLokum = lokums.get(i);
+			if(!argComboLokums.contains(currentLokum))
+				return false;
+		}
+		/*
+		 * if here, then it has passed all tests. So return true.
+		 */
+		return true;
+	}
+	
 }

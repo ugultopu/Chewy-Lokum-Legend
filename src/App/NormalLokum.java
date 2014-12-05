@@ -34,4 +34,14 @@ public class NormalLokum extends Lokum implements ComboDestroyable, Swapable{
 		// TODO Auto-generated method stub
 		return "NormalLokum";
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		if( !(super.equals(obj)) )
+			return false;
+		if( !(obj instanceof NormalLokum) )
+			return false;
+		return true;
+	}
 }

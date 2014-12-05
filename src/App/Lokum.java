@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public abstract class Lokum extends LogicField implements ComboDestroyable{
 
-	private String lokumColor;
-	private ArrayList<Combo> combosThisLokumIn;
+	String lokumColor;
+	ArrayList<Combo> combosThisLokumIn;
 
 	/**
 	 * Whenever a lokum is instantiated, the location in BoardLogic corresponding to Lokum's location is set to this instance.
@@ -1246,5 +1246,17 @@ public abstract class Lokum extends LogicField implements ComboDestroyable{
 			return BoardLogic.getInstance().getLogicFieldAt(getRowIndex(), getColumnIndex()+1);
 		return null;
 	}
-		
+
+	@Override
+	public boolean equals(Object obj){
+		if(!super.equals(obj))
+			return false;
+		if( !(obj instanceof Lokum) )
+			return false;
+		Lokum argLokum = (Lokum) obj;
+		if( !this.lokumColor.equals(argLokum.lokumColor) )
+			return false;
+		return true;
+	}
+	
 }

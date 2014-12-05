@@ -36,6 +36,17 @@ public class BombLokum extends Lokum implements ComboDestroyable,
 		// TODO Auto-generated method stub
 		return "BombLokum";
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		if( !super.equals(obj) )
+			return false;
+		if( !(obj instanceof BombLokum) )
+			return false;
+		return true;
+		
+	}
 	
 //	@Override
 //	public void comboDestroy() {
