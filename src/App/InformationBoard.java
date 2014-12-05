@@ -14,9 +14,9 @@ public class InformationBoard extends JPanel {
 	private JLabel level,target,score,movesLeft,levelInput,targetInput,scoreInput,movesLeftInput;
 	private JButton saveButton;
 	private int currentScore;
-	private int goalScore = 20000;
+	private int goalScore;
 	private int currentLevel;
-	private int moves = 100;
+	private int moves;
 
 	private static InformationBoard instance;
 
@@ -27,8 +27,8 @@ public class InformationBoard extends JPanel {
 		score = new JLabel("Score");
 		movesLeft = new JLabel("Moves");
 		levelInput = new JLabel("");
-		targetInput = new JLabel(""+goalScore);
-		scoreInput = new JLabel(""+currentScore);
+		targetInput = new JLabel("");
+		scoreInput = new JLabel("");
 		movesLeftInput = new JLabel(""+moves);
 		saveButton = new JButton("Save Game");
 		
@@ -174,7 +174,11 @@ public class InformationBoard extends JPanel {
 	
 	public void setCurrentLevel(int currentLevel){
 		this.currentLevel = currentLevel;
+		this.goalScore = Constants.GOAL_SCORE + currentLevel*5000;
+		this.moves = Constants.NUMBER_OF_MOVES - 3*currentLevel;
 		levelInput.setText(""+currentLevel);
+		movesLeftInput.setText(""+moves);
+		targetInput.setText(""+goalScore);
 	}
 	
 	public int getCurrentLevel(){
