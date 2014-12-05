@@ -48,7 +48,7 @@ public class LoadGame {
 				int x = Integer.parseInt(lokumFeatures.item(1).getFirstChild().getTextContent());
 				int y = Integer.parseInt(lokumFeatures.item(1).getLastChild().getTextContent());
 				String type = lokumFeatures.item(2).getTextContent();
-				LogicField lokum = Factory.createLogicField(x, y, type, color);
+				LogicField lokum = Factory.createLogicField(y, x, type, color);
 				loadedBoard[y][x] = lokum;
 			}
 			
