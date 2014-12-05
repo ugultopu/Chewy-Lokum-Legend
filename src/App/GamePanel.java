@@ -1,6 +1,7 @@
 package App;
 
 import java.awt.*;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -45,7 +46,8 @@ public class GamePanel extends JPanel {
 		
 		add(GameBoard.getInstance());
 		GameBoard.getInstance().setBounds(40, 60, Constants.ANIMATION_WINDOW_WIDTH, Constants.ANIMATION_WINDOW_HEIGHT);
-				
+		
+		
 	}
 
 	public void startGame(){
@@ -89,7 +91,6 @@ public class GamePanel extends JPanel {
 	public static void resetInstance(){
 		instance = new GamePanel();
 	}	
-
 
 	public void paint(Graphics g){
 

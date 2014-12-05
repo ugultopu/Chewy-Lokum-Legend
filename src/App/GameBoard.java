@@ -19,6 +19,7 @@ public class GameBoard extends JPanel {
 		}
 		requestFocusInWindow();
 		addMouseListener(ClickListener.getInstance());
+		
 	}
 	
 	public static GameBoard getInstance(){
