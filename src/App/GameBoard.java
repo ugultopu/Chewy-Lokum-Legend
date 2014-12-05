@@ -31,7 +31,7 @@ public class GameBoard extends JPanel {
 		return instance;
 	}
 	
-	public static void resetInstance(LogicField[][] logicFieldArray){
+	public static void resetInstance(){
 		instance = new GameBoard();
 	}
 	
