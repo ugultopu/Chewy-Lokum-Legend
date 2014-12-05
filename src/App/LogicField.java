@@ -16,7 +16,7 @@ public abstract class LogicField {
 		this.columnIndex = columnIndex;
 	}
 	
-	public abstract LogicField copyLogicField(); 
+	public abstract LogicField copyLogicField();
 
 	public int getRowIndex() {
 		return rowIndex;

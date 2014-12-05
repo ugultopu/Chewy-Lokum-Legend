@@ -15,9 +15,9 @@ public class BoardLogicTest{
 					Lokum lok = (Lokum)logicFields[i][j];
 					String color = Character.toString(lok.getLokumColor().charAt(0));
 					String type = Character.toString(lok.getType().charAt(0));
-					boardString += type + "|" + color + " ";
+					boardString += type + color + "|";
 				}else{
-					boardString += "E|E ";
+					boardString += "EE";
 				}
 			}
 			boardString += "\n";

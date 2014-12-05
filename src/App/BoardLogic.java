@@ -253,7 +253,7 @@ public class BoardLogic {
 			 * information. After completion of this operation, the board is updated with the new location of "to be dropped" object as well.
 			 * 3) Finally, the old location of "to be dropped" object is cleared.   
 			 */
-			fallingLogicFields.put(getLogicFieldAt(i+dropCounter, columnIndex), dropCounter);
+			fallingLogicFields.put(getLogicFieldAt(i+dropCounter, columnIndex).copyLogicField(), dropCounter);
 			logicFields[i+dropCounter][columnIndex].setRowIndex(i);
 			introduceLogicField(logicFields[i+dropCounter][columnIndex]);
 			clearLocation(i + dropCounter, columnIndex);
@@ -281,7 +281,7 @@ public class BoardLogic {
 		while(logicFields[currentRowIndex][columnIndex] instanceof EmptyLogicField){
 			emptyLocationCounter++;
 			currentRowIndex--;
-			if(currentRowIndex == 0)
+			if(currentRowIndex == -1)
 				break;
 		}
 		for(int i=0;i<emptyLocationCounter;i++){
@@ -294,7 +294,7 @@ public class BoardLogic {
 			 */
 			LogicField currentLogicFieldToSendGraphics = getLogicFieldAt(rowSize - emptyLocationCounter + i, columnIndex).copyLogicField();
 			currentLogicFieldToSendGraphics.setRowIndex(currentLogicFieldToSendGraphics.getRowIndex() + emptyLocationCounter);
-			fallingLogicFields.put(currentLogicFieldToSendGraphics, emptyLocationCounter);
+			fallingLogicFields.put(currentLogicFieldToSendGraphics.copyLogicField(), emptyLocationCounter);
 		}
 	}
 
