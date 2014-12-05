@@ -55,6 +55,16 @@ public class VerticalStripedLokum extends StripedLokum {
 		// TODO Auto-generated method stub
 		return "VerticalStripedLokum";
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		if( !(super.equals(obj)) )
+			return false;
+		if( !(obj instanceof VerticalStripedLokum) )
+			return false;
+		return true;
+	}
 	
 //	@Override
 //	public void comboDestroy() {

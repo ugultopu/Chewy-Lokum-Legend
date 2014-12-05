@@ -59,6 +59,16 @@ public class WrappedLokum extends Lokum implements ComboDestroyable,
 		return "WrappedLokum";
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		if( !super.equals(obj) )
+			return false;
+		if( !(obj instanceof WrappedLokum) )
+			return false;
+		return true;
+	}
+
 //	@Override
 //	public void comboDestroy() {
 //		// TODO Auto-generated method stub

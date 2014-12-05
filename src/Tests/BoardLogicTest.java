@@ -59,10 +59,19 @@ public class BoardLogicTest{
 	
 	public static void swapTest(LogicField lokum1, LogicField lokum2){
 		BoardLogic BL = BoardLogic.getInstance();
-		System.out.println("Before swap: ");
+		int currentScore = Score.getInstance().getCurrentScore();
+		System.out.println("Board Before swap: ");
+		System.out.println("Score Before Swap: " + currentScore);
 		System.out.println(toString(BL));
-		System.out.println("After swap: ");
+		int x1 = lokum1.getRowIndex();
+		int y1 = lokum1.getColumnIndex();
+		int x2 = lokum2.getRowIndex();
+		int y2 = lokum2.getColumnIndex();
+		System.out.println("Swapping: (" + x1 + ", " + y1 + ") and (" + x2 + ", " + y2 + ")");
 		BL.swap(lokum1, lokum2);
+		currentScore = Score.getInstance().getCurrentScore();
+		System.out.println("Score after swap: " + currentScore);
+		System.out.println("Board After swap: ");
 		System.out.println(toString(BL));
 	}
 	

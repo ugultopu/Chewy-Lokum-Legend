@@ -1,11 +1,14 @@
 package App;
 
+import Tests.BoardLogicTest;
+
 public class NewBoardEvent extends GameEvent {
 
 	LogicField[][] newBoard;
 	
 	public NewBoardEvent(LogicField[][] newBoard){
 		this.newBoard = newBoard;
+	
 		
 	}
 	@Override

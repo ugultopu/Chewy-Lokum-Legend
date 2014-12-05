@@ -54,6 +54,16 @@ public class HorizontalStripedLokum extends StripedLokum implements MergeDestroy
 		// TODO Auto-generated method stub
 		return "HorizontalStripedLokum";
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		if( !(super.equals(obj)) )
+			return false;
+		if( !(obj instanceof HorizontalStripedLokum) )
+			return false;
+		return true;
+	}
 	
 //	@Override
 //	public void comboDestroy() {

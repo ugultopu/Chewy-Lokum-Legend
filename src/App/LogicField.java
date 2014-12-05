@@ -2,8 +2,8 @@ package App;
 
 
 public abstract class LogicField {
-	private int rowIndex;
-	private int columnIndex;
+	int rowIndex;
+	int columnIndex;
 	
 	/**
 	 * Creates a new LogicField object and introduces it to the BoardLogic instance. 
@@ -49,4 +49,18 @@ public abstract class LogicField {
 			return false;
 		return true;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		if( !(obj instanceof LogicField) )
+			return false;
+		LogicField argLogicField = (LogicField) obj;
+		if(this.rowIndex != argLogicField.rowIndex)
+			return false;
+		if(this.columnIndex != argLogicField.columnIndex)
+			return false;
+		return true;
+	}
+	
 }

@@ -80,7 +80,7 @@ public class GamePanel extends JPanel {
 		
 	private void gameUpdate(){
 		if(!EventDispatchQueue.getInstance().isEmpty()){
-			System.out.println("Event happened");
+			//System.out.println("Event happened");
 			EventDispatchQueue.getInstance().getEvent().executeEvent();
 		}
 	}
