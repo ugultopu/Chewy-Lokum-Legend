@@ -68,9 +68,9 @@ public class BoardLogicTest{
 		int x2 = lokum2.getRowIndex();
 		int y2 = lokum2.getColumnIndex();
 		System.out.println("Swapping: (" + x1 + ", " + y1 + ") and (" + x2 + ", " + y2 + ")");
+		BL.swap(lokum1, lokum2);
 		currentScore = Score.getInstance().getCurrentScore();
 		System.out.println("Score after swap: " + currentScore);
-		BL.swap(lokum1, lokum2);
 		System.out.println("Board After swap: ");
 		System.out.println(toString(BL));
 	}

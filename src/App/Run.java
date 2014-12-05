@@ -13,9 +13,9 @@ public class Run {
 
 	public static void main(String[] args) throws IOException {
 		
-		//ApplicationWindow frame = ApplicationWindow.getInstance();
-		//frame.pack();
-		//frame.setSize(Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
+		ApplicationWindow frame = ApplicationWindow.getInstance();
+		frame.pack();
+		frame.setSize(Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
 		
 //		NormalLokum nl = new NormalLokum(0,0,"red");
 //		
