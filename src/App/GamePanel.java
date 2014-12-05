@@ -22,6 +22,7 @@ public class GamePanel extends JPanel {
 	private GamePanel() {
 		super();
 		
+		/* Thread for updating lokum board */
 		new Thread(new Runnable(){
 
 			public void run() {
@@ -33,6 +34,19 @@ public class GamePanel extends JPanel {
 			
 		}).start();
 		
+		/* Thread for updating information board */
+		/*
+		new Thread(new Runnable(){
+
+			public void run() {
+
+				while(running){
+					scoreUpdate();
+				}				
+			}
+			
+		}).start();
+		*/
 		
 		
 		setLayout(null);
@@ -65,9 +79,12 @@ public class GamePanel extends JPanel {
 	}
 		
 //	private void scoreUpdate(){
-//		if(scoreCalculator.updated){
-//			informationPanel.repaint();
-//			scoreCalculator.updated = false;
+//		Score score = Score.getInstance();
+//		if(score.isUpdated()){
+//			InformationBoard informationBoard = InformationBoard.getInstance();
+//			informationBoard.updateScore(score.getCurrentScore());
+//			informationBoard.repaint();
+//			score.setUpdated(false);
 //		}
 //		
 //	}

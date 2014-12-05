@@ -13,12 +13,17 @@ public class SaveGame {
 		String player_name = "default";
 		LogicField[][] lokumBoard = BoardLogic.getInstance().getBoard();
 
+		int goal_score = 100000;
+		int current_score = 0;
+		int moves_left = 31;
+		int level = 1;
 		
+		/*
 		int goal_score = BoardLogic.getInstance().getGoalScore();
 		int current_score = BoardLogic.getInstance().getCurrentScore();
 		int moves_left = BoardLogic.getInstance().getMovesLeft();
 		int level = BoardLogic.getInstance().getLevel();
-		
+		*/
 
 		
 		BufferedWriter wr = new BufferedWriter(new FileWriter("save.xml"));
