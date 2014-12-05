@@ -18,6 +18,11 @@ public class BombMerge extends Merge {
 	}
 
 	public void destroyMerge(){
+		if(l1 instanceof BombLokum)
+			BoardLogic.getInstance().introduceLogicField(new EmptyLogicField(l1.getRowIndex(), l1.getColumnIndex()));
+		if(l2 instanceof BombLokum)
+			BoardLogic.getInstance().introduceLogicField(new EmptyLogicField(l2.getRowIndex(), l2.getColumnIndex()));
+
 		if(l1 instanceof NormalLokum){
 			String colorl1 = l1.getLokumColor();
 			int numberOfDestroyedLokums = 0;
