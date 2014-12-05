@@ -17,7 +17,7 @@ public class NewBoardEvent extends GameEvent {
 		}
 		GameBoard.getInstance().repaint();
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(10);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
