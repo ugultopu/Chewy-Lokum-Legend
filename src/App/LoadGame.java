@@ -48,7 +48,7 @@ public class LoadGame {
 				int x = Integer.parseInt(lokumFeatures.item(1).getFirstChild().getTextContent());
 				int y = Integer.parseInt(lokumFeatures.item(1).getLastChild().getTextContent());
 				String type = lokumFeatures.item(2).getTextContent();
-				LogicField lokum = Factory.createLogicField(x, y, type, color);
+				LogicField lokum = Factory.createLogicField(y, x, type, color);
 				loadedBoard[y][x] = lokum;
 			}
 			
@@ -61,7 +61,7 @@ public class LoadGame {
 				int x = Integer.parseInt(obstacleFeatures.item(1).getFirstChild().getTextContent());
 				int y = Integer.parseInt(obstacleFeatures.item(1).getLastChild().getTextContent());
 				LogicField obstacle = Factory.createLogicField(y, x, null, color);
-				loadedBoard[x][y] = obstacle;
+				loadedBoard[y][x] = obstacle;
 			}
 			
 			int goalScore = Integer.parseInt(inGameNodes.item(2).getTextContent());
@@ -71,7 +71,7 @@ public class LoadGame {
 			
 			Score.getInstance().setScore(currentScore);
 			InformationBoard informationBoard = InformationBoard.getInstance();
-			informationBoard.setCurrentScore(currentScore);
+			informationBoard.updateScore(currentScore);
 			informationBoard.setGoalScore(goalScore);
 			informationBoard.setCurrentLevel(level);
 			informationBoard.setMovesLeft(movesLeft);
