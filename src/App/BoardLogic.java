@@ -195,7 +195,7 @@ public class BoardLogic {
 			if( logicFields[i][columnIndex] instanceof EmptyLogicField )
 				logicFields[i][columnIndex] = (LogicField) Factory.createRandomLokum(i, columnIndex);
 		}
-	}	
+	}
 
 	/**
 	 * After destroys, levels the LogicFields that have emptyLogicFields underneath. After that, populates the emptied locations with new LogicFields falling from above the
@@ -494,9 +494,13 @@ public class BoardLogic {
 		int xDifference = Math.abs(f0.getRowIndex() - f1.getRowIndex());
 		int yDifference = Math.abs(f0.getColumnIndex() - f1.getColumnIndex());
 
-		if((xDifference + yDifference) > 2)
-			return false;
-		return true;
+		if((xDifference + yDifference) == 2)
+			return true;
+		if( (xDifference == 0) && (yDifference == 1) )
+			return true;
+		if( (yDifference == 0) && (xDifference == 1) )
+			return true;
+		return false;
 	}
 
 	private boolean typesSuitableForSwap(LogicField f0, LogicField f1){

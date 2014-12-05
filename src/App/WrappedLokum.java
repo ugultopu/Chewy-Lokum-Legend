@@ -12,7 +12,10 @@ public class WrappedLokum extends Lokum implements ComboDestroyable,
 	}
 	
 	@Override
-	
+	/* ArrayIndexOutOfBoundsException veriyor. Düzelt. 
+	 * (non-Javadoc)
+	 * @see App.ComboDestroyable#comboDestroy()
+	 */
 	public void comboDestroy() {
 		// TODO Auto-generated method stub
 		BoardLogic boardLogic = BoardLogic.getInstance();
