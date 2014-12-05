@@ -151,8 +151,7 @@ public class BoardLogic {
 			}
 			if(currentCombo instanceof LokumGeneratingCombo){
 				introduceLogicField(currentCombo.getGeneratedLokum());
-				currentCombo.
-				
+				currentCombo.addGeneratedLokumtoQueue();
 			}
 		}
 	}
