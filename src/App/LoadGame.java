@@ -40,6 +40,8 @@ public class LoadGame {
 			NodeList lokums = board.getChildNodes().item(0).getChildNodes();
 			for(int i=0; i<lokums.getLength();i++){
 				Node lokum = lokums.item(i);
+				NodeList lokumFeatures = lokum.getChildNodes();
+				System.out.println(lokumFeatures.item(0));
 			}
 			
 			NodeList lokumList = document.getElementsByTagName("lokum");
