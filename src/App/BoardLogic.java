@@ -362,8 +362,9 @@ public class BoardLogic {
 			 * Then, check for combos.
 			 */
 
-			findBoardCombos();
+			//findBoardCombos();
 			destroyCombos();
+			readjustBoardAfterDestroy();
 			/*
 			 * After checking for combos, check if there are any combos actually. If not, revert the swap and return from the method.
 			 */

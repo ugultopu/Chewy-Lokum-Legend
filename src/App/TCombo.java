@@ -2,7 +2,7 @@ package App;
 
 import java.util.ArrayList;
 
-public class TCombo extends Combo{
+public class TCombo extends Combo implements LokumGeneratingCombo{
 	private TComboTest test;
 	private ArrayList<Lokum> lokums;
 	private Lokum generatedLokum;
@@ -13,7 +13,9 @@ public class TCombo extends Combo{
 		//test = new TComboTest();
 		this.comboPriority = 3;
 		Score.getInstance().scoreUpdateWrappedForm();
-
+		WrappedLokum copy = (WrappedLokum) copyLokum(generatedLokum);
+		LokumGenerateEvent lge = new LokumGenerateEvent(copy);
+		EventDispatchQueue.getInstance().addEvent(lge);
 	}
 	
 	public Lokum getGeneratedLokum(){
@@ -46,5 +48,13 @@ public class TCombo extends Combo{
 	public ArrayList<Lokum> getComboLokums() {
 		// TODO Auto-generated method stub
 		return lokums;
+	}
+
+	@Override
+	public Lokum copyLokum(Lokum lok) {
+		int x = lok.getRowIndex();
+		int y = lok.getColumnIndex();
+		String color = lok.getLokumColor();
+		return new WrappedLokum(x, y, color);
 	}
 }
