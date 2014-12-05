@@ -76,7 +76,7 @@ public class LoadGame {
 			informationBoard.setCurrentLevel(level);
 			informationBoard.setMovesLeft(movesLeft);
 			BoardLogic.loadBoard(loadedBoard);
-			
+			GameBoard.getInstance().repaint();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println("The save.xml format is incorrect!");
@@ -84,6 +84,4 @@ public class LoadGame {
 		}
 		return true;
 	}
-	
-	
 }

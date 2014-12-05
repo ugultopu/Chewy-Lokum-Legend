@@ -174,7 +174,7 @@ public class InformationBoard extends JPanel {
 	
 	public void setCurrentLevel(int currentLevel){
 		this.currentLevel = currentLevel;
-		this.goalScore = Constants.GOAL_SCORE + currentLevel*5000;
+		this.goalScore = Constants.GOAL_SCORE - currentLevel*100000;
 		this.moves = Constants.NUMBER_OF_MOVES - 3*currentLevel;
 		levelInput.setText(""+currentLevel);
 		movesLeftInput.setText(""+moves);
