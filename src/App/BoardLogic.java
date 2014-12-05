@@ -197,6 +197,7 @@ public class BoardLogic {
 		if ( !isBoardStabilized() ){
 			destroyCombos();
 			readjustBoardAfterDestroy();
+		}
 	}
 
 	/**
