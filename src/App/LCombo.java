@@ -13,12 +13,10 @@ public class LCombo extends Combo implements LokumGeneratingCombo{
 		//test = new LComboTest();
 		this.comboPriority = 3;
 		Score.getInstance().scoreUpdateWrappedForm();
-		WrappedLokum copy = (WrappedLokum) copyLokum(generatedLokum);
-		LokumGenerateEvent lge = new LokumGenerateEvent(copy);
-		EventDispatchQueue.getInstance().addEvent(lge);
 	}
 	
 	public Lokum getGeneratedLokum(){
+		
 		return generatedLokum;
 	}
 	
@@ -56,5 +54,13 @@ public class LCombo extends Combo implements LokumGeneratingCombo{
 		int y = lok.getColumnIndex();
 		String color = lok.getLokumColor();
 		return new WrappedLokum(x, y, color);
+	}
+
+	@Override
+	public void addGeneratedLokumtoQueue() {
+		// TODO Auto-generated method stub
+		WrappedLokum copy = (WrappedLokum) copyLokum(generatedLokum);
+		LokumGenerateEvent lge = new LokumGenerateEvent(copy);
+		EventDispatchQueue.getInstance().addEvent(lge);
 	}
 }

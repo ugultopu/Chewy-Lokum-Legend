@@ -38,4 +38,10 @@ public class ThreeCombo extends Combo {
 		// TODO Auto-generated method stub
 		return lokums;
 	}
+
+	@Override
+	public void addGeneratedLokumtoQueue() {
+		// TODO Auto-generated method stub
+		
+	}
 }
