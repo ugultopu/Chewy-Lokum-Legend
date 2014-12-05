@@ -10,7 +10,7 @@ public class ThreeCombo extends Combo {
 		//test = new ThreeComboTest();
 		this.lokums = lokums;
 		this.comboPriority = 1;
-		Score.getInstance().scoreUpdateThreeCombo();
+		
 	}
 	
 //Test for the method:
@@ -42,6 +42,13 @@ public class ThreeCombo extends Combo {
 	@Override
 	public void addGeneratedLokumtoQueue() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateScore() {
+		// TODO Auto-generated method stub
+		Score.getInstance().scoreUpdateThreeCombo();
 		
 	}
 }

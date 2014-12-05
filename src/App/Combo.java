@@ -13,6 +13,8 @@ public abstract class Combo implements Comparator<Combo>{
 	
 	public abstract Lokum getGeneratedLokum();
 	
+	public abstract void updateScore();
+	
 	public void addLokumToCombo(Lokum argLokum){
 		lokums.add(argLokum);
 	}

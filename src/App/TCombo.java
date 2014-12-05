@@ -12,7 +12,7 @@ public class TCombo extends Combo implements LokumGeneratingCombo{
 		generateLokum();
 		//test = new TComboTest();
 		this.comboPriority = 3;
-		Score.getInstance().scoreUpdateWrappedForm();
+		
 		
 	}
 	
@@ -62,5 +62,12 @@ public class TCombo extends Combo implements LokumGeneratingCombo{
 		WrappedLokum copy = (WrappedLokum) copyLokum(generatedLokum);
 		LokumGenerateEvent lge = new LokumGenerateEvent(copy);
 		EventDispatchQueue.getInstance().addEvent(lge);
+	}
+
+	@Override
+	public void updateScore() {
+		// TODO Auto-generated method stub
+		Score.getInstance().scoreUpdateWrappedForm();
+		
 	}
 }

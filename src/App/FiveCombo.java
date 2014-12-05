@@ -12,7 +12,7 @@ public class FiveCombo extends Combo implements LokumGeneratingCombo{
 		generateLokum();
 		//test = new FiveComboTest();
 		this.comboPriority = 4;
-		Score.getInstance().scoreUpdateBombForm();
+		
 		
 	}
 	
@@ -59,5 +59,12 @@ public class FiveCombo extends Combo implements LokumGeneratingCombo{
 		int x = lok.getRowIndex();
 		int y = lok.getColumnIndex();
 		return new BombLokum(x, y);
+	}
+
+	@Override
+	public void updateScore() {
+		// TODO Auto-generated method stub
+		Score.getInstance().scoreUpdateBombForm();
+		
 	}
 }
