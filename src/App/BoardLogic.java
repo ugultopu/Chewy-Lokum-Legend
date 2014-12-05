@@ -351,15 +351,12 @@ public class BoardLogic {
 	 */
 	public boolean swap(LogicField f0, LogicField f1){
 		/*
-		 * NOTE: This method allows swapping of the same lokums (That is: Arguments pointing to the exact same object.). Check if that would cause a problem. 
-		 */
-
-		/*
-		 * If locations are not suitable for swap, simply return w/o doing anything.
-		
+		 * What's the line below?
 		 */
 		EventDispatchQueue.getInstance().addEvent(new ClickListenerDeactiveEvent());
-		
+		/*
+		 * If locations are not suitable for swap, simply return w/o doing anything.
+		 */
 		if( !locationsSuitableForSwap(f0, f1) ){
 			EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
 			return false;
