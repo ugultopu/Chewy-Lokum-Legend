@@ -1,9 +1,10 @@
 package App;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 
-public abstract class Combo {
+public abstract class Combo implements Comparator<Combo>{
 	public int scoreAward;
 	public ArrayList<Lokum> lokums;
 	int comboPriority;
@@ -33,5 +34,16 @@ public abstract class Combo {
 		for(int comboLokumsIndex=0;comboLokumsIndex<comboLokums.size();comboLokumsIndex++){
 			comboLokums.get(comboLokumsIndex).addComboToComboList(this);
 		}
+	}
+
+	@Override
+	public int compare(Combo c1, Combo c2) {
+		// TODO Auto-generated method stub
+		if(c1.comboPriority < c2.comboPriority)
+			return 1;
+		else if(c1.comboPriority == c2.comboPriority)
+			return 0;
+		else
+			return -1;
 	}
 }
