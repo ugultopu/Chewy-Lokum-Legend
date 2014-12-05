@@ -72,12 +72,9 @@ public class GamePanel extends JPanel {
 	
 	public void endGame(){
 		running = false;
-//		gameOverPanel = new GameOverPanel(ownerFrame, scoreCalculator.getScore());
-//		remove(blockboard);
-//		
-//		gameOverPanel.setBounds(40, 60, 360, 540);
-//		add(gameOverPanel);
-//		gameOverPanel.repaint();
+		GameOverPanel.getInstance().setBounds(200, 100, 360, 540);
+		add(GameOverPanel.getInstance());
+		GameOverPanel.getInstance().repaint();
 	}
 		
 //	private void scoreUpdate(){
