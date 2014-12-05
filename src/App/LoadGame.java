@@ -11,6 +11,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
+import Tests.BoardLogicTest;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -21,6 +23,8 @@ public class LoadGame {
 		
 		
 		try {
+			LogicField[][] loadedBoard = new LogicField[Constants.BOARD_HEIGHT][Constants.BOARD_WIDTH];
+			
 			File saveFile = new File("save.xml");
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -28,7 +32,6 @@ public class LoadGame {
 			
 			document.getDocumentElement().normalize();
 			
-			System.out.println("Root element: " + document.getDocumentElement().getNodeName());
 			NodeList inGameNodes = document.getDocumentElement().getChildNodes();
 			/* Player */
 			/* Nothing to do with player yet */
@@ -39,30 +42,50 @@ public class LoadGame {
 			/* Lokums */
 			NodeList lokums = board.getChildNodes().item(0).getChildNodes();
 			for(int i=0; i<lokums.getLength();i++){
-				Node lokum = lokums.item(i);
-				NodeList lokumFeatures = lokum.getChildNodes();
-				System.out.println(lokumFeatures.item(0).getTextContent());
-				System.out.println(lokumFeatures.item(1).getFirstChild().getTextContent());
-				System.out.println(lokumFeatures.item(2).getTextContent());
+				Node lokumNode = lokums.item(i);
+				NodeList lokumFeatures = lokumNode.getChildNodes();
+				String color = lokumFeatures.item(0).getTextContent();
+				int x = Integer.parseInt(lokumFeatures.item(1).getFirstChild().getTextContent());
+				int y = Integer.parseInt(lokumFeatures.item(1).getLastChild().getTextContent());
+				String type = lokumFeatures.item(2).getTextContent();
+				LogicField lokum = Factory.createLogicField(x, y, type, color);
+				loadedBoard[y][x] = lokum;
 			}
 			
-			NodeList lokumList = document.getElementsByTagName("lokum");
+			/* Obstacles */
+			NodeList obstacles = board.getChildNodes().item(1).getChildNodes();
+			for(int i=0; i<obstacles.getLength();i++){
+				Node obstacleNode = obstacles.item(i);
+				NodeList obstacleFeatures = obstacleNode.getChildNodes();
+				String color = obstacleFeatures.item(0).getTextContent();
+				int x = Integer.parseInt(obstacleFeatures.item(1).getFirstChild().getTextContent());
+				int y = Integer.parseInt(obstacleFeatures.item(1).getLastChild().getTextContent());
+				LogicField obstacle = Factory.createLogicField(x, y, null, color);
+				loadedBoard[y][x] = obstacle;
+			}
+			
+			int goalScore = Integer.parseInt(inGameNodes.item(2).getTextContent());
+			int currentScore = Integer.parseInt(inGameNodes.item(3).getTextContent());
+			int movesLeft = Integer.parseInt(inGameNodes.item(4).getTextContent());
+			int level = Integer.parseInt(inGameNodes.item(5).getTextContent());
+			
+			Score.getInstance().setScore(currentScore);
+			InformationBoard informationBoard = InformationBoard.getInstance();
+			informationBoard.setCurrentScore(currentScore);
+			informationBoard.setGoalScore(goalScore);
+			informationBoard.setCurrentLevel(level);
+			informationBoard.setMovesLeft(5);
+			BoardLogic.loadBoard(loadedBoard);
 			
 			
-			
-			
-		} catch (SAXException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			System.out.println("The save.xml format is incorrect!");
+			return false;
+			
+		} 
 		
-		return false;
+		return true;
 		
 		
 	}

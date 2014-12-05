@@ -22,19 +22,23 @@ public class Factory {
 	}
 	
 	public static LogicField createLogicField(int x, int y, String type, String color){
-		switch (type){
-			case "NormalLokum":
-				return new NormalLokum(x, y, color);
-			case "VerticalStripedLokum":
-				return new VerticalStripedLokum(x, y, color);
-			case "HorizontalStripedLokum":
-				return new HorizontalStripedLokum(x, y, color);
-			case "WrappedLokum":
-				return new WrappedLokum(x, y, color);
-			case "BombLokum":
-				return new BombLokum(x, y);
-			default:
-				return new Obstacle(x, y, color);
+		if (type == null){
+			return new Obstacle(x, y, color);
+		}else{
+			switch (type){
+				case "NormalLokum":
+					return new NormalLokum(x, y, color);
+				case "VerticalStripedLokum":
+					return new VerticalStripedLokum(x, y, color);
+				case "HorizontalStripedLokum":
+					return new HorizontalStripedLokum(x, y, color);
+				case "WrappedLokum":
+					return new WrappedLokum(x, y, color);
+				case "BombLokum":
+					return new BombLokum(x, y);
+				default:
+					return null;
+			}
 		}
 	}
 	

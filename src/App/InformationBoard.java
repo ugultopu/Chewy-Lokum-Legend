@@ -14,7 +14,7 @@ public class InformationBoard extends JPanel {
 	private JLabel level,target,score,movesLeft,levelInput,targetInput,scoreInput,movesLeftInput;
 	private JButton saveButton;
 	private int currentScore;
-	private int goalScore = 30000;
+	private int goalScore = 1000000000;
 	private int currentLevel;
 	private int moves=20;
 	private static InformationBoard instance;
@@ -188,6 +188,15 @@ public class InformationBoard extends JPanel {
 	
 	public int getMovesLeft(){
 		return this.moves;
+	}
+
+	public void setGoalScore(int goalScore) {
+		this.goalScore = goalScore;
+		
+	}
+
+	public int getGoalScore() {
+		return goalScore;
 	}
 	
 }

@@ -22,5 +22,4 @@ public class WrappedWrappedMerge extends Merge {
 		destroyer2.comboDestroy();
 		score.scoreUpdateWrappedWrappedMerge();
 	}
-
 }

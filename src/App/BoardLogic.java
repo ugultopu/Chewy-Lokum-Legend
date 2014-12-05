@@ -27,6 +27,10 @@ public class BoardLogic {
 			instance = new BoardLogic();
 		return instance;
 	}
+	
+	public static void loadBoard(LogicField[][] logicFields){
+		instance = new BoardLogic(logicFields);
+	}
 
 	public LogicField[][] getLogicFields() {
 		return logicFields;
@@ -123,6 +127,18 @@ public class BoardLogic {
 		this.boardCombos = new ArrayList<Combo>();
 	}
 	
+	/**
+	 * This constructor is only used on Load game
+	 */
+	private BoardLogic(LogicField[][] logicFields){
+		this.rowSize = Constants.BOARD_WIDTH;
+		this.columnSize = Constants.BOARD_HEIGHT;
+		this.logicFields = logicFields;
+		NewBoardEvent newBoardEvent = new NewBoardEvent(copyLogicFieldArray());
+		EventDispatchQueue.getInstance().addEvent(newBoardEvent);
+		this.boardCombos = new ArrayList<Combo>();
+	}
+	
 	
 	/**
 	 * This method firstly populates the board with random lokums. Then, it checks the board
@@ -179,7 +195,7 @@ public class BoardLogic {
 			if( logicFields[i][columnIndex] instanceof EmptyLogicField )
 				logicFields[i][columnIndex] = (LogicField) Factory.createRandomLokum(i, columnIndex);
 		}
-	}	
+	}
 
 	/**
 	 * After destroys, levels the LogicFields that have emptyLogicFields underneath. After that, populates the emptied locations with new LogicFields falling from above the
@@ -334,31 +350,43 @@ public class BoardLogic {
 	 *	This method takes two positions and does the appropriate swapping operation between them.
 	 */
 	public boolean swap(LogicField f0, LogicField f1){
-		/*
-		 * NOTE: This method allows swapping of the same lokums (That is: Arguments pointing to the exact same object.). Check if that would cause a problem. 
-		 */
 
+		/*
+		 * What's the line below?
+		 */
+		//EventDispatchQueue.getInstance().addEvent(new ClickListenerDeactiveEvent());
 		/*
 		 * If locations are not suitable for swap, simply return w/o doing anything.
 		 */
-		if( !locationsSuitableForSwap(f0, f1) )
+
+		if( !locationsSuitableForSwap(f0, f1) ){
+			System.out.println("Locations are not suitable for swap.");
+			System.out.println("f0's row and column indices: " + f0.getRowIndex() + " " + f0.getColumnIndex());
+			System.out.println("f1's row and column indices: " + f1.getRowIndex() + " " + f1.getColumnIndex());
+			//EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
 			return false;
+		}
 		// if here, then locations are suitable for swap.
 		/*
 		 * If types are not suitable for swap, simply return w/o doing anything.
 		 */
-		if( !typesSuitableForSwap(f0, f1) )
+		if( !typesSuitableForSwap(f0, f1) ){
+			System.out.println("Types are not suitable for swap.");
+			//EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
 			return false;
+		}
 		// if here, then types are suitable for swap as well.
 		/*
 		 * ADD LOKUM RETURNING LIST FOR MERGE DESTROY AS WELL.
 		 */
 		if( isMergeSwap( f0, f1 ) ){
+			System.out.println("In merge swap.");
 			mergeDestroy( f0,  f1 );
 			readjustBoardAfterDestroy();
 		}
 		// if here, then not merge swap. So combo swap.
 		else{
+			System.out.println("In combo swap.");
 			/*
 			 * If here, then this means that this swap is a swap that requires the swapping of LogicFields on logicFields array. So perform it.
 			 */
@@ -370,10 +398,7 @@ public class BoardLogic {
 			/*
 			 * Then, check for combos.
 			 */
-
-			//findBoardCombos();
-			destroyCombos();
-			readjustBoardAfterDestroy();
+			findBoardCombos();
 			/*
 			 * After checking for combos, check if there are any combos actually. If not, revert the swap and return from the method.
 			 */
@@ -386,20 +411,14 @@ public class BoardLogic {
 				 * Send a swap event to Kugi.
 				 */
 				EventDispatchQueue.getInstance().addEvent(new SwapEvent((Lokum)f0.copyLogicField(), (Lokum)f1.copyLogicField()));
+				//EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
 				return false;
 			}
 			/*
-			 * If here, then there were indeed combos present. So find them and execute them. 
+			 * If here, then there are combos.
 			 */
-
-			for(int currentComboIndex=0;currentComboIndex<boardCombos.size();currentComboIndex++){
-				Combo currentCombo = boardCombos.get(currentComboIndex);
-				ArrayList<Lokum> currentCombosLokums = currentCombo.getComboLokums();
-				for(int currentCombosLokumIndex=0;currentCombosLokumIndex<currentCombosLokums.size();currentCombosLokumIndex++){
-					Lokum currentLokum = currentCombosLokums.get(currentCombosLokumIndex);
-					((ComboDestroyable) currentLokum).comboDestroy();
-				}
-			}
+			destroyCombos();
+			readjustBoardAfterDestroy();
 			// send comboDestroyedFields to Kugi.
 			// How does kugi get new generated lokums in this implementation?
 			// We are changing this sending all destroyed lokums approach to sending one destroyed lokum at a time approach.
@@ -407,6 +426,7 @@ public class BoardLogic {
 			// EventDispatchQueue.getInstance().addEvent(new NonLokumGeneratingEvent(convertLogicFieldListToEmptyLogicFieldList(comboDestroyedFields)));
 		}
 		InformationBoard.getInstance().decreaseMoves();
+		//EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
 		return true;
 	}
 
@@ -464,9 +484,13 @@ public class BoardLogic {
 		int xDifference = Math.abs(f0.getRowIndex() - f1.getRowIndex());
 		int yDifference = Math.abs(f0.getColumnIndex() - f1.getColumnIndex());
 
-		if((xDifference + yDifference) > 2)
-			return false;
-		return true;
+		if( (xDifference == 1) && (yDifference == 1) )
+			return true;
+		if( (xDifference == 0) && (yDifference == 1) )
+			return true;
+		if( (yDifference == 0) && (xDifference == 1) )
+			return true;
+		return false;
 	}
 
 	private boolean typesSuitableForSwap(LogicField f0, LogicField f1){
@@ -578,6 +602,8 @@ public class BoardLogic {
 	}
 
 	public void swap(int selectedColumn, int selectedRow, int otherColumn, int otherRow) {
+		System.out.println("Selected lokum's row and column indices in 4arg swap: " + selectedRow + " " + selectedColumn);
+		System.out.println("Other lokum's row and column indices in 4arg swap: " + otherRow + " " + otherColumn);
 		swap(logicFields[selectedRow][selectedColumn], logicFields[otherRow][otherColumn]);
 	}
 

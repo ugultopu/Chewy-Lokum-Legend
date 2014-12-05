@@ -44,7 +44,7 @@ public class LevelBoard extends JPanel {
 			buttonArray[n] = new JButton("Level " + (n + 1));
 			add(buttonArray[n],c);
 			counterX++;
-			int level = n;
+			final int level = n;
 			buttonArray[n].addActionListener(new ActionListener(){
 
 				@Override
