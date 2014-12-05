@@ -4,7 +4,7 @@ public class ClickListenerActivateEvent extends GameEvent {
 
 	@Override
 	public void executeEvent() {
-		ClickListener.getInstance().deactivate();
+		ClickListener.getInstance().activate();
 	}
 
 }
