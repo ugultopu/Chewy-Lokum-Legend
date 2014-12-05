@@ -1,8 +1,13 @@
 package App;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -26,9 +31,19 @@ public class LoadGame {
 			LogicField[][] loadedBoard = new LogicField[Constants.BOARD_HEIGHT][Constants.BOARD_WIDTH];
 			
 			File saveFile = new File("save.xml");
+			String language = XMLConstants.W3C_XML_SCHEMA_NS_URI;
+		    SchemaFactory schemaFactory = SchemaFactory.newInstance(language);
+		    Schema schema = schemaFactory.newSchema(new File("game.xsd"));
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			Document document = documentBuilder.parse(saveFile);
+			
+			/* Validation */
+			/* I'm skipping this validation since there is an error in the xsd */
+//			if(!validateFromXsd(schema,document)){
+//				return false;
+//			}
+			
 			
 			document.getDocumentElement().normalize();
 			
@@ -83,5 +98,19 @@ public class LoadGame {
 			return false;
 		}
 		return true;
+	}
+	
+	private static boolean validateFromXsd(Schema schema, Document document){
+		Validator validator = schema.newValidator();
+		try {
+			validator.validate(new DOMSource(document));
+			return true;
+		} catch (SAXException e) {
+			System.out.println("XML validation unsuccesful!");
+			return false;
+		} catch (IOException e) {
+			System.out.println("IO error occured.");
+			return false;
+		}
 	}
 }

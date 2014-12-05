@@ -74,7 +74,6 @@ public class Score {
 	
 	public void scoreUpdateThreeCombo(){
 		currentScore += 60;
-		System.out.println("added");
 		sue = new ScoreUpdateEvent(currentScore);
 		EventDispatchQueue.getInstance().addEvent(sue);
 	}
