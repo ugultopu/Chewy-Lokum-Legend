@@ -12,7 +12,7 @@ public class ApplicationWindow extends JFrame {
 	protected static ApplicationWindow instance;
 
 	public ApplicationWindow() {
-		super("TestisCrush");
+		super("Chewy Lokum Legend");
 		
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
