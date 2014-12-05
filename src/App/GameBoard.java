@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Tests.BoardLogicTest;
+
 public class GameBoard extends JPanel {
 
 	private LokumBox[][] boardArray;

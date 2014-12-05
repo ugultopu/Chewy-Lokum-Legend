@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
 
+import Tests.BoardLogicTest;
+
 import com.sun.org.apache.bcel.internal.generic.DALOAD;
 
 
@@ -194,8 +196,8 @@ public class BoardLogic {
 		if ( !isBoardStabilized() ){
 			destroyCombos();
 			readjustBoardAfterDestroy();
-		}
 			
+		}	
 	}
 
 	/**
