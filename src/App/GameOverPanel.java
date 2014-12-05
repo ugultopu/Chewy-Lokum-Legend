@@ -64,12 +64,24 @@ public class GameOverPanel extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				InformationBoard.getInstance().setCurrentLevel(InformationBoard.getInstance().getCurrentLevel());				
-				ApplicationWindow.removePanel(GamePanel.getInstance());
-				ApplicationWindow.addPanel(GamePanel.getInstance());
+				GamePanel.resetInstance();
+				GameBoard.resetInstance();
+				InformationBoard.resetInstance();
+				BoardLogic.resetInstance();
+				Score.getInstance().setScore(0);
+//				InformationBoard.getInstance().setCurrentLevel(InformationBoard.getInstance().getCurrentLevel());				
+				
+				GamePanel.getInstance().remove(GameOverPanel.getInstance());
+				GamePanel.getInstance().remove(InformationBoard.getInstance());
+				
+				GamePanel.getInstance().add(GameBoard.getInstance());
+				GamePanel.getInstance().add(InformationBoard.getInstance());
+				
+				GamePanel.getInstance().repaint();
 				GamePanel.getInstance().requestFocusInWindow();
 				GamePanel.getInstance().startGame();
 				GamePanel.getInstance().repaint();
+				
 			}
 
 		});
@@ -81,9 +93,11 @@ public class GameOverPanel extends JPanel{
 				InformationBoard.getInstance().setCurrentLevel(InformationBoard.getInstance().getCurrentLevel()+1);
 				ApplicationWindow.removePanel(GamePanel.getInstance());
 				ApplicationWindow.addPanel(GamePanel.getInstance());
+				BoardLogic.resetInstance();
 				GamePanel.getInstance().requestFocusInWindow();
 				GamePanel.getInstance().startGame();
 				GamePanel.getInstance().repaint();
+				
 			}
 
 		});
@@ -95,6 +109,7 @@ public class GameOverPanel extends JPanel{
 				ApplicationWindow.removePanel(GamePanel.getInstance());
 				ApplicationWindow.addPanel(MenuPanel.getInstance());
 				MenuPanel.getInstance().repaint();
+				BoardLogic.resetInstance();
 				GamePanel.getInstance().remove(GameOverPanel.getInstance());
 				GamePanel.resetInstance();
 				GameBoard.resetInstance();

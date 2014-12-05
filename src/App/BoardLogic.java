@@ -28,6 +28,10 @@ public class BoardLogic {
 		return instance;
 	}
 	
+	public static void resetInstance(){
+		instance = null;
+	}
+	
 	public static void loadBoard(LogicField[][] logicFields){
 		instance = new BoardLogic(logicFields);
 	}
@@ -626,5 +630,4 @@ public class BoardLogic {
 		}
 		return  emptyLogicFields;
 	}
-
 }
