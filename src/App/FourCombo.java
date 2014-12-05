@@ -3,7 +3,7 @@ package App;
 import java.util.ArrayList;
 
 
-public class FourCombo extends Combo{
+public class FourCombo extends Combo implements LokumGeneratingCombo{
 	private FourComboTest test;
 	private ArrayList<Lokum> lokums;
 	private Lokum generatedLokum;
@@ -14,11 +14,14 @@ public class FourCombo extends Combo{
 		//test = new FourComboTest();
 		this.comboPriority = 2;
 		Score.getInstance().scoreUpdateStripedForm();
+		StripedLokum copy = (StripedLokum) copyLokum(generatedLokum);
+		LokumGenerateEvent lge = new LokumGenerateEvent(copy);
+		EventDispatchQueue.getInstance().addEvent(lge);
 	}
 	
 	
 	
-	private void generateLokum(){
+	public void generateLokum(){
 		Lokum midLokum = lokums.get(1);
 		Lokum nextLokum = lokums.get(2);
 		int xMid = midLokum.getRowIndex();
@@ -55,5 +58,19 @@ public class FourCombo extends Combo{
 	public ArrayList<Lokum> getComboLokums() {
 		// TODO Auto-generated method stub
 		return lokums;
+	}
+
+
+
+	@Override
+	public Lokum copyLokum(Lokum lok) {
+		int x = lok.getRowIndex();
+		int y = lok.getColumnIndex();
+		String color = lok.getLokumColor();
+		if(generatedLokum instanceof VerticalStripedLokum){
+			return new VerticalStripedLokum(x, y, color);
+		}else{
+			return new HorizontalStripedLokum(x, y, color);
+		}
 	}
 }
