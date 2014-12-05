@@ -42,9 +42,7 @@ public class GameOverPanel extends JPanel{
 			gameOver.setFont(new Font("Tahoma", Font.BOLD, 30));
 			gameOver.setHorizontalAlignment(SwingConstants.CENTER);
 			
-			add(nextLevel);
 			
-			add(replay);
 
 		add(mainMenu);
 		mainMenu.setBounds(190, 250, 150, 50);
@@ -58,6 +56,7 @@ public class GameOverPanel extends JPanel{
 												
 				int level = InformationBoard.getInstance().getCurrentLevel();
 				ApplicationWindow.removePanel(GamePanel.getInstance());
+				Score.resetInstance();
 				InformationBoard.getInstance().repaint();
 				GamePanel.resetInstance();
 				GameBoard.resetInstance();
@@ -89,26 +88,19 @@ public class GameOverPanel extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				int level = InformationBoard.getInstance().getCurrentLevel();
 				ApplicationWindow.removePanel(GamePanel.getInstance());
-				InformationBoard.getInstance().repaint();
+				Score.resetInstance();
+				BoardLogic.resetInstance();
 				GamePanel.resetInstance();
 				GameBoard.resetInstance();
-				BoardLogic.resetInstance();
 				InformationBoard.resetInstance();
-				InformationBoard.getInstance().repaint();
-				ApplicationWindow.addPanel(GamePanel.getInstance());
-				GamePanel.getInstance().remove(GameOverPanel.getInstance());
-				GamePanel.getInstance().remove(InformationBoard.getInstance());
-				
-				GamePanel.getInstance().add(GameBoard.getInstance());
-				GamePanel.getInstance().add(InformationBoard.getInstance());
-				
 				InformationBoard.getInstance().setCurrentLevel(level+1);
-
-				Score.getInstance().setScore(0);
-				
+				ApplicationWindow.removePanel(ChooseLevelPanel.getInstance());
+				ApplicationWindow.addPanel(GamePanel.getInstance());
 				GamePanel.getInstance().requestFocusInWindow();
+				InformationBoard.getInstance().requestFocusInWindow();
+				GameBoard.getInstance().requestFocusInWindow();
 				GamePanel.getInstance().startGame();
-				GameBoard.getInstance().repaint();
+				GamePanel.getInstance().repaint();
 				InformationBoard.getInstance().repaint();
 			}
 
@@ -118,16 +110,22 @@ public class GameOverPanel extends JPanel{
 		mainMenu.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				int level = InformationBoard.getInstance().getCurrentLevel();
 				ApplicationWindow.removePanel(GamePanel.getInstance());
-				ApplicationWindow.addPanel(MenuPanel.getInstance());
-				MenuPanel.getInstance().repaint();
+				Score.resetInstance();
 				BoardLogic.resetInstance();
-				GamePanel.getInstance().remove(GameOverPanel.getInstance());
 				GamePanel.resetInstance();
 				GameBoard.resetInstance();
 				InformationBoard.resetInstance();
-				Score.getInstance().setScore(0);
-				GamePanel.getInstance().add(GameBoard.getInstance());
+				InformationBoard.getInstance().setCurrentLevel(level);
+				ApplicationWindow.removePanel(ChooseLevelPanel.getInstance());
+				ApplicationWindow.addPanel(GamePanel.getInstance());
+				GamePanel.getInstance().requestFocusInWindow();
+				InformationBoard.getInstance().requestFocusInWindow();
+				GameBoard.getInstance().requestFocusInWindow();
+				GamePanel.getInstance().startGame();
+				GamePanel.getInstance().repaint();
+				InformationBoard.getInstance().repaint();
 			}
 		});
 
@@ -162,21 +160,23 @@ public class GameOverPanel extends JPanel{
 		g.setColor(new Color(0,0,0));
 		
 		if(win==true){
-		victory.repaint();
-		victory.setOpaque(true);
-		victory.setBackground(Color.RED);
-		nextLevel.setBounds(20, 250, 150, 50);
-		nextLevel.setBorderPainted(false);
-		nextLevel.setFocusPainted(false);
-		nextLevel.repaint();
+			add(nextLevel);
+			victory.repaint();
+			victory.setOpaque(true);
+			victory.setBackground(Color.RED);
+			nextLevel.setBounds(20, 250, 150, 50);
+			nextLevel.setBorderPainted(false);
+			nextLevel.setFocusPainted(false);
+			nextLevel.repaint();
 		} else {
-		gameOver.repaint();
-		gameOver.setOpaque(true);
-		gameOver.setBackground(Color.RED);
-		replay.setBounds(20, 250, 150, 50);
-		replay.setBorderPainted(false);
-		replay.setFocusPainted(false);
-		replay.repaint();
+			add(replay);
+			gameOver.repaint();
+			gameOver.setOpaque(true);
+			gameOver.setBackground(Color.RED);
+			replay.setBounds(20, 250, 150, 50);
+			replay.setBorderPainted(false);
+			replay.setFocusPainted(false);
+			replay.repaint();
 		}
 		mainMenu.repaint();
 	}

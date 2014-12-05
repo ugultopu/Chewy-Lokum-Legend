@@ -618,9 +618,8 @@ public class BoardLogic {
 	}
 
 	public void swap(int selectedColumn, int selectedRow, int otherColumn, int otherRow) {
-		System.out.println("Selected lokum's row and column indices in 4arg swap: " + selectedRow + " " + selectedColumn);
-		System.out.println("Other lokum's row and column indices in 4arg swap: " + otherRow + " " + otherColumn);
-		swap(logicFields[selectedRow][selectedColumn], logicFields[otherRow][otherColumn]);
+		//swap(logicFields[selectedRow][selectedColumn], logicFields[otherRow][otherColumn]);
+		Tests.BoardLogicTest.swapTest(logicFields[selectedRow][selectedColumn], logicFields[otherRow][otherColumn]);
 	}
 
 	private LogicField[][] copyLogicFieldArray(){

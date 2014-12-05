@@ -75,6 +75,7 @@ public class BoardLogicTest{
 		System.out.println(toString(BL));
 	}
 	
+	/* This test is deprecated it needs to be modified
 	public static void findBoardCombosTest(){
 		BoardLogic BL = BoardLogic.getInstance();
 		System.out.println("Before Combo:");
@@ -94,7 +95,9 @@ public class BoardLogicTest{
 				}
 			}
 		}
+		
 		System.out.println("After Combo:");
 		System.out.println(toString(BL));
 	}
+	*/
 }

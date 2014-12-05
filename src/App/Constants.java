@@ -43,5 +43,5 @@ public class Constants {
 	public static final int INITIAL_SPEED=1000;
 	
 	public static final int NUMBER_OF_MOVES = 90;
-	public static final int GOAL_SCORE = 100000;
+	public static final int GOAL_SCORE = 10000;
 }

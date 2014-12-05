@@ -7,13 +7,16 @@ public class Score {
 	
 	private Score(){
 		currentScore = 0;
-		
 	}
 	
 	public static Score getInstance(){
 		if(instance == null)
 			instance = new Score();
 		return instance;
+	}
+	
+	public static void resetInstance(){
+		instance = null;
 	}
 	
 	public int getCurrentScore(){
@@ -71,6 +74,7 @@ public class Score {
 	
 	public void scoreUpdateThreeCombo(){
 		currentScore += 60;
+		System.out.println("added");
 		sue = new ScoreUpdateEvent(currentScore);
 		EventDispatchQueue.getInstance().addEvent(sue);
 	}

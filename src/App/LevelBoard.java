@@ -49,6 +49,7 @@ public class LevelBoard extends JPanel {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					Score.resetInstance();
 					BoardLogic.resetInstance();
 					GamePanel.resetInstance();
 					GameBoard.resetInstance();
