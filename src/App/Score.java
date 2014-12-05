@@ -74,5 +74,9 @@ public class Score {
 		sue = new ScoreUpdateEvent(currentScore);
 		EventDispatchQueue.getInstance().addEvent(sue);
 	}
+
+	public void setScore(int currentScore) {
+		this.currentScore = currentScore;
+	}
 	
 }

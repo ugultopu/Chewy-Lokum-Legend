@@ -11,6 +11,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
+import Tests.BoardLogicTest;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -30,7 +32,6 @@ public class LoadGame {
 			
 			document.getDocumentElement().normalize();
 			
-			System.out.println("Root element: " + document.getDocumentElement().getNodeName());
 			NodeList inGameNodes = document.getDocumentElement().getChildNodes();
 			/* Player */
 			/* Nothing to do with player yet */
@@ -52,7 +53,7 @@ public class LoadGame {
 			}
 			
 			/* Obstacles */
-			NodeList obstacles = board.getChildNodes().item(0).getChildNodes();
+			NodeList obstacles = board.getChildNodes().item(1).getChildNodes();
 			for(int i=0; i<obstacles.getLength();i++){
 				Node obstacleNode = obstacles.item(i);
 				NodeList obstacleFeatures = obstacleNode.getChildNodes();
@@ -63,20 +64,28 @@ public class LoadGame {
 				loadedBoard[y][x] = obstacle;
 			}
 			
+			int goalScore = Integer.parseInt(inGameNodes.item(2).getTextContent());
+			int currentScore = Integer.parseInt(inGameNodes.item(3).getTextContent());
+			int movesLeft = Integer.parseInt(inGameNodes.item(4).getTextContent());
+			int level = Integer.parseInt(inGameNodes.item(5).getTextContent());
+			
+			Score.getInstance().setScore(currentScore);
+			InformationBoard informationBoard = InformationBoard.getInstance();
+			informationBoard.setCurrentScore(currentScore);
+			informationBoard.setGoalScore(goalScore);
+			informationBoard.setCurrentLevel(level);
+			informationBoard.setMovesLeft(5);
+			BoardLogic.loadBoard(loadedBoard);
 			
 			
-		} catch (SAXException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			System.out.println("The save.xml format is incorrect!");
+			return false;
+			
+		} 
 		
-		return false;
+		return true;
 		
 		
 	}

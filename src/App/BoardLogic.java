@@ -27,6 +27,10 @@ public class BoardLogic {
 			instance = new BoardLogic();
 		return instance;
 	}
+	
+	public static void loadBoard(LogicField[][] logicFields){
+		instance = new BoardLogic(logicFields);
+	}
 
 	public LogicField[][] getLogicFields() {
 		return logicFields;
@@ -118,6 +122,18 @@ public class BoardLogic {
 		boardCombos = new ArrayList<Combo>();
 		initializeBoard();	// initializes the board to all EmptyLogicField objects.
 		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
+		NewBoardEvent newBoardEvent = new NewBoardEvent(copyLogicFieldArray());
+		EventDispatchQueue.getInstance().addEvent(newBoardEvent);
+		this.boardCombos = new ArrayList<Combo>();
+	}
+	
+	/**
+	 * This constructor is only used on Load game
+	 */
+	private BoardLogic(LogicField[][] logicFields){
+		this.rowSize = Constants.BOARD_WIDTH;
+		this.columnSize = Constants.BOARD_HEIGHT;
+		this.logicFields = logicFields;
 		NewBoardEvent newBoardEvent = new NewBoardEvent(copyLogicFieldArray());
 		EventDispatchQueue.getInstance().addEvent(newBoardEvent);
 		this.boardCombos = new ArrayList<Combo>();
