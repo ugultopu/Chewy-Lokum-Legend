@@ -11,7 +11,11 @@ public class BoardLogicTest{
 
 		for(int i = 0; i < BL.getRowSize(); i++){
 			for(int j = 0; j < BL.getColumnSize(); j++){
-				if(!(logicFields[i][j] instanceof EmptyLogicField)){
+				if(logicFields[i][j] instanceof Obstacle){
+					Obstacle obs = (Obstacle) logicFields[i][j];
+					String color = Character.toString(obs.getObstacleColor().charAt(0));
+					boardString += "O"+ color + "|";
+				}else if(!(logicFields[i][j] instanceof EmptyLogicField)){
 					Lokum lok = (Lokum)logicFields[i][j];
 					String color = Character.toString(lok.getLokumColor().charAt(0));
 					String type = Character.toString(lok.getType().charAt(0));
