@@ -25,7 +25,7 @@ public class InformationBoard extends JPanel {
 		levelInput = new JLabel("");
 		targetInput = new JLabel(""+goalScore);
 		scoreInput = new JLabel(""+currentScore);
-		movesLeftInput = new JLabel(""+moves);
+		movesLeftInput = new JLabel("20");
 		saveButton = new JButton("Save Game");
 		
 		setLayout(null);
@@ -136,11 +136,15 @@ public class InformationBoard extends JPanel {
 	public void updateScore(int currentScore) {
 		this.currentScore = currentScore;
 		scoreInput.setText(""+currentScore);
+		if(this.currentScore==this.goalScore || this.currentScore>this.goalScore){
+			GameOverPanel.getInstance().setWin(true);
+			GamePanel.getInstance().endGame();			
+		}
 	}
 	
 	public void setCurrentLevel(int currentLevel){
 		levelInput.setText(""+currentLevel);
-	}	
+	}
 	
 	public int getCurrentLevel(){
 		return Integer.parseInt(levelInput.getText());
@@ -149,6 +153,10 @@ public class InformationBoard extends JPanel {
 	public void decreaseMoves(){
 		this.moves--;
 		movesLeftInput.setText(""+moves);
+		if(moves==0){
+			GameOverPanel.getInstance().setWin(false);
+			GamePanel.getInstance().endGame();			
+		}
 	}
 	
 	public int getCurrentScore(){
