@@ -3,11 +3,11 @@ package App;
 public class Score {
 	private int currentScore;
 	private static Score instance;
-	private boolean updated;
+	private ScoreUpdateEvent sue;
 	
 	private Score(){
 		currentScore = 0;
-		updated = false;
+		
 	}
 	
 	public static Score getInstance(){
@@ -20,56 +20,50 @@ public class Score {
 		return currentScore;
 	}
 	
-	public boolean isUpdated(){
-		return updated;
-	}
-	
-	public void setUpdated(boolean upt){
-		updated = upt;
-	}
-	
 	public void scoreUpdateStripedForm(){
 		currentScore += 120;
-		updated = true;
+		sue = new ScoreUpdateEvent(currentScore);
+		
 	}
 	
 	public void scoreUpdateWrappedForm(){
 		currentScore += 200;
-		updated = true;
+		sue = new ScoreUpdateEvent(currentScore);
 	}
 	
 	public void scoreUpdateBombForm(){
 		currentScore += 200;
-		updated = true;
+		sue = new ScoreUpdateEvent(currentScore);
 	}
 	
 	public void scoreUpdateStripedUse(int numberOfLokumsDestroyed){
 		currentScore += numberOfLokumsDestroyed * 60;
-		updated = true;
+		sue = new ScoreUpdateEvent(currentScore);
 	}
 	
 	public void scoreUpdateWrappedUse(){
 		currentScore += 1080;
-		updated = true;
+		sue = new ScoreUpdateEvent(currentScore);
 	}
 	
 	public void scoreUpdateBombUse(int numberOfLokumsDestroyed){
 		currentScore += numberOfLokumsDestroyed * numberOfLokumsDestroyed * 60;
-		updated = true;
+		sue = new ScoreUpdateEvent(currentScore);
 	}
 	
 	public void scoreUpdateWrappedWrappedMerge(){
 		currentScore += 3600;
-		updated = true;
+		sue = new ScoreUpdateEvent(currentScore);
 	}
 	
 	public void scoreUpdateBombMerge(int numberOfLokumsOnTheBoard){
 		currentScore += numberOfLokumsOnTheBoard * numberOfLokumsOnTheBoard * 100;
-		updated = true;
+		sue = new ScoreUpdateEvent(currentScore);
 	}
 	
 	public void scoreUpdateThreeCombo(){
 		currentScore += 60;
+		sue = new ScoreUpdateEvent(currentScore);
 	}
 	
 }
