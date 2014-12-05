@@ -478,7 +478,7 @@ public class BoardLogic {
 		int xDifference = Math.abs(f0.getRowIndex() - f1.getRowIndex());
 		int yDifference = Math.abs(f0.getColumnIndex() - f1.getColumnIndex());
 
-		if((xDifference + yDifference) == 2)
+		if( (xDifference == 1) && (yDifference == 1) )
 			return true;
 		if( (xDifference == 0) && (yDifference == 1) )
 			return true;
