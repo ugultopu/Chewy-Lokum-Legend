@@ -363,6 +363,7 @@ public class BoardLogic {
 			 */
 
 			findBoardCombos();
+			destroyCombos();
 			/*
 			 * After checking for combos, check if there are any combos actually. If not, revert the swap and return from the method.
 			 */
@@ -564,7 +565,7 @@ public class BoardLogic {
 	}
 
 	public void swap(int selectedColumn, int selectedRow, int otherColumn, int otherRow) {
-		swap(logicFields[selectedRow][selectedColumn], logicFields[selectedRow][selectedColumn]);
+		swap(logicFields[selectedRow][selectedColumn], logicFields[otherRow][otherColumn]);
 	}
 
 	private LogicField[][] copyLogicFieldArray(){
