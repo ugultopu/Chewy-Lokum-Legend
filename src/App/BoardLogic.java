@@ -350,6 +350,8 @@ public class BoardLogic {
 	 *	This method takes two positions and does the appropriate swapping operation between them.
 	 */
 	public boolean swap(LogicField f0, LogicField f1){
+		System.out.println("Cum before swap.");
+		System.out.println(BoardLogicTest.toString(this));
 		/*
 		 * NOTE: This method allows swapping of the same lokums (That is: Arguments pointing to the exact same object.). Check if that would cause a problem. 
 		 */
@@ -424,6 +426,8 @@ public class BoardLogic {
 					((ComboDestroyable) currentLokum).comboDestroy();
 				}
 			}
+			System.out.println("Cum after swap.");
+			System.out.println(BoardLogicTest.toString(this));
 			// send comboDestroyedFields to Kugi.
 			// How does kugi get new generated lokums in this implementation?
 			// We are changing this sending all destroyed lokums approach to sending one destroyed lokum at a time approach.
@@ -432,6 +436,7 @@ public class BoardLogic {
 		}
 		InformationBoard.getInstance().decreaseMoves();
 		EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
+		
 		return true;
 	}
 
