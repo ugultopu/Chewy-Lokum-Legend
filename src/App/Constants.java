@@ -8,6 +8,8 @@ public class Constants {
 	public static final int ANIMATION_WINDOW_HEIGHT = 576;
 	public static final int INFORMATION_BOARD_WIDTH = 220;
 	public static final int INFORMATION_BOARD_HEIGHT = 300;
+	public static final int VERTICAL_EMPTY_SPACE = 60;
+	public static final int HORIZONTAL_EMPTY_SPACE = 40;
 	
 	/* Color Names */
 	public static final String LOKUM_COLOR_RED = "red";

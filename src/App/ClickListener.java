@@ -15,6 +15,12 @@ public class ClickListener implements MouseListener {
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		System.out.println("clicked");
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		System.out.println("pressed");
 		if(active){
 			if(selectedRow == null || selectedColumn == null){
 				selectedRow = convertToRowIndex(e.getY());
@@ -25,14 +31,9 @@ public class ClickListener implements MouseListener {
 				BoardLogic.getInstance().swap(selectedColumn, selectedRow, otherColumn, otherRow);
 				selectedRow = null;
 				selectedColumn = null;
+				System.out.println("swapped request sent");
 			}
 		}	
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -64,17 +65,17 @@ public class ClickListener implements MouseListener {
 	}
 	
 	private int convertToRowIndex(Integer yLocation){
-		return (Constants.ANIMATION_WINDOW_HEIGHT-yLocation)/(Constants.ANIMATION_WINDOW_HEIGHT/Constants.SCREEN_HEIGHT);
+		return (int) (Constants.ANIMATION_WINDOW_HEIGHT-yLocation)/(Constants.ANIMATION_WINDOW_HEIGHT/Constants.NUMBER_OF_COLUMNS);
 	}
 	
 	private int convertToColumnIndex(Integer xLocation){
-		return selectedColumn = xLocation/(Constants.ANIMATION_WINDOW_WIDTH/Constants.SCREEN_WIDTH);
+		return selectedColumn = (int) xLocation/(Constants.ANIMATION_WINDOW_WIDTH/Constants.NUMBER_OF_COLUMNS);
 	}
 
 	public static ClickListener getInstance() {
 		if (instance == null)
 			instance = new ClickListener();
-		return null;
+		return instance;
 	}
 
 }

@@ -49,7 +49,7 @@ public class MenuPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				
 				ApplicationWindow.removePanel(instance);
 				ApplicationWindow.addPanel(ChooseLevelPanel.getInstance());
 				ChooseLevelPanel.getInstance().requestFocusInWindow();
