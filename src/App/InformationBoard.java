@@ -131,4 +131,8 @@ public class InformationBoard extends JPanel {
 	public static void resetInstance(){
 		instance = null;
 	}
+
+	public void updateScore(int currentScore) {
+		scoreInput.setText(""+currentScore);
+	}
 }

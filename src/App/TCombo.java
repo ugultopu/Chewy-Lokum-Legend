@@ -13,7 +13,7 @@ public class TCombo extends Combo{
 		//test = new TComboTest();
 		this.comboPriority = 3;
 		Score.getInstance().scoreUpdateWrappedForm();
-		Score.getInstance().setUpdated(true);
+
 	}
 	
 	public Lokum getGeneratedLokum(){

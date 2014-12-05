@@ -2,6 +2,8 @@ package App;
 
 import java.util.LinkedList;
 
+import Tests.BoardLogicTest;
+
 
 
 public class EventDispatchQueue {
@@ -19,6 +21,7 @@ public class EventDispatchQueue {
 	}
 	
 	public synchronized GameEvent getEvent(){
+		System.out.println(BoardLogicTest.toString(BoardLogic.getInstance()));
 		return eventQueue.removeFirst();
 	}
 	

@@ -11,7 +11,6 @@ public class ThreeCombo extends Combo {
 		this.lokums = lokums;
 		this.comboPriority = 1;
 		Score.getInstance().scoreUpdateThreeCombo();
-		Score.getInstance().setUpdated(true);
 	}
 	
 //Test for the method:

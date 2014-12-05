@@ -3,15 +3,15 @@ package App;
 
 public class ScoreUpdateEvent extends GameEvent {
 
-	int scoreIncrement;
+	int newScore;
 	
-	public ScoreUpdateEvent(int scoreIncrement){
-		this.scoreIncrement = scoreIncrement;
+	public ScoreUpdateEvent(int newScore){
+		this.newScore = newScore;
 	}
 	
 	@Override
 	public void executeEvent() {
-		InformationBoard.getInstance().increaseScore(scoreIncrement);
+		InformationBoard.getInstance().updateScore(newScore);
 		InformationBoard.getInstance().repaint();
 	}
 

@@ -21,7 +21,6 @@ public class WrappedWrappedMerge extends Merge {
 		destroyer1.comboDestroy();
 		destroyer2.comboDestroy();
 		score.scoreUpdateWrappedWrappedMerge();
-		score.setUpdated(true);
 	}
 
 }
