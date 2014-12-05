@@ -149,6 +149,9 @@ public class BoardLogic {
 				Lokum currentCombosCurrentLokum = currentComboLokums.get(currentComboLokumIndex);
 				currentCombosCurrentLokum.comboDestroy();
 			}
+			if(currentCombo instanceof LokumGeneratingCombo){
+				
+			}
 		}
 	}
 
@@ -208,7 +211,7 @@ public class BoardLogic {
 	private void levelBoard(HashMap<LogicField, Integer> fallingLogicFields){
 		for(int i=0;i<columnSize;i++)
 			levelColumn(fallingLogicFields, i);
-	}	
+	}
 
 	private void levelColumn(HashMap<LogicField, Integer> fallingLogicFields, int columnIndex){
 		int currentRowIndex=0;
