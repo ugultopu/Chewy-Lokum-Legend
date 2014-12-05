@@ -13,7 +13,7 @@ public class FourCombo extends Combo implements LokumGeneratingCombo{
 		generateLokum();
 		//test = new FourComboTest();
 		this.comboPriority = 2;
-		Score.getInstance().scoreUpdateStripedForm();
+		
 		
 	}
 	
@@ -80,5 +80,14 @@ public class FourCombo extends Combo implements LokumGeneratingCombo{
 		StripedLokum copy = (StripedLokum) copyLokum(generatedLokum);
 		LokumGenerateEvent lge = new LokumGenerateEvent(copy);
 		EventDispatchQueue.getInstance().addEvent(lge);
+	}
+
+
+
+	@Override
+	public void updateScore() {
+		// TODO Auto-generated method stub
+		Score.getInstance().scoreUpdateStripedForm();
+		
 	}
 }
