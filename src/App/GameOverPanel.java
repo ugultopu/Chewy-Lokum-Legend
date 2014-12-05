@@ -12,6 +12,7 @@ import javax.swing.SwingConstants;
 
 public class GameOverPanel extends JPanel{
 
+	private static GameOverPanel instance;
 	private JLabel gameOver,victory;
 	private JButton replay, nextLevel, mainMenu;
 	private boolean win;
@@ -102,4 +103,19 @@ public class GameOverPanel extends JPanel{
 		else
 		this.win=false;
 	}
+	
+	public boolean getWinState(){
+		return this.win;
+	}
+	
+	public static GameOverPanel getInstance(){
+		if(instance==null){
+			instance = new GameOverPanel();
+		}
+		return instance;
+	}
+	
+	public static void resetInstance(){
+		instance = new GameOverPanel();
+	}	
 }
