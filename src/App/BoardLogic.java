@@ -149,6 +149,10 @@ public class BoardLogic {
 				Lokum currentCombosCurrentLokum = currentComboLokums.get(currentComboLokumIndex);
 				currentCombosCurrentLokum.comboDestroy();
 			}
+			if(currentCombo instanceof LokumGeneratingCombo){
+				introduceLogicField(currentCombo.getGeneratedLokum());
+				currentCombo.addGeneratedLokumtoQueue();
+			}
 		}
 	}
 
@@ -208,7 +212,7 @@ public class BoardLogic {
 	private void levelBoard(HashMap<LogicField, Integer> fallingLogicFields){
 		for(int i=0;i<columnSize;i++)
 			levelColumn(fallingLogicFields, i);
-	}	
+	}
 
 	private void levelColumn(HashMap<LogicField, Integer> fallingLogicFields, int columnIndex){
 		int currentRowIndex=0;
@@ -351,6 +355,7 @@ public class BoardLogic {
 		 */
 		if( isMergeSwap( f0, f1 ) ){
 			mergeDestroy( f0,  f1 );
+			readjustBoardAfterDestroy();
 		}
 		// if here, then not merge swap. So combo swap.
 		else{
@@ -401,6 +406,7 @@ public class BoardLogic {
 			// Hence, the line below is deprecated now, I commented out it just as a remainder
 			// EventDispatchQueue.getInstance().addEvent(new NonLokumGeneratingEvent(convertLogicFieldListToEmptyLogicFieldList(comboDestroyedFields)));
 		}
+		InformationBoard.getInstance().decreaseMoves();
 		return true;
 	}
 

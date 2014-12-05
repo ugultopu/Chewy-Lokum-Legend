@@ -21,7 +21,7 @@ public class Factory {
 		}
 	}
 	
-	public static Lokum createLokum(int x, int y, String type, String color){
+	public static LogicField createLogicField(int x, int y, String type, String color){
 		switch (type){
 			case "NormalLokum":
 				return new NormalLokum(x, y, color);
@@ -34,8 +34,7 @@ public class Factory {
 			case "BombLokum":
 				return new BombLokum(x, y);
 			default:
-				System.out.println("Not a lokum type.");
-				return null;
+				return new Obstacle(x, y, color);
 		}
 	}
 	
