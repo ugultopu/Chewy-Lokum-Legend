@@ -2,7 +2,7 @@ package App;
 
 import java.util.*;
 
-public class FiveCombo extends Combo{
+public class FiveCombo extends Combo implements LokumGeneratingCombo{
 	private FiveComboTest test;
 	private ArrayList<Lokum> lokums;
 	private Lokum generatedLokum;
@@ -13,9 +13,10 @@ public class FiveCombo extends Combo{
 		//test = new FiveComboTest();
 		this.comboPriority = 4;
 		Score.getInstance().scoreUpdateBombForm();
+		
 	}
 	
-	private void generateLokum(){
+	public void generateLokum(){
 		Lokum midLokum = lokums.get(2);
 		int x = midLokum.getRowIndex();
 		int y = midLokum.getColumnIndex();
@@ -23,7 +24,14 @@ public class FiveCombo extends Combo{
 	}
 	
 	public Lokum getGeneratedLokum(){
+		
 		return generatedLokum;
+	}
+	
+	public void addGeneratedLokumtoQueue(){
+		BombLokum copy = (BombLokum) copyLokum(generatedLokum);
+		LokumGenerateEvent lge = new LokumGenerateEvent(copy);
+		EventDispatchQueue.getInstance().addEvent(lge);
 	}
 	
 	public class FiveComboTest{
@@ -44,5 +52,12 @@ public class FiveCombo extends Combo{
 	public ArrayList<Lokum> getComboLokums() {
 		// TODO Auto-generated method stub
 		return lokums;
+	}
+
+	@Override
+	public Lokum copyLokum(Lokum lok) {
+		int x = lok.getRowIndex();
+		int y = lok.getColumnIndex();
+		return new BombLokum(x, y);
 	}
 }
