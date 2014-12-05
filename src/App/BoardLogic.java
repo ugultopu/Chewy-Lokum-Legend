@@ -226,7 +226,7 @@ public class BoardLogic {
 
 	/**
 	 * Position of an empty logicFields element is given to this method. Receiving that, the method
-	 * calculates if there are more continuously empty fields that are above the given position and
+	 * calculates if there are more contiguously empty fields that are above the given position and
 	 * drops the elements. If the method finds out that all positions above the given element's position
 	 * until the top are empty, it returns true. Else, it returns false.  
 	 * 
@@ -258,7 +258,7 @@ public class BoardLogic {
 			introduceLogicField(logicFields[i+dropCounter][columnIndex]);
 			clearLocation(i + dropCounter, columnIndex);
 		}
-		return currentRowIndex == (rowSize-1);
+		return currentRowIndex == rowSize;
 	}
 
 	private void populateAfterDestroy(HashMap<LogicField, Integer> fallingLogicFields){
