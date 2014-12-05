@@ -16,7 +16,7 @@ public abstract class Combo {
 		lokums.add(argLokum);
 	}
 	
-	public abstract void addCombotoQueue();
+	public abstract void addGeneratedLokumtoQueue();
 	
 	public boolean hasHigherPriority(Combo argCombo){
 		return this.comboPriority > argCombo.comboPriority;
