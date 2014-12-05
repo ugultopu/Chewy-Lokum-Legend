@@ -355,6 +355,7 @@ public class BoardLogic {
 		 */
 		if( isMergeSwap( f0, f1 ) ){
 			mergeDestroy( f0,  f1 );
+			readjustBoardAfterDestroy();
 		}
 		// if here, then not merge swap. So combo swap.
 		else{
