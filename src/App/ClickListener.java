@@ -25,11 +25,13 @@ public class ClickListener implements MouseListener {
 			if(selectedRow == null || selectedColumn == null){
 				selectedRow = convertToRowIndex(e.getY());
 				selectedColumn = convertToColumnIndex(e.getX());
-				System.out.println("First lokum at: "+ convertToColumnIndex(e.getX())+", "+convertToRowIndex(e.getY()));
+				System.out.println("First lokum at: "+ selectedColumn+", "+selectedRow);
+				
 			}else{
 				int otherRow = convertToRowIndex(e.getY());
 				int otherColumn = convertToColumnIndex(e.getX());
-				System.out.println("Second lokum at: "+ convertToColumnIndex(e.getX())+", "+convertToRowIndex(e.getY()));
+				System.out.println("First lokum at: "+ selectedColumn+", "+selectedRow);
+				System.out.println("Second lokum at: "+ otherColumn+", "+otherRow);
 				BoardLogic.getInstance().swap(selectedColumn, selectedRow, otherColumn, otherRow);
 				selectedRow = null;
 				selectedColumn = null;
@@ -38,7 +40,25 @@ public class ClickListener implements MouseListener {
 		}	
 	}
 
-	
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		/*
+		if(active){
+			if(selectedRow != null && selectedColumn != null){
+				int otherRow = convertToRowIndex(e.getY());
+				int otherColumn = convertToColumnIndex(e.getX());
+				if(!(selectedRow == otherRow && selectedColumn == otherColumn)){
+					BoardLogic.getInstance().swap(selectedColumn, selectedRow, otherColumn, otherRow);
+					selectedRow = null;
+					selectedColumn = null;
+				}
+			}
+		}
+		*/	
+	}
+
 	
 	private int convertToRowIndex(Integer yLocation){
 		return (int) (Constants.ANIMATION_WINDOW_HEIGHT-yLocation)/(Constants.ANIMATION_WINDOW_HEIGHT/Constants.BOARD_HEIGHT);

@@ -360,6 +360,9 @@ public class BoardLogic {
 		 */
 
 		if( !locationsSuitableForSwap(f0, f1) ){
+			System.out.println("Locations are not suitable for swap.");
+			System.out.println("f0's row and column indices: " + f0.getRowIndex() + " " + f0.getColumnIndex());
+			System.out.println("f1's row and column indices: " + f1.getRowIndex() + " " + f1.getColumnIndex());
 			//EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
 			return false;
 		}
@@ -368,6 +371,7 @@ public class BoardLogic {
 		 * If types are not suitable for swap, simply return w/o doing anything.
 		 */
 		if( !typesSuitableForSwap(f0, f1) ){
+			System.out.println("Types are not suitable for swap.");
 			//EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
 			return false;
 		}
@@ -376,11 +380,13 @@ public class BoardLogic {
 		 * ADD LOKUM RETURNING LIST FOR MERGE DESTROY AS WELL.
 		 */
 		if( isMergeSwap( f0, f1 ) ){
+			System.out.println("In merge swap.");
 			mergeDestroy( f0,  f1 );
 			readjustBoardAfterDestroy();
 		}
 		// if here, then not merge swap. So combo swap.
 		else{
+			System.out.println("In combo swap.");
 			/*
 			 * If here, then this means that this swap is a swap that requires the swapping of LogicFields on logicFields array. So perform it.
 			 */
@@ -596,6 +602,8 @@ public class BoardLogic {
 	}
 
 	public void swap(int selectedColumn, int selectedRow, int otherColumn, int otherRow) {
+		System.out.println("Selected lokum's row and column indices in 4arg swap: " + selectedRow + " " + selectedColumn);
+		System.out.println("Other lokum's row and column indices in 4arg swap: " + otherRow + " " + otherColumn);
 		swap(logicFields[selectedRow][selectedColumn], logicFields[otherRow][otherColumn]);
 	}
 
