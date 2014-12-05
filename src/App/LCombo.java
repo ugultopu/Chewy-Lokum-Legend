@@ -13,6 +13,7 @@ public class LCombo extends Combo{
 		//test = new LComboTest();
 		this.comboPriority = 3;
 		Score.getInstance().scoreUpdateWrappedForm();
+		Score.getInstance().setUpdated(true);
 	}
 	
 	public Lokum getGeneratedLokum(){
