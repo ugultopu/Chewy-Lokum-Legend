@@ -41,7 +41,6 @@ public class WrappedLokum extends Lokum implements ComboDestroyable,
 			}
 		}
 		Score.getInstance().scoreUpdateWrappedUse();
-		Score.getInstance().setUpdated(true);
 	}
 
 	@Override

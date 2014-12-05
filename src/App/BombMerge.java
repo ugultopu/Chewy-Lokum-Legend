@@ -33,7 +33,6 @@ public class BombMerge extends Merge {
 				}	
 			}
 			score.scoreUpdateBombUse(numberOfDestroyedLokums);
-			score.setUpdated(true);
 		}else if(l2 instanceof NormalLokum){
 			String colorl2 = l2.getLokumColor();
 			int numberOfDestroyedLokums = 0;
@@ -50,7 +49,6 @@ public class BombMerge extends Merge {
 				
 			}
 			score.scoreUpdateBombUse(numberOfDestroyedLokums);
-			score.setUpdated(true);
 		}else if(l1 instanceof StripedLokum){
 			Random randomGenerator = new Random();
 			String colorl1 = l1.getLokumColor();
@@ -110,7 +108,6 @@ public class BombMerge extends Merge {
 				}	
 			}
 			score.scoreUpdateBombUse(numberOfDestroyedLokums);
-			score.setUpdated(true);
 		}else if(l2 instanceof WrappedLokum){
 			String colorl2 = l2.getLokumColor();
 			String randomColor = generateRandomColor();
@@ -126,7 +123,6 @@ public class BombMerge extends Merge {
 				}
 			}
 			score.scoreUpdateBombUse(numberOfDestroyedLokums);
-			score.setUpdated(true);
 		}else if(l1 instanceof BombLokum || l2 instanceof BombLokum){
 			for(int i = 0; i < lokumBoard.length; i++){
 				for(int j = 0; j < lokumBoard[i].length; j++){
@@ -135,7 +131,6 @@ public class BombMerge extends Merge {
 				}
 			}
 			score.scoreUpdateBombMerge(Constants.BOARD_HEIGHT * Constants.BOARD_WIDTH);
-			score.setUpdated(true);
 			System.out.println("Anasını siktin.");
 		}else{
 			System.out.println("FATAL ERROR!: BOMBMERGE");
