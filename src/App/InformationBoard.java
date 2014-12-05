@@ -174,5 +174,10 @@ public class InformationBoard extends JPanel {
 	public int getMovesLeft(){
 		return this.moves;
 	}
+
+	public void setGoalScore(int goalScore) {
+		this.goalScore = goalScore;
+		
+	}
 	
 }
