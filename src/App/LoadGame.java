@@ -74,7 +74,7 @@ public class LoadGame {
 			informationBoard.setCurrentScore(currentScore);
 			informationBoard.setGoalScore(goalScore);
 			informationBoard.setCurrentLevel(level);
-			informationBoard.setMovesLeft(5);
+			informationBoard.setMovesLeft(movesLeft);
 			BoardLogic.loadBoard(loadedBoard);
 			
 			

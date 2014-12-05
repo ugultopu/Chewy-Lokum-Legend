@@ -64,6 +64,7 @@ public class MenuPanel extends JPanel {
 				if(LoadGame.loadGameFromXML()){
 					System.out.println("Loaded");
 					ApplicationWindow.removePanel(instance);
+					GamePanel.resetInstance();
 					ApplicationWindow.addPanel(GamePanel.getInstance());
 					GameBoard.getInstance().requestFocusInWindow();
 					GameBoard.getInstance().repaint();
