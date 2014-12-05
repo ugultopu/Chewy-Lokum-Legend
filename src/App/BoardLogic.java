@@ -27,6 +27,10 @@ public class BoardLogic {
 			instance = new BoardLogic();
 		return instance;
 	}
+	
+	public static void loadBoard(LogicField[][] logicFields){
+		instance = new BoardLogic(logicFields);
+	}
 
 	public LogicField[][] getLogicFields() {
 		return logicFields;
@@ -118,6 +122,18 @@ public class BoardLogic {
 		boardCombos = new ArrayList<Combo>();
 		initializeBoard();	// initializes the board to all EmptyLogicField objects.
 		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
+		NewBoardEvent newBoardEvent = new NewBoardEvent(copyLogicFieldArray());
+		EventDispatchQueue.getInstance().addEvent(newBoardEvent);
+		this.boardCombos = new ArrayList<Combo>();
+	}
+	
+	/**
+	 * This constructor is only used on Load game
+	 */
+	private BoardLogic(LogicField[][] logicFields){
+		this.rowSize = Constants.BOARD_WIDTH;
+		this.columnSize = Constants.BOARD_HEIGHT;
+		this.logicFields = logicFields;
 		NewBoardEvent newBoardEvent = new NewBoardEvent(copyLogicFieldArray());
 		EventDispatchQueue.getInstance().addEvent(newBoardEvent);
 		this.boardCombos = new ArrayList<Combo>();
@@ -340,15 +356,22 @@ public class BoardLogic {
 
 		/*
 		 * If locations are not suitable for swap, simply return w/o doing anything.
+		
 		 */
-		if( !locationsSuitableForSwap(f0, f1) )
+		EventDispatchQueue.getInstance().addEvent(new ClickListenerDeactiveEvent());
+		
+		if( !locationsSuitableForSwap(f0, f1) ){
+			EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
 			return false;
+		}
 		// if here, then locations are suitable for swap.
 		/*
 		 * If types are not suitable for swap, simply return w/o doing anything.
 		 */
-		if( !typesSuitableForSwap(f0, f1) )
+		if( !typesSuitableForSwap(f0, f1) ){
+			EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
 			return false;
+		}
 		// if here, then types are suitable for swap as well.
 		/*
 		 * ADD LOKUM RETURNING LIST FOR MERGE DESTROY AS WELL.
@@ -386,6 +409,7 @@ public class BoardLogic {
 				 * Send a swap event to Kugi.
 				 */
 				EventDispatchQueue.getInstance().addEvent(new SwapEvent((Lokum)f0.copyLogicField(), (Lokum)f1.copyLogicField()));
+				EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
 				return false;
 			}
 			/*
@@ -407,6 +431,7 @@ public class BoardLogic {
 			// EventDispatchQueue.getInstance().addEvent(new NonLokumGeneratingEvent(convertLogicFieldListToEmptyLogicFieldList(comboDestroyedFields)));
 		}
 		InformationBoard.getInstance().decreaseMoves();
+		EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
 		return true;
 	}
 

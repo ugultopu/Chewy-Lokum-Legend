@@ -79,5 +79,11 @@ public class ClickListener implements MouseListener {
 			instance = new ClickListener();
 		return instance;
 	}
+	public void activate(){
+		active = true;
+	}
+	public void deactivate(){
+		active = false;
+	}
 
 }
