@@ -16,7 +16,7 @@ public class InformationBoard extends JPanel {
 	private int currentScore;
 	private int goalScore = 1000000000;
 	private int currentLevel;
-	private int moves=2;
+	private int moves=99;
 	private static InformationBoard instance;
 
 	public InformationBoard(){
