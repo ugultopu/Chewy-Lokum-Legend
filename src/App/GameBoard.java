@@ -32,7 +32,7 @@ public class GameBoard extends JPanel {
 	}
 	
 	public static void resetInstance(LogicField[][] logicFieldArray){
-		instance = new GameBoard();
+		instance = null;
 	}
 	
 	public void changeLokum(LogicField logicField){

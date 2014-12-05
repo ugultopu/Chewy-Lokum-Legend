@@ -25,35 +25,38 @@ public class GameOverPanel extends JPanel{
 		nextLevel = new JButton("Next Level");
 		replay = new JButton("Replay");
 		mainMenu= new JButton("Main Menu");
+		
+		setLayout(null);
+		setBackground(Color.RED);
 
-		if (win==true){
-			add(victory);
-			victory.setBounds(0, 50, 360, 60);
-			victory.setForeground(Color.BLACK);
-			victory.setFont(new Font("Tahoma", Font.BOLD, 40));
-			victory.setHorizontalAlignment(SwingConstants.CENTER);
-
-			add(nextLevel);
-			nextLevel.setBounds(40, 200, 130, 50);
-			nextLevel.setBorderPainted(false);
-			nextLevel.setFocusPainted(false);
-		}
+//		if (win==true){
+//			add(victory);
+//			victory.setBounds(80, 100, 200, 60);
+//			victory.setForeground(Color.BLACK);
+//			victory.setFont(new Font("Tahoma", Font.BOLD, 40));
+//			victory.setHorizontalAlignment(SwingConstants.CENTER);
+//
+//			add(nextLevel);
+//			nextLevel.setBounds(20, 250, 150, 50);
+//			nextLevel.setBorderPainted(false);
+//			nextLevel.setFocusPainted(false);
+//		}
 
 		if (win==false){
 			add(gameOver);
-			gameOver.setBounds(0, 50, 360, 60);
+			gameOver.setBounds(80, 100, 200, 60);
 			gameOver.setForeground(Color.BLACK);
-			gameOver.setFont(new Font("Tahoma", Font.BOLD, 40));
+			gameOver.setFont(new Font("Tahoma", Font.BOLD, 30));
 			gameOver.setHorizontalAlignment(SwingConstants.CENTER);
 
 			add(replay);
-			replay.setBounds(40, 200, 130, 50);
+			replay.setBounds(20, 250, 150, 50);
 			replay.setBorderPainted(false);
 			replay.setFocusPainted(false);
 		}
 
 		add(mainMenu);
-		mainMenu.setBounds(190, 200, 130, 50);
+		mainMenu.setBounds(190, 250, 150, 50);
 		mainMenu.setBorderPainted(false);
 		mainMenu.setFocusPainted(false);
 
@@ -92,6 +95,12 @@ public class GameOverPanel extends JPanel{
 				ApplicationWindow.removePanel(GamePanel.getInstance());
 				ApplicationWindow.addPanel(MenuPanel.getInstance());
 				MenuPanel.getInstance().repaint();
+				GamePanel.getInstance().remove(GameOverPanel.getInstance());
+				GamePanel.resetInstance();
+				GameBoard.resetInstance();
+				InformationBoard.resetInstance();
+				Score.getInstance().setScore(0);
+				GamePanel.getInstance().add(GameBoard.getInstance());
 			}
 		});
 
@@ -126,7 +135,13 @@ public class GameOverPanel extends JPanel{
 		g.setColor(new Color(0,0,0));
 		
 		victory.repaint();
+		victory.setOpaque(true);
+		victory.setBackground(Color.RED);
+		
 		gameOver.repaint();
+		gameOver.setOpaque(true);
+		gameOver.setBackground(Color.RED);
+		
 		nextLevel.repaint();
 		replay.repaint();
 		mainMenu.repaint();

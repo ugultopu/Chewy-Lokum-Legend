@@ -72,6 +72,7 @@ public class GamePanel extends JPanel {
 	
 	public void endGame(){
 		running = false;
+		remove(GameBoard.getInstance());
 		GameOverPanel.getInstance().setBounds(200, 100, 360, 540);
 		add(GameOverPanel.getInstance());
 		GameOverPanel.getInstance().repaint();
