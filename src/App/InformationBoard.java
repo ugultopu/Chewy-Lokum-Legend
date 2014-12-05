@@ -14,9 +14,9 @@ public class InformationBoard extends JPanel {
 	private JLabel level,target,score,movesLeft,levelInput,targetInput,scoreInput,movesLeftInput;
 	private JButton saveButton;
 	private int currentScore;
-	private int goalScore = 1000000000;
+	private int goalScore = 20000;
 	private int currentLevel;
-	private int moves=10;
+	private int moves = 100;
 	private static InformationBoard instance;
 
 	public InformationBoard(){
