@@ -22,8 +22,6 @@ public class GamePanel extends JPanel {
 	private GamePanel() {
 		super();
 		
-//		EventDispatchQueue.resetInstance();
-		
 		new Thread(new Runnable(){
 
 			public void run() {
@@ -98,12 +96,9 @@ public class GamePanel extends JPanel {
 		g.setColor(Constants.GAME_BACKGROUND_COLOR);
 		g.fillRect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 		g.setColor(new Color(0,0,0));
-//		g.fillRect(30,50, Constants.ANIMATION_WINDOW_WIDTH, Constants.ANIMATION_WINDOW_HEIGHT);
-//		g.fillRect(750, 160, Constants.INFORMATION_BOARD_WIDTH, Constants.INFORMATION_BOARD_HEIGHT);
     	
 		GameBoard.getInstance().repaint();    	
     	InformationBoard.getInstance().repaint();
-
 	}
 
 }
