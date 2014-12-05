@@ -3,6 +3,7 @@ package App;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.PriorityQueue;
 import java.util.Random;
 
 import Tests.BoardLogicTest;
@@ -15,7 +16,7 @@ public class BoardLogic {
 	private LogicField[][] logicFields;
 	private int rowSize;
 	private int columnSize;
-	private ArrayList<Combo> boardCombos;
+	private PriorityQueue<Combo> boardCombos;
 	private static BoardLogic instance;
 
 
@@ -78,7 +79,7 @@ public class BoardLogic {
 
 
 
-	public ArrayList<Combo> findBoardCombos(){
+	public PriorityQueue<Combo> findBoardCombos(){
 
 		/*
 		 * Clear current board combos before beginning a new search.
@@ -122,13 +123,12 @@ public class BoardLogic {
 	private BoardLogic(){
 		this.rowSize = Constants.BOARD_WIDTH;
 		this.columnSize= Constants.BOARD_HEIGHT;
-		logicFields = new LogicField[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
-		boardCombos = new ArrayList<Combo>();
+		this.logicFields = new LogicField[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
+		this.boardCombos = new PriorityQueue<Combo>(10, Combo c);
 		initializeBoard();	// initializes the board to all EmptyLogicField objects.
 		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
 		NewBoardEvent newBoardEvent = new NewBoardEvent(copyLogicFieldArray());
 		EventDispatchQueue.getInstance().addEvent(newBoardEvent);
-		this.boardCombos = new ArrayList<Combo>();
 	}
 	
 	/**
@@ -140,7 +140,7 @@ public class BoardLogic {
 		this.logicFields = logicFields;
 		NewBoardEvent newBoardEvent = new NewBoardEvent(copyLogicFieldArray());
 		EventDispatchQueue.getInstance().addEvent(newBoardEvent);
-		this.boardCombos = new ArrayList<Combo>();
+		this.boardCombos = new PriorityQueue<Combo>();
 	}
 	
 	
@@ -164,7 +164,7 @@ public class BoardLogic {
 	private void destroyCombos(){
 		findBoardCombos();
 		for(int currentComboIndex=0;currentComboIndex<boardCombos.size();currentComboIndex++){
-			Combo currentCombo = boardCombos.get(currentComboIndex);
+			Combo currentCombo = boardCombos.poll();
 			ArrayList<Lokum> currentComboLokums = currentCombo.getComboLokums();
 			for(int currentComboLokumIndex=0;currentComboLokumIndex<currentComboLokums.size();currentComboLokumIndex++){
 				Lokum currentCombosCurrentLokum = currentComboLokums.get(currentComboLokumIndex);
