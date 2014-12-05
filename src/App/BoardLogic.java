@@ -350,6 +350,7 @@ public class BoardLogic {
 	 *	This method takes two positions and does the appropriate swapping operation between them.
 	 */
 	public boolean swap(LogicField f0, LogicField f1){
+		System.out.println(BoardLogicTest.toString(this));
 		/*
 		 * What's the line below?
 		 */
