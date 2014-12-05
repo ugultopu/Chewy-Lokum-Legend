@@ -70,6 +70,19 @@ public class InformationBoard extends JPanel {
 		saveButton.setBounds(0, 240, 150, 50);
 		saveButton.setBorderPainted(false);
 		saveButton.setFocusPainted(false);
+		saveButton.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					SaveGame.saveBoardToXML();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			
+		});
 		
 		level.setOpaque(true);
 		level.setBackground(Constants.GAME_BACKGROUND_COLOR);
