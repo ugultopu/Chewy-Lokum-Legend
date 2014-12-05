@@ -64,6 +64,7 @@ public class MenuPanel extends JPanel {
 				GamePanel.resetInstance();
 				GameBoard.resetInstance();
 				InformationBoard.resetInstance();
+				BoardLogic.resetInstance();
 				if(LoadGame.loadGameFromXML()){
 					System.out.println("Loaded");
 					ApplicationWindow.removePanel(instance);
