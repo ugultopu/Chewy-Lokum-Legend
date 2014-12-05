@@ -53,7 +53,8 @@ public abstract class Combo implements Comparator<Combo>{
 		if( !(obj instanceof Combo) )
 			return false;
 		/*
-		 * if here, then obj is an instance of Combo.
+		 * if here, then obj is an instance of Combo. I guess checking for sub-type equality is not a must. So just
+		 * do not perform it. 
 		 */
 		Combo argCombo = (Combo) obj;
 		ArrayList<Lokum> argComboLokums = argCombo.getComboLokums();
