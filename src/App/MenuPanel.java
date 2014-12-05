@@ -14,7 +14,7 @@ public class MenuPanel extends JPanel {
 	private static MenuPanel instance;
 	
 	public MenuPanel() {
-		label = new JLabel("Testis Crush",JLabel.CENTER);
+		label = new JLabel("Chewy Lokum Legend",JLabel.CENTER);
 		start = new JButton("Start");
 		loadGame = new JButton("Load Game");
 		exit = new JButton("Exit");
