@@ -225,6 +225,7 @@ public class BoardLogic {
 			destroyCombos();
 			readjustBoardAfterDestroy();
 		}
+		EventDispatchQueue.getInstance().addEvent(new EndGameEvent());
 	}
 
 	/**
