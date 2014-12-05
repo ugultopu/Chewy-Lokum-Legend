@@ -105,10 +105,6 @@ public class InformationBoard extends JPanel {
 	public void paint(Graphics g){
 		super.paintComponent(g);
 		
-//		levelInput.setText(""+scoreCalculator.getLevel());
-//		linesInput.setText(""+scoreCalculator.getLinesDeleted());
-//		scoreInput.setText(""+scoreCalculator.getScore());
-		
     	level.repaint();
     	target.repaint();
     	score.repaint();
