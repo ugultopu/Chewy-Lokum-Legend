@@ -17,7 +17,7 @@ public class DestroyLokumEvent extends GameEvent {
 		GameBoard.getInstance().changeLokum(destroyedLokum);
 		GameBoard.getInstance().repaint();
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Exception on event waiting.");

@@ -21,7 +21,7 @@ public class InformationBoard extends JPanel {
 		target = new JLabel("Lines");
 		score = new JLabel("Score");
 		movesLeft = new JLabel("Moves");
-		levelInput = new JLabel("0");
+		levelInput = new JLabel("");
 		targetInput = new JLabel("0");
 		scoreInput = new JLabel("0");
 		movesLeftInput = new JLabel("0");
@@ -134,5 +134,13 @@ public class InformationBoard extends JPanel {
 
 	public void updateScore(int currentScore) {
 		scoreInput.setText(""+currentScore);
+	}
+	
+	public void setCurrentLevel(int currentLevel){
+		levelInput.setText(""+currentLevel);
+	}	
+	
+	public int getCurrentLevel(){
+		return Integer.parseInt(levelInput.getText());
 	}
 }
