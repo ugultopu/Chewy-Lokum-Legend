@@ -1,5 +1,6 @@
 package App;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -16,17 +17,29 @@ public class FallingLokumsEvent extends GameEvent {
 	
 	@Override
 	public void executeEvent() {
-		while(fallingLokums.keySet().size()>0){
-			for(LogicField lokum: fallingLokums.keySet()){
-				int lokumShift = fallingLokums.get(lokum);
+		ArrayList<LogicField> lokumArray = new ArrayList<LogicField>();
+		ArrayList<Integer> shiftArray = new ArrayList<Integer>();
+		
+		for(LogicField lokum: fallingLokums.keySet()){
+			lokumArray.add(lokum);
+			shiftArray.add(fallingLokums.get(lokum));
+		}
+		int count = 0;
+		int target_count = lokumArray.size();
+		
+		while(count<target_count){
+			count = 0;
+			for(int i=0; i<target_count; i++){
+				LogicField lokum = lokumArray.get(i);
+				int lokumShift = shiftArray.get(i);
 				if(lokumShift>0){
 					lokum.setRowIndex(lokum.getRowIndex()-1);
-					fallingLokums.put(lokum, (Integer)lokumShift-1);
+					shiftArray.set(i, lokumShift-1);
 					if(lokum.getRowIndex()<Constants.BOARD_HEIGHT){
-						GameBoard.getInstance().changeLokum(lokum);
+						GameBoard.getInstance().changeLokum(lokum.copyLogicField());
 					}
 				}else
-					fallingLokums.remove(lokum);
+					count++;
 			}
 			GameBoard.getInstance().repaint();
 			try {
