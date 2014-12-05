@@ -124,7 +124,7 @@ public class BoardLogic {
 		this.rowSize = Constants.BOARD_WIDTH;
 		this.columnSize= Constants.BOARD_HEIGHT;
 		this.logicFields = new LogicField[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
-		this.boardCombos = new PriorityQueue<Combo>(10, Combo c);
+		this.boardCombos = new PriorityQueue<Combo>(10, new ThreeCombo(null));
 		initializeBoard();	// initializes the board to all EmptyLogicField objects.
 		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
 		NewBoardEvent newBoardEvent = new NewBoardEvent(copyLogicFieldArray());
@@ -138,9 +138,9 @@ public class BoardLogic {
 		this.rowSize = Constants.BOARD_WIDTH;
 		this.columnSize = Constants.BOARD_HEIGHT;
 		this.logicFields = logicFields;
+		this.boardCombos = new PriorityQueue<Combo>(10, new ThreeCombo(null));
 		NewBoardEvent newBoardEvent = new NewBoardEvent(copyLogicFieldArray());
 		EventDispatchQueue.getInstance().addEvent(newBoardEvent);
-		this.boardCombos = new PriorityQueue<Combo>();
 	}
 	
 	
