@@ -14,7 +14,7 @@ public class InformationBoard extends JPanel {
 	private JLabel level,target,score,movesLeft,levelInput,targetInput,scoreInput,movesLeftInput;
 	private JButton saveButton;
 	private int currentScore;
-	private int goalScore = 30000;
+	private int goalScore = 1000000000;
 	private int currentLevel;
 	private int moves=20;
 	private static InformationBoard instance;
@@ -116,14 +116,26 @@ public class InformationBoard extends JPanel {
 		movesLeftInput.setBackground(Constants.GAME_BACKGROUND_COLOR);
 		movesLeftInput.setForeground(Constants.TITLE_COLOR);
 		
+		saveButton.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					SaveGame.saveBoardToXML();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				ApplicationWindow.removePanel(GamePanel.getInstance());
+				ApplicationWindow.addPanel(MenuPanel.getInstance());
+				MenuPanel.getInstance().requestFocusInWindow();
+				MenuPanel.getInstance().repaint();
+			}
+		});
 	}
 	
 	public void paint(Graphics g){
 		super.paintComponent(g);
-		
-//		levelInput.setText(""+scoreCalculator.getLevel());
-//		linesInput.setText(""+scoreCalculator.getLinesDeleted());
-//		scoreInput.setText(""+scoreCalculator.getScore());
 		
     	level.repaint();
     	target.repaint();

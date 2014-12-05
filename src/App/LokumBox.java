@@ -23,7 +23,7 @@ public class LokumBox {
 		Graphics2D g1 = (Graphics2D) g;
 		
 		
-		g.setColor(Color.GREEN);
+		g.setColor(Color.WHITE);
 		if(logicField instanceof EmptyLogicField){
 			g.fillRect(logicField.getColumnIndex()*side, Constants.ANIMATION_WINDOW_HEIGHT - (logicField.getRowIndex() + 1)*side, side, side);
 		} else if(logicField instanceof Obstacle){

@@ -13,7 +13,11 @@ public class StripedStripedMerge extends Merge {
 	}
 	
 	public void destroyMerge(){
-		((StripedLokum)l1).comboDestroy();
-		((StripedLokum)l2).comboDestroy();
+		int x = l2.getRowIndex();
+		int y = l2.getColumnIndex();
+		VerticalStripedLokum verticalDestroyer = new VerticalStripedLokum(x, y, "red");
+		HorizontalStripedLokum horizontalDestroyer = new HorizontalStripedLokum(x, y, "red");
+		verticalDestroyer.comboDestroy();
+		horizontalDestroyer.comboDestroy();
 	}
 }

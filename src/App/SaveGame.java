@@ -11,9 +11,7 @@ public class SaveGame {
 		
 		int player_id = 1;
 		String player_name = "default";
-		LogicField[][] lokumBoard = BoardLogic.getInstance().getBoard();
-
-		
+		LogicField[][] lokumBoard = BoardLogic.getInstance().getBoard();		
 		
 		int goal_score = InformationBoard.getInstance().getGoalScore();
 		int current_score = Score.getInstance().getCurrentScore();

@@ -66,12 +66,12 @@ public class MenuPanel extends JPanel {
 					ApplicationWindow.removePanel(instance);
 					ApplicationWindow.addPanel(GamePanel.getInstance());
 					GameBoard.getInstance().requestFocusInWindow();
-					GamePanel.getInstance().startGame();
 					GameBoard.getInstance().repaint();
 				}
 			}
 			
 		});
+
 				
 		exit.addActionListener(new ActionListener(){
 

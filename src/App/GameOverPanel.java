@@ -2,6 +2,7 @@ package App;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -118,4 +119,16 @@ public class GameOverPanel extends JPanel{
 	public static void resetInstance(){
 		instance = new GameOverPanel();
 	}	
+	
+	public void paint(Graphics g){
+		g.setColor(Color.RED);
+		g.fillRect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+		g.setColor(new Color(0,0,0));
+		
+		victory.repaint();
+		gameOver.repaint();
+		nextLevel.repaint();
+		replay.repaint();
+		mainMenu.repaint();
+	}
 }

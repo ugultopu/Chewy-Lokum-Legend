@@ -39,6 +39,7 @@ public class ClickListener implements MouseListener {
 		}	
 	}
 
+
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -57,17 +58,6 @@ public class ClickListener implements MouseListener {
 		
 	}
 
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	private int convertToRowIndex(Integer yLocation){
 		return (int) (Constants.ANIMATION_WINDOW_HEIGHT-yLocation)/(Constants.ANIMATION_WINDOW_HEIGHT/Constants.BOARD_HEIGHT);
@@ -87,6 +77,18 @@ public class ClickListener implements MouseListener {
 	}
 	public void deactivate(){
 		active = false;
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
