@@ -294,7 +294,7 @@ public class BoardLogic {
 			 */
 			LogicField currentLogicFieldToSendGraphics = getLogicFieldAt(rowSize - emptyLocationCounter + i, columnIndex).copyLogicField();
 			currentLogicFieldToSendGraphics.setRowIndex(currentLogicFieldToSendGraphics.getRowIndex() + emptyLocationCounter);
-			fallingLogicFields.put(currentLogicFieldToSendGraphics.copyLogicField(), emptyLocationCounter);
+			fallingLogicFields.put(currentLogicFieldToSendGraphics, emptyLocationCounter);
 		}
 	}
 
