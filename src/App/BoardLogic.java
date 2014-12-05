@@ -190,6 +190,8 @@ public class BoardLogic {
 		populateAfterDestroy(fallingLogicFields);
 		GameEvent fallingLokumsEvent = new FallingLokumsEvent(fallingLogicFields);
 		EventDispatchQueue.getInstance().addEvent(fallingLokumsEvent);
+		NewBoardEvent newBoardEvent = new NewBoardEvent(copyLogicFieldArray());
+		EventDispatchQueue.getInstance().addEvent(newBoardEvent);
 		// send fallingLogicFields to Kugi.
 		/*
 		 * If board is not yet stabilized, call the method again.
@@ -253,7 +255,9 @@ public class BoardLogic {
 			 * information. After completion of this operation, the board is updated with the new location of "to be dropped" object as well.
 			 * 3) Finally, the old location of "to be dropped" object is cleared.   
 			 */
-			fallingLogicFields.put(getLogicFieldAt(i+dropCounter, columnIndex).copyLogicField(), dropCounter);
+			if( !(getLogicFieldAt(i+dropCounter, columnIndex) instanceof EmptyLogicField) ){
+				fallingLogicFields.put(getLogicFieldAt(i+dropCounter, columnIndex).copyLogicField(), dropCounter);
+			}
 			logicFields[i+dropCounter][columnIndex].setRowIndex(i);
 			introduceLogicField(logicFields[i+dropCounter][columnIndex]);
 			clearLocation(i + dropCounter, columnIndex);
@@ -265,7 +269,7 @@ public class BoardLogic {
 		for(int i=0;i<columnSize;i++){
 			populateEmptiedColumn(fallingLogicFields, i);
 		}
-	}	
+	}
 
 	/**
 	 * @requires:
@@ -362,7 +366,9 @@ public class BoardLogic {
 			 * Then, check for combos.
 			 */
 
-			findBoardCombos();
+			//findBoardCombos();
+			destroyCombos();
+			readjustBoardAfterDestroy();
 			/*
 			 * After checking for combos, check if there are any combos actually. If not, revert the swap and return from the method.
 			 */
