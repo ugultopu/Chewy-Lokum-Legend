@@ -179,5 +179,9 @@ public class InformationBoard extends JPanel {
 		this.goalScore = goalScore;
 		
 	}
+
+	public int getGoalScore() {
+		return goalScore;
+	}
 	
 }
