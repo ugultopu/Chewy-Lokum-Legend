@@ -17,7 +17,7 @@ public class SwapEvent extends GameEvent {
 		GameBoard.getInstance().changeLokum(swapLokum2);
 		GameBoard.getInstance().repaint();
 		try {
-			Thread.sleep(500);
+			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
