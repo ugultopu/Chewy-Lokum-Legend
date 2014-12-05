@@ -2,6 +2,9 @@ package App;
 
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -67,6 +70,19 @@ public class InformationBoard extends JPanel {
 		saveButton.setBounds(0, 240, 150, 50);
 		saveButton.setBorderPainted(false);
 		saveButton.setFocusPainted(false);
+		saveButton.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					SaveGame.saveBoardToXML();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			
+		});
 		
 		level.setOpaque(true);
 		level.setBackground(Constants.GAME_BACKGROUND_COLOR);
