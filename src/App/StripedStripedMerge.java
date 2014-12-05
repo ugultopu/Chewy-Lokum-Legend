@@ -17,6 +17,8 @@ public class StripedStripedMerge extends Merge {
 		int y2 = l2.getColumnIndex();
 		int x = l1.getRowIndex();
 		int y = l1.getColumnIndex();
+		BoardLogic.getInstance().introduceLogicField(new EmptyLogicField(x, y));
+		BoardLogic.getInstance().introduceLogicField(new EmptyLogicField(x2, y2));
 		LogicField removeComboLokum = new EmptyLogicField(x, y);
 		board.introduceLogicField(removeComboLokum);
 		VerticalStripedLokum verticalDestroyer = new VerticalStripedLokum(x2, y2, "red");

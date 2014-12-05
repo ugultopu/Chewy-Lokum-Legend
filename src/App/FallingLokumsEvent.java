@@ -43,7 +43,7 @@ public class FallingLokumsEvent extends GameEvent {
 			}
 			GameBoard.getInstance().repaint();
 			try {
-				Thread.sleep(30);
+				Thread.sleep(75);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				System.out.println("Exception on event waiting.");
