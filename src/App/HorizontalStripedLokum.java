@@ -64,6 +64,12 @@ public class HorizontalStripedLokum extends StripedLokum implements MergeDestroy
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "HorizontalStripedLokum";
+	}
 	
 //	@Override
 //	public void comboDestroy() {

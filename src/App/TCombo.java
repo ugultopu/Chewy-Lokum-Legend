@@ -70,4 +70,10 @@ public class TCombo extends Combo implements LokumGeneratingCombo{
 		Score.getInstance().scoreUpdateWrappedForm();
 		
 	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "TCombo = " + super.toString();
+	}
 }

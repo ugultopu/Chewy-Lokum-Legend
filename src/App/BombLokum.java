@@ -46,6 +46,12 @@ public class BombLokum extends Lokum implements ComboDestroyable,
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "BombLokum";
+	}
 	
 //	@Override
 //	public void comboDestroy() {

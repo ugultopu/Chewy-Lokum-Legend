@@ -65,6 +65,12 @@ public class VerticalStripedLokum extends StripedLokum {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "VerticalStripedLokum";
+	}
 	
 //	@Override
 //	public void comboDestroy() {

@@ -51,4 +51,10 @@ public class ThreeCombo extends Combo {
 		Score.getInstance().scoreUpdateThreeCombo();
 		
 	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "ThreeCombo = " + super.toString();
+	}
 }

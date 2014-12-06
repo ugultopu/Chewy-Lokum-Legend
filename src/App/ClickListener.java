@@ -31,7 +31,7 @@ public class ClickListener implements MouseListener {
 				BoardLogic.getInstance().swap(selectedColumn, selectedRow, otherColumn, otherRow);
 				selectedRow = null;
 				selectedColumn = null;
-				System.out.println("swapped request sent");
+				//System.out.println("swapped request sent");
 			}
 		}	
 	}

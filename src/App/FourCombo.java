@@ -90,4 +90,12 @@ public class FourCombo extends Combo implements LokumGeneratingCombo{
 		Score.getInstance().scoreUpdateStripedForm();
 		
 	}
+
+
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "FourCombo = " + super.toString();
+	}
 }

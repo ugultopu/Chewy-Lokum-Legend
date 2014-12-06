@@ -1242,5 +1242,8 @@ public abstract class Lokum extends LogicField implements ComboDestroyable{
 			return false;
 		return true;
 	}
+
+	@Override
+	public abstract String toString();
 	
 }

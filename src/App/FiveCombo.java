@@ -67,4 +67,10 @@ public class FiveCombo extends Combo implements LokumGeneratingCombo{
 		Score.getInstance().scoreUpdateBombForm();
 		
 	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "FiveCombo = " + super.toString();
+	}
 }

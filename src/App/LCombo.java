@@ -69,4 +69,10 @@ public class LCombo extends Combo implements LokumGeneratingCombo{
 		// TODO Auto-generated method stub
 		Score.getInstance().scoreUpdateWrappedForm();
 	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "LCombo = " + super.toString();
+	}
 }
