@@ -5,24 +5,30 @@ import java.util.ArrayList;
 
 public class BoardLogicTest{
 	
+	/*
+	 * Check if this method prints the board to the console correctly!
+	 */
 	public static String toString(BoardLogic BL){
 		String boardString = "";
 		LogicField[][] logicFields = BL.getLogicFields();
 
-		for(int i = 0; i < BL.getRowSize(); i++){
-			for(int j = 0; j < BL.getColumnSize(); j++){
-				if(logicFields[i][j] instanceof Obstacle){
-					Obstacle obs = (Obstacle) logicFields[i][j];
+		for(int currentRowIndex = BL.getRowSize() - 1; currentRowIndex > -1; currentRowIndex--){
+			for(int currentColumnIndex = 0; currentColumnIndex < BL.getColumnSize(); currentColumnIndex++){
+				if( logicFields[currentRowIndex][currentColumnIndex] instanceof Obstacle ){
+					Obstacle obs = (Obstacle) logicFields[currentRowIndex][currentColumnIndex];
 					String color = Character.toString(obs.getObstacleColor().charAt(0));
-					boardString += "O"+ color + "|";
-				}else if(!(logicFields[i][j] instanceof EmptyLogicField)){
-					Lokum lok = (Lokum)logicFields[i][j];
+					boardString += "O"+ color;
+				}
+				else if( !(logicFields[currentRowIndex][currentColumnIndex] instanceof EmptyLogicField) ){
+					Lokum lok = (Lokum) logicFields[currentRowIndex][currentColumnIndex];
 					String color = Character.toString(lok.getLokumColor().charAt(0));
 					String type = Character.toString(lok.getType().charAt(0));
-					boardString += type + color + "|";
-				}else{
+					boardString += type + color;
+				}
+				else{
 					boardString += "EE";
 				}
+				boardString += "|";
 			}
 			boardString += "\n";
 		}
