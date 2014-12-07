@@ -72,7 +72,7 @@ public class WrappedLokum extends Lokum implements ComboDestroyable,
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "WrappedLokum";
+		return "WL@" + super.toString();
 	}
 
 //	@Override

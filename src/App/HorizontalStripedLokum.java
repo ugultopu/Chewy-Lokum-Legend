@@ -68,7 +68,7 @@ public class HorizontalStripedLokum extends StripedLokum implements MergeDestroy
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "HorizontalStripedLokum";
+		return "HSL@" + super.toString();
 	}
 	
 //	@Override

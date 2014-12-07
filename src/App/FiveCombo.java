@@ -4,7 +4,6 @@ import java.util.*;
 
 public class FiveCombo extends Combo implements LokumGeneratingCombo{
 	private FiveComboTest test;
-	private ArrayList<Lokum> lokums;
 	private Lokum generatedLokum;
 	
 	public FiveCombo(ArrayList<Lokum> lokums){
@@ -53,7 +52,12 @@ public class FiveCombo extends Combo implements LokumGeneratingCombo{
 		// TODO Auto-generated method stub
 		return lokums;
 	}
-
+	
+	/*
+	 * What's the method below doing here? What's its job?
+	 * (non-Javadoc)
+	 * @see App.LokumGeneratingCombo#copyLokum(App.Lokum)
+	 */
 	@Override
 	public Lokum copyLokum(Lokum lok) {
 		int x = lok.getRowIndex();
@@ -71,6 +75,6 @@ public class FiveCombo extends Combo implements LokumGeneratingCombo{
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "FiveCombo = " + super.toString();
+		return "FiveCombo = " /*+ super.toString()*/;
 	}
 }

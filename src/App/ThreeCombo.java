@@ -4,8 +4,7 @@ import java.util.*;
 
 public class ThreeCombo extends Combo {
 	private ThreeComboTest test;
-	private ArrayList<Lokum> lokums;
-
+	
 	public ThreeCombo(ArrayList<Lokum> lokums){
 		//test = new ThreeComboTest();
 		this.lokums = lokums;
@@ -13,7 +12,7 @@ public class ThreeCombo extends Combo {
 		
 	}
 	
-//Test for the method:
+	//Test for the method:
 	public class ThreeComboTest{
 		public ThreeComboTest(){
 			if(lokums == null){
@@ -55,6 +54,6 @@ public class ThreeCombo extends Combo {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "ThreeCombo = " + super.toString();
+		return "ThreeCombo = " /*+ super.toString()*/;
 	}
 }

@@ -48,6 +48,6 @@ public class NormalLokum extends Lokum implements ComboDestroyable, Swapable{
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "NormalLokum";
+		return "NL@" + super.toString();
 	}
 }

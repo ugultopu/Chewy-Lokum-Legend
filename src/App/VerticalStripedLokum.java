@@ -69,7 +69,7 @@ public class VerticalStripedLokum extends StripedLokum {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "VerticalStripedLokum";
+		return "VSL@" + super.toString();
 	}
 	
 //	@Override

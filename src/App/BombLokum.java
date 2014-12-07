@@ -50,7 +50,7 @@ public class BombLokum extends Lokum implements ComboDestroyable,
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "BombLokum";
+		return "BL@" + super.toString();
 	}
 	
 //	@Override

@@ -96,7 +96,24 @@ public class BoardLogic {
 			for(int currentColumnIndex=0;currentColumnIndex<columnSize;currentColumnIndex++){
 				LogicField currentLogicField = logicFields[currentRowIndex][currentColumnIndex];
 				/*
-				 * In order to be subject to the combo search, currentLogicField must be an instance of Lokum AND it MUST NOT be an instance of BombLokum.
+				 * In order to be subject to the combo search, currentLogicField must be an instance of
+				 * Lokum AND it MUST NOT be an instance of BombLokum.
+				 */
+				if( (currentLogicField instanceof Lokum) && !(currentLogicField instanceof BombLokum) ){
+					Lokum currentLokum = (Lokum) currentLogicField;
+					currentLokum.findCombos();
+				}
+			}
+		}
+		/*
+		 * After the search, add the combos to the combosAsSet.
+		 */
+		for(int currentRowIndex=0;currentRowIndex<rowSize;currentRowIndex++){
+			for(int currentColumnIndex=0;currentColumnIndex<columnSize;currentColumnIndex++){
+				LogicField currentLogicField = logicFields[currentRowIndex][currentColumnIndex];
+				/*
+				 * In order to be subject to the combo add, currentLogicField must be an instance of
+				 * Lokum AND it MUST NOT be an instance of BombLokum.
 				 */
 				if( (currentLogicField instanceof Lokum) && !(currentLogicField instanceof BombLokum) ){
 					Lokum currentLokum = (Lokum) currentLogicField;
@@ -108,14 +125,16 @@ public class BoardLogic {
 			}
 		}
 		/*
-		 * After the search for combos is finished, convert the Set into an Object array, by using the built in method: toArray().
+		 * After the combos are added to the combosAsSet, convert the Set into an Object array, by using
+		 * the built in method of the HashSet: toArray().
 		 */
 		Object[] combosAsObjectArray = combosAsSet.toArray();
 		/*
 		 * After that, finally put every element in this array to the boardCombos field of the BoardLogic.
 		 */
 		for(int i=0;i<combosAsObjectArray.length;i++){
-			boardCombos.add((Combo) combosAsObjectArray[i]);
+			Combo currentComboToAdd = (Combo) combosAsObjectArray[i];
+			boardCombos.add(currentComboToAdd);
 		}
 		return this.boardCombos;
 	}
@@ -171,8 +190,9 @@ public class BoardLogic {
 	
 	private void destroyCombos(){
 		findBoardCombos();
-		for(int currentComboIndex=0;currentComboIndex<boardCombos.size();currentComboIndex++){
-			Combo currentCombo = boardCombos.remove();
+		int boardCombosSize = boardCombos.size();
+		for(int currentComboIndex=0;currentComboIndex<boardCombosSize;currentComboIndex++){
+			Combo currentCombo = boardCombos.poll();
 			ArrayList<Lokum> currentCombosLokums = currentCombo.getComboLokums();
 			for(int currentComboLokumsLokumIndex=0;currentComboLokumsLokumIndex<currentCombosLokums.size();currentComboLokumsLokumIndex++){
 				Lokum currentCombosCurrentLokum = currentCombosLokums.get(currentComboLokumsLokumIndex);
@@ -415,19 +435,10 @@ public class BoardLogic {
 			 * Then, check for combos.
 			 */
 			findBoardCombos();
-//			/*
-//			 * Then, print the combos for testing.
-//			 */
-//			System.out.println("---------------------------------------------------------");
-//			int boardCombosSize = boardCombos.size();
-//			for(int i=0;i<boardCombosSize;i++)
-//				System.out.println(boardCombos.poll());
-//			System.out.println("---------------------------------------------------------");
-//			/*
-//			 * Then, call findBoardCombos again since boardCombos has become empty as a result of the
-//			 * printing.
-//			 */
-//			findBoardCombos();
+			/*
+			 * Then, print the combos.
+			 */
+			printCombosInBoard();
 			/*
 			 * After checking for combos, check if there are any combos actually. If not, revert the swap and return from the method.
 			 */
@@ -604,6 +615,29 @@ public class BoardLogic {
 			}
 		}
 		return false;
+	}
+	
+	/*
+	 * The method below prints the contents of the boardCombos field. In order to do so, it iterates the
+	 * following operations:
+	 * 
+	 * 1) It polls the priority queue.
+	 * 2) Then it prints the element.
+	 * 3) Then it saves that element to an array list.
+	 * 
+	 * Before returning from the method, all the elements are added back into the boardCombos field.
+	 */
+	void printCombosInBoard(){
+		ArrayList<Combo> polledCombosToAdd = new ArrayList<Combo>();
+		int sizeOfBoardCombos = boardCombos.size();
+		System.out.println("--------------------Combos In Board--------------------");
+		for (int i = 0; i < sizeOfBoardCombos; i++){
+			polledCombosToAdd.add(0, boardCombos.poll());
+			System.out.println(polledCombosToAdd.get(0));
+		}
+		System.out.println("-------------------------------------------------------");
+		for (int i = 0; i < polledCombosToAdd.size(); i++)
+			boardCombos.add(polledCombosToAdd.get(i));
 	}
 
 	/**

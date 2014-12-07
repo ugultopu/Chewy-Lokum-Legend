@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class LCombo extends Combo implements LokumGeneratingCombo{
 	private LComboTest test;
-	private ArrayList<Lokum> lokums;
 	private Lokum generatedLokum;
 	
 	public LCombo(ArrayList<Lokum> lokums){
@@ -73,6 +72,6 @@ public class LCombo extends Combo implements LokumGeneratingCombo{
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "LCombo = " + super.toString();
+		return "LCombo = " /*+ super.toString()*/;
 	}
 }

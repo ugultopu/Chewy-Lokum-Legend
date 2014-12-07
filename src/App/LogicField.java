@@ -62,5 +62,11 @@ public abstract class LogicField {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "(" + this.rowIndex + ", " + this.columnIndex + ")";
+	}
 	
 }

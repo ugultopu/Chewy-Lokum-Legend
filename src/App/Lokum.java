@@ -32,7 +32,6 @@ public abstract class Lokum extends LogicField implements ComboDestroyable{
 	}
 	
 	public ArrayList<Combo> getCombosThisLokumIn() {
-		findCombos();
 		return combosThisLokumIn;
 	}
 
@@ -85,8 +84,16 @@ public abstract class Lokum extends LogicField implements ComboDestroyable{
 	public void findCombos(){
 		/*
 		 * Before beginning a new search, clear the combosThisLokumIn field.
+		 * 
+		 * NOTE: Actually, this instruction is not needed. The reason is, if a lokum was in a combo, then
+		 * that lokum will be destroyed and hence, it will not exist in the board at the time of the next
+		 * call to the findBoardCombos method.
+		 * 
+		 * IMPORTANT NOTE: Actually, this instruction is erroneous. The reason is, in a call to findCombos
+		 * of a prior Lokum, a Combo might have been added to the combosThisLokumIn field of this Lokum.
+		 * Removing that Combo it may lead to incorrect behavior. So I am commenting out the line below. 
 		 */
-		combosThisLokumIn.clear();
+//		combosThisLokumIn.clear();
 		/*
 		 * Then, the method checks if this Lokum is an instance of BombLokum. If so, it returns immediately from the method. If not, it keeps on finding the combos which
 		 * this Lokum participates in.
@@ -1230,6 +1237,10 @@ public abstract class Lokum extends LogicField implements ComboDestroyable{
 			return BoardLogic.getInstance().getLogicFieldAt(getRowIndex(), getColumnIndex()+1);
 		return null;
 	}
+	
+	void clearCombosThisLokumInField(){
+		
+	}
 
 	@Override
 	public boolean equals(Object obj){
@@ -1243,7 +1254,14 @@ public abstract class Lokum extends LogicField implements ComboDestroyable{
 		return true;
 	}
 
+	/*
+	 * The method below is maybe unnecessary.
+	 * (non-Javadoc)
+	 * @see App.LogicField#toString()
+	 */
 	@Override
-	public abstract String toString();
+	public String toString(){
+		return super.toString();
+	}
 	
 }
