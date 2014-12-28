@@ -779,4 +779,36 @@ public class BoardLogic {
 			return false;
 		return true;
 	}
+
+	/*
+	 * Very bad implementation. Maybe will be fix later but keep it for now.
+	 */
+	@Override
+	public String toString(){
+		String boardString = "";
+		LogicField[][] logicFields = this.getLogicFields();
+
+		for(int currentRowIndex = this.getRowSize() - 1; currentRowIndex > -1; currentRowIndex--){
+			for(int currentColumnIndex = 0; currentColumnIndex < this.getColumnSize(); currentColumnIndex++){
+				if( logicFields[currentRowIndex][currentColumnIndex] instanceof Obstacle ){
+					Obstacle obs = (Obstacle) logicFields[currentRowIndex][currentColumnIndex];
+					String color = Character.toString(obs.getObstacleColor().charAt(0));
+					boardString += "O"+ color;
+				}
+				else if( !(logicFields[currentRowIndex][currentColumnIndex] instanceof EmptyLogicField) ){
+					Lokum lok = (Lokum) logicFields[currentRowIndex][currentColumnIndex];
+					String color = Character.toString(lok.getLokumColor().charAt(0));
+					String type = Character.toString(lok.getType().charAt(0));
+					boardString += type + color;
+				}
+				else{
+					boardString += "EE";
+				}
+				boardString += "|";
+			}
+			boardString += "\n";
+		}
+		return boardString;
+	}
+	
 }
