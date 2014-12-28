@@ -135,8 +135,8 @@ public class BombMerge extends Merge {
 					newLokum.comboDestroy();
 				}
 			}
+		
 			score.scoreUpdateBombMerge(Constants.BOARD_HEIGHT * Constants.BOARD_WIDTH);
-			System.out.println("Anasını siktin.");
 		}else{
 			System.out.println("FATAL ERROR!: BOMBMERGE");
 		}

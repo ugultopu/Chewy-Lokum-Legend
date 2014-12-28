@@ -89,7 +89,7 @@ public class LoadGame {
 			informationBoard.updateScore(currentScore);
 			informationBoard.setGoalScore(goalScore);
 			informationBoard.setCurrentLevel(level);
-			informationBoard.setMovesLeft(movesLeft);
+			MoveLevelPanel.getInstance().setMovesLeft(movesLeft);
 			BoardLogic.loadBoard(loadedBoard);
 			GameBoard.getInstance().repaint();
 		} catch (Exception e) {
