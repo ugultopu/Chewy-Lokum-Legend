@@ -11,12 +11,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class InformationBoard extends JPanel {
-	private JLabel level,target,score,movesLeft,levelInput,targetInput,scoreInput,movesLeftInput;
+	private JLabel level,target,score,levelInput,targetInput,scoreInput;
 	private JButton saveButton;
 	private int currentScore;
 	private int goalScore;
 	private int currentLevel;
-	private int moves;
 
 	private static InformationBoard instance;
 
@@ -25,11 +24,9 @@ public class InformationBoard extends JPanel {
 		level = new JLabel("Level");
 		target = new JLabel("Target");
 		score = new JLabel("Score");
-		movesLeft = new JLabel("Moves");
 		levelInput = new JLabel("");
 		targetInput = new JLabel("");
 		scoreInput = new JLabel("");
-		movesLeftInput = new JLabel(""+moves);
 		saveButton = new JButton("Save Game");
 		
 		setLayout(null);
@@ -47,10 +44,6 @@ public class InformationBoard extends JPanel {
 		score.setBounds(0, 120, 80, 30);
 		score.setFont(new Font("Tahoma", Font.BOLD, 20));
 		
-		add(movesLeft);
-		movesLeft.setBounds(0, 180, 80, 30);
-		movesLeft.setFont(new Font("Tahoma", Font.BOLD, 20));
-		
 		add(levelInput);
 		levelInput.setBounds(100, 0,80,30);
 		levelInput.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -63,9 +56,8 @@ public class InformationBoard extends JPanel {
 		scoreInput.setBounds(100, 120, 80, 30);
 		scoreInput.setFont(new Font("Tahoma", Font.BOLD, 20));
 		
-		add(movesLeftInput);
-		movesLeftInput.setBounds(100, 180, 80, 30);
-		movesLeftInput.setFont(new Font("Tahoma", Font.BOLD, 20));
+		add(MoveLevelPanel.getInstance());
+		MoveLevelPanel.getInstance().setBounds(0,180,200,30);
 		
 		add(saveButton);
 		saveButton.setBounds(0, 240, 150, 50);
@@ -97,10 +89,6 @@ public class InformationBoard extends JPanel {
 		score.setBackground(Constants.GAME_BACKGROUND_COLOR);
 		score.setForeground(Constants.TITLE_COLOR);
 		
-		movesLeft.setOpaque(true);
-		movesLeft.setBackground(Constants.GAME_BACKGROUND_COLOR);
-		movesLeft.setForeground(Constants.TITLE_COLOR);
-		
 		levelInput.setOpaque(true);
 		levelInput.setBackground(Constants.GAME_BACKGROUND_COLOR);
 		levelInput.setForeground(Constants.TITLE_COLOR);
@@ -112,10 +100,6 @@ public class InformationBoard extends JPanel {
 		scoreInput.setOpaque(true);
 		scoreInput.setBackground(Constants.GAME_BACKGROUND_COLOR);
 		scoreInput.setForeground(Constants.TITLE_COLOR);
-		
-		movesLeftInput.setOpaque(true);
-		movesLeftInput.setBackground(Constants.GAME_BACKGROUND_COLOR);
-		movesLeftInput.setForeground(Constants.TITLE_COLOR);
 		
 		saveButton.addActionListener(new ActionListener(){
 
@@ -141,14 +125,13 @@ public class InformationBoard extends JPanel {
     	level.repaint();
     	target.repaint();
     	score.repaint();
-    	movesLeft.repaint();
     	
     	levelInput.repaint();
     	targetInput.repaint();
     	scoreInput.repaint();
-    	movesLeftInput.repaint();
     	
     	saveButton.repaint();
+    	MoveLevelPanel.getInstance().repaint();
 	}
 	
 	public static InformationBoard getInstance(){
@@ -167,17 +150,12 @@ public class InformationBoard extends JPanel {
 		scoreInput.setText(""+currentScore);
 	}
 	
-	public void decreaseMoves(){
-		this.moves--;
-		movesLeftInput.setText(""+moves);
-	}
-	
 	public void setCurrentLevel(int currentLevel){
 		this.currentLevel = currentLevel;
-		this.goalScore = Constants.GOAL_SCORE + currentLevel*5000;
-		this.moves = Constants.NUMBER_OF_MOVES - 3*currentLevel;
+		this.goalScore = Constants.GOAL_SCORE + currentLevel*5000;		
+		MoveLevelPanel.getInstance().setMoves(currentLevel);
 		levelInput.setText(""+currentLevel);
-		movesLeftInput.setText(""+moves);
+		MoveLevelPanel.getInstance().setMovesText(currentLevel);
 		targetInput.setText(""+goalScore);
 	}
 	
@@ -188,15 +166,6 @@ public class InformationBoard extends JPanel {
 	
 	public int getCurrentScore(){
 		return this.currentScore;
-	}
-	
-	public void setMovesLeft(int moves){
-		this.moves = moves;
-		movesLeftInput.setText(""+moves);
-	}
-	
-	public int getMovesLeft(){
-		return this.moves;
 	}
 
 	public void setGoalScore(int goalScore) {
@@ -212,7 +181,7 @@ public class InformationBoard extends JPanel {
 		if(this.currentScore==this.goalScore || this.currentScore>this.goalScore){
 			GameOverPanel.getInstance().setWin(true);
 			GamePanel.getInstance().endGame();			
-		} else { if(moves==0){
+		} else { if(MoveLevelPanel.getInstance().getMovesLeft()==0){
 			GameOverPanel.getInstance().setWin(false);
 			GamePanel.getInstance().endGame();			
 		}
