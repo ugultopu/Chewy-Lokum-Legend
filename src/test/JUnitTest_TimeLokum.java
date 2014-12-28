@@ -11,6 +11,7 @@ import org.junit.Test;
 import App.BoardLogic;
 import App.Constants;
 import App.EmptyLogicField;
+import App.TimeLevel;
 import App.TimeLokum;
 
 public class JUnitTest_TimeLokum {
@@ -45,9 +46,9 @@ public class JUnitTest_TimeLokum {
 		assert(boardLogic.getLogicFieldAt(timeLokum.getRowIndex(), timeLokum.getColumnIndex()) instanceof TimeLokum);
 		assertTrue(timeLokum.repOK());
 		int timeAward = timeLokum.getTimeAward();
-		int oldTime = Level.getInstance().getTime();
+		int oldTime = TimeLevel.getInstance().getTime();
 		timeLokum.comboDestroy();
-		int newTime = Level.getInstance().getTime();
+		int newTime = TimeLevel.getInstance().getTime();
 		assertEquals(oldTime+timeAward,newTime);
 		System.out.println("Board just AFTER calling comboDestroy:");
 		boardLogic.toString();
