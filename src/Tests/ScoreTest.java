@@ -266,6 +266,13 @@ public class ScoreTest {
     	BombLokum bomb1 = new BombLokum(0, 0);
     	BombLokum bomb2 = new BombLokum(0, 1);
     	
+    	for(int i = 0; i < bl.getRowSize() ; i++){
+    		for(int j = 0; j < bl.getColumnSize(); j++){
+    			NormalLokum nl = new NormalLokum(i, j, "green");
+    			bl.introduceLogicField(nl);
+    		}
+    	}
+    	
     	bl.introduceLogicField(bomb1);
     	bl.introduceLogicField(bomb2);
     	
@@ -274,7 +281,7 @@ public class ScoreTest {
     	BombMerge bm = new BombMerge(bomb1, bomb2);
     	bm.destroyMerge();
     	
-    	assertEquals(81 * 81 * 100, Score.getInstance().getCurrentScore());
+    	assertEquals(bl.getRowSize() * bl.getColumnSize() * bl.getRowSize() * bl.getColumnSize() * 100, Score.getInstance().getCurrentScore());
     }
     
     @Test
@@ -341,6 +348,22 @@ public class ScoreTest {
     	BombLokum bomb = new BombLokum(3, 3);
     	WrappedLokum wl = new WrappedLokum(3, 4, "red");
     	
+    	
+    	for(int i = 0; i < bl.getRowSize() ; i++){
+    		for(int j = 0; j < bl.getColumnSize(); j++){
+    			NormalLokum nl = new NormalLokum(i, j, "green");
+    			bl.introduceLogicField(nl);
+    		}
+    	}
+
+    	
+    	for(int i = 5; i < 7 ; i++){
+    		for(int j = 5; j < 7; j++){
+    			NormalLokum nl = new NormalLokum(i, j, "red");
+    			bl.introduceLogicField(nl);
+    		}
+    	}
+    	
     	bl.introduceLogicField(bomb);
     	bl.introduceLogicField(wl);
     	
@@ -349,7 +372,9 @@ public class ScoreTest {
     	BombMerge bm = new BombMerge(bomb, wl);
     	bm.destroyMerge();
     	
-    	assertEquals(0, Score.getInstance().getCurrentScore());
+    	System.out.println(Score.getInstance().getCurrentScore());
+    	
+    	assertEquals(2 * 4 * 60 * (bl.getColumnSize()), Score.getInstance().getCurrentScore());
     }
     
     @Test
@@ -358,6 +383,14 @@ public class ScoreTest {
     	
     	BombLokum bomb = new BombLokum(3, 3);
     	VerticalStripedLokum vsl = new VerticalStripedLokum(3, 4, "red");
+    	
+    	for(int i = 0; i < bl.getRowSize() ; i++){
+    		for(int j = 0; j < bl.getColumnSize(); j++){
+    			NormalLokum nl = new NormalLokum(i, j, "green");
+    			bl.introduceLogicField(nl);
+    		}
+    	}
+
     	
     	for(int i = 5; i < 7 ; i++){
     		for(int j = 5; j < 7; j++){
@@ -374,6 +407,8 @@ public class ScoreTest {
     	BombMerge bm = new BombMerge(bomb, vsl);
     	bm.destroyMerge();
     	
-    	assertEquals(0 , Score.getInstance().getCurrentScore());
+    	System.out.println(Score.getInstance().getCurrentScore());
+    	
+    	assertEquals(4 * 60 * (bl.getColumnSize()) , Score.getInstance().getCurrentScore());
     }
 }
