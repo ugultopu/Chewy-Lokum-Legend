@@ -9,12 +9,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import App.BoardLogic;
-import App.BombLokum;
 import App.EmptyLogicField;
+import App.WrappedLokum;
 
-public class JUnitTest_BombLokum {
+public class JUnitTest_WrappedLokum {
 	BoardLogic boardLogic;
-	BombLokum bombLokum;
+	WrappedLokum wrappedLokum;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -27,8 +27,8 @@ public class JUnitTest_BombLokum {
 	@Before
 	public void setUp() throws Exception {
 		this.boardLogic = BoardLogic.getInstance();
-		this.bombLokum = new BombLokum(boardLogic.getRowSize()/2, boardLogic.getColumnSize()/2);
-		boardLogic.introduceLogicField(bombLokum);
+		this.wrappedLokum= new WrappedLokum(boardLogic.getRowSize()/2, boardLogic.getColumnSize()/2, "White");
+		boardLogic.introduceLogicField(wrappedLokum);
 		System.out.println("--------------------------------------------------Test Start--------------------------------------------------");
 	}
 
@@ -41,10 +41,19 @@ public class JUnitTest_BombLokum {
 	public void testComboDestroy() {
 		System.out.println("Board just BEFORE calling comboDestroy:");
 		boardLogic.toString();
-		assert(boardLogic.getLogicFieldAt(bombLokum.getRowIndex(), bombLokum.getColumnIndex()) instanceof BombLokum);
-		bombLokum.comboDestroy();
+		assert(boardLogic.getLogicFieldAt(wrappedLokum.getRowIndex(), wrappedLokum.getColumnIndex()) instanceof WrappedLokum);
+		wrappedLokum.comboDestroy();
 		System.out.println("Board just AFTER calling comboDestroy:");
 		boardLogic.toString();
-		assert(boardLogic.getLogicFieldAt(bombLokum.getRowIndex(), bombLokum.getColumnIndex()) instanceof EmptyLogicField);
+		/*
+		 * NOTE! Had wrapped lokum been close to the edges, the for loops below would generate an error. Keep that
+		 * in mind.
+		 */
+		for (int rowIndex = wrappedLokum.getRowIndex()-1; rowIndex < wrappedLokum.getRowIndex()+2; rowIndex++) {
+			for (int columnIndex = wrappedLokum.getColumnIndex()-1; columnIndex < wrappedLokum.getColumnIndex()+2; columnIndex++) {
+				assert(boardLogic.getLogicFieldAt(rowIndex, columnIndex) instanceof EmptyLogicField);
+			}
+		}
 	}
+
 }
