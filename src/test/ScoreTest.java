@@ -1,4 +1,4 @@
-package Tests;
+package test;
 
 import java.util.ArrayList;
 
@@ -7,6 +7,7 @@ import org.junit.*;
 import App.BoardLogic;
 import App.BombLokum;
 import App.BombMerge;
+import App.Constants;
 import App.EmptyLogicField;
 import App.FiveCombo;
 import App.FourCombo;
@@ -250,11 +251,7 @@ public class ScoreTest {
     	BombMerge bm = new BombMerge(bombLokum, bl.getLogicFieldAt(0, 1));
     	bm.destroyMerge();
     	
-    	assertEquals(384000, Score.getInstance().getCurrentScore());
-    	
-    	
-    	
-    	
+    	assertEquals(384000, Score.getInstance().getCurrentScore()); 	
     }
     
     
@@ -279,6 +276,7 @@ public class ScoreTest {
     	System.out.println(BoardLogicTest.toString(bl));
     	
     	BombMerge bm = new BombMerge(bomb1, bomb2);
+    	assertTrue(bm.repOK());
     	bm.destroyMerge();
     	
     	assertEquals(bl.getRowSize() * bl.getColumnSize() * bl.getRowSize() * bl.getColumnSize() * 100, Score.getInstance().getCurrentScore());
@@ -289,8 +287,8 @@ public class ScoreTest {
     public void wrappedWrappedMergeTest(){
     	System.out.println("------Wrapped+Wrapped Merge Score Test-------");
     	
-    	WrappedLokum wl1 = new WrappedLokum(0, 0, "red");
-    	WrappedLokum wl2 = new WrappedLokum(0, 1, "red");
+    	WrappedLokum wl1 = new WrappedLokum(0, 0, Constants.LOKUM_COLOR_RED);
+    	WrappedLokum wl2 = new WrappedLokum(0, 1, Constants.LOKUM_COLOR_RED);
     	
     	bl.introduceLogicField(wl1);
     	bl.introduceLogicField(wl2);
@@ -298,6 +296,7 @@ public class ScoreTest {
     	System.out.println(BoardLogicTest.toString(bl));
     	
     	WrappedWrappedMerge wwm = new WrappedWrappedMerge(wl1, wl2);
+    	assertTrue(wwm.repOK());
     	wwm.destroyMerge();
     	
     	assertEquals(3600, Score.getInstance().getCurrentScore());
@@ -318,6 +317,7 @@ public class ScoreTest {
     	System.out.println(BoardLogicTest.toString(bl));
     	
     	StripedStripedMerge ssm = new StripedStripedMerge(vsl, hsl);
+    	assertTrue(ssm.repOK());
     	ssm.destroyMerge();
     	
     	assertEquals(60 * (bl.getRowSize() + bl.getColumnSize()), Score.getInstance().getCurrentScore());
@@ -327,16 +327,17 @@ public class ScoreTest {
     public void stripedWrappedMergeTest() {
     	System.out.println("-------Wrapped + Striped Score Test------");
     	
-    	VerticalStripedLokum vsl = new VerticalStripedLokum(3, 3, "red");
-    	WrappedLokum wl = new WrappedLokum(3, 4, "red");
+    	VerticalStripedLokum vsl = new VerticalStripedLokum(3, 3, Constants.LOKUM_COLOR_BROWN);
+    	WrappedLokum wl = new WrappedLokum(3, 4, Constants.LOKUM_COLOR_BROWN);
     	
     	bl.introduceLogicField(vsl);
     	bl.introduceLogicField(wl);
     	
     	System.out.println(BoardLogicTest.toString(bl));
     	
-    	StripedWrappedMerge ssm = new StripedWrappedMerge(vsl, wl);
-    	ssm.destroyMerge();
+    	StripedWrappedMerge swm = new StripedWrappedMerge(vsl, wl);
+    	assertTrue(swm.repOK());
+    	swm.destroyMerge();
     	
     	assertEquals(3 * (60 * (bl.getRowSize() + bl.getColumnSize())), Score.getInstance().getCurrentScore());
     }
@@ -370,6 +371,7 @@ public class ScoreTest {
     	System.out.println(BoardLogicTest.toString(bl));
     	
     	BombMerge bm = new BombMerge(bomb, wl);
+    	assertTrue(bm.repOK());
     	bm.destroyMerge();
     	
     	System.out.println(Score.getInstance().getCurrentScore());
@@ -405,6 +407,7 @@ public class ScoreTest {
     	System.out.println(BoardLogicTest.toString(bl));
     	
     	BombMerge bm = new BombMerge(bomb, vsl);
+    	assertTrue(bm.repOK());
     	bm.destroyMerge();
     	
     	System.out.println(Score.getInstance().getCurrentScore());

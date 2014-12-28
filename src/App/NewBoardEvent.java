@@ -1,6 +1,6 @@
 package App;
 
-import Tests.BoardLogicTest;
+import test.BoardLogicTest;
 
 public class NewBoardEvent extends GameEvent {
 

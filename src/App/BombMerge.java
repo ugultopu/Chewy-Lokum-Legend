@@ -2,7 +2,6 @@ package App;
 
 import java.util.Random;
 
-import Tests.LokumTest;
 
 
 public class BombMerge extends Merge {

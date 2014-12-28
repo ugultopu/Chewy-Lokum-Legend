@@ -4,15 +4,11 @@ import java.util.ArrayList;
 
 
 public class WrappedWrappedMerge extends Merge {
-	private Lokum l1;
-	private Lokum l2;
-	private BoardLogic board;
 	private Score score = Score.getInstance();
 	
 	public WrappedWrappedMerge(MergeDestroyable l1, MergeDestroyable l2){
 		this.l1 = (Lokum)l1;
 		this.l2 = (Lokum)l2;
-		board = BoardLogic.getInstance();
 	}
 	
 	public void destroyMerge(){
@@ -23,6 +19,6 @@ public class WrappedWrappedMerge extends Merge {
 		score.scoreUpdateWrappedWrappedMerge();
 	}
 	public boolean repOK(){
-		return super.repOK()&&(l1 instanceof WrappedLokum && l2 instanceof WrappedLokum);
+		return super.repOK()&&l1 instanceof WrappedLokum && l2 instanceof WrappedLokum;
 	}
 }

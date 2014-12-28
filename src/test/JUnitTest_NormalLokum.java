@@ -9,6 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import App.BoardLogic;
+import App.Constants;
 import App.EmptyLogicField;
 import App.NormalLokum;
 
@@ -27,7 +28,7 @@ public class JUnitTest_NormalLokum {
 	@Before
 	public void setUp() throws Exception {
 		this.boardLogic = BoardLogic.getInstance();
-		this.normalLokum= new NormalLokum(boardLogic.getRowSize()/2, boardLogic.getColumnSize()/2, "White");
+		this.normalLokum= new NormalLokum(boardLogic.getRowSize()/2, boardLogic.getColumnSize()/2, Constants.LOKUM_COLOR_WHITE);
 		boardLogic.introduceLogicField(normalLokum);
 		System.out.println("--------------------------------------------------Test Start--------------------------------------------------");
 	}
@@ -42,6 +43,7 @@ public class JUnitTest_NormalLokum {
 		System.out.println("Board just BEFORE calling comboDestroy:");
 		boardLogic.toString();
 		assert(boardLogic.getLogicFieldAt(normalLokum.getRowIndex(), normalLokum.getColumnIndex()) instanceof NormalLokum);
+		assertTrue(normalLokum.repOK());
 		normalLokum.comboDestroy();
 		System.out.println("Board just AFTER calling comboDestroy:");
 		boardLogic.toString();

@@ -2,7 +2,7 @@ package App;
 
 import java.util.LinkedList;
 
-import Tests.BoardLogicTest;
+import test.BoardLogicTest;
 
 
 

@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Tests.BoardLogicTest;
+import test.BoardLogicTest;
 
 public class GameBoard extends JPanel {
 

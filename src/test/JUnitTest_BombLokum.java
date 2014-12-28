@@ -42,6 +42,7 @@ public class JUnitTest_BombLokum {
 		System.out.println("Board just BEFORE calling comboDestroy:");
 		boardLogic.toString();
 		assert(boardLogic.getLogicFieldAt(bombLokum.getRowIndex(), bombLokum.getColumnIndex()) instanceof BombLokum);
+		assertTrue(bombLokum.repOK());
 		bombLokum.comboDestroy();
 		System.out.println("Board just AFTER calling comboDestroy:");
 		boardLogic.toString();

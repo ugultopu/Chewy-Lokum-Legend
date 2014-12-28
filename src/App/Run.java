@@ -2,11 +2,6 @@ package App;
 
 import java.io.IOException;
 
-import Tests.BoardLogicTest;
-import Tests.LokumTest;
-import Tests.MergeTest;
-import Tests.NormalLokumTest;
-import Tests.StripedLokumTest;
 
 
 public class Run {

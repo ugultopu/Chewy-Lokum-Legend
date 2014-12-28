@@ -9,6 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import App.BoardLogic;
+import App.Constants;
 import App.EmptyLogicField;
 import App.VerticalStripedLokum;
 
@@ -27,7 +28,7 @@ public class JUnitTest_VerticalStripedLokum {
 	@Before
 	public void setUp() throws Exception {
 		this.boardLogic = BoardLogic.getInstance();
-		this.verticalStripedLokum= new VerticalStripedLokum(boardLogic.getRowSize()/2, boardLogic.getColumnSize()/2, "White");
+		this.verticalStripedLokum= new VerticalStripedLokum(boardLogic.getRowSize()/2, boardLogic.getColumnSize()/2, Constants.LOKUM_COLOR_BROWN);
 		boardLogic.introduceLogicField(verticalStripedLokum);
 		System.out.println("--------------------------------------------------Test Start--------------------------------------------------");
 	}
@@ -42,6 +43,7 @@ public class JUnitTest_VerticalStripedLokum {
 		System.out.println("Board just BEFORE calling comboDestroy:");
 		boardLogic.toString();
 		assert(boardLogic.getLogicFieldAt(verticalStripedLokum.getRowIndex(), verticalStripedLokum.getColumnIndex()) instanceof VerticalStripedLokum);
+		assertTrue(verticalStripedLokum.repOK());
 		verticalStripedLokum.comboDestroy();
 		System.out.println("Board just AFTER calling comboDestroy:");
 		boardLogic.toString();

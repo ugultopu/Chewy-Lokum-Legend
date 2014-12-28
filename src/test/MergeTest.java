@@ -1,4 +1,4 @@
-package Tests;
+package test;
 
 import static org.junit.Assert.*;
 
@@ -11,7 +11,6 @@ import org.junit.Test;
 import App.BoardLogic;
 import App.Merge;
 import App.Score;
-import Tests.BoardLogicTest;
 
 public class MergeTest {
 	BoardLogic mergeTestBoard;
@@ -32,7 +31,7 @@ public class MergeTest {
 	@After
 	public void tearDown() throws Exception {
 	}
-
+	
 	@Test
 	public void testDestroyMerge(Merge testMerge) {
 		System.out.println("Board before combo destroy: \n");

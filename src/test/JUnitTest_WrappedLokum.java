@@ -9,6 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import App.BoardLogic;
+import App.Constants;
 import App.EmptyLogicField;
 import App.WrappedLokum;
 
@@ -27,7 +28,7 @@ public class JUnitTest_WrappedLokum {
 	@Before
 	public void setUp() throws Exception {
 		this.boardLogic = BoardLogic.getInstance();
-		this.wrappedLokum= new WrappedLokum(boardLogic.getRowSize()/2, boardLogic.getColumnSize()/2, "White");
+		this.wrappedLokum= new WrappedLokum(boardLogic.getRowSize()/2, boardLogic.getColumnSize()/2, Constants.LOKUM_COLOR_GREEN);
 		boardLogic.introduceLogicField(wrappedLokum);
 		System.out.println("--------------------------------------------------Test Start--------------------------------------------------");
 	}
@@ -42,6 +43,7 @@ public class JUnitTest_WrappedLokum {
 		System.out.println("Board just BEFORE calling comboDestroy:");
 		boardLogic.toString();
 		assert(boardLogic.getLogicFieldAt(wrappedLokum.getRowIndex(), wrappedLokum.getColumnIndex()) instanceof WrappedLokum);
+		assertTrue(wrappedLokum.repOK());
 		wrappedLokum.comboDestroy();
 		System.out.println("Board just AFTER calling comboDestroy:");
 		boardLogic.toString();
