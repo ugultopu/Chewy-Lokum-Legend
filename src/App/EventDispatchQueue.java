@@ -36,5 +36,7 @@ public class EventDispatchQueue {
 	public static void resetInstance(){
 		instance = new EventDispatchQueue();
 	}
-	
+	public boolean repOK(){
+		return eventQueue != null;
+	}
 }
