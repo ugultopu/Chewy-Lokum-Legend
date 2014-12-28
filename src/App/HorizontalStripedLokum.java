@@ -40,7 +40,7 @@ public class HorizontalStripedLokum extends StripedLokum implements MergeDestroy
 				
 			}
 		}
-		Score.getInstance().scoreUpdateStripedUse(destroyedLokums);
+		Score.getInstance().scoreUpdateHorizontalStripedUse();
 	}
 
 	@Override
