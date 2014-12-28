@@ -11,8 +11,8 @@ public class TimeLokum extends NormalLokum{
 	
 	@Override
 	public void comboDestroy() {
-		Level.getInstance().updateTime(Level.getInstance().getTime()+timeAward);
-		EventDispatchQueue.getInstance().addEvent(new UpdateTimeEvent(Level.getInstance().getTime()));
+		TimeLevel.getInstance().updateTime(TimeLevel.getInstance().getTime()+timeAward);
+		EventDispatchQueue.getInstance().addEvent(new UpdateTimeEvent(TimeLevel.getInstance().getTime()));
 		super.comboDestroy();
 	
 	}
