@@ -5,10 +5,6 @@ import java.util.Comparator;
 
 
 public abstract class Combo implements Comparator<Combo>{
-	/*
-	 * Where is the field scoreAward is used?
-	 */
-	public int scoreAward;
 	public ArrayList<Lokum> lokums;
 	int comboPriority;
 	
@@ -120,7 +116,7 @@ public abstract class Combo implements Comparator<Combo>{
 	 * @return
 	 */
 	public boolean repOK(){
-		return (scoreAward>0&&lokums!=null&&comboPriority>0);
+		return (lokums!=null&&comboPriority>0);
 	}
 	
 }
