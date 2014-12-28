@@ -38,4 +38,7 @@ public class StripedWrappedMerge extends Merge {
 			}
 		}
 	}
+	public boolean repOK(){
+		return super.repOK()&&((l1 instanceof StripedLokum && l2 instanceof WrappedLokum)||(l2 instanceof StripedLokum && l1 instanceof WrappedLokum));
+	}
 }

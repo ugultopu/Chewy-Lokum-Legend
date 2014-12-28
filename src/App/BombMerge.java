@@ -6,8 +6,6 @@ import Tests.LokumTest;
 
 
 public class BombMerge extends Merge {
-	private Lokum l1;
-	private Lokum l2;
 	private BoardLogic board = BoardLogic.getInstance();
 	private Lokum[][] lokumBoard =  board.getBoard();
 	private Score score = Score.getInstance();
@@ -210,5 +208,9 @@ public class BombMerge extends Merge {
 			default:
 				return null;
 		}
+	}
+	
+	public boolean repOK(){
+		return super.repOK()&&(l1 instanceof BombLokum || l2 instanceof BombLokum);
 	}
 }

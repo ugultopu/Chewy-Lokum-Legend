@@ -22,4 +22,7 @@ public class WrappedWrappedMerge extends Merge {
 		destroyer2.comboDestroy();
 		score.scoreUpdateWrappedWrappedMerge();
 	}
+	public boolean repOK(){
+		return super.repOK()&&(l1 instanceof WrappedLokum && l2 instanceof WrappedLokum);
+	}
 }

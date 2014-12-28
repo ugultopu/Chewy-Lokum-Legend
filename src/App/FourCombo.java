@@ -11,8 +11,6 @@ public class FourCombo extends Combo implements LokumGeneratingCombo{
 		generateLokum();
 		//test = new FourComboTest();
 		this.comboPriority = 2;
-		
-		
 	}
 	
 	

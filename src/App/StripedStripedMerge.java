@@ -2,8 +2,6 @@ package App;
 
 
 public class StripedStripedMerge extends Merge {
-	private Lokum l1;
-	private Lokum l2;
 	private BoardLogic board;
 	
 	public StripedStripedMerge(MergeDestroyable l1, MergeDestroyable l2){
@@ -25,5 +23,8 @@ public class StripedStripedMerge extends Merge {
 		HorizontalStripedLokum horizontalDestroyer = new HorizontalStripedLokum(x2, y2, "red");
 		verticalDestroyer.comboDestroy();
 		horizontalDestroyer.comboDestroy();
+	}
+	public boolean repOK(){
+		return super.repOK()&&(l1 instanceof StripedLokum && l2 instanceof StripedLokum);
 	}
 }
