@@ -8,8 +8,6 @@ import java.util.Random;
 
 import Tests.BoardLogicTest;
 
-import com.sun.org.apache.bcel.internal.generic.DALOAD;
-
 
 public class BoardLogic {
 
@@ -19,10 +17,7 @@ public class BoardLogic {
 	private PriorityQueue<Combo> boardCombos;
 	private static BoardLogic instance;
 
-
-	/*
-	 * CHECK!
-	 */
+	
 	public static BoardLogic getInstance(){
 		if(instance == null)
 			instance = new BoardLogic();
@@ -78,7 +73,20 @@ public class BoardLogic {
 	}
 
 
-
+    /**
+	* @requires  
+	* repOK() is true
+	*			
+	* @ensures	
+	* Combos are selected and put into a priorityQueue
+	*
+	* @modifies
+	* Nothing is modified
+	*
+	*
+	* @return
+	* PriorityQueue of selected Combos
+	*/
 	public PriorityQueue<Combo> findBoardCombos(){
 
 		/*
@@ -188,6 +196,22 @@ public class BoardLogic {
 		//Score.getInstance().setScore(0);
 	}
 	
+
+	/**
+	* 
+	* @requires
+	* currentCombosLokums != null
+	*
+	* @ensures	Ensures the ensurences of selected lokum.comboDestroy(), updateScore()
+	*			For each combo in the ArrayList, checks for Generating Event and adds to EventDispatchQueue
+	*
+	*
+	* @modifies	
+	*			-Lokums
+	*			-Modifies of updateScore()
+	*			-EventDispatchQueue
+	*			-Returns nothing
+	*/
 	private void destroyCombos(){
 		findBoardCombos();
 		int boardCombosSize = boardCombos.size();
@@ -233,9 +257,18 @@ public class BoardLogic {
 	/**
 	 * After destroys, levels the LogicFields that have emptyLogicFields underneath. After that, populates the emptied locations with new LogicFields falling from above the
 	 * board.
-	 * @requires:
-	 * R.0) Should be called in the method:swap(LogicField, LogicField), after performing the required lokum destroys.
-	 * @return
+	 * @requires
+	 * Should be called in the method:swap(LogicField, LogicField), after performing the required lokum destroys.
+	 * this.repOK() == true, there is at least one empty EmptyLogicField instance in side lokums
+	 * eventDispatchQueue.repOK() == true
+	 * @modifies
+	 * instance(i.e this)
+	 * eventDispatchQueue
+	 * @ensures
+	 * EmptyLogicFields are replaced with the upper LogicFields inside logicFields. If there are no more non-EmptyLogicFields on the upper fields,
+	 * these EmptyLogicFields are replaced with randomLokums.
+	 * There is no EmptyLogicField inside logicFields.
+	 * An FallingLokumEvent is created and added to eventDispatchQueue.
 	 */
 	public void readjustBoardAfterDestroy(){
 		HashMap<LogicField, Integer> fallingLogicFields = new HashMap<LogicField, Integer>();
@@ -465,7 +498,7 @@ public class BoardLogic {
 			// Hence, the line below is deprecated now, I commented out it just as a remainder
 			// EventDispatchQueue.getInstance().addEvent(new NonLokumGeneratingEvent(convertLogicFieldListToEmptyLogicFieldList(comboDestroyedFields)));
 		}
-		InformationBoard.getInstance().decreaseMoves();
+		MoveLevelPanel.getInstance().decreaseMoves();
 		EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
 		return true;
 	}
@@ -487,7 +520,7 @@ public class BoardLogic {
 	}
 
 	/**
-	 * @requires:
+	 * @requires
 	 * R.0 Either of the arguments is instanceof MergeDestroyable.
 	 */
 	public void mergeDestroy( LogicField f0, LogicField f1 ){
@@ -495,9 +528,12 @@ public class BoardLogic {
 		merge.destroyMerge();
 	}
 	/**
-	 * @requires:
-	 * R.0 ( f0 instanceof SwappableLogicField ) && ( f1 instanceof SwappableLogicField ) 
-	 */
+     * Checks if the swapped lokums are special lokums and they can be merged.
+     * @requires 
+     * f0 != null and f1 != null
+     * @ensures
+     * Correct boolean returned.
+     */
 	private boolean isMergeSwap(LogicField f0, LogicField f1){
 		if ( ( f0 instanceof MergeDestroyable ) && ( f1 instanceof MergeDestroyable ) )
 			return true;
@@ -558,11 +594,31 @@ public class BoardLogic {
 		return false;
 	}
 
+	/**
+	 * @requires
+	 * this.repOK() == true
+	 * @modifies
+	 * Nothing gets modified.
+	 * @ensures
+	 * Returns true if there are no combos inside the board.
+	 * Returns false if there is at least one combo inside the board. 
+	 * The board state is not changed
+	 */
 	public boolean isBoardStabilized(){
 		findBoardCombos();
 		return ( boardCombos.size() == 0 ) ;
 	}
 
+	/**
+	 * @requires
+	 * this.repOK() == true
+	 * @modifies
+	 * Nothing gets modified.
+	 * @ensures
+	 * Returns true if there are no possible combo making or merge making swap actions combos inside the board.
+	 * Returns false otherwise. 
+	 * The board state is not changed
+	 */
 	public boolean isMoveAvailable(){
 		int currentRowIndex;
 		int currentColumnIndex;
@@ -650,6 +706,12 @@ public class BoardLogic {
 	 * will be checked and if it is not swapped as well, then it will be swapped with that element.
 	 * 
 	 * -Yet as another alternative, you can pick the lokums to be swapped not in a random fashion, but it a "pseudo - random" fashion.
+	 * @requires
+     * logicFields != null, BoardLogic.isMoveAvailable: false
+	 * @ensures 
+     * logicFields != null, BoardLogic.isMoveAvailable: true
+	 * @modifies 
+     * this.logicFields
 	 */
 	public void shuffleBoard(){
 		Random rnd = new Random();
@@ -685,5 +747,36 @@ public class BoardLogic {
 			emptyLogicFields.add((EmptyLogicField)logicField);
 		}
 		return  emptyLogicFields;
+	}
+
+	/**
+	 * 	@requires
+	 * 	
+	 * 	<nothing>
+	 * 
+	 * 	@ensures
+	 * 
+	 * 	E.1) BoardLogic instance != null.
+	 * 	E.2) LogicField[][] logicFields != null. 
+	 * 	E.3) logicField.repOK() == true for every lokum in logicFields matrix.
+	 * 	E.4) eventDispatchQueue.repOK() == true.
+	 * 
+	 * 	@modifies
+	 * 
+	 *	<nothing> 
+	 */
+	public boolean repOK(){
+
+		if(instance == null)
+			return false;
+		if(logicFields == null)
+			return false;
+		for(int i=0;i<logicFields.length;i++)
+			for(int j=0;j<logicFields[i].length;j++)
+				if(!logicFields[i][j].repOK())
+					return false;	
+		if(!EventDispatchQueue.getInstance().repOK())
+			return false;
+		return true;
 	}
 }

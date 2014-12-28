@@ -69,4 +69,15 @@ public abstract class LogicField {
 		return "(" + this.rowIndex + ", " + this.columnIndex + ")";
 	}
 	
+	/**
+	 * @return
+	 * is representation of the logic field ok.
+	 */
+	public boolean repOK(){
+		if(rowIndex<Constants.BOARD_HEIGHT&&0<=rowIndex&&columnIndex<Constants.BOARD_WIDTH&&0<=columnIndex)
+			return true;
+		else
+			return false;
+	}
+	
 }

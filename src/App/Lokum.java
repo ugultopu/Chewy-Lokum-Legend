@@ -1263,5 +1263,41 @@ public abstract class Lokum extends LogicField implements ComboDestroyable{
 	public String toString(){
 		return super.toString();
 	}
+
+	/**
+	 * 
+	 * @requires
+	 * 
+	 * <nothing>
+	 * 
+	 * @ensures
+	 * 
+	 * E.1) (implicit? because we actually need to call repOK() of this field.) color != null.
+	 * E.2) (implicit? because we actually need to call repOK() of this field.) location != null.
+	 * E.3) color's value is indeed a valid color.
+	 * E.4) location is valid
+	 * 
+	 * @modifies
+	 * 
+	 * <nothing>
+	 * @return
+	 */
+	public boolean repOK(){
+		if(!super.repOK())
+			return false;
+		/*
+		 * Following if statement may be changed if we change the way the color of a Lokum is represented.
+		 */
+		if(!isColorValid(lokumColor))
+			return false;
+		return true;
+	}
+	
+	private boolean isColorValid(String lokumColor){
+		if(lokumColor.equals(Constants.LOKUM_COLOR_BROWN)||lokumColor.equals(Constants.LOKUM_COLOR_GREEN)||lokumColor.equals(Constants.LOKUM_COLOR_RED)||lokumColor.equals(Constants.LOKUM_COLOR_WHITE))
+			return true;
+		else
+			return false;
+	}
 	
 }

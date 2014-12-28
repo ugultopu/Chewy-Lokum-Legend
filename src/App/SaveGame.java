@@ -15,7 +15,7 @@ public class SaveGame {
 		
 		int goal_score = InformationBoard.getInstance().getGoalScore();
 		int current_score = Score.getInstance().getCurrentScore();
-		int moves_left = InformationBoard.getInstance().getMovesLeft();
+		int moves_left = MoveLevelPanel.getInstance().getMovesLeft();
 		int level = InformationBoard.getInstance().getCurrentLevel();
 		
 
