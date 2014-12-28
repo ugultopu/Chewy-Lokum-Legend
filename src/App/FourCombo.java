@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 
 public class FourCombo extends Combo implements LokumGeneratingCombo{
-	private FourComboTest test;
 	private Lokum generatedLokum;
 	
 	public FourCombo(ArrayList<Lokum> lokums){
@@ -35,20 +34,6 @@ public class FourCombo extends Combo implements LokumGeneratingCombo{
 	
 	public Lokum getGeneratedLokum(){
 		return generatedLokum;
-	}
-	
-	public class FourComboTest{
-		public FourComboTest(){
-			if(lokums == null){
-				System.out.println("Lokums in four combo is null");
-			}else{
-				for(int i = 0; i < lokums.size(); i++){
-					Lokum lokum = lokums.get(i);
-					System.out.println("Four lokum combo with lokums: " + lokum.toString() + ", ");
-					System.out.println("Generated: " + generatedLokum.toString());
-				}
-			}
-		}
 	}
 
 	@Override
@@ -96,5 +81,9 @@ public class FourCombo extends Combo implements LokumGeneratingCombo{
 	public String toString() {
 		// TODO Auto-generated method stub
 		return "FourCombo = " /*+ super.toString()*/;
+	}
+	
+	public boolean repOK(){
+		return super.repOK()&&lokums.size()==4;
 	}
 }

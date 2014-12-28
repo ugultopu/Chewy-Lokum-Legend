@@ -40,4 +40,8 @@ public class ThreeCombo extends Combo {
 		// TODO Auto-generated method stub
 		return "ThreeCombo = " /*+ super.toString()*/;
 	}
+	
+	public boolean repOK(){
+		return super.repOK()&&lokums.size()==3;
+	}
 }
