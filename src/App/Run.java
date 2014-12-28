@@ -15,11 +15,9 @@ public class Run {
 		
 		ApplicationWindow frame = ApplicationWindow.getInstance();
 		frame.pack();
-<<<<<<< HEAD
-	frame.setSize(Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
-=======
+
 		frame.setSize(Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
->>>>>>> 27d182ee9c32e0b6cfb4974ce5b685786b51c54f
+
 		
 //		NormalLokum nl = new NormalLokum(0,0,"red");
 //		
