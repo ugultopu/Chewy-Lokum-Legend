@@ -665,8 +665,8 @@ public class BoardLogic {
 	}
 
 	public void swap(int selectedColumn, int selectedRow, int otherColumn, int otherRow) {
-		//swap(logicFields[selectedRow][selectedColumn], logicFields[otherRow][otherColumn]);
-		Tests.BoardLogicTest.swapTest(logicFields[selectedRow][selectedColumn], logicFields[otherRow][otherColumn]);
+		swap(logicFields[selectedRow][selectedColumn], logicFields[otherRow][otherColumn]);
+		//Tests.BoardLogicTest.swapTest(logicFields[selectedRow][selectedColumn], logicFields[otherRow][otherColumn]);
 	}
 
 	private LogicField[][] copyLogicFieldArray(){
