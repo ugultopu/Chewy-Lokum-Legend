@@ -42,8 +42,14 @@ public class Score {
 		EventDispatchQueue.getInstance().addEvent(sue);
 	}
 	
-	public void scoreUpdateStripedUse(int numberOfLokumsDestroyed){
-		currentScore += numberOfLokumsDestroyed * 60;
+	public void scoreUpdateHorizontalStripedUse(){
+		currentScore += BoardLogic.getInstance().getColumnSize() * 60;
+		sue = new ScoreUpdateEvent(currentScore);
+		EventDispatchQueue.getInstance().addEvent(sue);
+	}
+	
+	public void scoreUpdateVerticalStripedUse(){
+		currentScore += BoardLogic.getInstance().getRowSize() * 60;
 		sue = new ScoreUpdateEvent(currentScore);
 		EventDispatchQueue.getInstance().addEvent(sue);
 	}

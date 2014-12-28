@@ -41,7 +41,7 @@ public class VerticalStripedLokum extends StripedLokum {
 				
 			}
 		}
-		Score.getInstance().scoreUpdateStripedUse(lokumsDestroyed);
+		Score.getInstance().scoreUpdateVerticalStripedUse();
 	}
 
 	@Override
