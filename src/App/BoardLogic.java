@@ -218,6 +218,7 @@ public class BoardLogic {
 		for(int currentComboIndex=0;currentComboIndex<boardCombosSize;currentComboIndex++){
 			Combo currentCombo = boardCombos.poll();
 			ArrayList<Lokum> currentCombosLokums = currentCombo.getComboLokums();
+			currentCombo.updateScore();
 			for(int currentComboLokumsLokumIndex=0;currentComboLokumsLokumIndex<currentCombosLokums.size();currentComboLokumsLokumIndex++){
 				Lokum currentCombosCurrentLokum = currentCombosLokums.get(currentComboLokumsLokumIndex);
 				currentCombosCurrentLokum.comboDestroy();
