@@ -115,5 +115,12 @@ public abstract class Combo implements Comparator<Combo>{
 		stringToReturn = stringToReturn + lokums.get(i).toString() + "}";
 		return stringToReturn;
 	}
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean repOK(){
+		return (scoreAward>0&&lokums!=null&&comboPriority>0);
+	}
 	
 }

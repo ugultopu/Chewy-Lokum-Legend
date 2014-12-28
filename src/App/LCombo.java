@@ -3,7 +3,6 @@ package App;
 import java.util.ArrayList;
 
 public class LCombo extends Combo implements LokumGeneratingCombo{
-	private LComboTest test;
 	private Lokum generatedLokum;
 	
 	public LCombo(ArrayList<Lokum> lokums){
@@ -27,19 +26,6 @@ public class LCombo extends Combo implements LokumGeneratingCombo{
 		this.generatedLokum = new WrappedLokum(x, y, color);
 	}
 	
-	public class LComboTest{
-		public LComboTest(){
-			if(lokums == null){
-				System.out.println("Lokums in L combo is null");
-			}else{
-				for(int i = 0; i < lokums.size(); i++){
-					Lokum lokum = lokums.get(i);
-					System.out.println("L lokum combo with lokums: " + lokum.toString() + ", ");
-					System.out.println("Generated: " + generatedLokum.toString());
-				}
-			}
-		}
-	}
 
 	@Override
 	public ArrayList<Lokum> getComboLokums() {
@@ -73,5 +59,8 @@ public class LCombo extends Combo implements LokumGeneratingCombo{
 	public String toString() {
 		// TODO Auto-generated method stub
 		return "LCombo = " /*+ super.toString()*/;
+	}
+	public boolean repOK(){
+		return super.repOK()&&lokums.size()==5;
 	}
 }

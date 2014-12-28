@@ -3,7 +3,6 @@ package App;
 import java.util.*;
 
 public class FiveCombo extends Combo implements LokumGeneratingCombo{
-	private FiveComboTest test;
 	private Lokum generatedLokum;
 	
 	public FiveCombo(ArrayList<Lokum> lokums){
@@ -33,19 +32,6 @@ public class FiveCombo extends Combo implements LokumGeneratingCombo{
 		EventDispatchQueue.getInstance().addEvent(lge);
 	}
 	
-	public class FiveComboTest{
-		public FiveComboTest(){
-			if(lokums == null){
-				System.out.println("Lokums in five combo is null");
-			}else{
-				for(int i = 0; i < lokums.size(); i++){
-					Lokum lokum = lokums.get(i);
-					System.out.println("Five lokum combo with lokums: " + lokum.toString() + ", ");
-					System.out.println("Generated: " + generatedLokum.toString());
-				}
-			}
-		}
-	}
 
 	@Override
 	public ArrayList<Lokum> getComboLokums() {
@@ -76,5 +62,8 @@ public class FiveCombo extends Combo implements LokumGeneratingCombo{
 	public String toString() {
 		// TODO Auto-generated method stub
 		return "FiveCombo = " /*+ super.toString()*/;
+	}
+	public boolean repOK(){
+		return super.repOK()&&lokums.size()==5;
 	}
 }

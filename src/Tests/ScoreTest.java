@@ -66,6 +66,7 @@ public class ScoreTest {
         System.out.println(BoardLogicTest.toString(bl));
         
         ThreeCombo testThree = new ThreeCombo(comboLokums);
+        assertTrue(testThree.repOK());
         testThree.updateScore();
         
         assertEquals(60, Score.getInstance().getCurrentScore());
@@ -93,8 +94,9 @@ public class ScoreTest {
         
         System.out.println(BoardLogicTest.toString(bl));
         
-        LCombo testThree = new LCombo(comboLokums);
-        testThree.updateScore();
+        LCombo testL = new LCombo(comboLokums);
+        assertTrue(testL.repOK());
+        testL.updateScore();
         
         assertEquals(200, Score.getInstance().getCurrentScore());
     }
@@ -121,8 +123,9 @@ public class ScoreTest {
         
         System.out.println(BoardLogicTest.toString(bl));
         
-        LCombo testThree = new LCombo(comboLokums);
-        testThree.updateScore();
+        LCombo testT = new LCombo(comboLokums);
+        assertTrue(testT.repOK());
+        testT.updateScore();
         
         assertEquals(200, Score.getInstance().getCurrentScore());
     }
@@ -148,8 +151,9 @@ public class ScoreTest {
         
         System.out.println(BoardLogicTest.toString(bl));
         
-        FourCombo testThree = new FourCombo(comboLokums);
-        testThree.updateScore();
+        FourCombo testFour = new FourCombo(comboLokums);
+        assertTrue(testFour.repOK());
+        testFour.updateScore();
         
         assertEquals(120, Score.getInstance().getCurrentScore());
     }
@@ -177,8 +181,9 @@ public class ScoreTest {
         
         System.out.println(BoardLogicTest.toString(bl));
         
-        FiveCombo testThree = new FiveCombo(comboLokums);
-        testThree.updateScore();
+        FiveCombo testFive = new FiveCombo(comboLokums);
+        assertTrue(testFive.repOK());
+        testFive.updateScore();
         
         assertEquals(200, Score.getInstance().getCurrentScore());
     }
