@@ -42,21 +42,6 @@ public class JUnitTest_BombMerge {
 		this.bombLokum = new BombLokum(boardLogic.getRowSize()/2, boardLogic.getColumnSize()/2);
 		boardLogic.introduceLogicField(bombLokum);
 		
-		this.normalTest = new NormalLokum(boardLogic.getRowSize()/2-1, boardLogic.getColumnSize()/2, "White");
-		boardLogic.introduceLogicField(normalTest);
-		
-		this.horizontalStripedTest = new HorizontalStripedLokum(boardLogic.getRowSize()/2-1, boardLogic.getColumnSize()/2, "White");
-		boardLogic.introduceLogicField(horizontalStripedTest);
-		
-		this.verticalStripedTest = new VerticalStripedLokum(boardLogic.getRowSize()/2-1, boardLogic.getColumnSize()/2, "White");
-		boardLogic.introduceLogicField(verticalStripedTest);
-		
-		this.wrappedTest = new WrappedLokum(boardLogic.getRowSize()/2-1, boardLogic.getColumnSize()/2, "White");
-		boardLogic.introduceLogicField(wrappedTest);
-		
-		this.bombTest = new BombLokum(boardLogic.getRowSize()/2-1, boardLogic.getColumnSize()/2);
-		boardLogic.introduceLogicField(bombTest);
-		
 		System.out.println("--------------------------------------------------Test Start--------------------------------------------------");
 	}
 
@@ -68,11 +53,15 @@ public class JUnitTest_BombMerge {
 	@Test
 	public void testDestroyMerge() {
 		System.out.println("Board just BEFORE calling Bomb - Normal merge:");
-		boardLogic.toString();
+		System.out.println(boardLogic);
+		
+		this.normalTest = new NormalLokum(boardLogic.getRowSize()/2-1, boardLogic.getColumnSize()/2, "White");
+		boardLogic.introduceLogicField(normalTest);
+		
 		BombMerge bombMerge = new BombMerge(bombLokum, normalTest);
 		bombMerge.destroyMerge();
 		System.out.println("Board just AFTER calling Bomb - Normal merge:");
-		boardLogic.toString();
+		System.out.println(boardLogic);
 		
 		try {
 			setUp();
@@ -81,11 +70,15 @@ public class JUnitTest_BombMerge {
 			e.printStackTrace();
 		}
 		System.out.println("Board just BEFORE calling Bomb - Horizontal Striped merge:");
-		boardLogic.toString();
+		System.out.println(boardLogic);
+		
+		this.horizontalStripedTest = new HorizontalStripedLokum(boardLogic.getRowSize()/2-1, boardLogic.getColumnSize()/2, "White");
+		boardLogic.introduceLogicField(horizontalStripedTest);
+		
 		bombMerge = new BombMerge(bombLokum, horizontalStripedTest);
 		bombMerge.destroyMerge();
 		System.out.println("Board just AFTER calling Bomb - Horizontal Striped merge:");
-		boardLogic.toString();
+		System.out.println(boardLogic);
 		
 		try {
 			setUp();
@@ -94,11 +87,15 @@ public class JUnitTest_BombMerge {
 			e.printStackTrace();
 		}
 		System.out.println("Board just BEFORE calling Bomb - Vertical Striped merge:");
-		boardLogic.toString();
+		System.out.println(boardLogic);
+		
+		this.verticalStripedTest = new VerticalStripedLokum(boardLogic.getRowSize()/2-1, boardLogic.getColumnSize()/2, "White");
+		boardLogic.introduceLogicField(verticalStripedTest);
+		
 		bombMerge = new BombMerge(bombLokum, verticalStripedTest);
 		bombMerge.destroyMerge();
 		System.out.println("Board just AFTER calling Bomb - Vertical Striped merge:");
-		boardLogic.toString();
+		System.out.println(boardLogic);
 		
 		try {
 			setUp();
@@ -107,11 +104,15 @@ public class JUnitTest_BombMerge {
 			e.printStackTrace();
 		}
 		System.out.println("Board just BEFORE calling Bomb - Wrapped merge:");
-		boardLogic.toString();
+		System.out.println(boardLogic);
+		
+		this.wrappedTest = new WrappedLokum(boardLogic.getRowSize()/2-1, boardLogic.getColumnSize()/2, "White");
+		boardLogic.introduceLogicField(wrappedTest);
+		
 		bombMerge = new BombMerge(bombLokum, wrappedTest);
 		bombMerge.destroyMerge();
 		System.out.println("Board just AFTER calling Bomb - Wrapped merge:");
-		boardLogic.toString();
+		System.out.println(boardLogic);
 		
 		try {
 			setUp();
@@ -120,11 +121,15 @@ public class JUnitTest_BombMerge {
 			e.printStackTrace();
 		}
 		System.out.println("Board just BEFORE calling Bomb - Bomb merge:");
-		boardLogic.toString();
+		System.out.println(boardLogic);
+		
+		this.bombTest = new BombLokum(boardLogic.getRowSize()/2-1, boardLogic.getColumnSize()/2);
+		boardLogic.introduceLogicField(bombTest);
+		
 		bombMerge = new BombMerge(bombLokum, bombTest);
 		bombMerge.destroyMerge();
 		System.out.println("Board just AFTER calling Bomb - Bomb merge:");
-		boardLogic.toString();
+		System.out.println(boardLogic);
 	}
 
 }

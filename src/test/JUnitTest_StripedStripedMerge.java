@@ -19,12 +19,10 @@ import App.WrappedLokum;
 
 public class JUnitTest_StripedStripedMerge {
 	BoardLogic boardLogic;
-	BombLokum bombLokum;
-	NormalLokum normalTest;
+	HorizontalStripedLokum horizontalStripedLokum;
+	VerticalStripedLokum verticalStripedLokum;
 	HorizontalStripedLokum horizontalStripedTest;
 	VerticalStripedLokum verticalStripedTest;
-	WrappedLokum wrappedTest;
-	BombLokum bombTest;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -38,23 +36,11 @@ public class JUnitTest_StripedStripedMerge {
 	public void setUp() throws Exception {
 		this.boardLogic = BoardLogic.getInstance();
 
-		this.bombLokum = new BombLokum(boardLogic.getRowSize()/2, boardLogic.getColumnSize()/2);
-		boardLogic.introduceLogicField(bombLokum);
-
-		this.normalTest = new NormalLokum(boardLogic.getRowSize()/2-1, boardLogic.getColumnSize()/2, "White");
-		boardLogic.introduceLogicField(normalTest);
-
-		this.horizontalStripedTest = new HorizontalStripedLokum(boardLogic.getRowSize()/2-1, boardLogic.getColumnSize()/2, "White");
-		boardLogic.introduceLogicField(horizontalStripedTest);
-
-		this.verticalStripedTest = new VerticalStripedLokum(boardLogic.getRowSize()/2-1, boardLogic.getColumnSize()/2, "White");
-		boardLogic.introduceLogicField(verticalStripedTest);
-
-		this.wrappedTest = new WrappedLokum(boardLogic.getRowSize()/2-1, boardLogic.getColumnSize()/2, "White");
-		boardLogic.introduceLogicField(wrappedTest);
-
-		this.bombTest = new BombLokum(boardLogic.getRowSize()/2-1, boardLogic.getColumnSize()/2);
-		boardLogic.introduceLogicField(bombTest);
+		this.horizontalStripedLokum= new HorizontalStripedLokum(boardLogic.getRowSize()/2, boardLogic.getColumnSize()/2, "White");
+		boardLogic.introduceLogicField(horizontalStripedLokum);
+		
+		this.verticalStripedLokum= new VerticalStripedLokum(boardLogic.getRowSize()/2-1, boardLogic.getColumnSize()/2, "White");
+		boardLogic.introduceLogicField(verticalStripedLokum);
 
 		System.out.println("--------------------------------------------------Test Start--------------------------------------------------");
 
@@ -67,12 +53,53 @@ public class JUnitTest_StripedStripedMerge {
 
 	@Test
 	public void testDestroyMerge() {
-		System.out.println("Board just BEFORE calling Striped - Striped merge:");
-		boardLogic.toString();
-		StripedStripedMerge stripedStripedMerge = new StripedStripedMerge(bombLokum, horizontalStripedTest);
+		System.out.println("Board just BEFORE calling HorizontalStriped - HorizontalStriped merge:");
+		System.out.println(boardLogic);
+		
+		this.horizontalStripedTest = new HorizontalStripedLokum(boardLogic.getRowSize()/2, boardLogic.getColumnSize()/2-1, "White");
+		boardLogic.introduceLogicField(horizontalStripedTest);
+		
+		StripedStripedMerge stripedStripedMerge = new StripedStripedMerge(horizontalStripedLokum, horizontalStripedTest);
+		
 		stripedStripedMerge.destroyMerge();
-		System.out.println("Board just AFTER calling Striped - Striped merge:");
-		boardLogic.toString();
+		System.out.println("Board just AFTER calling HorizontalStriped - HorizontalStriped merge:");
+		System.out.println(boardLogic);
+		
+		try {
+			setUp();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Board just BEFORE calling HorizontalStriped - VerticalStriped merge:");
+		System.out.println(boardLogic);
+		
+		this.verticalStripedTest = new VerticalStripedLokum(boardLogic.getRowSize()/2, boardLogic.getColumnSize()/2-1, "White");
+		boardLogic.introduceLogicField(verticalStripedTest);
+		
+		stripedStripedMerge = new StripedStripedMerge(horizontalStripedLokum, verticalStripedTest);
+		
+		stripedStripedMerge.destroyMerge();
+		System.out.println("Board just AFTER calling HorizontalStriped - VerticalStriped merge:");
+		System.out.println(boardLogic);
+		
+		try {
+			setUp();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Board just BEFORE calling VerticalStriped - VerticalStriped merge:");
+		System.out.println(boardLogic);
+		
+		this.verticalStripedTest = new VerticalStripedLokum(boardLogic.getRowSize()/2, boardLogic.getColumnSize()/2-1, "White");
+		boardLogic.introduceLogicField(verticalStripedTest);
+		
+		stripedStripedMerge = new StripedStripedMerge(verticalStripedLokum, verticalStripedTest);
+		
+		stripedStripedMerge.destroyMerge();
+		System.out.println("Board just AFTER calling VerticalStriped - VerticalStriped merge:");
+		System.out.println(boardLogic);
 	}
 
 }
