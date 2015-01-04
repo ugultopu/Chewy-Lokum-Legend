@@ -16,6 +16,7 @@ public class BoardLogic {
 	private int columnSize;
 	private PriorityQueue<Combo> boardCombos;
 	private static BoardLogic instance;
+	private boolean isSpecialSwapActive;
 
 	
 	public static BoardLogic getInstance(){
@@ -28,6 +29,14 @@ public class BoardLogic {
 		instance = null;
 	}
 	
+	public boolean isSpecialSwapActive() {
+		return isSpecialSwapActive;
+	}
+
+	public void setSpecialSwapActive(boolean isSpecialSwapActive) {
+		this.isSpecialSwapActive = isSpecialSwapActive;
+	}
+
 	public static void loadBoard(LogicField[][] logicFields){
 		instance = new BoardLogic(logicFields);
 	}
@@ -430,23 +439,26 @@ public class BoardLogic {
 			((TimeLevel) currentLevel).stopTimer();
 		
 		/*
-		 * If locations are not suitable for swap, simply return w/o doing anything.
+		 * If not in special swap mode, check if locations are suitable for swap. If not, simply return w/o
+		 * doing anything. 
 		 */
-
-		if( !locationsSuitableForSwap(f0, f1) ){
-			//System.out.println("Locations are not suitable for swap.");
-			//System.out.println("f0's row and column indices: " + f0.getRowIndex() + " " + f0.getColumnIndex());
-			//System.out.println("f1's row and column indices: " + f1.getRowIndex() + " " + f1.getColumnIndex());
-			EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
-			return false;
+		if(!isSpecialSwapActive){
+			if( !locationsSuitableForSwap(f0, f1) ){
+				//System.out.println("Locations are not suitable for swap.");
+				//System.out.println("f0's row and column indices: " + f0.getRowIndex() + " " + f0.getColumnIndex());
+				//System.out.println("f1's row and column indices: " + f1.getRowIndex() + " " + f1.getColumnIndex());
+				EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
+				return false;
+			}
+			// if here, then locations are suitable for swap.
 		}
-		// if here, then locations are suitable for swap.
 		/*
 		 * If types are not suitable for swap, simply return w/o doing anything.
 		 */
 		if( !typesSuitableForSwap(f0, f1) ){
 			//System.out.println("Types are not suitable for swap.");
 			EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
+			isSpecialSwapActive = false;
 			return false;
 		}
 		// if here, then types are suitable for swap as well.
@@ -478,22 +490,25 @@ public class BoardLogic {
 			 */
 			printCombosInBoard();
 			/*
-			 * After checking for combos, check if there are any combos actually. If not, revert the swap and return from the method.
+			 * After checking for combos, check if there are any combos actually. If not, AND IF NOT IN SPECIAL
+			 * SWAP MODE AS WELL, revert the swap and return from the method. 
 			 */
-			if(boardCombos.size() == 0){
-				/*
-				 * If here, then swap did not yield any combos. So revert the swap and return from the method.
-				 */
-				locationSwap(f0, f1);
-				/*
-				 * Send a swap event to Kugi.
-				 */
-				EventDispatchQueue.getInstance().addEvent(new SwapEvent((Lokum)f0.copyLogicField(), (Lokum)f1.copyLogicField()));
-				EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
-				return false;
+			if(!isSpecialSwapActive){
+				if(boardCombos.size() == 0){
+					/*
+					 * If here, then swap did not yield any combos. So revert the swap and return from the method.
+					 */
+					locationSwap(f0, f1);
+					/*
+					 * Send a swap event to Kugi.
+					 */
+					EventDispatchQueue.getInstance().addEvent(new SwapEvent((Lokum)f0.copyLogicField(), (Lokum)f1.copyLogicField()));
+					EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
+					return false;
+				}
 			}
 			/*
-			 * If here, then there are combos.
+			 * If here, then there MAY BE combos.
 			 */
 			destroyCombos();
 			readjustBoardAfterDestroy();
@@ -509,6 +524,7 @@ public class BoardLogic {
 			((TimeLevel) currentLevel).startTimer();
 		else
 			((MoveLevel) currentLevel).decreaseMove();
+		isSpecialSwapActive = false;
 		return true;
 	}
 
