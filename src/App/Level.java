@@ -3,5 +3,25 @@ package App;
 public abstract class Level {
 	
 	int levelNumber;
+	int specialMoves;
+	private static Level instance;
+	
+	public static Level getInstance(){
+		if(instance == null){
+			int currentLevel =Options.currentLevel;
+			if(currentLevel%2==0)
+				instance = new TimeLevel(currentLevel);
+			else
+				instance = new MoveLevel(currentLevel);
+		}
+		return instance;
+	}
+	public static void resetInstance(){
+		instance = null;
+	}
+	
+	public void setSpecialMoves(int newSpecialMoves){
+		this.specialMoves = newSpecialMoves;
+	}
 	
 }
