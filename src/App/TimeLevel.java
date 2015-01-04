@@ -19,7 +19,10 @@ public class TimeLevel extends Level {
 			@Override
 			public void run() {
 				updateTime(timeLeft-1);
-				System.out.println(timeLeft);
+				if(timeLeft == 0){
+					EventDispatchQueue.getInstance().addEvent(new LoseGameEvent());
+					stopTimer();
+				}
 			}
 
 		}, 1000, 1000);

@@ -12,7 +12,7 @@ public class Run {
 		frame.pack();
 		frame.setSize(Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
 
-		
+//		TimeLevel.getInstance();
 //		NormalLokum nl = new NormalLokum(0,0,"red");
 //		
 		
