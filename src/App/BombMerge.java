@@ -102,10 +102,11 @@ public class BombMerge extends Merge {
 			for(int i = 0; i < lokumBoard.length; i++){
 				for(int j = 0; j < lokumBoard[i].length; j++){
 					Lokum lokum = lokumBoard[i][j];
-					if(lokum.getLokumColor().equals(colorl1) || lokum.getLokumColor().equals(randomColor)){
+					if(lokum.getLokumColor().equals(colorl1) || lokum.getLokumColor().equals(randomColor) ){
 						NormalLokum newLokum = new NormalLokum(i, j, colorl1);
 						newLokum.comboDestroy();
 						numberOfDestroyedLokums++;
+						score.scoreUpdateBombUse(1);
 					}
 				}	
 			}
@@ -118,9 +119,10 @@ public class BombMerge extends Merge {
 			for(int i = 0; i < lokumBoard.length; i++){
 				for(int j = 0; j < lokumBoard[i].length; j++){
 					Lokum lokum = lokumBoard[i][j];
-					if(lokum.getLokumColor().equals(colorl2) || lokum.getLokumColor().equals(randomColor)){
+					if(lokum.getLokumColor().equals(colorl2) || lokum.getLokumColor().equals(randomColor) ){
 						NormalLokum newLokum = new NormalLokum(i, j, colorl2);
 						newLokum.comboDestroy();
+						score.scoreUpdateBombUse(1);
 					}
 				}
 			}
