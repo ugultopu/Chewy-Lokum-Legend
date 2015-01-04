@@ -4,8 +4,8 @@ public class TimeLokum extends NormalLokum{
 	
 	int timeAward;
 	
-	public TimeLokum(int rowIndex, int columnIndex, String lokumColor) {
-		super(rowIndex, columnIndex, lokumColor);
+	public TimeLokum(int rowIndex, int columnIndex) {
+		super(rowIndex, columnIndex, Constants.TIME_LOKUM_COLOR);
 		timeAward = 1+ (int)Math.random()*5;
 	}
 	
@@ -18,7 +18,7 @@ public class TimeLokum extends NormalLokum{
 
 	@Override
 	public LogicField copyLogicField() {
-		TimeLokum copyLokum =new TimeLokum(getRowIndex(), getColumnIndex(), getLokumColor());
+		TimeLokum copyLokum =new TimeLokum(getRowIndex(), getColumnIndex());
 		copyLokum.setTimeAward(timeAward);
 		return copyLokum;
 	}

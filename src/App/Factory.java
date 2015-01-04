@@ -16,6 +16,11 @@ public class Factory {
 				return new NormalLokum(x, y, Constants.LOKUM_COLOR_RED);
 			case 3:
 				return new NormalLokum(x, y, Constants.LOKUM_COLOR_WHITE);
+			case 4:
+				randomNumber = generateRandomNumber();
+				if(Options.currentLevel % 2 == 0 && randomNumber == 1)
+					return new TimeLokum(x, y);
+				return createRandomLokum(x, y);
 			default:
 				return null;
 		}
@@ -44,7 +49,7 @@ public class Factory {
 	
 	public static int generateRandomNumber(){
 		Random randomGenerator = new Random();
-		int randomNumber = randomGenerator.nextInt(4);
+		int randomNumber = randomGenerator.nextInt(5);
 		return randomNumber;
 	}
 	

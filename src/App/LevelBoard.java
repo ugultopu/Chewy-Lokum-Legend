@@ -56,6 +56,7 @@ public class LevelBoard extends JPanel {
 					InformationBoard.resetInstance();
 					Options.getInstance().setLevel(level+1);
 					InformationBoard.getInstance().setCurrentLevel(Options.getInstance().getLevel());
+					
 					ApplicationWindow.removePanel(ChooseLevelPanel.getInstance());
 					ApplicationWindow.addPanel(GamePanel.getInstance());
 					GamePanel.getInstance().requestFocusInWindow();

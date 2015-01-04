@@ -15,7 +15,7 @@ public class TimeLevelPanel extends JPanel{
 	
 	public TimeLevelPanel(){
 	
-		timeLeft = new JLabel("time");
+		timeLeft = new JLabel("Time");
 		timeLeftInput = new JLabel(""+time);
 		
 		setLayout(null);
@@ -25,9 +25,9 @@ public class TimeLevelPanel extends JPanel{
 		timeLeft.setBounds(0, 0, 80, 30);
 		timeLeft.setFont(new Font("Tahoma", Font.BOLD, 20));
 		
-		add(timeLeft);
-		timeLeft.setBounds(100, 0, 80, 30);
-		timeLeft.setFont(new Font("Tahoma", Font.BOLD, 20));
+		add(timeLeftInput);
+		timeLeftInput.setBounds(100, 0, 80, 30);
+		timeLeftInput.setFont(new Font("Tahoma", Font.BOLD, 20));
 
 		timeLeft.setOpaque(true);
 		timeLeft.setBackground(Constants.GAME_BACKGROUND_COLOR);
