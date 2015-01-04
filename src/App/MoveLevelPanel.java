@@ -60,11 +60,11 @@ public class MoveLevelPanel extends JPanel {
 		movesLeftInput.setText(""+moves);
 	}
 	
-	public void setMoves(int currentLevel){
-		this.moves = Constants.NUMBER_OF_MOVES - 3*currentLevel;
+	public void setMoves(int moves){
+		this.moves = moves;
 	}
 
-	public void setMovesText(int currentLevel) {
+	public void setMovesText(int moves) {
 		movesLeftInput.setText(""+moves);		
 	}
 

@@ -299,6 +299,7 @@ public class BoardLogic {
 			destroyCombos();
 			readjustBoardAfterDestroy();
 		}
+		
 	}
 
 	/**

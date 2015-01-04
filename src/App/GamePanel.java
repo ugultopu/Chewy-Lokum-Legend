@@ -55,8 +55,8 @@ public class GamePanel extends JPanel {
 		setSize(Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
 		
 		add(InformationBoard.getInstance());
-		InformationBoard.getInstance().setBounds(LabelXPadding,LabelYPadding, 
-				Constants.INFORMATION_BOARD_WIDTH,Constants.INFORMATION_BOARD_HEIGHT);
+		InformationBoard.getInstance().setBounds(LabelXPadding-50,LabelYPadding-50, 
+				Constants.INFORMATION_BOARD_WIDTH+300,Constants.INFORMATION_BOARD_HEIGHT+300);
 		
 		add(GameBoard.getInstance());
 		GameBoard.getInstance().setBounds(40, 60, Constants.ANIMATION_WINDOW_WIDTH, Constants.ANIMATION_WINDOW_HEIGHT);
