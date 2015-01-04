@@ -434,11 +434,7 @@ public class BoardLogic {
 
 		EventDispatchQueue.getInstance().addEvent(new ClickListenerDeactiveEvent());
 		
-		if(currentLevel instanceof TimeLevel){
-			
-			((TimeLevel) currentLevel).pauseTimer();
-			
-		}
+		
 		/*
 		 * If not in special swap mode, check if locations are suitable for swap. If not, simply return w/o
 		 * doing anything. 
@@ -470,6 +466,10 @@ public class BoardLogic {
 			//System.out.println("In merge swap.");
 			mergeDestroy( f0,  f1 );
 			readjustBoardAfterDestroy();
+			if(currentLevel instanceof TimeLevel){
+				((TimeLevel) currentLevel).pauseTimer();
+	
+			}
 		}
 		// if here, then not merge swap. So combo swap.
 		else{
@@ -511,6 +511,11 @@ public class BoardLogic {
 			/*
 			 * If here, then there MAY BE combos.
 			 */
+			if(currentLevel instanceof TimeLevel){
+				
+				((TimeLevel) currentLevel).pauseTimer();
+				
+			}
 			destroyCombos();
 			readjustBoardAfterDestroy();
 			// send comboDestroyedFields to Kugi.
