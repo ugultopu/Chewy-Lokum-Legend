@@ -13,8 +13,6 @@ import javax.swing.JPanel;
 public class InformationBoard extends JPanel {
 	private JLabel level,target,score,specialMoves,levelInput,targetInput,scoreInput,specialMovesInput;
 	private JButton saveButton,specialMovesButton;
-	private int currentScore;
-	private int goalScore;
 
 	private static InformationBoard instance;
 
@@ -23,7 +21,7 @@ public class InformationBoard extends JPanel {
 		level = new JLabel("Level");
 		target = new JLabel("Target");
 		score = new JLabel("Score");
-		specialMoves = new JLabel("SpecialMoves");
+		specialMoves = new JLabel("SM");
 		levelInput = new JLabel("");
 		targetInput = new JLabel("");
 		scoreInput = new JLabel("");
@@ -89,7 +87,7 @@ public class InformationBoard extends JPanel {
 		});
 		
 		add(saveButton);
-		saveButton.setBounds(0, 360, 150, 50);
+		saveButton.setBounds(0, 380, 150, 50);
 		saveButton.setBorderPainted(false);
 		saveButton.setFocusPainted(false);
 
@@ -178,7 +176,6 @@ public class InformationBoard extends JPanel {
 	}
 
 	public void updateScore(int currentScore) {
-		this.currentScore = currentScore;
 		scoreInput.setText(""+currentScore);
 	}
 
@@ -186,21 +183,11 @@ public class InformationBoard extends JPanel {
 		levelInput.setText(""+currentLevel);
 	}
 
-	public int getCurrentLevel(){
-		return Integer.parseInt(levelInput.getText());
-	}
-
-
-	public int getCurrentScore(){
-		return this.currentScore;
-	}
-
 	public void setGoalScore(int goalScore) {
-		this.goalScore = goalScore;
 		targetInput.setText(""+goalScore);
 	}
 
-	public int getGoalScore() {
-		return goalScore;
+	public void setSpecialMoves(int sm){
+		specialMovesInput.setText(""+ sm);
 	}
 }
