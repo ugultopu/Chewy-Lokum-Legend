@@ -19,6 +19,7 @@ public class TimeLevel extends Level {
 			@Override
 			public void run() {
 				updateTime(timeLeft-1);
+				System.out.println(timeLeft);
 			}
 
 		}, 1000, 1000);
@@ -29,7 +30,7 @@ public class TimeLevel extends Level {
 	}
 	public void updateTime(int newTime){
 		timeLeft = newTime;
-		EventDispatchQueue.getInstance().addEvent(new TimeUpdateEvent(TimeLevel.getInstance().getTime()));
+		EventDispatchQueue.getInstance().addEvent(new TimeUpdateEvent(newTime));
 	}
 	public static TimeLevel getInstance(){
 		if(instance == null)
