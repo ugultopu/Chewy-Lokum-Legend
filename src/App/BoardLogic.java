@@ -222,7 +222,7 @@ public class BoardLogic {
 	*			-Returns nothing
 	*/
 	private void destroyCombos(){
-		findBoardCombos();
+		findBoardCombos();	// Not really required, since combos are seeked in swap().
 		int boardCombosSize = boardCombos.size();
 		for(int currentComboIndex=0;currentComboIndex<boardCombosSize;currentComboIndex++){
 			Combo currentCombo = boardCombos.poll();
@@ -435,9 +435,14 @@ public class BoardLogic {
 		
 		Level currentLevel = Level.getInstance();
 		
-		if(currentLevel instanceof TimeLevel)
-			((TimeLevel) currentLevel).stopTimer();
-		
+		if(currentLevel instanceof TimeLevel){
+			try {
+				((TimeLevel) currentLevel).pauseTimer();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		/*
 		 * If not in special swap mode, check if locations are suitable for swap. If not, simply return w/o
 		 * doing anything. 
@@ -450,7 +455,7 @@ public class BoardLogic {
 				EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
 				return false;
 			}
-			// if here, then locations are suitable for swap.
+			// if here, then locations MAY BE suitable for swap.
 		}
 		/*
 		 * If types are not suitable for swap, simply return w/o doing anything.

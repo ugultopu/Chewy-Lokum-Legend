@@ -21,7 +21,6 @@ public class MoveLevel extends Level {
 				wge.executeEvent();
 			}
 		}
-		
 	}
 	
 	public int getMovesLeft(){
