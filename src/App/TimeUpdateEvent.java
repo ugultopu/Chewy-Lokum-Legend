@@ -1,10 +1,10 @@
 package App;
 
-public class UpdateTimeEvent extends GameEvent {
+public class TimeUpdateEvent extends GameEvent {
 	
 	private int newTime;
 	
-	public UpdateTimeEvent(int newTime){
+	public TimeUpdateEvent(int newTime){
 		this.newTime = newTime;
 	}
 
