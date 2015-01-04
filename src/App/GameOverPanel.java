@@ -54,7 +54,7 @@ public class GameOverPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 												
-				int level = InformationBoard.getInstance().getCurrentLevel();
+				int level = Options.getInstance().getLevel();
 				ApplicationWindow.removePanel(GamePanel.getInstance());
 				Score.resetInstance();
 				InformationBoard.getInstance().repaint();
@@ -86,7 +86,7 @@ public class GameOverPanel extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int level = InformationBoard.getInstance().getCurrentLevel();
+				int level = Options.getInstance().getLevel();
 				ApplicationWindow.removePanel(GamePanel.getInstance());
 				Score.resetInstance();
 				BoardLogic.resetInstance();
@@ -110,7 +110,7 @@ public class GameOverPanel extends JPanel{
 		mainMenu.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int level = InformationBoard.getInstance().getCurrentLevel();
+				int level = Options.getInstance().getLevel();
 				ApplicationWindow.removePanel(GamePanel.getInstance());
 				Score.resetInstance();
 				BoardLogic.resetInstance();
