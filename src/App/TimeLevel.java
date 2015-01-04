@@ -15,6 +15,20 @@ public class TimeLevel extends Level {
 		this.levelNumber = Options.currentLevel;
 		updateTime(90 - 3*levelNumber);
 		System.out.println("started!");
+	}
+	
+	public int getTime(){
+		return timeLeft;
+	}
+	public void updateTime(int newTime){
+		timeLeft = newTime;
+		EventDispatchQueue.getInstance().addEvent(new TimeUpdateEvent(newTime));
+	}
+	
+	public void pauseTimer(){
+		timer.cancel();
+	}
+	public void startTimer(){
 		timer = new Timer ();
 		timerTask = new TimerTask(){
 
@@ -31,21 +45,6 @@ public class TimeLevel extends Level {
 
 		};
 		timer.schedule(timerTask, 1000, 1000);
-	}
-	
-	public int getTime(){
-		return timeLeft;
-	}
-	public void updateTime(int newTime){
-		timeLeft = newTime;
-		EventDispatchQueue.getInstance().addEvent(new TimeUpdateEvent(newTime));
-	}
-	
-	public void pauseTimer() throws InterruptedException{
-		timer.cancel();
-	}
-	public void startTimer(){
-		timer.schedule(timerTask,1000,1000);
 	}
 	public void stopTimer(){
 		timer.cancel();
