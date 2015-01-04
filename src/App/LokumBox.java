@@ -126,7 +126,12 @@ public class LokumBox {
 			image = bombLokumImage.getImage();
 			g.drawImage(image, logicField.getColumnIndex()*side, Constants.ANIMATION_WINDOW_HEIGHT - (logicField.getRowIndex() + 1)*side, side, side, null);
 		}
-			
+		if(logicField instanceof TimeLokum){
+			ImageIcon timeLokumImage = new ImageIcon("images/time_lokum.png");
+			image = timeLokumImage.getImage();
+			g.drawImage(image, logicField.getColumnIndex()*side, Constants.ANIMATION_WINDOW_HEIGHT - (logicField.getRowIndex() + 1)*side, side, side, null);
+		}
+		
 	}
 
 	public void changeLogicField(LogicField logicField) {
