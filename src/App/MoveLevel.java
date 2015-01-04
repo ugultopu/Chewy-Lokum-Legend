@@ -3,24 +3,24 @@ package App;
 
 public class MoveLevel extends Level {
 	private int movesLeft;
-	private int specialMoveLeft;
-	private static MoveLevel instance;
 
-	private MoveLevel(int moves){
-		this.movesLeft = moves;
+	public MoveLevel(){
+		this.movesLeft = (Constants.NUMBER_OF_MOVES - 3 * Options.currentLevel);
+		MoveUpdateEvent mue = new MoveUpdateEvent(movesLeft);
+		EventDispatchQueue.getInstance().addEvent(mue);
 	}
 	
 	public void decreaseMove(){
 		movesLeft--;
 		MoveUpdateEvent mue = new MoveUpdateEvent(movesLeft);
-		mue.executeEvent();
+		EventDispatchQueue.getInstance().addEvent(mue);
 		if(movesLeft == 0){
 			if(Score.getInstance().getCurrentScore() < Score.getInstance().getGoalScore(Options.currentLevel)){
 				LoseGameEvent lge = new LoseGameEvent();
-				lge.executeEvent();
+				EventDispatchQueue.getInstance().addEvent(lge);
 			}else{
 				WinGameEvent wge = new WinGameEvent();
-				wge.executeEvent();
+				EventDispatchQueue.getInstance().addEvent(wge);
 			}
 		}
 	}
@@ -29,15 +29,6 @@ public class MoveLevel extends Level {
 		return movesLeft;
 	}
 	
-	public static MoveLevel getInstance(){
-		if(instance == null)
-			instance = new MoveLevel(50 - (3 * Options.currentLevel));
-		return instance;
-	}
-	
-	public static void resetInstance(){
-		instance = new MoveLevel(50 - (3 * Options.currentLevel));
-	}
 }
 
 
