@@ -17,6 +17,7 @@ public class BoardLogic {
 	private PriorityQueue<Combo> boardCombos;
 	private static BoardLogic instance;
 	private boolean isSpecialSwapActive;
+	private Level currentLevel;
 
 	
 	public static BoardLogic getInstance(){
@@ -197,6 +198,7 @@ public class BoardLogic {
 	private void initializeBoard(){
 		for(int i=0;i<columnSize;i++)
 			initializeColumn(i);
+		this.currentLevel = Level.getInstance();
 	}
 	
 	void readjustAfterInitialize(){
@@ -432,8 +434,6 @@ public class BoardLogic {
 		 * What's the line below?
 		 */
 		EventDispatchQueue.getInstance().addEvent(new ClickListenerDeactiveEvent());
-		
-		Level currentLevel = Level.getInstance();
 		
 		if(currentLevel instanceof TimeLevel){
 			try {
