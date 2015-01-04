@@ -81,7 +81,11 @@ public class InformationBoard extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//					FILLHERE!!!
+				int remainedSpecialMoves = Level.getInstance().specialMoves;
+				if(remainedSpecialMoves != 0){
+					Level.getInstance().specialMoves--;
+					BoardLogic.getInstance().setSpecialSwapActive(true);
+				}
 			}
 
 		});
