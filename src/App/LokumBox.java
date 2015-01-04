@@ -22,7 +22,6 @@ public class LokumBox {
 	public void paintComponent(Graphics g){
 		Graphics2D g1 = (Graphics2D) g;
 		
-		
 		g.setColor(Color.WHITE);
 		if(logicField instanceof EmptyLogicField){
 			g.fillRect(logicField.getColumnIndex()*side, Constants.ANIMATION_WINDOW_HEIGHT - (logicField.getRowIndex() + 1)*side, side, side);
@@ -34,7 +33,6 @@ public class LokumBox {
 		}
 		
 		if(logicField instanceof NormalLokum){
-			
 			switch(((Lokum)logicField).getLokumColor()){
 				case Constants.LOKUM_COLOR_RED:
 					ImageIcon redNormalLokumImage = new ImageIcon("images/normal_red_lokum.png");
@@ -126,10 +124,27 @@ public class LokumBox {
 			image = bombLokumImage.getImage();
 			g.drawImage(image, logicField.getColumnIndex()*side, Constants.ANIMATION_WINDOW_HEIGHT - (logicField.getRowIndex() + 1)*side, side, side, null);
 		}
+		
 		if(logicField instanceof TimeLokum){
-			ImageIcon timeLokumImage = new ImageIcon("images/time_lokum.png");
-			image = timeLokumImage.getImage();
-			g.drawImage(image, logicField.getColumnIndex()*side, Constants.ANIMATION_WINDOW_HEIGHT - (logicField.getRowIndex() + 1)*side, side, side, null);
+			switch(((TimeLokum)logicField).getLokumColor()){
+			case Constants.LOKUM_COLOR_RED:
+				ImageIcon redTimeLokumImage = new ImageIcon("images/time_red_lokum.png");
+				image = redTimeLokumImage.getImage();
+				g.drawImage(image, logicField.getColumnIndex()*side, Constants.ANIMATION_WINDOW_HEIGHT - (logicField.getRowIndex() + 1)*side, side, side, null); break;
+			case Constants.LOKUM_COLOR_GREEN:
+				ImageIcon greenTimeLokumImage = new ImageIcon("images/time_green_lokum.png");
+				image = greenTimeLokumImage.getImage();
+				g.drawImage(image, logicField.getColumnIndex()*side, Constants.ANIMATION_WINDOW_HEIGHT - (logicField.getRowIndex() + 1)*side, side, side, null); break;	
+			case Constants.LOKUM_COLOR_BROWN:
+				ImageIcon brownTimeLokumImage = new ImageIcon("images/time_brown_lokum.png");
+				image = brownTimeLokumImage.getImage();
+				g.drawImage(image, logicField.getColumnIndex()*side, Constants.ANIMATION_WINDOW_HEIGHT - (logicField.getRowIndex() + 1)*side, side, side, null); break;
+			case Constants.LOKUM_COLOR_WHITE:
+				ImageIcon whiteTimeLokumImage = new ImageIcon("images/time_white_lokum.png");
+				image = whiteTimeLokumImage.getImage();
+				g.drawImage(image, logicField.getColumnIndex()*side, Constants.ANIMATION_WINDOW_HEIGHT - (logicField.getRowIndex() + 1)*side, side, side, null); break;
+			default: g.fillRect(logicField.getColumnIndex()*side, Constants.ANIMATION_WINDOW_HEIGHT - (logicField.getRowIndex() + 1)*side, side, side);
+			}
 		}
 		
 	}

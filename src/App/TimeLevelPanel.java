@@ -16,7 +16,7 @@ public class TimeLevelPanel extends JPanel{
 	public TimeLevelPanel(){
 	
 		timeLeft = new JLabel("Time");
-		timeLeftInput = new JLabel(""+time);
+		timeLeftInput = new JLabel("0"+time);
 		
 		setLayout(null);
 		setBackground(Constants.GAME_BACKGROUND_COLOR);
@@ -33,16 +33,16 @@ public class TimeLevelPanel extends JPanel{
 		timeLeft.setBackground(Constants.GAME_BACKGROUND_COLOR);
 		timeLeft.setForeground(Constants.TITLE_COLOR);
 		
-		timeLeft.setOpaque(true);
-		timeLeft.setBackground(Constants.GAME_BACKGROUND_COLOR);
-		timeLeft.setForeground(Constants.TITLE_COLOR);
+		timeLeftInput.setOpaque(true);
+		timeLeftInput.setBackground(Constants.GAME_BACKGROUND_COLOR);
+		timeLeftInput.setForeground(Constants.TITLE_COLOR);
 		
 	}
 	
 	public void paint(Graphics g){
 		super.paintComponent(g);
     	timeLeft.repaint();
-    	timeLeft.repaint();
+    	timeLeftInput.repaint();
 	}
 	
 	public static TimeLevelPanel getInstance(){
@@ -58,20 +58,16 @@ public class TimeLevelPanel extends JPanel{
 	
 	public void decreaseTime(){
 		this.time--;
-		timeLeft.setText(""+time);
+		timeLeftInput.setText(""+time);
 	}
 	
 	public void setTime(int currentLevel){
 		this.time = Constants.NUMBER_OF_MOVES - 3*currentLevel;
 	}
 
-	public void setTimeText(int currentLevel) {
-		timeLeft.setText(""+time);		
-	}
-
 	public void setTimeLeft(int time){
 		this.time = time;
-		timeLeft.setText(""+time);
+		timeLeftInput.setText(""+time);
 	}
 	
 	public int getTimeLeft(){
