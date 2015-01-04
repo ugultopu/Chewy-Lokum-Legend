@@ -19,7 +19,7 @@ public class Factory {
 			case 4:
 				randomNumber = generateRandomNumber();
 				if(Options.currentLevel % 2 == 0 && randomNumber == 1)
-					return new TimeLokum(x, y);
+					return new TimeLokum(x, y, generateRandomColor());
 				return createRandomLokum(x, y);
 			default:
 				return null;
@@ -41,6 +41,8 @@ public class Factory {
 					return new WrappedLokum(x, y, color);
 				case "BombLokum":
 					return new BombLokum(x, y);
+				case "TimeLokum":
+					return new TimeLokum(x, y, color);
 				default:
 					return null;
 			}
@@ -51,6 +53,23 @@ public class Factory {
 		Random randomGenerator = new Random();
 		int randomNumber = randomGenerator.nextInt(5);
 		return randomNumber;
+	}
+	
+	public static String generateRandomColor(){
+		Random randomGenerator = new Random();
+		int randomNumber = randomGenerator.nextInt(4);
+		switch (randomNumber){
+		case 0:
+			return Constants.LOKUM_COLOR_BROWN;
+		case 1:
+			return Constants.LOKUM_COLOR_GREEN;
+		case 2:
+			return Constants.LOKUM_COLOR_RED;
+		case 3:
+			return Constants.LOKUM_COLOR_WHITE;
+		default:
+			return Constants.LOKUM_COLOR_RED;
+		}
 	}
 	
 	public static Merge createMerge(LogicField l1, LogicField l2){
