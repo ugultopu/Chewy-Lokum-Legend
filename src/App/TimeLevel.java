@@ -8,6 +8,7 @@ public class TimeLevel extends Level {
 	
 	private int timeLeft;
 	private Timer timer;
+	private TimerTask timerTask;
 
 	
 	public TimeLevel(){
@@ -15,7 +16,7 @@ public class TimeLevel extends Level {
 		updateTime(90 - 3*levelNumber);
 		System.out.println("started!");
 		timer = new Timer ();
-		timer.schedule(new TimerTask(){
+		timerTask = new TimerTask(){
 
 			@Override
 			public void run() {
@@ -28,7 +29,8 @@ public class TimeLevel extends Level {
 				}
 			}
 
-		}, 1000, 1000);
+		};
+		timer.schedule(timerTask, 1000, 1000);
 	}
 	
 	public int getTime(){
@@ -40,10 +42,10 @@ public class TimeLevel extends Level {
 	}
 	
 	public void pauseTimer() throws InterruptedException{
-		timer.wait();
+		timer.cancel();
 	}
 	public void startTimer(){
-		timer.notify();
+		timer.schedule(timerTask,1000,1000);
 	}
 	public void stopTimer(){
 		timer.cancel();
