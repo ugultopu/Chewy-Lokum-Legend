@@ -20,7 +20,7 @@ public class InformationBoard extends JPanel {
 	private static InformationBoard instance;
 
 	public InformationBoard(){
-		
+
 		level = new JLabel("Level");
 		target = new JLabel("Target");
 		score = new JLabel("Score");
@@ -28,14 +28,14 @@ public class InformationBoard extends JPanel {
 		targetInput = new JLabel("");
 		scoreInput = new JLabel("");
 		saveButton = new JButton("Save Game");
-		
+
 		setLayout(null);
 		setBackground(Constants.GAME_BACKGROUND_COLOR);
-		
+
 		add(level);
 		level.setBounds(0, 0,80,30);
 		level.setFont(new Font("Tahoma", Font.BOLD, 20));
-		
+
 		add(target);
 		target.setBounds(0, 60, 80, 30);
 		target.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -43,24 +43,26 @@ public class InformationBoard extends JPanel {
 		add(score);
 		score.setBounds(0, 120, 80, 30);
 		score.setFont(new Font("Tahoma", Font.BOLD, 20));
-		
+
 		add(levelInput);
 		levelInput.setBounds(100, 0,80,30);
 		levelInput.setFont(new Font("Tahoma", Font.BOLD, 20));
-		
+
 		add(targetInput);
 		targetInput.setBounds(100, 60, 80, 30);
 		targetInput.setFont(new Font("Tahoma", Font.BOLD, 20));
-		
+
 		add(scoreInput);
 		scoreInput.setBounds(100, 120, 80, 30);
 		scoreInput.setFont(new Font("Tahoma", Font.BOLD, 20));
-		
-		add(MoveLevelPanel.getInstance());
-		MoveLevelPanel.getInstance().setBounds(0,180,200,30);
-		
-		add(TimeLevelPanel.getInstance());
-		TimeLevelPanel.getInstance().setBounds(0,180,200,30);
+
+		if (Options.getInstance().getLevel()%2 == 1){
+			add(MoveLevelPanel.getInstance());
+			MoveLevelPanel.getInstance().setBounds(0,180,200,30);
+		} else {
+			add(TimeLevelPanel.getInstance());
+			TimeLevelPanel.getInstance().setBounds(0,180,200,30);
+		}
 		
 		add(saveButton);
 		saveButton.setBounds(0, 240, 150, 50);
@@ -77,33 +79,33 @@ public class InformationBoard extends JPanel {
 					e1.printStackTrace();
 				}
 			}
-			
+
 		});
-		
+
 		level.setOpaque(true);
 		level.setBackground(Constants.GAME_BACKGROUND_COLOR);
 		level.setForeground(Constants.TITLE_COLOR);
-		
+
 		target.setOpaque(true);
 		target.setBackground(Constants.GAME_BACKGROUND_COLOR);
 		target.setForeground(Constants.TITLE_COLOR);
-		
+
 		score.setOpaque(true);
 		score.setBackground(Constants.GAME_BACKGROUND_COLOR);
 		score.setForeground(Constants.TITLE_COLOR);
-		
+
 		levelInput.setOpaque(true);
 		levelInput.setBackground(Constants.GAME_BACKGROUND_COLOR);
 		levelInput.setForeground(Constants.TITLE_COLOR);
-		
+
 		targetInput.setOpaque(true);
 		targetInput.setBackground(Constants.GAME_BACKGROUND_COLOR);
 		targetInput.setForeground(Constants.TITLE_COLOR);
-		
+
 		scoreInput.setOpaque(true);
 		scoreInput.setBackground(Constants.GAME_BACKGROUND_COLOR);
 		scoreInput.setForeground(Constants.TITLE_COLOR);
-		
+
 		saveButton.addActionListener(new ActionListener(){
 
 			@Override
@@ -121,29 +123,34 @@ public class InformationBoard extends JPanel {
 			}
 		});
 	}
-	
+
 	public void paint(Graphics g){
 		super.paintComponent(g);
+
+		level.repaint();
+		target.repaint();
+		score.repaint();
+
+		levelInput.repaint();
+		targetInput.repaint();
+		scoreInput.repaint();
+
+		saveButton.repaint();
 		
-    	level.repaint();
-    	target.repaint();
-    	score.repaint();
-    	
-    	levelInput.repaint();
-    	targetInput.repaint();
-    	scoreInput.repaint();
-    	
-    	saveButton.repaint();
-    	MoveLevelPanel.getInstance().repaint();
+		if (Options.getInstance().getLevel()%2 == 1){
+		MoveLevelPanel.getInstance().repaint();
+		} else {
+		TimeLevelPanel.getInstance().repaint();
+		}
 	}
-	
+
 	public static InformationBoard getInstance(){
 		if(instance==null){
 			instance = new InformationBoard();
 		}
 		return instance;
 	}
-	
+
 	public static void resetInstance(){
 		instance = null;
 	}
@@ -152,21 +159,27 @@ public class InformationBoard extends JPanel {
 		this.currentScore = currentScore;
 		scoreInput.setText(""+currentScore);
 	}
-	
+
 	public void setCurrentLevel(int currentLevel){
 		this.currentLevel = currentLevel;
 		this.goalScore = Constants.GOAL_SCORE + currentLevel*5000;		
-		MoveLevelPanel.getInstance().setMoves(currentLevel);
+
+		if (Options.getInstance().getLevel()%2 == 1){
+			MoveLevelPanel.getInstance().setMoves(currentLevel);
+			MoveLevelPanel.getInstance().setMovesText(currentLevel);
+		} else {
+			TimeLevelPanel.getInstance().setTime(currentLevel);
+			TimeLevelPanel.getInstance().setTimeText(currentLevel);
+		}
 		levelInput.setText(""+currentLevel);
-		MoveLevelPanel.getInstance().setMovesText(currentLevel);
 		targetInput.setText(""+goalScore);
 	}
-	
+
 	public int getCurrentLevel(){
 		return Integer.parseInt(levelInput.getText());
 	}
-	
-	
+
+
 	public int getCurrentScore(){
 		return this.currentScore;
 	}
@@ -179,15 +192,23 @@ public class InformationBoard extends JPanel {
 	public int getGoalScore() {
 		return goalScore;
 	}
-	
+
 	public void finishGame(){
 		if(this.currentScore==this.goalScore || this.currentScore>this.goalScore){
 			GameOverPanel.getInstance().setWin(true);
 			GamePanel.getInstance().endGame();			
-		} else { if(MoveLevelPanel.getInstance().getMovesLeft()==0){
-			GameOverPanel.getInstance().setWin(false);
-			GamePanel.getInstance().endGame();			
-		}
+		} else {
+			if (Options.getInstance().getLevel()%2 == 1){
+				if(MoveLevelPanel.getInstance().getMovesLeft()==0){
+					GameOverPanel.getInstance().setWin(false);
+					GamePanel.getInstance().endGame();			
+				}
+			} else {
+				if(TimeLevelPanel.getInstance().getTimeLeft()==0){
+					GameOverPanel.getInstance().setWin(false);
+					GamePanel.getInstance().endGame();			
+				}
+			}
 		}
 	}
 }

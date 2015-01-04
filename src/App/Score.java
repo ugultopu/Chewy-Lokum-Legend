@@ -15,6 +15,10 @@ public class Score {
 		return instance;
 	}
 	
+	public int getGoalScore(int currentLevel){
+		return (Constants.GOAL_SCORE + currentLevel) * 5000;
+	}
+	
 	public static void resetInstance(){
 		instance = null;
 	}
