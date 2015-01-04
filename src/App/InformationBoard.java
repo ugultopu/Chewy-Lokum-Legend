@@ -59,6 +59,9 @@ public class InformationBoard extends JPanel {
 		add(MoveLevelPanel.getInstance());
 		MoveLevelPanel.getInstance().setBounds(0,180,200,30);
 		
+		add(TimeLevelPanel.getInstance());
+		TimeLevelPanel.getInstance().setBounds(0,180,200,30);
+		
 		add(saveButton);
 		saveButton.setBounds(0, 240, 150, 50);
 		saveButton.setBorderPainted(false);
