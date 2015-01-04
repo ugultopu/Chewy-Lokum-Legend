@@ -204,6 +204,7 @@ public class BoardLogic {
 	void readjustAfterInitialize(){
 		destroyCombos();
 		readjustBoardAfterDestroy();
+		sendStartTimeSignal();
 		//Score.getInstance().setScore(0);
 	}
 	
@@ -431,19 +432,9 @@ public class BoardLogic {
 	 */
 	public boolean swap(LogicField f0, LogicField f1){
 
-		/*
-		 * What's the line below?
-		 */
 		EventDispatchQueue.getInstance().addEvent(new ClickListenerDeactiveEvent());
 		
-		if(currentLevel instanceof TimeLevel){
-			try {
-				((TimeLevel) currentLevel).pauseTimer();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		
 		/*
 		 * If not in special swap mode, check if locations are suitable for swap. If not, simply return w/o
 		 * doing anything. 
@@ -475,6 +466,10 @@ public class BoardLogic {
 			//System.out.println("In merge swap.");
 			mergeDestroy( f0,  f1 );
 			readjustBoardAfterDestroy();
+			if(currentLevel instanceof TimeLevel){
+				((TimeLevel) currentLevel).pauseTimer();
+	
+			}
 		}
 		// if here, then not merge swap. So combo swap.
 		else{
@@ -516,6 +511,11 @@ public class BoardLogic {
 			/*
 			 * If here, then there MAY BE combos.
 			 */
+			if(currentLevel instanceof TimeLevel){
+				
+				((TimeLevel) currentLevel).pauseTimer();
+				
+			}
 			destroyCombos();
 			readjustBoardAfterDestroy();
 			// send comboDestroyedFields to Kugi.
@@ -527,7 +527,7 @@ public class BoardLogic {
 		MoveLevelPanel.getInstance().decreaseMoves();
 		EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
 		if(currentLevel instanceof TimeLevel)
-			((TimeLevel) currentLevel).startTimer();
+			sendStartTimeSignal();
 		else
 			((MoveLevel) currentLevel).decreaseMove();
 		isSpecialSwapActive = false;
@@ -840,6 +840,10 @@ public class BoardLogic {
 			boardString += "\n";
 		}
 		return boardString;
+	}
+	
+	public void sendStartTimeSignal(){
+		EventDispatchQueue.getInstance().addEvent(new StartTimerEvent());
 	}
 	
 }
