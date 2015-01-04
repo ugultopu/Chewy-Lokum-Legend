@@ -17,6 +17,7 @@ public class Constants {
 	public static final String LOKUM_COLOR_BROWN = "brown";
 	public static final String LOKUM_COLOR_WHITE = "white";
 	public static final String BOMB_LOKUM_COLOR = "bomb";
+	public static final String TIME_LOKUM_COLOR = "time";
 	
 	/* Number Of Lokums */
 	
