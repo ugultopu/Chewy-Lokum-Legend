@@ -12,6 +12,7 @@ public class TimeLevel extends Level {
 	
 	public TimeLevel(int levelNumber){
 		updateTime(90 - 3*levelNumber);
+		System.out.println("started!");
 		this.levelNumber = levelNumber;
 		timer = new Timer ();
 		timer.schedule(new TimerTask(){
@@ -19,9 +20,11 @@ public class TimeLevel extends Level {
 			@Override
 			public void run() {
 				updateTime(timeLeft-1);
+				System.out.println(timeLeft);
 				if(timeLeft == 0){
 					EventDispatchQueue.getInstance().addEvent(new LoseGameEvent());
 					stopTimer();
+					resetInstance();
 				}
 			}
 
