@@ -359,10 +359,10 @@ public class ScoreTest {
 
     	
     	for(int i = 5; i < 7 ; i++){
-    		for(int j = 5; j < 7; j++){
-    			NormalLokum nl = new NormalLokum(i, j, "red");
+    		
+    			NormalLokum nl = new NormalLokum(i, 0, "red");
     			bl.introduceLogicField(nl);
-    		}
+    		
     	}
     	
     	bl.introduceLogicField(bomb);
@@ -376,7 +376,7 @@ public class ScoreTest {
     	
     	System.out.println(Score.getInstance().getCurrentScore());
     	
-    	assertEquals(2 * 4 * 60 * (bl.getColumnSize()), Score.getInstance().getCurrentScore());
+    	assertEquals(3 * 60, Score.getInstance().getCurrentScore());
     }
     
     @Test
@@ -395,10 +395,10 @@ public class ScoreTest {
 
     	
     	for(int i = 5; i < 7 ; i++){
-    		for(int j = 5; j < 7; j++){
-    			NormalLokum nl = new NormalLokum(i, j, "red");
-    			bl.introduceLogicField(nl);
-    		}
+
+    		NormalLokum nl = new NormalLokum(i, 0, "red");
+    		bl.introduceLogicField(nl);
+
     	}
 
     	bl.introduceLogicField(bomb);
@@ -412,6 +412,8 @@ public class ScoreTest {
     	
     	System.out.println(Score.getInstance().getCurrentScore());
     	
-    	assertEquals(4 * 60 * (bl.getColumnSize()) , Score.getInstance().getCurrentScore());
+    	//There are 2 red lokums. The one merged with bomb is red too. Therefore there must be 3 * striped lokum
+    	//score award.
+    	assertEquals(3 * 60 * (bl.getColumnSize()) , Score.getInstance().getCurrentScore());
     }
 }
