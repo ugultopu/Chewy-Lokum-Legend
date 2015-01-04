@@ -3,8 +3,9 @@ package App;
 
 public class MoveLevel extends Level {
 	private int movesLeft;
+	private MoveLevel instance;
 
-	public MoveLevel(int moves){
+	private MoveLevel(int moves){
 		this.movesLeft = moves;
 	}
 	
@@ -16,6 +17,16 @@ public class MoveLevel extends Level {
 	
 	public int getMovesLeft(){
 		return movesLeft;
+	}
+	
+	public MoveLevel getInstance(){
+		if(instance == null)
+			instance = new MoveLevel(50 - (3 * Options.currentLevel));
+		return instance;
+	}
+	
+	public void resetInstance(){
+		instance = new MoveLevel(50 - (3 * Options.currentLevel));
 	}
 }
 
