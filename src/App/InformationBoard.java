@@ -192,23 +192,4 @@ public class InformationBoard extends JPanel {
 	public int getGoalScore() {
 		return goalScore;
 	}
-
-	public void finishGame(){
-		if(this.currentScore==this.goalScore || this.currentScore>this.goalScore){
-			GameOverPanel.getInstance().setWin(true);
-			GamePanel.getInstance().endGame();			
-		} else {
-			if (Options.getInstance().getLevel()%2 == 1){
-				if(MoveLevelPanel.getInstance().getMovesLeft()==0){
-					GameOverPanel.getInstance().setWin(false);
-					GamePanel.getInstance().endGame();			
-				}
-			} else {
-				if(TimeLevelPanel.getInstance().getTimeLeft()==0){
-					GameOverPanel.getInstance().setWin(false);
-					GamePanel.getInstance().endGame();			
-				}
-			}
-		}
-	}
 }

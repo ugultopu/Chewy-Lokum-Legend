@@ -8,9 +8,9 @@ public class TimeLevel extends Level {
 	
 	private int timeLeft;
 	private Timer timer;
-	private static TimeLevel instance;
+
 	
-	private TimeLevel(int levelNumber){
+	public TimeLevel(int levelNumber){
 		updateTime(90 - 3*levelNumber);
 		this.levelNumber = levelNumber;
 		timer = new Timer ();
@@ -35,11 +35,7 @@ public class TimeLevel extends Level {
 		timeLeft = newTime;
 		EventDispatchQueue.getInstance().addEvent(new TimeUpdateEvent(newTime));
 	}
-	public static TimeLevel getInstance(){
-		if(instance == null)
-			instance = new TimeLevel(Options.currentLevel);
-		return (TimeLevel) instance;
-	}
+	
 	public void pauseTimer() throws InterruptedException{
 		timer.wait();
 	}

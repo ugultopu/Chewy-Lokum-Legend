@@ -10,7 +10,7 @@ public class TimeUpdateEvent extends GameEvent {
 
 	@Override
 	public void executeEvent() {
-		TimeLevelPanel.getInstance().setTime(newTime);
+		TimeLevelPanel.getInstance().setTimeLeft(newTime);
 	}
 
 }
