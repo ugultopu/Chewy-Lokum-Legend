@@ -425,6 +425,12 @@ public class BoardLogic {
 		 * What's the line below?
 		 */
 		EventDispatchQueue.getInstance().addEvent(new ClickListenerDeactiveEvent());
+		
+		Level currentLevel = Level.getInstance();
+		
+		if(currentLevel instanceof TimeLevel)
+			((TimeLevel) currentLevel).stopTimer();
+		
 		/*
 		 * If locations are not suitable for swap, simply return w/o doing anything.
 		 */
@@ -501,6 +507,10 @@ public class BoardLogic {
 		}
 		MoveLevelPanel.getInstance().decreaseMoves();
 		EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
+		if(currentLevel instanceof TimeLevel)
+			((TimeLevel) currentLevel).startTimer();
+		else
+			((MoveLevel) currentLevel).decreaseMove();
 		return true;
 	}
 
