@@ -289,7 +289,7 @@ public class BoardLogic {
 			readjustBoardAfterDestroy();
 		}
 		
-		EventDispatchQueue.getInstance().addEvent(new EndGameEvent());
+//		EventDispatchQueue.getInstance().addEvent(new EndGameEvent());
 	}
 
 	/**

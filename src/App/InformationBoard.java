@@ -11,11 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class InformationBoard extends JPanel {
-	private JLabel level,target,score,levelInput,targetInput,scoreInput;
-	private JButton saveButton;
+	private JLabel level,target,score,specialMoves,levelInput,targetInput,scoreInput,specialMovesInput;
+	private JButton saveButton,specialMovesButton;
 	private int currentScore;
 	private int goalScore;
-	private int currentLevel;
 
 	private static InformationBoard instance;
 
@@ -24,10 +23,14 @@ public class InformationBoard extends JPanel {
 		level = new JLabel("Level");
 		target = new JLabel("Target");
 		score = new JLabel("Score");
+		specialMoves = new JLabel("SpecialMoves");
 		levelInput = new JLabel("");
 		targetInput = new JLabel("");
 		scoreInput = new JLabel("");
+		specialMovesInput = new JLabel("");
 		saveButton = new JButton("Save Game");
+		specialMovesButton = new JButton("Special Move");
+		
 
 		setLayout(null);
 		setBackground(Constants.GAME_BACKGROUND_COLOR);
@@ -63,24 +66,32 @@ public class InformationBoard extends JPanel {
 			add(TimeLevelPanel.getInstance());
 			TimeLevelPanel.getInstance().setBounds(0,180,200,30);
 		}
+
+		add(specialMoves);
+		specialMoves.setBounds(0, 240, 80, 30);
+		specialMoves.setFont(new Font("Tahoma", Font.BOLD, 20));
 		
-		add(saveButton);
-		saveButton.setBounds(0, 240, 150, 50);
-		saveButton.setBorderPainted(false);
-		saveButton.setFocusPainted(false);
-		saveButton.addActionListener(new ActionListener(){
+		add(specialMovesInput);
+		specialMovesInput.setBounds(100, 240, 80, 30);
+		specialMovesInput.setFont(new Font("Tahoma", Font.BOLD, 20));
+		
+		add(specialMovesButton);
+		specialMovesButton.setBounds(0, 300, 150, 50);
+		specialMovesButton.setBorderPainted(false);
+		specialMovesButton.setFocusPainted(false);
+		specialMovesButton.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					SaveGame.saveBoardToXML();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+//					FILLHERE!!!
 			}
 
 		});
+		
+		add(saveButton);
+		saveButton.setBounds(0, 360, 150, 50);
+		saveButton.setBorderPainted(false);
+		saveButton.setFocusPainted(false);
 
 		level.setOpaque(true);
 		level.setBackground(Constants.GAME_BACKGROUND_COLOR);
@@ -93,6 +104,10 @@ public class InformationBoard extends JPanel {
 		score.setOpaque(true);
 		score.setBackground(Constants.GAME_BACKGROUND_COLOR);
 		score.setForeground(Constants.TITLE_COLOR);
+		
+		specialMoves.setOpaque(true);
+		specialMoves.setBackground(Constants.GAME_BACKGROUND_COLOR);
+		specialMoves.setForeground(Constants.TITLE_COLOR);
 
 		levelInput.setOpaque(true);
 		levelInput.setBackground(Constants.GAME_BACKGROUND_COLOR);
@@ -106,6 +121,10 @@ public class InformationBoard extends JPanel {
 		scoreInput.setBackground(Constants.GAME_BACKGROUND_COLOR);
 		scoreInput.setForeground(Constants.TITLE_COLOR);
 
+		specialMovesInput.setOpaque(true);
+		specialMovesInput.setBackground(Constants.GAME_BACKGROUND_COLOR);
+		specialMovesInput.setForeground(Constants.TITLE_COLOR);
+		
 		saveButton.addActionListener(new ActionListener(){
 
 			@Override
@@ -130,12 +149,15 @@ public class InformationBoard extends JPanel {
 		level.repaint();
 		target.repaint();
 		score.repaint();
-
+		specialMoves.repaint();
+		
 		levelInput.repaint();
 		targetInput.repaint();
 		scoreInput.repaint();
-
+		specialMovesInput.repaint();
+		
 		saveButton.repaint();
+		specialMovesButton.repaint();
 		
 		if (Options.getInstance().getLevel()%2 == 1){
 		MoveLevelPanel.getInstance().repaint();
@@ -161,18 +183,7 @@ public class InformationBoard extends JPanel {
 	}
 
 	public void setCurrentLevel(int currentLevel){
-		this.currentLevel = currentLevel;
-		this.goalScore = Constants.GOAL_SCORE + currentLevel*5000;		
-
-		if (Options.getInstance().getLevel()%2 == 1){
-			MoveLevelPanel.getInstance().setMoves(currentLevel);
-			MoveLevelPanel.getInstance().setMovesText(currentLevel);
-		} else {
-			TimeLevelPanel.getInstance().setTime(currentLevel);
-			TimeLevelPanel.getInstance().setTimeText(currentLevel);
-		}
 		levelInput.setText(""+currentLevel);
-		targetInput.setText(""+goalScore);
 	}
 
 	public int getCurrentLevel(){
@@ -191,24 +202,5 @@ public class InformationBoard extends JPanel {
 
 	public int getGoalScore() {
 		return goalScore;
-	}
-
-	public void finishGame(){
-		if(this.currentScore==this.goalScore || this.currentScore>this.goalScore){
-			GameOverPanel.getInstance().setWin(true);
-			GamePanel.getInstance().endGame();			
-		} else {
-			if (Options.getInstance().getLevel()%2 == 1){
-				if(MoveLevelPanel.getInstance().getMovesLeft()==0){
-					GameOverPanel.getInstance().setWin(false);
-					GamePanel.getInstance().endGame();			
-				}
-			} else {
-				if(TimeLevelPanel.getInstance().getTimeLeft()==0){
-					GameOverPanel.getInstance().setWin(false);
-					GamePanel.getInstance().endGame();			
-				}
-			}
-		}
 	}
 }

@@ -3,6 +3,7 @@ package App;
 
 public class MoveLevel extends Level {
 	private int movesLeft;
+	private int specialMoveLeft;
 	private static MoveLevel instance;
 
 	private MoveLevel(int moves){
@@ -22,7 +23,6 @@ public class MoveLevel extends Level {
 				wge.executeEvent();
 			}
 		}
-		
 	}
 	
 	public int getMovesLeft(){
