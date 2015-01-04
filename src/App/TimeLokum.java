@@ -6,7 +6,7 @@ public class TimeLokum extends NormalLokum{
 	
 	public TimeLokum(int rowIndex, int columnIndex, String color) {
 		super(rowIndex, columnIndex, color);
-		timeAward = 1+ (int)Math.random()*5;
+		timeAward = (int)( 1+ Math.random()*5);
 	}
 	
 	@Override
