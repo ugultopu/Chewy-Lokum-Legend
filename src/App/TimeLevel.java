@@ -10,10 +10,10 @@ public class TimeLevel extends Level {
 	private Timer timer;
 
 	
-	public TimeLevel(int levelNumber){
+	public TimeLevel(){
+		this.levelNumber = Options.currentLevel;
 		updateTime(90 - 3*levelNumber);
 		System.out.println("started!");
-		this.levelNumber = levelNumber;
 		timer = new Timer ();
 		timer.schedule(new TimerTask(){
 

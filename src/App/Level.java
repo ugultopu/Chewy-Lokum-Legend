@@ -13,9 +13,9 @@ public abstract class Level {
 		if(instance == null){
 			int currentLevel =Options.currentLevel;
 			if(currentLevel%2==0)
-				instance = new TimeLevel(currentLevel);
+				instance = new TimeLevel();
 			else
-				instance = new MoveLevel(currentLevel);
+				instance = new MoveLevel();
 		}
 		return instance;
 	}
