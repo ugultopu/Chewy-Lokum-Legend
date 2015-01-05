@@ -457,6 +457,7 @@ public class BoardLogic {
 		if( !typesSuitableForSwap(f0, f1) ){
 			//System.out.println("Types are not suitable for swap.");
 			EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
+			EventDispatchQueue.getInstance().addEvent(new SpecialMoveDeactivateEvent());
 			isSpecialSwapActive = false;
 			return false;
 		}
@@ -468,10 +469,8 @@ public class BoardLogic {
 			//System.out.println("In merge swap.");
 			mergeDestroy( f0,  f1 );
 			readjustBoardAfterDestroy();
-			if(currentLevel instanceof TimeLevel){
+			if(currentLevel instanceof TimeLevel)
 				((TimeLevel) currentLevel).pauseTimer();
-	
-			}
 		}
 		// if here, then not merge swap. So combo swap.
 		else{
@@ -513,11 +512,9 @@ public class BoardLogic {
 			/*
 			 * If here, then there MAY BE combos.
 			 */
-			if(currentLevel instanceof TimeLevel){
-				
+			if(currentLevel instanceof TimeLevel)
 				((TimeLevel) currentLevel).pauseTimer();
-				
-			}
+			
 			destroyCombos();
 			readjustBoardAfterDestroy();
 			// send comboDestroyedFields to Kugi.
@@ -532,7 +529,14 @@ public class BoardLogic {
 			sendStartTimeSignal();
 		else
 			((MoveLevel) currentLevel).decreaseMove();
-		isSpecialSwapActive = false;
+		
+		if(isSpecialSwapActive){
+			Level.getInstance().specialMoves--;
+			EventDispatchQueue.getInstance().addEvent(new SpecialMoveUpdateEvent(Level.getInstance().specialMoves));
+			EventDispatchQueue.getInstance().addEvent(new SpecialMoveDeactivateEvent());
+			isSpecialSwapActive = false;
+		}
+		
 		return true;
 	}
 

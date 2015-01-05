@@ -1,19 +1,22 @@
 package App;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class InformationBoard extends JPanel {
 	private JLabel level,target,score,specialMoves,levelInput,targetInput,scoreInput,specialMovesInput;
 	private JButton saveButton,specialMovesButton;
-
+	private Color specialSwapOvalColor;
 	private static InformationBoard instance;
 
 	public InformationBoard(){
@@ -28,13 +31,14 @@ public class InformationBoard extends JPanel {
 		specialMovesInput = new JLabel("");
 		saveButton = new JButton("Save Game");
 		specialMovesButton = new JButton("Special Move");
+		specialSwapOvalColor = Color.RED;
 		
 		setCurrentLevel(Options.getInstance().getLevel());
 		setGoalScore(Options.getInstance().getTargetScore());
 		
 		setLayout(null);
 		setBackground(Constants.GAME_BACKGROUND_COLOR);
-
+		
 		add(level);
 		level.setBounds(0, 0,80,30);
 		level.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -85,8 +89,13 @@ public class InformationBoard extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				int remainedSpecialMoves = Level.getInstance().specialMoves;
 				if(remainedSpecialMoves != 0){
-					Level.getInstance().specialMoves--;
-					BoardLogic.getInstance().setSpecialSwapActive(true);
+					if(!BoardLogic.getInstance().isSpecialSwapActive()){
+						setSpecialSwapActive();
+						BoardLogic.getInstance().setSpecialSwapActive(true);
+					}else{
+						setSpecialSwapDeactive();
+						BoardLogic.getInstance().setSpecialSwapActive(false);
+					}
 				}
 			}
 
@@ -146,6 +155,16 @@ public class InformationBoard extends JPanel {
 			}
 		});
 	}
+	
+	public void setSpecialSwapActive(){
+		specialSwapOvalColor = Color.GREEN;
+		repaint();
+	}
+	
+	public void setSpecialSwapDeactive(){
+		specialSwapOvalColor = Color.RED;
+		repaint();
+	}
 
 	public void paint(Graphics g){
 		super.paintComponent(g);
@@ -162,6 +181,10 @@ public class InformationBoard extends JPanel {
 		
 		saveButton.repaint();
 		specialMovesButton.repaint();
+		
+		
+		g.setColor(specialSwapOvalColor);
+		g.fillOval(165, 300, 50, 50);
 		
 		if (Options.getInstance().getLevel()%2 == 1){
 		MoveLevelPanel.getInstance().repaint();
@@ -196,4 +219,5 @@ public class InformationBoard extends JPanel {
 	public void setSpecialMoves(int sm){
 		specialMovesInput.setText(""+ sm);
 	}
+
 }
