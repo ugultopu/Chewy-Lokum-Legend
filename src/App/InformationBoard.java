@@ -1,7 +1,9 @@
 package App;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -84,8 +86,11 @@ public class InformationBoard extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				int remainedSpecialMoves = Level.getInstance().specialMoves;
 				if(remainedSpecialMoves != 0){
-					Level.getInstance().specialMoves--;
-					BoardLogic.getInstance().setSpecialSwapActive(true);
+					if(!BoardLogic.getInstance().isSpecialSwapActive()){
+						BoardLogic.getInstance().setSpecialSwapActive(true);
+					}else{
+						BoardLogic.getInstance().setSpecialSwapActive(false);
+					}
 				}
 			}
 

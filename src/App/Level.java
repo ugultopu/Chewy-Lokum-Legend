@@ -6,7 +6,7 @@ package App;
 public abstract class Level {
 	
 	int levelNumber;
-	int specialMoves;
+	int specialMoves = 10;
 	private static Level instance;
 	
 	public static Level getInstance(){
