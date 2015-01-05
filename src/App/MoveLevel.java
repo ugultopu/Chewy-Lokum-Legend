@@ -15,7 +15,7 @@ public class MoveLevel extends Level {
 		MoveUpdateEvent mue = new MoveUpdateEvent(movesLeft);
 		EventDispatchQueue.getInstance().addEvent(mue);
 		if(movesLeft == 0){
-			if(Score.getInstance().getCurrentScore() < Score.getInstance().getGoalScore(Options.currentLevel)){
+			if(Score.getInstance().getCurrentScore() < Options.targetScore){
 				LoseGameEvent lge = new LoseGameEvent();
 				EventDispatchQueue.getInstance().addEvent(lge);
 			}else{

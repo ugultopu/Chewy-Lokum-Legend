@@ -10,7 +10,7 @@ public class ClickListener implements MouseListener {
 	
 	Integer selectedRow = null;
 	Integer selectedColumn = null; 
-	boolean active = true;
+	boolean active = false;
 	private static ClickListener instance;
 	
 	@Override

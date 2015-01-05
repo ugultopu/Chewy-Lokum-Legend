@@ -29,6 +29,7 @@ public class InformationBoard extends JPanel {
 		saveButton = new JButton("Save Game");
 		specialMovesButton = new JButton("Special Move");
 		
+		setCurrentLevel(Options.getInstance().getLevel());
 		setGoalScore(Options.getInstance().getTargetScore());
 		
 		setLayout(null);

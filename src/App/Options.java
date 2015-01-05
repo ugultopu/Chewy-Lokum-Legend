@@ -9,10 +9,7 @@ public class Options {
 	
 	public void setLevel(int level){
 		currentLevel = level;
-	}
-	
-	public void setTargetScore(int score){
-		targetScore = score;
+		targetScore = Constants.GOAL_SCORE + currentLevel* 5000;
 	}
 	
 	public int getTargetScore(){

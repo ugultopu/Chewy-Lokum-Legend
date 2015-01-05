@@ -204,6 +204,7 @@ public class BoardLogic {
 	void readjustAfterInitialize(){
 		destroyCombos();
 		readjustBoardAfterDestroy();
+		EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
 		if(currentLevel instanceof TimeLevel)
 			sendStartTimeSignal();
 		//Score.getInstance().setScore(0);

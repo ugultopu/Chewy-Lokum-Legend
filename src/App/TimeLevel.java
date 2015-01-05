@@ -13,7 +13,7 @@ public class TimeLevel extends Level {
 	
 	public TimeLevel(){
 		this.levelNumber = Options.currentLevel;
-		updateTime(90 - 3*levelNumber);
+		updateTime(Constants.TIME - 3*levelNumber);
 		System.out.println("started!");
 	}
 	
