@@ -6,7 +6,7 @@ package App;
 public abstract class Level {
 	
 	int levelNumber;
-	int specialMoves = 10;
+	int specialMoves = 3;
 	private static Level instance;
 	
 	public static Level getInstance(){
@@ -16,6 +16,7 @@ public abstract class Level {
 				instance = new TimeLevel();
 			else
 				instance = new MoveLevel();
+			EventDispatchQueue.getInstance().addEvent(new SpecialMoveUpdateEvent(instance.getSpecialMoves()));
 		}
 		return instance;
 	}
@@ -25,6 +26,10 @@ public abstract class Level {
 	
 	public void setSpecialMoves(int newSpecialMoves){
 		this.specialMoves = newSpecialMoves;
+	}
+	
+	public int getSpecialMoves(){
+		return specialMoves;
 	}
 	
 }
