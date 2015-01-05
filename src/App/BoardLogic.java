@@ -456,6 +456,7 @@ public class BoardLogic {
 		if( !typesSuitableForSwap(f0, f1) ){
 			//System.out.println("Types are not suitable for swap.");
 			EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
+			EventDispatchQueue.getInstance().addEvent(new SpecialMoveDeactivateEvent());
 			isSpecialSwapActive = false;
 			return false;
 		}
@@ -528,9 +529,12 @@ public class BoardLogic {
 		else
 			((MoveLevel) currentLevel).decreaseMove();
 		
-		Level.getInstance().specialMoves--;
-		EventDispatchQueue.getInstance().addEvent(new SpecialMoveUpdateEvent(Level.getInstance().specialMoves));
-		isSpecialSwapActive = false;
+		if(isSpecialSwapActive){
+			Level.getInstance().specialMoves--;
+			EventDispatchQueue.getInstance().addEvent(new SpecialMoveUpdateEvent(Level.getInstance().specialMoves));
+			EventDispatchQueue.getInstance().addEvent(new SpecialMoveDeactivateEvent());
+			isSpecialSwapActive = false;
+		}
 		
 		return true;
 	}
