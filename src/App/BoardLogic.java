@@ -17,8 +17,7 @@ public class BoardLogic {
 	private PriorityQueue<Combo> boardCombos;
 	private static BoardLogic instance;
 	private boolean isSpecialSwapActive;
-	private Level currentLevel;
-
+	
 	
 	public static BoardLogic getInstance(){
 		if(instance == null)
@@ -198,14 +197,14 @@ public class BoardLogic {
 	private void initializeBoard(){
 		for(int i=0;i<columnSize;i++)
 			initializeColumn(i);
-		this.currentLevel = Level.getInstance();
+		
 	}
 	
 	void readjustAfterInitialize(){
 		destroyCombos();
 		readjustBoardAfterDestroy();
 		EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
-		if(currentLevel instanceof TimeLevel)
+		if(Level.getInstance() instanceof TimeLevel)
 			sendStartTimeSignal();
 		//Score.getInstance().setScore(0);
 	}
@@ -469,8 +468,8 @@ public class BoardLogic {
 			//System.out.println("In merge swap.");
 			mergeDestroy( f0,  f1 );
 			readjustBoardAfterDestroy();
-			if(currentLevel instanceof TimeLevel)
-				((TimeLevel) currentLevel).pauseTimer();
+			if(Level.getInstance() instanceof TimeLevel)
+				((TimeLevel) Level.getInstance()).pauseTimer();
 		}
 		// if here, then not merge swap. So combo swap.
 		else{
@@ -512,8 +511,8 @@ public class BoardLogic {
 			/*
 			 * If here, then there MAY BE combos.
 			 */
-			if(currentLevel instanceof TimeLevel)
-				((TimeLevel) currentLevel).pauseTimer();
+			if(Level.getInstance() instanceof TimeLevel)
+				((TimeLevel) Level.getInstance()).pauseTimer();
 			
 			destroyCombos();
 			readjustBoardAfterDestroy();
@@ -525,14 +524,14 @@ public class BoardLogic {
 		}
 		MoveLevelPanel.getInstance().decreaseMoves();
 		EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
-		if(currentLevel instanceof TimeLevel)
+		if(Level.getInstance() instanceof TimeLevel)
 			sendStartTimeSignal();
 		else
-			((MoveLevel) currentLevel).decreaseMove();
+			((MoveLevel) Level.getInstance()).decreaseMove();
 		
 		if(isSpecialSwapActive){
-			Level.getInstance().specialMoves--;
-			EventDispatchQueue.getInstance().addEvent(new SpecialMoveUpdateEvent(Level.getInstance().specialMoves));
+			Level.getInstance().setSpecialMoves(Level.getInstance().getSpecialMoves()-1);
+			EventDispatchQueue.getInstance().addEvent(new SpecialMoveUpdateEvent(Level.getInstance().getSpecialMoves()));
 			EventDispatchQueue.getInstance().addEvent(new SpecialMoveDeactivateEvent());
 			isSpecialSwapActive = false;
 		}

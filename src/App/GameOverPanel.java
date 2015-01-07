@@ -57,11 +57,13 @@ public class GameOverPanel extends JPanel{
 				int level = Options.getInstance().getLevel();
 				ApplicationWindow.removePanel(GamePanel.getInstance());
 				Score.resetInstance();
-				InformationBoard.getInstance().repaint();
+				Options.resetInstance();
+				Level.resetInstance();
 				GamePanel.resetInstance();
 				GameBoard.resetInstance();
 				BoardLogic.resetInstance();
 				InformationBoard.resetInstance();
+				EventDispatchQueue.resetInstance();
 				InformationBoard.getInstance().repaint();
 				ApplicationWindow.addPanel(GamePanel.getInstance());
 				GamePanel.getInstance().remove(GameOverPanel.getInstance());
@@ -86,13 +88,20 @@ public class GameOverPanel extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int level = Options.getInstance().getLevel();
+				int level = Level.getInstance().getCurrentLevel();
+				int specialMoves = Level.getInstance().getSpecialMoves();
 				ApplicationWindow.removePanel(GamePanel.getInstance());
 				Score.resetInstance();
+				Options.resetInstance();
+				Level.resetInstance();
 				BoardLogic.resetInstance();
 				GamePanel.resetInstance();
 				GameBoard.resetInstance();
 				InformationBoard.resetInstance();
+				EventDispatchQueue.resetInstance();
+				
+				Options.getInstance().setLevel(level+1);
+				Level.getInstance().setSpecialMoves(Level.getInstance().getSpecialMoves()+specialMoves);
 				InformationBoard.getInstance().setCurrentLevel(level+1);
 				ApplicationWindow.removePanel(ChooseLevelPanel.getInstance());
 				ApplicationWindow.addPanel(GamePanel.getInstance());
@@ -113,10 +122,13 @@ public class GameOverPanel extends JPanel{
 				int level = Options.getInstance().getLevel();
 				ApplicationWindow.removePanel(GamePanel.getInstance());
 				Score.resetInstance();
+				Options.resetInstance();
+				Level.resetInstance();
 				BoardLogic.resetInstance();
 				GamePanel.resetInstance();
 				GameBoard.resetInstance();
 				InformationBoard.resetInstance();
+				EventDispatchQueue.resetInstance();
 				InformationBoard.getInstance().setCurrentLevel(level);
 				ApplicationWindow.removePanel(ChooseLevelPanel.getInstance());
 				ApplicationWindow.addPanel(MenuPanel.getInstance());

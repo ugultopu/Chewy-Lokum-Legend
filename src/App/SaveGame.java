@@ -13,10 +13,19 @@ public class SaveGame {
 		String player_name = "default";
 		LogicField[][] lokumBoard = BoardLogic.getInstance().getBoard();		
 		
-		int goal_score = InformationBoard.getInstance().getGoalScore();
+		int level_id = Level.getInstance().getCurrentLevel();
+		int goal_score = Options.getInstance().getTargetScore();
 		int current_score = Score.getInstance().getCurrentScore();
-		int moves_left = MoveLevelPanel.getInstance().getMovesLeft();
-		int level = InformationBoard.getInstance().getCurrentLevel();
+		int left = 0; // from moves_left
+		String level_type = null;
+		if (Level.getInstance() instanceof MoveLevel){
+			level_type = "move";
+			left = ((MoveLevel)Level.getInstance()).getMovesLeft();
+		}else if (Level.getInstance() instanceof TimeLevel){
+			level_type = "time";
+			left = ((TimeLevel)Level.getInstance()).getTime();
+		}
+		
 		
 
 		
@@ -28,6 +37,15 @@ public class SaveGame {
 		wr.write("<id>"+player_id+"</id>");
 		wr.write("<name>"+player_name+"</name>");
 		wr.write("</player>");
+		
+		wr.write("<level>");
+		wr.write("<id>"+level_id+"</id>");
+		wr.write("<type>"+level_type+"</type>");
+		wr.write("<left>"+left+"</left>");
+		wr.write("<special_moves>"+Level.getInstance().getSpecialMoves()+"</special_moves>");
+		wr.write("<goalscore>"+goal_score+"</goalscore>");
+		wr.write("<currentscore>"+current_score+"</currentscore>");
+		wr.write("</level>");
 		
 		wr.write("<board>");
 		wr.write("<lokums>");
@@ -66,10 +84,6 @@ public class SaveGame {
 		}
 		wr.write("</obstacles>");
 		wr.write("</board>");
-		wr.write("<goalscore>"+goal_score+"</goalscore>");
-		wr.write("<currentscore>"+current_score+"</currentscore>");
-		wr.write("<movesleft>"+moves_left+"</movesleft>");
-		wr.write("<level>"+level+"</level>");
 		wr.write("</game>");
 		wr.close();
 			

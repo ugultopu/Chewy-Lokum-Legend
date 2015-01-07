@@ -5,8 +5,8 @@ package App;
  */
 public abstract class Level {
 	
-	int levelNumber;
-	int specialMoves = 3;
+	protected int levelNumber;
+	private int specialMoves = 3;
 	private static Level instance;
 	
 	public static Level getInstance(){
@@ -30,6 +30,10 @@ public abstract class Level {
 	
 	public int getSpecialMoves(){
 		return specialMoves;
+	}
+	
+	public int getCurrentLevel(){
+		return levelNumber;
 	}
 	
 }

@@ -51,10 +51,12 @@ public class LevelBoard extends JPanel {
 				public void actionPerformed(ActionEvent e) {
 					Level.resetInstance();
 					Score.resetInstance();
+					Options.resetInstance();
 					BoardLogic.resetInstance();
 					GamePanel.resetInstance();
 					GameBoard.resetInstance();
 					InformationBoard.resetInstance();
+					EventDispatchQueue.resetInstance();
 					Options.getInstance().setLevel(level+1);
 					
 					ApplicationWindow.removePanel(ChooseLevelPanel.getInstance());

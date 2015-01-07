@@ -87,7 +87,7 @@ public class InformationBoard extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int remainedSpecialMoves = Level.getInstance().specialMoves;
+				int remainedSpecialMoves = Level.getInstance().getSpecialMoves();
 				if(remainedSpecialMoves != 0){
 					if(!BoardLogic.getInstance().isSpecialSwapActive()){
 						setSpecialSwapActive();
@@ -152,6 +152,16 @@ public class InformationBoard extends JPanel {
 				ApplicationWindow.addPanel(MenuPanel.getInstance());
 				MenuPanel.getInstance().requestFocusInWindow();
 				MenuPanel.getInstance().repaint();
+				Score.resetInstance();
+				Options.resetInstance();
+				if(Level.getInstance() instanceof TimeLevel)
+					((TimeLevel)Level.getInstance()).stopTimer();
+				Level.resetInstance();
+				BoardLogic.resetInstance();
+				InformationBoard.resetInstance();
+				EventDispatchQueue.resetInstance();
+				GamePanel.resetInstance();
+				GameBoard.resetInstance();
 			}
 		});
 	}

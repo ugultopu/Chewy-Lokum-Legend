@@ -51,8 +51,34 @@ public class LoadGame {
 			/* Player */
 			/* Nothing to do with player yet */
 			
+			
+			/* Level */
+			Node level = inGameNodes.item(1);
+			NodeList levelFeatures = level.getChildNodes();
+			int level_id = Integer.parseInt(levelFeatures.item(0).getTextContent());
+			String level_type = levelFeatures.item(1).getTextContent();
+			int left = Integer.parseInt(levelFeatures.item(2).getTextContent());
+			int special_moves = Integer.parseInt(levelFeatures.item(3).getTextContent());
+			int goalScore = Integer.parseInt(levelFeatures.item(4).getTextContent());
+			int currentScore = Integer.parseInt(levelFeatures.item(5).getTextContent());
+			
+			System.out.println(level_id);
+			Options.getInstance().setLevel(level_id);
+			Options.getInstance().targetScore = goalScore;
+			Score.getInstance().setScore(currentScore);
+			
+			Level levelObject = Level.getInstance();
+			
+			levelObject.setSpecialMoves(special_moves);
+			if (level_type.equals("move")){
+				((MoveLevel)levelObject).setMovesLeft(left); 
+			}else if(level_type.equals("time")){
+				((TimeLevel)levelObject).updateTime(left);
+			}
+			
+			
 			/* Board */
-			Node board = inGameNodes.item(1);
+			Node board = inGameNodes.item(2);
 			
 			/* Lokums */
 			NodeList lokums = board.getChildNodes().item(0).getChildNodes();
@@ -79,21 +105,13 @@ public class LoadGame {
 				loadedBoard[y][x] = obstacle;
 			}
 			
-			int goalScore = Integer.parseInt(inGameNodes.item(2).getTextContent());
-			int currentScore = Integer.parseInt(inGameNodes.item(3).getTextContent());
-			int movesLeft = Integer.parseInt(inGameNodes.item(4).getTextContent());
-			int level = Integer.parseInt(inGameNodes.item(5).getTextContent());
 			
-			Score.getInstance().setScore(currentScore);
-			InformationBoard informationBoard = InformationBoard.getInstance();
-			informationBoard.updateScore(currentScore);
-			informationBoard.setGoalScore(goalScore);
-			informationBoard.setCurrentLevel(level);
-			MoveLevelPanel.getInstance().setMovesLeft(movesLeft);
+			
 			BoardLogic.loadBoard(loadedBoard);
 			GameBoard.getInstance().repaint();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
 			System.out.println("The save.xml format is incorrect!");
 			return false;
 		}

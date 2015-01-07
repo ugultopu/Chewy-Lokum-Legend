@@ -3,7 +3,7 @@ package App;
 public class Options {
 	
 	public static int currentLevel = 1;
-	public static int targetScore = 1;
+	public int targetScore = 1;
 	
 	private static Options instance;
 	
@@ -25,6 +25,10 @@ public class Options {
 			instance = new Options();
 		}
 		return instance;
+	}
+	
+	public static void resetInstance(){
+		instance = null;
 	}
 	
 }

@@ -61,15 +61,25 @@ public class MenuPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Score.resetInstance();
+				Options.resetInstance();
+				Level.resetInstance();
 				BoardLogic.resetInstance();
+				GamePanel.resetInstance();
+				GameBoard.resetInstance();
+				InformationBoard.resetInstance();
+				EventDispatchQueue.resetInstance();
 				if(LoadGame.loadGameFromXML()){
 					System.out.println("Loaded");
+					if(Level.getInstance() instanceof TimeLevel)
+						((TimeLevel)Level.getInstance()).startTimer();
 					ApplicationWindow.removePanel(instance);
 					ApplicationWindow.addPanel(GamePanel.getInstance());
 					GamePanel.getInstance().requestFocusInWindow();
 					GameBoard.getInstance().requestFocusInWindow();
 					GamePanel.getInstance().repaint();
 					GameBoard.getInstance().repaint();
+					
 					
 				}
 			}
