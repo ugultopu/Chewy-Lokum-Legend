@@ -19,7 +19,7 @@ public class TCombo extends Combo implements LokumGeneratingCombo{
 	}
 	
 	public void generateLokum(){
-		Lokum midLokum = lokums.get(2);
+		Lokum midLokum = lokums.get(1);
 		int midx = midLokum.getRowIndex();
 		int midy = midLokum.getColumnIndex();
 		String midColor = midLokum.getLokumColor();
