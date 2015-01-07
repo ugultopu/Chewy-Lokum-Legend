@@ -7,6 +7,7 @@ public class Factory {
 	
 	public static Lokum createRandomLokum(int x, int y){
 		int randomNumber = generateRandomNumber();
+		int extraRandom = generateRandomNumber();
 		switch (randomNumber){
 			case 0:
 				return new NormalLokum(x, y, Constants.LOKUM_COLOR_BROWN);
@@ -18,7 +19,7 @@ public class Factory {
 				return new NormalLokum(x, y, Constants.LOKUM_COLOR_WHITE);
 			case 4:
 				randomNumber = generateRandomNumber();
-				if(Options.currentLevel % 2 == 0 && randomNumber == 1)
+				if(Options.currentLevel % 2 == 0 && randomNumber == 1 && extraRandom == 1)
 					return new TimeLokum(x, y, generateRandomColor());
 				return createRandomLokum(x, y);
 			default:

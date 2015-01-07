@@ -1,5 +1,6 @@
 package App;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -52,6 +53,7 @@ public class BombMerge extends Merge {
 			}
 			score.scoreUpdateBombUse(numberOfDestroyedLokums);
 		}else if(l1 instanceof StripedLokum){
+			ArrayList<Lokum> convertedLokums = new ArrayList<Lokum>();
 			Random randomGenerator = new Random();
 			String colorl1 = l1.getLokumColor();
 			System.out.println("l1: Striped Lokum, color: " + colorl1 + ", l2: Bomb Lokum, merge.");
@@ -63,17 +65,23 @@ public class BombMerge extends Merge {
 						int randomStriped = randomGenerator.nextInt(2);
 						if(randomStriped == 0){
 							VerticalStripedLokum newLokum = new VerticalStripedLokum(i, j, colorl1);
-							newLokum.comboDestroy();
+							EventDispatchQueue.getInstance().addEvent(new LokumGenerateEvent(newLokum));
+							convertedLokums.add(newLokum);
 						}else if(randomStriped == 1){
 							HorizontalStripedLokum newLokum = new HorizontalStripedLokum(i, j, colorl1);
-							newLokum.comboDestroy();
+							EventDispatchQueue.getInstance().addEvent(new LokumGenerateEvent(newLokum));
+							convertedLokums.add(newLokum);
 						}else{
 							System.out.println("Error at Bomb + Striped Merge");
 						}
 					}
 				}
 			}
+			for(int i = 0; i < convertedLokums.size(); i++){
+				convertedLokums.get(i).comboDestroy();
+			}
 		}else if(l2 instanceof StripedLokum){
+			ArrayList<Lokum> convertedLokums = new ArrayList<Lokum>();
 			String colorl2 = l2.getLokumColor();
 			Random randomGenerator = new Random();
 			System.out.println("l2: Striped Lokum, color: " + colorl2 + ", l1: Bomb Lokum, merge.");
@@ -84,15 +92,21 @@ public class BombMerge extends Merge {
 						int randomStriped = randomGenerator.nextInt(2);
 						if(randomStriped == 0){
 							VerticalStripedLokum newLokum = new VerticalStripedLokum(i, j, colorl2);
-							newLokum.comboDestroy();
+							EventDispatchQueue.getInstance().addEvent(new LokumGenerateEvent(newLokum));
+							convertedLokums.add(newLokum);
 						}else if(randomStriped == 1){
 							HorizontalStripedLokum newLokum = new HorizontalStripedLokum(i, j, colorl2);
-							newLokum.comboDestroy();
+							EventDispatchQueue.getInstance().addEvent(new LokumGenerateEvent(newLokum));
+							convertedLokums.add(newLokum);
 						}else{
 							System.out.println("Error at Bomb + Striped Merge");
 						}
 					}
 				}
+				
+			}
+			for(int i = 0; i < convertedLokums.size(); i++){
+				convertedLokums.get(i).comboDestroy();
 			}
 		}else if(l1 instanceof WrappedLokum){
 			String colorl1 = l1.getLokumColor();
@@ -105,10 +119,9 @@ public class BombMerge extends Merge {
 					if(lokum.getLokumColor().equals(colorl1) || lokum.getLokumColor().equals(randomColor) ){
 						NormalLokum newLokum = new NormalLokum(i, j, colorl1);
 						newLokum.comboDestroy();
-						numberOfDestroyedLokums++;
 						score.scoreUpdateBombUse(1);
 					}
-				}	
+				}
 			}
 			score.scoreUpdateBombUse(numberOfDestroyedLokums);
 		}else if(l2 instanceof WrappedLokum){

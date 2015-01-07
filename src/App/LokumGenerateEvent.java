@@ -17,7 +17,7 @@ public class LokumGenerateEvent extends GameEvent{
 		GameBoard.getInstance().changeLokum(generatedLokum);
 		GameBoard.getInstance().repaint();
 		try {
-			Thread.sleep(10);
+			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Exception on event waiting.");
