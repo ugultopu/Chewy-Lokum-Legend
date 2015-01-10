@@ -2,10 +2,6 @@ package App;
 
 import java.util.LinkedList;
 
-import test.BoardLogicTest;
-
-
-
 public class EventDispatchQueue {
 	
 	private LinkedList<GameEvent> eventQueue;

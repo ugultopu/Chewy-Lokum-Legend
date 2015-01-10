@@ -8,6 +8,10 @@ import javax.swing.JPanel;
 
 public class TimeLevelPanel extends JPanel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel timeLeftInput,timeLeft;
 	private int time;
 	

@@ -1,8 +1,5 @@
 package App;
 
-import java.util.ArrayList;
-
-
 public class WrappedWrappedMerge extends Merge {
 	private Score score = Score.getInstance();
 	

@@ -30,6 +30,7 @@ public class JUnitTest_WrappedWrappedMerge {
 
 	@Before
 	public void setUp() throws Exception {
+		boardLogic = BoardLogic.getInstance();
 		this.wrappedLokum = new WrappedLokum(boardLogic.getRowSize()/2, boardLogic.getColumnSize()/2, "White");
 		boardLogic.introduceLogicField(wrappedLokum);
 		

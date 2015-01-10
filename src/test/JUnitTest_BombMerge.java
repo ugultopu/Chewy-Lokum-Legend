@@ -37,10 +37,11 @@ public class JUnitTest_BombMerge {
 
 	@Before
 	public void setUp() throws Exception {
-		this.boardLogic = BoardLogic.getInstance();
+		boardLogic = BoardLogic.getInstance();
 		
 		this.bombLokum = new BombLokum(boardLogic.getRowSize()/2, boardLogic.getColumnSize()/2);
-		boardLogic.introduceLogicField(bombLokum);
+		
+		this.normalTest = new NormalLokum(boardLogic.getRowSize()/2-1, boardLogic.getColumnSize()/2, "White");
 		
 		System.out.println("--------------------------------------------------Test Start--------------------------------------------------");
 	}
@@ -52,16 +53,6 @@ public class JUnitTest_BombMerge {
 
 	@Test
 	public void testDestroyMerge() {
-		System.out.println("Board just BEFORE calling Bomb - Normal merge:");
-		System.out.println(boardLogic);
-		
-		this.normalTest = new NormalLokum(boardLogic.getRowSize()/2-1, boardLogic.getColumnSize()/2, "White");
-		boardLogic.introduceLogicField(normalTest);
-		
-		BombMerge bombMerge = new BombMerge(bombLokum, normalTest);
-		bombMerge.destroyMerge();
-		System.out.println("Board just AFTER calling Bomb - Normal merge:");
-		System.out.println(boardLogic);
 		
 		try {
 			setUp();
@@ -69,10 +60,21 @@ public class JUnitTest_BombMerge {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		this.boardLogic.resetInstance();
+		System.out.println("Board just BEFORE calling Bomb - Normal merge:");
+		System.out.println(boardLogic);
+	
+		BombMerge bombMerge = new BombMerge(bombLokum, normalTest);
+		bombMerge.destroyMerge();
+		System.out.println("Board just AFTER calling Bomb - Normal merge:");
+		System.out.println(boardLogic);
+		
+		this.boardLogic.resetInstance();
+		
 		System.out.println("Board just BEFORE calling Bomb - Horizontal Striped merge:");
 		System.out.println(boardLogic);
 		
-		this.horizontalStripedTest = new HorizontalStripedLokum(boardLogic.getRowSize()/2-1, boardLogic.getColumnSize()/2, "White");
+		this.horizontalStripedTest = new HorizontalStripedLokum(0, 0, "White");
 		boardLogic.introduceLogicField(horizontalStripedTest);
 		
 		bombMerge = new BombMerge(bombLokum, horizontalStripedTest);
@@ -86,11 +88,13 @@ public class JUnitTest_BombMerge {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		this.boardLogic.resetInstance();
 		System.out.println("Board just BEFORE calling Bomb - Vertical Striped merge:");
 		System.out.println(boardLogic);
 		
 		this.verticalStripedTest = new VerticalStripedLokum(boardLogic.getRowSize()/2-1, boardLogic.getColumnSize()/2, "White");
-		boardLogic.introduceLogicField(verticalStripedTest);
+		//boardLogic.introduceLogicField(verticalStripedTest);
 		
 		bombMerge = new BombMerge(bombLokum, verticalStripedTest);
 		bombMerge.destroyMerge();
@@ -103,11 +107,13 @@ public class JUnitTest_BombMerge {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		this.boardLogic.resetInstance();
 		System.out.println("Board just BEFORE calling Bomb - Wrapped merge:");
 		System.out.println(boardLogic);
 		
 		this.wrappedTest = new WrappedLokum(boardLogic.getRowSize()/2-1, boardLogic.getColumnSize()/2, "White");
-		boardLogic.introduceLogicField(wrappedTest);
+		//boardLogic.introduceLogicField(wrappedTest);
 		
 		bombMerge = new BombMerge(bombLokum, wrappedTest);
 		bombMerge.destroyMerge();
@@ -120,11 +126,13 @@ public class JUnitTest_BombMerge {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		this.boardLogic.resetInstance();
 		System.out.println("Board just BEFORE calling Bomb - Bomb merge:");
 		System.out.println(boardLogic);
 		
 		this.bombTest = new BombLokum(boardLogic.getRowSize()/2-1, boardLogic.getColumnSize()/2);
-		boardLogic.introduceLogicField(bombTest);
+		//boardLogic.introduceLogicField(bombTest);
 		
 		bombMerge = new BombMerge(bombLokum, bombTest);
 		bombMerge.destroyMerge();

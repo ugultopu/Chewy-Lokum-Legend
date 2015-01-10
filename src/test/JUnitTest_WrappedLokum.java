@@ -27,6 +27,7 @@ public class JUnitTest_WrappedLokum {
 
 	@Before
 	public void setUp() throws Exception {
+		boardLogic = BoardLogic.getInstance();
 		this.boardLogic = BoardLogic.getInstance();
 		this.wrappedLokum= new WrappedLokum(boardLogic.getRowSize()/2, boardLogic.getColumnSize()/2, Constants.LOKUM_COLOR_GREEN);
 		boardLogic.introduceLogicField(wrappedLokum);

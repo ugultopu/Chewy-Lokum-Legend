@@ -13,11 +13,9 @@ import App.FiveCombo;
 import App.FourCombo;
 import App.HorizontalStripedLokum;
 import App.LCombo;
-import App.LogicField;
 import App.Lokum;
 import App.NormalLokum;
 import App.Score;
-import App.StripedLokum;
 import App.StripedStripedMerge;
 import App.StripedWrappedMerge;
 import App.ThreeCombo;
@@ -347,7 +345,7 @@ public class ScoreTest {
     	System.out.println("-------Wrapped + Bomb Score Test------");
     	
     	BombLokum bomb = new BombLokum(3, 3);
-    	WrappedLokum wl = new WrappedLokum(3, 4, "red");
+    	WrappedLokum wl = new WrappedLokum(3, 4, "green");
     	
     	
     	for(int i = 0; i < bl.getRowSize() ; i++){
@@ -360,7 +358,7 @@ public class ScoreTest {
     	
     	for(int i = 5; i < 7 ; i++){
     		
-    			NormalLokum nl = new NormalLokum(i, 0, "red");
+    			NormalLokum nl = new NormalLokum(i, 0, "green");
     			bl.introduceLogicField(nl);
     		
     	}
@@ -376,7 +374,7 @@ public class ScoreTest {
     	
     	System.out.println(Score.getInstance().getCurrentScore());
     	
-    	assertEquals(3 * 60, Score.getInstance().getCurrentScore());
+    	assertEquals(80 * 60, Score.getInstance().getCurrentScore());
     }
     
     @Test

@@ -6,8 +6,6 @@ import java.util.HashSet;
 import java.util.PriorityQueue;
 import java.util.Random;
 
-import test.BoardLogicTest;
-
 
 public class BoardLogic {
 
