@@ -204,7 +204,9 @@ public class BoardLogic {
 		EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
 		if(Level.getInstance() instanceof TimeLevel)
 			sendStartTimeSignal();
-		//Score.getInstance().setScore(0);
+		if (Score.getInstance().getCurrentScore() >= Options.getInstance().targetScore){
+			EventDispatchQueue.getInstance().addEvent(new WinGameEvent());
+		}
 	}
 	
 
@@ -532,6 +534,10 @@ public class BoardLogic {
 			EventDispatchQueue.getInstance().addEvent(new SpecialMoveUpdateEvent(Level.getInstance().getSpecialMoves()));
 			EventDispatchQueue.getInstance().addEvent(new SpecialMoveDeactivateEvent());
 			isSpecialSwapActive = false;
+		}
+		
+		if (Score.getInstance().getCurrentScore() >= Options.getInstance().targetScore){
+			EventDispatchQueue.getInstance().addEvent(new WinGameEvent());
 		}
 		
 		return true;
