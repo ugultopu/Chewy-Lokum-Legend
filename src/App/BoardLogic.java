@@ -204,7 +204,9 @@ public class BoardLogic {
 		EventDispatchQueue.getInstance().addEvent(new ClickListenerActivateEvent());
 		if(Level.getInstance() instanceof TimeLevel)
 			sendStartTimeSignal();
-		//Score.getInstance().setScore(0);
+		if (Score.getInstance().getCurrentScore() >= Options.getInstance().targetScore){
+			EventDispatchQueue.getInstance().addEvent(new WinGameEvent());
+		}
 	}
 	
 
@@ -234,7 +236,7 @@ public class BoardLogic {
 				Lokum currentCombosCurrentLokum = currentCombosLokums.get(currentComboLokumsLokumIndex);
 				currentCombosCurrentLokum.comboDestroy();
 			}
-			if(currentCombo instanceof LokumGeneratingCombo){
+			if( (currentCombo instanceof LokumGeneratingCombo) && ( !currentCombo.hasCommonElementWithHigherCombos(boardCombos) ) ){
 				introduceLogicField(currentCombo.getGeneratedLokum());
 				currentCombo.addGeneratedLokumtoQueue();
 			}
@@ -532,6 +534,10 @@ public class BoardLogic {
 			EventDispatchQueue.getInstance().addEvent(new SpecialMoveUpdateEvent(Level.getInstance().getSpecialMoves()));
 			EventDispatchQueue.getInstance().addEvent(new SpecialMoveDeactivateEvent());
 			isSpecialSwapActive = false;
+		}
+		
+		if (Score.getInstance().getCurrentScore() >= Options.getInstance().targetScore){
+			EventDispatchQueue.getInstance().addEvent(new WinGameEvent());
 		}
 		
 		return true;

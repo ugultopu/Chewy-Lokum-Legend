@@ -16,8 +16,10 @@ public class HorizontalStripedLokum extends StripedLokum implements MergeDestroy
 		/*
 		 * Set the striped lokum's position to empty.
 		 */
-		boardLogic.introduceLogicField(new EmptyLogicField(getRowIndex(), getColumnIndex()));
-
+		EmptyLogicField destroyThis = new EmptyLogicField(getRowIndex(), getColumnIndex());
+		boardLogic.introduceLogicField(destroyThis);
+		EventDispatchQueue.getInstance().addEvent(new DestroyLokumEvent(destroyThis));
+		
 		int currentColumnIndex;
 
 		for( currentColumnIndex = 0; currentColumnIndex<boardLogic.getColumnSize(); currentColumnIndex++ ){
