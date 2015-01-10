@@ -2,6 +2,7 @@ package App;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.PriorityQueue;
 
 
 public abstract class Combo implements Comparator<Combo>{
@@ -117,6 +118,54 @@ public abstract class Combo implements Comparator<Combo>{
 	 */
 	public boolean repOK(){
 		return (lokums!=null&&comboPriority>0);
+	}
+	
+	/**
+	 * This method compares the elements of the current combo with the elements of the argument combo. If there
+	 * is at least one common element, it returns true. Otherwise, it returns true.
+	 * @param argumentCombo
+	 * @return
+	 */
+	boolean hasCommonElement(Combo argumentCombo){
+		ArrayList<Lokum> argCombosLokums = argumentCombo.getComboLokums();
+		int thisCombosNumberOfLokums = this.lokums.size();
+		int argumentCombosNumberOfLokums = argCombosLokums.size();
+		
+		for (int thisCombosLokumIndex = 0; thisCombosLokumIndex < thisCombosNumberOfLokums; thisCombosLokumIndex++) {
+			Lokum thisCombosCurrentLokum = this.lokums.get(thisCombosLokumIndex);
+			for (int argumentCombosLokumIndex = 0; argumentCombosLokumIndex < argumentCombosNumberOfLokums; argumentCombosLokumIndex++) {
+				if(argCombosLokums.get(argumentCombosLokumIndex).equals(thisCombosCurrentLokum))
+					return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * This method receives a priority queue containing combos from lower to higher priority, and it determines
+	 * if this combo has any common elements with the combos in the priority queue.
+	 * 
+	 * @requires
+	 * -Given priority queue contains combos that is of higher priority with this combo. Note that this is a
+	 * reasonable assumption, because the combos are polled one by one from the priority queue and hence, the
+	 * priority queue's elements when calling this method contains the elements that have combos with greater
+	 * than or equal to priorities.  
+	 * @param boardCombos
+	 * @return
+	 */
+	boolean hasCommonElementWithHigherCombos(PriorityQueue<Combo> boardCombos){
+		Object[] boardCombosAsObjectArray = boardCombos.toArray();
+		/*
+		 * NOTE: Note that the elements returned by the line above are returned in no particular order, but
+		 * this is not a problem for us, since we want to compare this combo with ALL combos in the priority
+		 * queue.
+		 */
+		for (int currentCombosIndex = 0; currentCombosIndex < boardCombosAsObjectArray.length; currentCombosIndex++) {
+			Combo currentCombo = (Combo) boardCombosAsObjectArray[currentCombosIndex];
+			if(this.hasCommonElement(currentCombo))
+				return true;
+		}
+		return false;
 	}
 	
 }

@@ -110,14 +110,19 @@ public class BombMerge extends Merge {
 			}
 		}else if(l1 instanceof WrappedLokum){
 			String colorl1 = l1.getLokumColor();
-			String randomColor = generateRandomColor();
+			String randomColor = generateRandomColor(colorl1);
 			int numberOfDestroyedLokums = 0;
 			System.out.println("l1: Wrapped Lokum, color: " + colorl1 + ", l2: Bomb Lokum, merge.");
 			for(int i = 0; i < lokumBoard.length; i++){
 				for(int j = 0; j < lokumBoard[i].length; j++){
 					Lokum lokum = lokumBoard[i][j];
-					if(lokum.getLokumColor().equals(colorl1) || lokum.getLokumColor().equals(randomColor) ){
+					if(lokum.getLokumColor().equals(colorl1)){
 						NormalLokum newLokum = new NormalLokum(i, j, colorl1);
+						newLokum.comboDestroy();
+						score.scoreUpdateBombUse(1);
+					}
+					if(lokum.getLokumColor().equals(randomColor) ){
+						NormalLokum newLokum = new NormalLokum(i, j, randomColor);
 						newLokum.comboDestroy();
 						score.scoreUpdateBombUse(1);
 					}
@@ -126,14 +131,19 @@ public class BombMerge extends Merge {
 			score.scoreUpdateBombUse(numberOfDestroyedLokums);
 		}else if(l2 instanceof WrappedLokum){
 			String colorl2 = l2.getLokumColor();
-			String randomColor = generateRandomColor();
+			String randomColor = generateRandomColor(colorl2);
 			int numberOfDestroyedLokums = 0;
 			System.out.println("l2: Wrapped Lokum, color: " + colorl2 + ", l1: Bomb Lokum, merge.");
 			for(int i = 0; i < lokumBoard.length; i++){
 				for(int j = 0; j < lokumBoard[i].length; j++){
 					Lokum lokum = lokumBoard[i][j];
-					if(lokum.getLokumColor().equals(colorl2) || lokum.getLokumColor().equals(randomColor) ){
+					if(lokum.getLokumColor().equals(colorl2)){
 						NormalLokum newLokum = new NormalLokum(i, j, colorl2);
+						newLokum.comboDestroy();
+						score.scoreUpdateBombUse(1);
+					}
+					if(lokum.getLokumColor().equals(randomColor) ){
+						NormalLokum newLokum = new NormalLokum(i, j, randomColor);
 						newLokum.comboDestroy();
 						score.scoreUpdateBombUse(1);
 					}
@@ -208,16 +218,29 @@ public class BombMerge extends Merge {
 		}
 	}
 	
-	private String generateRandomColor(){
-		int randomNumber = Factory.generateRandomNumber();
+	private String generateRandomColor(String currentLokumColor){
+		Random rgen = new Random();
+		int randomNumber = rgen.nextInt(4);
 		switch (randomNumber){
 			case 0:
+				if(Constants.LOKUM_COLOR_BROWN.equals(currentLokumColor)){
+					return generateRandomColor(currentLokumColor);
+				}
 				return Constants.LOKUM_COLOR_BROWN;
 			case 1:
+				if(Constants.LOKUM_COLOR_GREEN.equals(currentLokumColor)){
+					return generateRandomColor(currentLokumColor);
+				}
 				return Constants.LOKUM_COLOR_GREEN;
 			case 2:
+				if(Constants.LOKUM_COLOR_RED.equals(currentLokumColor)){
+					return generateRandomColor(currentLokumColor);
+				}
 				return  Constants.LOKUM_COLOR_RED;
 			case 3:
+				if(Constants.LOKUM_COLOR_WHITE.equals(currentLokumColor)){
+					return generateRandomColor(currentLokumColor);
+				}
 				return Constants.LOKUM_COLOR_WHITE;
 			default:
 				return null;

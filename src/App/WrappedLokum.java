@@ -20,7 +20,9 @@ MergeDestroyable, Swapable {
 		/*
 		 * Set the wrapped lokum's position to empty.
 		 */
-		boardLogic.introduceLogicField(new EmptyLogicField(getRowIndex(), getColumnIndex()));
+		EmptyLogicField destroyThis = new EmptyLogicField(getRowIndex(), getColumnIndex());
+		boardLogic.introduceLogicField(destroyThis);;
+		EventDispatchQueue.getInstance().addEvent(new DestroyLokumEvent(destroyThis));
 
 		for(int i=1;i>-2;i--){
 			for(int j=-1;j<2;j++){
