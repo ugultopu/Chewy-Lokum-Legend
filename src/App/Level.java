@@ -35,5 +35,4 @@ public abstract class Level {
 	public int getCurrentLevel(){
 		return levelNumber;
 	}
-	
 }

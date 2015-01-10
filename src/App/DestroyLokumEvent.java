@@ -1,9 +1,5 @@
 package App;
 
-import java.util.ArrayList;
-import java.util.Objects;
-
-
 public class DestroyLokumEvent extends GameEvent {
 
 	EmptyLogicField destroyedLokum;

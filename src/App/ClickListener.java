@@ -88,4 +88,9 @@ public class ClickListener implements MouseListener {
 		
 	}
 
+	public static void resetInstance() {
+		// TODO Auto-generated method stub
+		instance=null;
+	}
+
 }

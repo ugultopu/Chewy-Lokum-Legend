@@ -1,8 +1,5 @@
 package App;
 
-import java.util.ArrayList;
-
-
 public class LokumGenerateEvent extends GameEvent{
 
 	Lokum generatedLokum;

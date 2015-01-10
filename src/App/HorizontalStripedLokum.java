@@ -1,8 +1,5 @@
 package App;
 
-import java.util.ArrayList;
-
-
 public class HorizontalStripedLokum extends StripedLokum implements MergeDestroyable, ComboDestroyable {
 
 	public HorizontalStripedLokum(int rowIndex, int columnIndex,
@@ -10,7 +7,7 @@ public class HorizontalStripedLokum extends StripedLokum implements MergeDestroy
 		super(rowIndex, columnIndex, lokumColor);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
 	public void comboDestroy() {
 		// TODO Auto-generated method stub
@@ -20,24 +17,24 @@ public class HorizontalStripedLokum extends StripedLokum implements MergeDestroy
 		 * Set the striped lokum's position to empty.
 		 */
 		boardLogic.introduceLogicField(new EmptyLogicField(getRowIndex(), getColumnIndex()));
-		int destroyedLokums = 0;
 
 		int currentColumnIndex;
 
 		for( currentColumnIndex = 0; currentColumnIndex<boardLogic.getColumnSize(); currentColumnIndex++ ){
-			LogicField currentLogicField = boardLogic.getLogicFieldAt( getRowIndex() , currentColumnIndex ); 
-			if( currentLogicField instanceof ComboDestroyable )
-				((ComboDestroyable) currentLogicField).comboDestroy();
-			// if here, then currentLogicField is not combo destroyable. So simply clear it's position.
-			else{
-				EmptyLogicField destroyed = new EmptyLogicField( getRowIndex() , currentColumnIndex );
-				boardLogic.introduceLogicField(destroyed);
-				destroyedLokums++;
-				/*
-				 * CHECK THE LINE BELOW!!!
-				 */
-				EventDispatchQueue.getInstance().addEvent(new DestroyLokumEvent(destroyed.copyLogicField()));
-				
+			LogicField currentLogicField = boardLogic.getLogicFieldAt( getRowIndex() , currentColumnIndex );
+			if (!(currentLogicField instanceof EmptyLogicField)){
+				if( currentLogicField instanceof ComboDestroyable )
+					((ComboDestroyable) currentLogicField).comboDestroy();
+				// if here, then currentLogicField is not combo destroyable. So simply clear it's position.
+				else{
+					EmptyLogicField destroyed = new EmptyLogicField( getRowIndex() , currentColumnIndex );
+					boardLogic.introduceLogicField(destroyed);
+					/*
+					 * CHECK THE LINE BELOW!!!
+					 */
+					EventDispatchQueue.getInstance().addEvent(new DestroyLokumEvent(destroyed.copyLogicField()));
+
+				}
 			}
 		}
 		Score.getInstance().scoreUpdateHorizontalStripedUse();
@@ -70,24 +67,24 @@ public class HorizontalStripedLokum extends StripedLokum implements MergeDestroy
 		// TODO Auto-generated method stub
 		return "HSL@" + super.toString();
 	}
-	
-//	@Override
-//	public void comboDestroy() {
-//		// TODO Auto-generated method stub
-//		BoardLogic boardLogic = BoardLogic.getInstance();
-//
-//		/*
-//		 * Set the striped lokum's position to empty.
-//		 */
-//		boardLogic.introduceLogicField(new EmptyLogicField(getRowIndex(), getColumnIndex()));
-//		int currentColumnIndex;
-//
-//		for( currentColumnIndex = 0; currentColumnIndex<boardLogic.getColumnSize(); currentColumnIndex++ ){
-//			LogicField currentLogicField = boardLogic.getLogicFieldAt( getRowIndex() , currentColumnIndex ); 
-//			if( currentLogicField instanceof ComboDestroyable )
-//				((ComboDestroyable) currentLogicField).comboDestroy();
-//			// if here, then currentLogicField is not combo destroyable. So simply clear it's position.
-//			boardLogic.introduceLogicField(new EmptyLogicField( getRowIndex() , currentColumnIndex ));
-//		}
-//	}
+
+	//	@Override
+	//	public void comboDestroy() {
+	//		// TODO Auto-generated method stub
+	//		BoardLogic boardLogic = BoardLogic.getInstance();
+	//
+	//		/*
+	//		 * Set the striped lokum's position to empty.
+	//		 */
+	//		boardLogic.introduceLogicField(new EmptyLogicField(getRowIndex(), getColumnIndex()));
+	//		int currentColumnIndex;
+	//
+	//		for( currentColumnIndex = 0; currentColumnIndex<boardLogic.getColumnSize(); currentColumnIndex++ ){
+	//			LogicField currentLogicField = boardLogic.getLogicFieldAt( getRowIndex() , currentColumnIndex ); 
+	//			if( currentLogicField instanceof ComboDestroyable )
+	//				((ComboDestroyable) currentLogicField).comboDestroy();
+	//			// if here, then currentLogicField is not combo destroyable. So simply clear it's position.
+	//			boardLogic.introduceLogicField(new EmptyLogicField( getRowIndex() , currentColumnIndex ));
+	//		}
+	//	}
 }

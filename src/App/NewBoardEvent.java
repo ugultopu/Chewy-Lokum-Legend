@@ -1,7 +1,5 @@
 package App;
 
-import test.BoardLogicTest;
-
 public class NewBoardEvent extends GameEvent {
 
 	LogicField[][] newBoard;
