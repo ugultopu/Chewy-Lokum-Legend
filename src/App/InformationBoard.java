@@ -148,6 +148,7 @@ public class InformationBoard extends JPanel {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				GamePanel.getInstance().stopGame();
 				ApplicationWindow.removePanel(GamePanel.getInstance());
 				ApplicationWindow.addPanel(MenuPanel.getInstance());
 				MenuPanel.getInstance().requestFocusInWindow();

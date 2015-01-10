@@ -21,16 +21,19 @@ public class EventDispatchQueue {
 		return eventQueue.removeFirst();
 	}
 	
-	public synchronized boolean isEmpty(){
+	public boolean isEmpty(){
 		return eventQueue.isEmpty();
 	}
 	
 	public static EventDispatchQueue getInstance(){
+		if(instance==null){
+			instance = new EventDispatchQueue();
+		}
 		return instance;
 	}
 	
 	public static void resetInstance(){
-		instance = new EventDispatchQueue();
+		instance = null;
 	}
 	public boolean repOK(){
 		return eventQueue != null;
