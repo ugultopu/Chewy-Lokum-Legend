@@ -236,7 +236,7 @@ public class BoardLogic {
 				Lokum currentCombosCurrentLokum = currentCombosLokums.get(currentComboLokumsLokumIndex);
 				currentCombosCurrentLokum.comboDestroy();
 			}
-			if(currentCombo instanceof LokumGeneratingCombo){
+			if( (currentCombo instanceof LokumGeneratingCombo) && ( !currentCombo.hasCommonElementWithHigherCombos(boardCombos) ) ){
 				introduceLogicField(currentCombo.getGeneratedLokum());
 				currentCombo.addGeneratedLokumtoQueue();
 			}
