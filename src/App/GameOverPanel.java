@@ -89,7 +89,6 @@ public class GameOverPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int level = Level.getInstance().getCurrentLevel();
-				int specialMoves = Level.getInstance().getSpecialMoves();
 				ApplicationWindow.removePanel(GamePanel.getInstance());
 				Score.resetInstance();
 				Options.resetInstance();
@@ -101,7 +100,6 @@ public class GameOverPanel extends JPanel{
 				EventDispatchQueue.resetInstance();
 				
 				Options.getInstance().setLevel(level+1);
-				Level.getInstance().setSpecialMoves(Level.getInstance().getSpecialMoves()+specialMoves);
 				InformationBoard.getInstance().setCurrentLevel(level+1);
 				ApplicationWindow.removePanel(ChooseLevelPanel.getInstance());
 				ApplicationWindow.addPanel(GamePanel.getInstance());

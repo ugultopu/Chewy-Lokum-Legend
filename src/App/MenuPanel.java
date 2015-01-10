@@ -73,11 +73,8 @@ public class MenuPanel extends JPanel {
 					System.out.println("Loaded");
 					ApplicationWindow.removePanel(instance);
 					ApplicationWindow.addPanel(GamePanel.getInstance());
-					GamePanel.getInstance().requestFocusInWindow();
-					GamePanel.getInstance().repaint();
-					InformationBoard.getInstance().requestFocusInWindow();
-					GameBoard.getInstance().requestFocusInWindow();
 					GamePanel.getInstance().startGame();
+					GameBoard.getInstance().requestFocusInWindow();
 				}
 			}
 			

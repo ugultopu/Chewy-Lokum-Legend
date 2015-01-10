@@ -33,16 +33,16 @@ public class LoadGame {
 			File saveFile = new File("save.xml");
 			String language = XMLConstants.W3C_XML_SCHEMA_NS_URI;
 		    SchemaFactory schemaFactory = SchemaFactory.newInstance(language);
-		    Schema schema = schemaFactory.newSchema(new File("game.xsd"));
+		    //Schema schema = schemaFactory.newSchema(new File("game.xsd"));
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			Document document = documentBuilder.parse(saveFile);
 			
 			/* Validation */
 			/* I'm skipping this validation since there is an error in the xsd */
-//			if(!validateFromXsd(schema,document)){
-//				return false;
-//			}
+			//if(!validateFromXsd(schema,document)){
+				//return false;
+			//}
 			
 			
 			document.getDocumentElement().normalize();
@@ -103,12 +103,9 @@ public class LoadGame {
 				int y = Integer.parseInt(obstacleFeatures.item(1).getLastChild().getTextContent());
 				LogicField obstacle = Factory.createLogicField(y, x, null, color);
 				loadedBoard[y][x] = obstacle;
-			}
-			
-			
+			}	
 			
 			BoardLogic.loadBoard(loadedBoard);
-			GameBoard.getInstance().repaint();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
