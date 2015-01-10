@@ -17,12 +17,15 @@ public class VerticalStripedLokum extends StripedLokum {
 		/*
 		 * Set the striped lokum's position to empty.
 		 */
-		boardLogic.introduceLogicField(new EmptyLogicField(getRowIndex(), getColumnIndex()));
+		EmptyLogicField destroyThis = new EmptyLogicField(getRowIndex(), getColumnIndex());
+		boardLogic.introduceLogicField(destroyThis);
+		EventDispatchQueue.getInstance().addEvent(new DestroyLokumEvent(destroyThis));
 
 		int currentRowIndex;
 
 		for( currentRowIndex = 0; currentRowIndex<boardLogic.getRowSize(); currentRowIndex++ ){
 			LogicField currentLogicField = boardLogic.getLogicFieldAt( currentRowIndex , getColumnIndex() );
+			
 			if (!(currentLogicField instanceof EmptyLogicField)){
 				if( currentLogicField instanceof ComboDestroyable ){
 					((ComboDestroyable) currentLogicField).comboDestroy();
