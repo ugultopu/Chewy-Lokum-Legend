@@ -31,6 +31,7 @@ public class JUnitTest_StripedWrappedTest {
 
 	@Before
 	public void setUp() throws Exception {
+		boardLogic = BoardLogic.getInstance();
 		this.horizontalStripedLokum= new HorizontalStripedLokum(boardLogic.getRowSize()/2, boardLogic.getColumnSize()/2, "White");
 		boardLogic.introduceLogicField(horizontalStripedLokum);
 		

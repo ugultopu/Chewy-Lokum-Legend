@@ -1,8 +1,5 @@
 package App;
 
-import java.util.ArrayList;
-
-
 public class BombLokum extends Lokum implements ComboDestroyable,
 		MergeDestroyable, Swapable {
 
