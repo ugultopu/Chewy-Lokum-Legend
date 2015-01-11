@@ -6,7 +6,7 @@ package App;
 public abstract class Level {
 	
 	protected int levelNumber;
-	private int specialMoves = 3;
+	private int specialMoves;
 	private static Level instance;
 	
 	public static Level getInstance(){
@@ -16,6 +16,7 @@ public abstract class Level {
 				instance = new TimeLevel();
 			else
 				instance = new MoveLevel();
+			instance.specialMoves = currentLevel%3 +3;
 			EventDispatchQueue.getInstance().addEvent(new SpecialMoveUpdateEvent(instance.getSpecialMoves()));
 		}
 		return instance;

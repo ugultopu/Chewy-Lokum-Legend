@@ -6,7 +6,7 @@ public class MoveLevel extends Level {
 
 	public MoveLevel(){
 		levelNumber = Options.currentLevel;
-		this.movesLeft = (Constants.NUMBER_OF_MOVES - 3 * Options.currentLevel);
+		this.movesLeft = Math.max(Constants.NUMBER_OF_MOVES - 3 * Options.currentLevel,5);
 		MoveUpdateEvent mue = new MoveUpdateEvent(movesLeft);
 		EventDispatchQueue.getInstance().addEvent(mue);
 	}
