@@ -100,8 +100,7 @@ public class GameOverPanel extends JPanel{
 				EventDispatchQueue.resetInstance();
 				
 				Options.getInstance().setLevel(level+1);
-				InformationBoard.getInstance().setCurrentLevel(level+1);
-				ApplicationWindow.removePanel(ChooseLevelPanel.getInstance());
+				InformationBoard.getInstance().setCurrentLevel(level+1);;
 				ApplicationWindow.addPanel(GamePanel.getInstance());
 				GamePanel.getInstance().requestFocusInWindow();
 				InformationBoard.getInstance().requestFocusInWindow();

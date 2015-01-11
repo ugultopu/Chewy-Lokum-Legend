@@ -206,6 +206,8 @@ public class BoardLogic {
 		if(Level.getInstance() instanceof TimeLevel)
 			sendStartTimeSignal();
 		if (Score.getInstance().getCurrentScore() >= Options.getInstance().targetScore){
+			if(Level.getInstance() instanceof TimeLevel)
+				((TimeLevel)Level.getInstance()).stopTimer();
 			EventDispatchQueue.getInstance().addEvent(new WinGameEvent());
 		}
 	}
@@ -538,6 +540,8 @@ public class BoardLogic {
 		}
 		
 		if (Score.getInstance().getCurrentScore() >= Options.getInstance().targetScore){
+			if(Level.getInstance() instanceof TimeLevel)
+				((TimeLevel)Level.getInstance()).stopTimer();
 			EventDispatchQueue.getInstance().addEvent(new WinGameEvent());
 		}
 		
