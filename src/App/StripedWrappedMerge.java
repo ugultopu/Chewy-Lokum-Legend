@@ -15,8 +15,13 @@ public class StripedWrappedMerge extends Merge {
 		int x1 = l1.getRowIndex();
 		int y1 = l1.getColumnIndex();
 		
-		BoardLogic.getInstance().introduceLogicField(new EmptyLogicField(x1, y1));
-		BoardLogic.getInstance().introduceLogicField(new EmptyLogicField(xl2, yl2));
+		EmptyLogicField removeComboLokum1 = new EmptyLogicField(xl2, yl2);
+		BoardLogic.getInstance().introduceLogicField(removeComboLokum1);
+		EmptyLogicField removeComboLokum2 = new EmptyLogicField(x1, y1);
+		BoardLogic.getInstance().introduceLogicField(removeComboLokum2);
+		EventDispatchQueue.getInstance().addEvent(new DestroyLokumEvent(removeComboLokum1));
+		EventDispatchQueue.getInstance().addEvent(new DestroyLokumEvent(removeComboLokum2));
+		
 		//IMPORTANT: CHECK THE BOUNDS OF BOARD.
 		for(int i = -1; i < 2; i++){
 			int y = yl2 + i;
