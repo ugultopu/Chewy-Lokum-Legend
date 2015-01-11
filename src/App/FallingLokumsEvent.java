@@ -28,6 +28,12 @@ public class FallingLokumsEvent extends GameEvent {
 		int target_count = lokumArray.size();
 		
 		while(count<target_count){
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				System.out.println("Exception on event waiting.");
+			}
 			count = 0;
 			for(int i=0; i<target_count; i++){
 				LogicField lokum = lokumArray.get(i);
@@ -42,12 +48,6 @@ public class FallingLokumsEvent extends GameEvent {
 					count++;
 			}
 			GameBoard.getInstance().repaint();
-			try {
-				Thread.sleep(75);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				System.out.println("Exception on event waiting.");
-			}
 		}
 	}
 }

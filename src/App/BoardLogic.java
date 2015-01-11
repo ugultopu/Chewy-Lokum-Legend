@@ -318,15 +318,18 @@ public class BoardLogic {
 	private void levelColumn(HashMap<LogicField, Integer> fallingLogicFields, int columnIndex){
 		int currentRowIndex=0;
 		while(currentRowIndex < rowSize){
-			if(logicFields[currentRowIndex][columnIndex] instanceof EmptyLogicField){
-				/*
-				 * Drop the column and return from the method if there are no more elements to drop. 
-				 * Please refer to the definition of dropColumn to understand what the following if
-				 * statement means.
-				 */
-				if( dropColumn(fallingLogicFields, currentRowIndex, columnIndex) )
-					return;
+			int emptyCount = 0;
+			for(int i=currentRowIndex-1; i>=0; i--){
+				if(logicFields[i][columnIndex] instanceof EmptyLogicField)
+					emptyCount++;
 			}
+			if(emptyCount>0){
+				fallingLogicFields.put(getLogicFieldAt(currentRowIndex, columnIndex).copyLogicField(), emptyCount);
+				logicFields[currentRowIndex][columnIndex].setRowIndex(currentRowIndex-emptyCount);
+				introduceLogicField(logicFields[currentRowIndex][columnIndex]);
+				clearLocation(currentRowIndex, columnIndex);
+			}
+		
 			currentRowIndex++;
 		}
 	}
