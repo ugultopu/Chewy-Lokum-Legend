@@ -162,6 +162,7 @@ public class BoardLogic {
 		 * In the line below, we get an unreal score update event inside the constructor of ThreeCombo. Check if that
 		 * would cause a problem.
 		 */
+		Level.getInstance();
 		this.boardCombos = new PriorityQueue<Combo>(10, new ThreeCombo(null));
 		initializeBoard();	// initializes the board to all EmptyLogicField objects.
 		populateBoard();	// populates the board at the beginning. (or at any time. Decide on this.)
