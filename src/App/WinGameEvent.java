@@ -10,7 +10,6 @@ public class WinGameEvent extends GameEvent{
 		}
 		GameOverPanel.getInstance().setWin(true);
 		GamePanel.getInstance().endGame();
-		
 	}
 
 }

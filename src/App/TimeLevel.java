@@ -13,7 +13,7 @@ public class TimeLevel extends Level {
 	
 	public TimeLevel(){
 		levelNumber = Options.currentLevel;
-		updateTime(Constants.TIME - 3*levelNumber);
+		updateTime(Math.max(Constants.TIME - 3*levelNumber,20));
 		System.out.println("started!");
 	}
 	
