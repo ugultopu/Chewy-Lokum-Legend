@@ -3,7 +3,7 @@ package App;
 public class Options {
 	
 	public static int currentLevel = 1;
-	public int targetScore = 1;
+	public int targetScore = Constants.GOAL_SCORE + currentLevel* 5000;;
 	
 	private static Options instance;
 	
