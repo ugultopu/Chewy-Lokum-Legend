@@ -540,8 +540,6 @@ public class BoardLogic {
 		}
 		
 		if (Score.getInstance().getCurrentScore() >= Options.getInstance().targetScore){
-			if(Level.getInstance() instanceof TimeLevel)
-				((TimeLevel)Level.getInstance()).stopTimer();
 			EventDispatchQueue.getInstance().addEvent(new WinGameEvent());
 		}
 		
