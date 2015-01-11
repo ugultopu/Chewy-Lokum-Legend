@@ -64,6 +64,7 @@ public class GameOverPanel extends JPanel{
 				BoardLogic.resetInstance();
 				InformationBoard.resetInstance();
 				EventDispatchQueue.resetInstance();
+				GameOverPanel.resetInstance();
 				InformationBoard.getInstance().repaint();
 				ApplicationWindow.addPanel(GamePanel.getInstance());
 				GamePanel.getInstance().remove(GameOverPanel.getInstance());
@@ -98,6 +99,7 @@ public class GameOverPanel extends JPanel{
 				GameBoard.resetInstance();
 				InformationBoard.resetInstance();
 				EventDispatchQueue.resetInstance();
+				GameOverPanel.resetInstance();
 				
 				Options.getInstance().setLevel(level+1);
 				InformationBoard.getInstance().setCurrentLevel(level+1);;
