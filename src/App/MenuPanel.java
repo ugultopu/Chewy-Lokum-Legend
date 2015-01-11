@@ -73,6 +73,7 @@ public class MenuPanel extends JPanel {
 					System.out.println("Loaded");
 					ApplicationWindow.removePanel(instance);
 					ApplicationWindow.addPanel(GamePanel.getInstance());
+					GamePanel.getInstance().setBounds(0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 					GamePanel.getInstance().startGame();
 					GameBoard.getInstance().requestFocusInWindow();
 				}
