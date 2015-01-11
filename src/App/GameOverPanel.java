@@ -128,6 +128,8 @@ public class GameOverPanel extends JPanel{
 				GameBoard.resetInstance();
 				InformationBoard.resetInstance();
 				EventDispatchQueue.resetInstance();
+				GameOverPanel.resetInstance();
+				
 				InformationBoard.getInstance().setCurrentLevel(level);
 				ApplicationWindow.removePanel(ChooseLevelPanel.getInstance());
 				ApplicationWindow.addPanel(MenuPanel.getInstance());
